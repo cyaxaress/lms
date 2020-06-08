@@ -12,10 +12,6 @@
 |
 */
 
-Route::get('/', function () {
-
-    $user = \App\User::whereEmail();
-    $user->email_verified_at = 'asdf';
-
+Route::get('/', function () { 
     return view('welcome');
 });

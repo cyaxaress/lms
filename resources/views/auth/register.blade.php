@@ -8,7 +8,7 @@
     <div class="form-content form-account">
         <form method="POST" action="{{ route('register') }}">
             @csrf
-            <input type="text" class="txt @error('name') is-invalid @enderror" placeholder="نام و نام خانوادگی"
+            <input type="text" class="txt @error('name') is-invalid @enderror" placeholder="نام و نام خانوادگی *"
                    name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
             >
             @error('name')
@@ -17,7 +17,7 @@
                 </span>
             @enderror
 
-            <input id="email" type="email" class="txt txt-l @error('email') is-invalid @enderror" placeholder="ایمیل"
+            <input id="email" type="email" class="txt txt-l @error('email') is-invalid @enderror" placeholder="ایمیل *"
                    name="email" value="{{ old('email') }}" required autocomplete="email"
             >
             @error('email')
@@ -26,13 +26,22 @@
                                     </span>
             @enderror
 
+            <input id="mobile" type="text" class="txt txt-l @error('mobile') is-invalid @enderror" placeholder="موبایل"
+                   name="mobile" value="{{ old('mobile') }}" autocomplete="mobile"
+            >
+            @error('mobile')
+            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+            @enderror
+
 
             <input id="password" type="password" class="txt txt-l @error('password') is-invalid @enderror"
-                   placeholder="رمز عبور"
+                   placeholder="رمز عبور *"
                    name="password" required autocomplete="new-password"
             >
             <input  id="password-confirm" type="password" class="txt txt-l @error('password') is-invalid @enderror"
-                    placeholder="تایید رمز عبور"
+                    placeholder="تایید رمز عبور *"
                     name="password_confirmation" required autocomplete="new-password"
             >
             <span class="rules">رمز عبور باید حداقل ۶ کاراکتر و ترکیبی از حروف بزرگ، حروف کوچک، اعداد و کاراکترهای غیر الفبا مانند !@#$%^&*() باشد.</span>

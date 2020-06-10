@@ -58,7 +58,7 @@
         </form>
     </div>
     <div class="form-footer">
-        <a href="login.html">صفحه ورود</a>
+        <a href="{{ route('login') }}">صفحه ورود</a>
     </div>
 </form>
 @endsection

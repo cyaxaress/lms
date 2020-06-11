@@ -3676,3 +3676,7 @@ textarea {
     max-width: 100% !important;
     transition: all 200ms ease;
 }
+
+.center{
+    text-align: center;
+}

@@ -3,7 +3,7 @@
 @section('content')
     <form action="" class="form" method="post">
         <a class="account-logo" href="index.html">
-            <img src="img/weblogo.png" alt="">
+            <img src="/img/weblogo.png" alt="">
         </a>
         <div class="card-header">
             <p class="activation-code-title">کد فرستاده شده به ایمیل  <span>Mohammadniko3@gmail.com</span> را وارد کنید</p>

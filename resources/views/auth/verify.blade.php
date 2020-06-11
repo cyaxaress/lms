@@ -1,28 +1,24 @@
-@extends('layouts.app')
+@extends('auth.master')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
-                </div>
+<div class="form">
+    <a class="account-logo" href="/">
+        <img src="/img/weblogo.png" alt="">
+    </a>
+    <div class="form-content form-account">
+        @if (session('resent'))
+            <div class="alert alert-success" role="alert">
+                یک لینک تایید ایمیل جدید به ایمیلتان ارسال شد.
             </div>
-        </div>
+        @endif
+
+        قبل از ادامه لطفا ایمیلتان را چک کنید
+        اگر ایمیلی دریافت نکرده اید درخواست ارسال مجدد لینک بدهید.
+        <form class="d-inline center" method="POST" action="{{ route('verification.resend') }}">
+            @csrf
+            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">ارسال مجددا کد لینک تایید</button>
+            <a href="/" class="">بازگشت به صفحه ی اصلی</a>
+        </form>
     </div>
 </div>
 @endsection

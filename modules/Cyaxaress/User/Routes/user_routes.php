@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'namespace' => 'App\Http\Controllers',
+    'namespace' => 'Cyaxaress\User\Http\Controllers',
     'middleware' => 'web'
 ], function ($router) {
     Auth::routes(['verify' => true]);

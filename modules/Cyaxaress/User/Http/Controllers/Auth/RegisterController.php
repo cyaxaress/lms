@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Cyaxaress\User\Rules\ValidMobile;
 use Cyaxaress\User\Rules\ValidPassword;
-use App\User;
+use Cyaxaress\User\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

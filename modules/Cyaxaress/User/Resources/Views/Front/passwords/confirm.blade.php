@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('User::Front.master')
 
 @section('content')
 <div class="container">

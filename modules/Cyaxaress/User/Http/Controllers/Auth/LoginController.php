@@ -49,4 +49,10 @@ class LoginController extends Controller
             'password' => $request->password
         ];
     }
+
+    public function showLoginForm()
+    {
+        return view('User::Front.login');
+    }
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Cyaxaress\User\Tests\Feature;
 
 use Cyaxaress\User\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

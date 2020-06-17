@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Cyaxaress\User\Tests\Unit;
 
 use Cyaxaress\User\Rules\ValidMobile;
 use PHPUnit\Framework\TestCase;

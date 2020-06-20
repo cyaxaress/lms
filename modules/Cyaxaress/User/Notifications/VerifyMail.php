@@ -40,11 +40,22 @@ class VerifyMail extends Notification
      */
     public function toMail($notifiable)
     {
+
+        $code = random_int(100000, 999999);
+
+        cache()->set(
+            'verify_code_' . $notifiable,
+            $code,
+            now()->addDay()
+        );
+
         return (new MailMessage)
                     ->line('The introduction to the notification.')
+                    ->line('your code is: ' . $code)
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
+
 
     /**
      * Get the array representation of the notification.

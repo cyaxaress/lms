@@ -16,4 +16,8 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/test', function () {
+    return new \Cyaxaress\User\Mail\VerifyCodeMail(457857);
+});
+
 Route::get('/home', 'HomeController@index')->name('home');

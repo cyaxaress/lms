@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\User\Notifications;
 
+use Cyaxaress\User\Mail\VerifyCodeMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -32,12 +33,6 @@ class VerifyMail extends Notification
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
     public function toMail($notifiable)
     {
 
@@ -49,11 +44,9 @@ class VerifyMail extends Notification
             now()->addDay()
         );
 
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->line('your code is: ' . $code)
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return (new VerifyCodeMail($code))
+            ->to($notifiable->email)
+            ->subject('وب آموز | کد فعالسازی');
     }
 
 

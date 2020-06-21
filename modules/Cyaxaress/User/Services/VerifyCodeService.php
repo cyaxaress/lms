@@ -19,4 +19,13 @@ class VerifyCodeService
             now()->addDay()
         );
     }
+
+    public static function get($id)
+    {
+        return cache()->get('verify_code_' . $id);
+    }
+    public static function delete($id)
+    {
+        return cache()->delete('verify_code_' . $id);
+    }
 }

@@ -3,6 +3,7 @@
 namespace Cyaxaress\User\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Cyaxaress\User\Services\VerifyCodeService;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,6 @@ class VerificationController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
     public function show(Request $request)
@@ -44,6 +44,22 @@ class VerificationController extends Controller
         return $request->user()->hasVerifiedEmail()
             ? redirect($this->redirectPath())
             : view('User::Front.verify');
+    }
+
+    public function verify(Request $request)
+    {
+       $this->validate($request, [
+           'verify_code' => 'required|numeric|min:6'
+       ]);
+
+       $code = VerifyCodeService::get(auth()->id());
+
+        if ($code == $request->verify_code) {
+            auth()->user()->markEmailAsVerified();
+            VerifyCodeService::delete(auth()->id());
+            return redirect()->route('home');
+        }
+        return back()->withErrors(['verify_code' => 'کد وارد شده معتبر نمیباشد!']);
     }
 
 }

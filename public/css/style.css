@@ -3676,14 +3676,3 @@ textarea {
     max-width: 100% !important;
     transition: all 200ms ease;
 }
-
-.center{
-    text-align: center;
-}
-.invalid-feedback{
-    color: red;
-    font-size: 14px;
-}
-.is-invalid{
-    border: 1px solid red;
-}

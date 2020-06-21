@@ -3,6 +3,7 @@
 namespace Cyaxaress\User\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Cyaxaress\User\Http\Requests\VerifyCodeRequest;
 use Cyaxaress\User\Services\VerifyCodeService;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
@@ -46,20 +47,14 @@ class VerificationController extends Controller
             : view('User::Front.verify');
     }
 
-    public function verify(Request $request)
+    public function verify(VerifyCodeRequest $request)
     {
-       $this->validate($request, [
-           'verify_code' => 'required|numeric|min:6'
-       ]);
+       if(! VerifyCodeService::check(auth()->id(), $request->verify_code)){
+           return back()->withErrors(['verify_code' => 'کد وارد شده معتبر نمیباشد!']);
+       }
 
-       $code = VerifyCodeService::get(auth()->id());
-
-        if ($code == $request->verify_code) {
-            auth()->user()->markEmailAsVerified();
-            VerifyCodeService::delete(auth()->id());
-            return redirect()->route('home');
-        }
-        return back()->withErrors(['verify_code' => 'کد وارد شده معتبر نمیباشد!']);
+        auth()->user()->markEmailAsVerified();
+        return redirect()->route('home');
     }
 
 }

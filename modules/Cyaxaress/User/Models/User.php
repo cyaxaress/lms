@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\User\Models;
 
+use Cyaxaress\User\Notifications\ResetPasswordRequestNotification;
 use Cyaxaress\User\Notifications\VerifyMailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -41,5 +42,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyMailNotification());
+    }
+
+    public function sendResetPasswordRequestNotification()
+    {
+        $this->notify(new ResetPasswordRequestNotification());
     }
 }

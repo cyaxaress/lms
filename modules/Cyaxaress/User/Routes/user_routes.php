@@ -16,8 +16,10 @@ Route::group([
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
     // reset password
+    Route::get('/password/reset', 'Auth\ForgotPasswordController@showVerifyCodeRequestForm')->name('password.request');
+    Route::get('/password/reset/send', 'Auth\ForgotPasswordController@sendVerifyCodeEmail')->name('password.sendVerifyCodeEmail');
+
     Route::get('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
     Route::post('/password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 

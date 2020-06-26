@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Cyaxaress\User\Http\Requests\SendResetPasswordVerifyCodeRequest;
 use Cyaxaress\User\Http\Requests\VerifyCodeRequest;
 use Cyaxaress\User\Models\User;
+use Cyaxaress\User\Repositories\UserRepo;
 use Cyaxaress\User\Services\VerifyCodeService;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -33,8 +34,7 @@ class ForgotPasswordController extends Controller
 
     public function sendVerifyCodeEmail(SendResetPasswordVerifyCodeRequest $request)
     {
-        // todo use UserRepository
-        $user = User::query()->where('email', $request->email)->first();
+        $user = resolve(UserRepo::class)->findByEmail($request->email);
 
         // check if code exists
         if ($user) {
@@ -47,8 +47,7 @@ class ForgotPasswordController extends Controller
     public function checkVerifyCode(VerifyCodeRequest $request)
     {
         // todo email validation
-        // todo use UserRepository
-        $user = User::query()->where('email', $request->email)->first();
+        $user = resolve(UserRepo::class)->findByEmail($request->email);
 
         if (! VerifyCodeService::check($user->id, $request->verify_code)) {
             return back()->withErrors(['verify_code' => 'کد وارد شده معتبر نمیباشد!']);

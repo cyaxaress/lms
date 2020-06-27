@@ -19,7 +19,9 @@ Route::group([
     Route::get('/password/reset', 'Auth\ForgotPasswordController@showVerifyCodeRequestForm')->name('password.request');
     Route::get('/password/reset/send', 'Auth\ForgotPasswordController@sendVerifyCodeEmail')->name('password.sendVerifyCodeEmail');
 
-    Route::post('/password/reset/check-verify-code', 'Auth\ForgotPasswordController@checkVerifyCode')->name('password.checkVerifyCode');
+    Route::post('/password/reset/check-verify-code', 'Auth\ForgotPasswordController@checkVerifyCode')
+        ->name('password.checkVerifyCode')
+        ->middleware('throttle:5,1');
 
     Route::get('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
@@ -28,7 +30,4 @@ Route::group([
     // register
     Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
     Route::post('/register', 'Auth\RegisterController@register')->name('register');
-
-
-
 });

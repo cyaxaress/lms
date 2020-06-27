@@ -8,27 +8,35 @@ class VerifyCodeService
 {
     private static $min = 100000;
     private static $max = 999999;
+    private static $prefix = 'verify_code_';
+
     public static function generate()
     {
         return random_int(self::$min, self::$max);
     }
 
-    public static function store($id, $code)
+    public static function store($id, $code, $time)
     {
         cache()->set(
-            'verify_code_' . $id,
+            self::$prefix . $id,
             $code,
-            now()->addDay()
+            $time
         );
     }
 
     public static function get($id)
     {
-        return cache()->get('verify_code_' . $id);
+        return cache()->get(self::$prefix . $id);
     }
+
+    public static function has($id)
+    {
+        return cache()->has(self::$prefix . $id);
+    }
+
     public static function delete($id)
     {
-        return cache()->delete('verify_code_' . $id);
+        return cache()->delete(self::$prefix . $id);
     }
 
     public static function getRule()

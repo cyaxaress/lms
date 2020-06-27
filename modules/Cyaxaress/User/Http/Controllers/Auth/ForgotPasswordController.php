@@ -3,6 +3,7 @@
 namespace Cyaxaress\User\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Cyaxaress\User\Http\Requests\ResetPasswordVerifyCodeRequest;
 use Cyaxaress\User\Http\Requests\SendResetPasswordVerifyCodeRequest;
 use Cyaxaress\User\Http\Requests\VerifyCodeRequest;
 use Cyaxaress\User\Models\User;
@@ -36,17 +37,15 @@ class ForgotPasswordController extends Controller
     {
         $user = resolve(UserRepo::class)->findByEmail($request->email);
 
-        // check if code exists
-        if ($user) {
+        if ($user && ! VerifyCodeService::has($user->id)) {
             $user->sendResetPasswordRequestNotification();
         }
 
         return view('User::Front.passwords.enter-verify-code-form');
     }
 
-    public function checkVerifyCode(VerifyCodeRequest $request)
+    public function checkVerifyCode(ResetPasswordVerifyCodeRequest $request)
     {
-        // todo email validation
         $user = resolve(UserRepo::class)->findByEmail($request->email);
 
         if (! VerifyCodeService::check($user->id, $request->verify_code)) {

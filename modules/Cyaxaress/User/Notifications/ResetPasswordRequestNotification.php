@@ -25,7 +25,7 @@ class ResetPasswordRequestNotification extends Notification
     public function toMail($notifiable)
     {
         $code = VerifyCodeService::generate();
-        VerifyCodeService::store($notifiable->id, $code);
+        VerifyCodeService::store($notifiable->id, $code, 120);
         return (new ResetPasswordRequestMail($code))->to($notifiable->email);
     }
 

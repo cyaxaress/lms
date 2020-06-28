@@ -22,10 +22,12 @@ Route::group([
     Route::post('/password/reset/check-verify-code', 'Auth\ForgotPasswordController@checkVerifyCode')
         ->name('password.checkVerifyCode')
         ->middleware('throttle:5,1');
+    Route::get('/password/change', 'Auth\ResetPasswordController@showResetForm')
+        ->name('password.showResetForm')->middleware('auth');
+    Route::post('/password/change', 'Auth\ResetPasswordController@reset')->name('password.update');
+
 
     Route::get('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-    Route::post('/password/reset', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 
     // register
     Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');

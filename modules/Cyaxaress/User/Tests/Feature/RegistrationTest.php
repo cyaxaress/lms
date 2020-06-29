@@ -58,7 +58,7 @@ class RegistrationTest extends TestCase
             ]
         );
         $code = VerifyCodeService::generate();
-        VerifyCodeService::store($user->id, $code);
+        VerifyCodeService::store($user->id, $code, now()->addDay());
 
         auth()->loginUsingId($user->id);
 

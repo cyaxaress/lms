@@ -48,7 +48,7 @@ class ForgotPasswordController extends Controller
     {
         $user = resolve(UserRepo::class)->findByEmail($request->email);
 
-        if (! VerifyCodeService::check($user->id, $request->verify_code)) {
+        if ($user == null || !VerifyCodeService::check($user->id, $request->verify_code)) {
             return back()->withErrors(['verify_code' => 'کد وارد شده معتبر نمیباشد!']);
         }
 

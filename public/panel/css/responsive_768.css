@@ -1,0 +1,26 @@
+.content .header__logo {
+    display: none;
+}
+.sidebar__nav .header__logo {
+    display: block;
+}
+.col-3 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 calc(100%);
+    flex: 0 0 calc(100% );
+    max-width: calc(100% );
+}
+.multi-text{
+    display: unset;
+    margin: 0;
+}
+.t-header-search{
+    width: 100%;
+}
+.content .posts .col {
+    width: calc(100% - 20px) !important;
+    -ms-flex: 0 0 calc(100% - 20px);
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    flex: 0 0 calc(100% - 20px) !important
+}

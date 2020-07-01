@@ -37,7 +37,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Cyaxaress\\User\\" : "modules/Cyaxaress/User/"
+            "Cyaxaress\\User\\" : "modules/Cyaxaress/User/",
+            "Cyaxaress\\Dashboard\\" : "modules/Cyaxaress/Dashboard/"
         },
         "classmap": [
             "database/seeds",

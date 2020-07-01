@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Cyaxaress\User\Providers\UserServiceProvider::class,
+        Cyaxaress\Dashboard\Providers\DashboardServiceProvider::class,
         /*
          * Package Service Providers...
          */

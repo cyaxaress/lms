@@ -3,52 +3,44 @@ namespace Cyaxaress\Category\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Cyaxaress\Category\Http\Requests\CategoryRequest;
-use Cyaxaress\Category\Models\Category;
+use Cyaxaress\Category\Repositories\CategoryRepo;
+use Cyaxaress\Category\Responses\AjaxResponses;
 
 class CategoryController extends Controller
 {
+    public $repo;
+    public function __construct(CategoryRepo $categoryRepo)
+    {
+        $this->repo = $categoryRepo;
+    }
     public function index()
     {
-        // todo CategoryRepository
-        $categories = Category::all();
+        $categories = $this->repo->all();
         return view('Categories::index', compact('categories'));
     }
 
     public function store(CategoryRequest $request)
     {
-        // todo repository
-        Category::create([
-            'title' => $request->title,
-            'slug' => $request->slug,
-            'parent_id' => $request->parent_id,
-        ]);
-
+        $this->repo->store($request);
         return back();
     }
 
-    public function edit(Category $category)
+    public function edit($categoryId)
     {
-        // todo CategoryRepository
-        $categories = Category::where('id', '!=', $category->id)->get();
+        $category = $this->repo->findById($categoryId);
+        $categories = $this->repo->allExceptById($categoryId);
         return view('Categories::edit', compact('category', 'categories'));
     }
 
-    public function update(Category $category, CategoryRequest $request)
+    public function update($categoryId, CategoryRequest $request)
     {
-        // todo repository
-        $category->update([
-            'title' => $request->title,
-            'slug' => $request->slug,
-            'parent_id' => $request->parent_id,
-        ]);
-
+        $this->repo->update($categoryId, $request);
         return back();
     }
 
-    public function destroy(Category $category)
+    public function destroy($categoryId)
     {
-        $category->delete();
-
-        return response()->json(['message' => 'عملیات با موفقیت انجام شد.'], \Illuminate\Http\Response::HTTP_OK);
+        $this->repo->delete($categoryId);
+        return AjaxResponses::SuccessResponse();
     }
 }

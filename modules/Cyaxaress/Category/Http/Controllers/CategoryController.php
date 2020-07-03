@@ -44,4 +44,11 @@ class CategoryController extends Controller
 
         return back();
     }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+
+        return response()->json(['message' => 'عملیات با موفقیت انجام شد.'], \Illuminate\Http\Response::HTTP_OK);
+    }
 }

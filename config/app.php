@@ -161,9 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Cyaxaress\User\Providers\UserServiceProvider::class,
-        Cyaxaress\Dashboard\Providers\DashboardServiceProvider::class,
-        Cyaxaress\Category\Providers\CategoryServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -177,6 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Cyaxaress\User\Providers\UserServiceProvider::class,
+        Cyaxaress\Dashboard\Providers\DashboardServiceProvider::class,
+        Cyaxaress\Category\Providers\CategoryServiceProvider::class,
     ],
 
     /*

@@ -10,20 +10,19 @@
 
     <p class="box__title margin-bottom-15">انتخاب مجوزها</p>
     @foreach($permissions as $permission)
-    <label class="ui-checkbox pt-1">
-        <input type="checkbox" name="permissions[{{ $permission->name }}]" class="sub-checkbox" data-id="2"
-               value="true"
-            @if(is_array(old('permissions')) && array_key_exists($permission->name, old('permissions'))) checked @endif
-
-        >
-        <span class="checkmark"></span>
-        @lang($permission->name)
-    </label>
+        <label class="ui-checkbox pt-1">
+            <input type="checkbox" name="permissions[{{ $permission->name }}]" class="sub-checkbox" data-id="2"
+                   value="{{ $permission->name }}"
+                   @if(is_array(old('permissions')) && array_key_exists($permission->name, old('permissions'))) checked @endif
+            >
+            <span class="checkmark"></span>
+            @lang($permission->name)
+        </label>
     @endforeach
 
     @error("permissions")
     <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
+        <strong>{{ $message }}</strong>
     </span>
     @enderror
     <hr>

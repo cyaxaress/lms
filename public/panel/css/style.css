@@ -685,6 +685,10 @@ textarea {
     content: '\e111';
 }
 
+.sidebar__nav .i-role-permissions a::before {
+    content: '\e084';
+}
+
 .sidebar__nav.is-active ul li {
     margin: 0 9px;
 }

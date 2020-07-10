@@ -20,8 +20,14 @@
                     @foreach($roles as $role)
                     <tr role="row" class="">
                         <td><a href="">{{ $role->id }}</a></td>
-                        <td><a href="">{{ $role->title }}</a></td>
-                        <td> -- </td>
+                        <td><a href="">{{ $role->name }}</a></td>
+                        <td>
+                            <ul>
+                                @foreach($role->permissions as $permission)
+                                    <li>@lang($permission->name)</li>
+                                @endforeach
+                            </ul>
+                        </td>
                         <td>
                             <a href="" onclick="event.preventDefault(); deleteItem(event, '{{ route('role-permissions.destroy', $role->id) }}')" class="item-delete mlg-15" title="حذف"></a>
                             <a href="{{ route('role-permissions.edit',  $role->id) }}" class="item-edit " title="ویرایش"></a>

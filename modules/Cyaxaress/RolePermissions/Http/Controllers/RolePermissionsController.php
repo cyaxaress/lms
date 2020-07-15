@@ -1,6 +1,7 @@
 <?php
 namespace Cyaxaress\RolePermissions\Http\Controllers;
 
+use Cyaxaress\Category\Responses\AjaxResponses;
 use Cyaxaress\RolePermissions\Http\Requests\RoleRequest;
 use Cyaxaress\RolePermissions\Http\Requests\RoleUpdateRequest;
 use Cyaxaress\RolePermissions\Repositories\PermissionRepo;
@@ -40,5 +41,11 @@ class RolePermissionsController
     {
         $this->roleRepo->update($id, $request);
         return redirect(route('role-permissions.index'));
+    }
+
+    public function destroy($roleId)
+    {
+        $this->roleRepo->delete($roleId);
+        return AjaxResponses::SuccessResponse();
     }
 }

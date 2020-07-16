@@ -179,6 +179,7 @@ return [
         Cyaxaress\Dashboard\Providers\DashboardServiceProvider::class,
         Cyaxaress\Category\Providers\CategoryServiceProvider::class,
         Cyaxaress\RolePermissions\Providers\RolePermissionsServiceProvider::class,
+        Cyaxaress\Course\Providers\CourseServiceProvider::class,
     ],
 
     /*

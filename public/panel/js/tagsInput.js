@@ -1,46 +1,42 @@
-function existingTag(text)
-{
-    var existing = false,
-        text = text.toLowerCase();
-
-    $(".tags").each(function(){
-        if ($(this).text().toLowerCase() == text)
-        {
-            existing = true;
-            return "";
-        }
+$.expr[":"].contains = $.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    };
+});
+$(document).ready(function() {
+    $('#addTagBtn').click(function() {
+        $('#tags option:selected').each(function() {
+            $(this).appendTo($('#selectedTags'));
+        });
     });
+    $('#removeTagBtn').click(function() {
+        $('#selectedTags option:selected').each(function(el) {
+            $(this).appendTo($('#tags'));
+        });
+    });
+    $('.tagRemove').click(function(event) {
+        event.preventDefault();
+        $(this).parent().remove();
+    });
+    $('ul.tags').click(function() {
+        $('#search-field').focus();
+    });
+    $('#search-field').keypress(function(event) {
+        if (event.keyCode == '13') {
+            event.preventDefault();
+            if (($(this).val() != '') && ($(".tags .addedTag:contains('" + $(this).val() + "') ").length == 0 ))  {
 
-    return existing;
-}
 
-$(function(){
-    $(".tags-new input").focus();
 
-    $(".tags-new input").keyup(function(){
+                $('<li class="addedTag">' + $(this).val() + '<span class="tagRemove" onclick="$(this).parent().remove();">x</span><input type="hidden" value="' + $(this).val() + '" name="tags[]"></li>').insertBefore('.tags .tagAdd');
+                $(this).val('');
 
-        var tag = $(this).val().trim(),
-            length = tag.length;
+            } else {
+                $(this).val('');
 
-        if((tag.charAt(length - 1) == ',') && (tag != ","))
-        {
-            tag = tag.substring(0, length - 1);
-
-            if(!existingTag(tag))
-            {
-                $('<li class="tags-input"><span>' + tag + '</span><span class="remove-tag"></span></i></li>').insertBefore($(".tags-new"));
-                $(this).val("");
-            }
-            else
-            {
-                $(this).val(tag);
             }
         }
-    });
-
-    $(document).on("click", ".tags-input .remove-tag", function(){
-        $(this).parent("li").remove();
     });
 
 });
-                                
+  

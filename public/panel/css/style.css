@@ -632,7 +632,9 @@ textarea {
 .sidebar__nav .i-ads a::before {
     content: "\E00b";
 }
-
+.sidebar__nav .i-role-permissions a::before {
+    content: "\E084";
+}
 
 .sidebar__nav .i-banners a::before {
     content: "\E05e";
@@ -683,10 +685,6 @@ textarea {
 
 .sidebar__nav .i-user__inforamtion a::before {
     content: '\e111';
-}
-
-.sidebar__nav .i-role-permissions a::before {
-    content: '\e084';
 }
 
 .sidebar__nav.is-active ul li {
@@ -1333,68 +1331,55 @@ select {
 
 
 
-.tags-input-ul .remove-tag:before {
-    content: '\e041';
-}
-
-.tags-input-ul {
-    display: -ms-flexbox;
-    display: -webkit-box;
+.tags {
+    background: none repeat scroll 0 0 #fff;
+    border: solid 2px #e2e2e2;
     display: flex;
-    border: 2px solid #e2e2e2;
-    border-radius: 2px;
-    padding: 0 12px;
-    -ms-flex-align: center;
-    -webkit-box-align: center;
-    align-items: center;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-}
-
-.tags-input-ul .tags-new {
-    margin-right: 8px;
-    flex-grow: 1;
-}
-
-.tags-input-ul .tags-new input {
-    height: 38px;
+    padding: 0.5em;
     width: 100%;
-    line-height: 39px;
+    justify-content: flex-start;
+    margin-bottom: 12px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.tags-input {
-    background: transparent;
-    border: 2px solid #e2e2e2;
-    padding: 5px 20px 5px 5px;
+.tags li.tagAdd, .tags li.addedTag {
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    height: 25px;
+}
+.tags li.addedTag {
+    border:1px solid #e2e2e2;
     border-radius: 2px;
-    margin-right: 5px;
-    position: relative;
-    height: 30px;
-    font-size: 12px;
+    padding: 0.25em;
+    font-size: 13px;
+    vertical-align: middle;
+}
+.tags input, li.addedTag {
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-shadow: none;
+    display: block;
+    padding: 0.5em;
+    height: 25px;
+
 }
 
-.tags-input .remove-tag {
-    position: absolute;
-    right: 6px;
-    top: 3px;
-    width: 8px;
-    height: 8px;
-    content: '';
+span.tagRemove {
     cursor: pointer;
-    opacity: .7;
-    font-size: 12px;
+    display: inline-block;
+    padding-left: 0.5em;
+    margin-right: 7px;
 }
-
-.tags-input .remove-tag:hover {
-    opacity: 1;
+span.tagRemove:hover {
+    color: #222222;
 }
 @media (max-width: 414px) {
-  .tab__item{
-      width: 100%;
-      text-align: center;
-      margin-bottom: 5px;
-  }
+    .tab__item{
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
 }
 
 @media (max-width: 346px) {
@@ -1448,7 +1433,6 @@ select {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    padding-right: 35px;
 }
 
 .ui-checkbox input {

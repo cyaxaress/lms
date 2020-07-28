@@ -1890,3 +1890,14 @@ span.tagRemove:hover {
 .invalid-feedback{
     color: red;
 }
+.w-100{
+    width: 100%;
+}
+.text{
+    margin-bottom: 0 !important;
+    margin-top: 15px;
+}
+
+.multi-text{
+    margin-bottom: 15px;
+}

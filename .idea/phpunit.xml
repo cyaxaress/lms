@@ -5,6 +5,9 @@
       <list>
         <option value="$PROJECT_DIR$/tests/Unit" />
         <option value="$PROJECT_DIR$/tests/Feature" />
+        <option value="$PROJECT_DIR$/modules/Cyaxaress/User/Tests/Feature" />
+        <option value="$PROJECT_DIR$/modules/Cyaxaress/User/Tests/Unit" />
+        <option value="$PROJECT_DIR$/modules/Cyaxaress/Category/Tests/Feature" />
       </list>
     </option>
   </component>

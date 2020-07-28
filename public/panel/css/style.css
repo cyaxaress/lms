@@ -1882,9 +1882,15 @@ span.tagRemove:hover {
 .pr-3{
     padding-right: 30px;
 }
-
+.mt-0{
+    margin-top: 0 !important;
+}
 .mt-2{
     margin-top: 20px;
+}
+
+.mb-0{
+    margin-bottom: 0 !important;
 }
 
 .invalid-feedback{
@@ -1893,7 +1899,7 @@ span.tagRemove:hover {
 .w-100{
     width: 100%;
 }
-.text{
+.text, .dropdown-select{
     margin-bottom: 0 !important;
     margin-top: 15px;
 }

@@ -7,7 +7,7 @@
     <div class="row no-gutters  ">
         <div class="col-12 bg-white">
             <p class="box__title">بروزرسانی دوره</p>
-            <form action="{{ route('courses.store') }}" class="padding-30">
+            <form action="{{ route('courses.store') }}" class="padding-30" method="post">
                 @csrf
                 <input type="text" class="text" name="title" placeholder="عنوان دوره" required>
                 <input type="text" class="text text-left " name="slug" placeholder="نام انگلیسی دوره" required>
@@ -30,14 +30,15 @@
                 </ul>
                 <select name="type" required>
                     <option value="">نوع دوره</option>
-                    <option value="cash">نقدی</option>
-                    <option value="free">رایگان</option>
+                    @foreach(\Cyaxaress\Course\Models\Course::$types as $type)
+                        <option value="{{ $type }}">@lang($type)</option>
+                    @endforeach
                 </select>
                 <select name="status" required>
                     <option value="">وضعیت دوره</option>
-                    <option value="not-completed">درحال برگزاری</option>
-                    <option value="completed">تکمیل</option>
-                    <option value="lock">قفل شده</option>
+                    @foreach(\Cyaxaress\Course\Models\Course::$statuses as $status)
+                        <option value="{{ $status }}">@lang($status)</option>
+                    @endforeach
                 </select>
                 <select name="category_id" required>
                     <option value="">دسته بندی</option>
@@ -48,7 +49,7 @@
                 <div class="file-upload">
                     <div class="i-file-upload">
                         <span>آپلود بنر دوره</span>
-                        <input type="file" class="file-upload" id="files" name="attachment" required/>
+                        <input type="file" class="file-upload" id="files" name="image" required/>
                     </div>
                     <span class="filesize"></span>
                     <span class="selectedFiles">فایلی انتخاب نشده است</span>

@@ -22,9 +22,9 @@ class CreateCoursesTable extends Migration
             $table->float('priority')->nullable();
             $table->string('price', 10);
             $table->string('percent', 5);
-            $table->enum('type', ['free', 'cash']);
-            $table->enum('status', ['completed', 'not-completed', 'lock']);
-            $table->text('body')->nullable();
+            $table->enum('type', \Cyaxaress\Course\Models\Course::$types);
+            $table->enum('status', \Cyaxaress\Course\Models\Course::$statuses);
+            $table->longText('body')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');

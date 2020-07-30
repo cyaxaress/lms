@@ -24,9 +24,7 @@ class CourseController
     public function store(CourseRequest $request, CourseRepo $courseRepo)
     {
         $request->request->add(['banner_id' => MediaUploadService::upload($request->file('image'))->id ]);
-
         $course = $courseRepo->store($request);
-
         return $course;
     }
 }

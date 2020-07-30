@@ -7,7 +7,7 @@
     <div class="row no-gutters  ">
         <div class="col-12 bg-white">
             <p class="box__title">بروزرسانی دوره</p>
-            <form action="{{ route('courses.store') }}" class="padding-30" method="post">
+            <form action="{{ route('courses.store') }}" class="padding-30" method="post" enctype="multipart/form-data">
                 @csrf
                 <x-input name="title" placeholder="عنوان دوره" type="text" required/>
                 <x-input type="text" name="slug" placeholder="نام انگلیسی دوره" class="text-left" required />
@@ -18,7 +18,6 @@
                     <x-input type="text" placeholder="مبلغ دوره" name="price" class="text-left" required />
                     <x-input type="number" placeholder="درصد مدرس" name="percent" class="text-left" required />
                 </div>
-
                 <x-select name="teacher_id" required>
                     <option value="">انتخاب مدرس دوره</option>
                     @foreach($teachers as $teacher)

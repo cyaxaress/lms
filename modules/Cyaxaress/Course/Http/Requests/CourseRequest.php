@@ -28,4 +28,27 @@ class CourseRequest extends FormRequest
             "image" => "required|mimes:jpg,png,jpeg",
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            "price" => "قیمت",
+            "slug" => "عنوان انگلیسی",
+            "priority" => "ردیف دوره",
+            "percent" => "درصد مدرس",
+            "teacher_id" => "مدرس",
+            "category_id" => "دسته بندی",
+            "status" => "وضعیت",
+            "type" => "نوع",
+            "body" => "توضیحات",
+            "image" => "بنر دوره",
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
 }

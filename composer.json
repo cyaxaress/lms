@@ -42,7 +42,8 @@
             "Cyaxaress\\Dashboard\\" : "modules/Cyaxaress/Dashboard/",
             "Cyaxaress\\Category\\" : "modules/Cyaxaress/Category/",
             "Cyaxaress\\RolePermissions\\" : "modules/Cyaxaress/RolePermissions/",
-            "Cyaxaress\\Course\\" : "modules/Cyaxaress/Course/"
+            "Cyaxaress\\Course\\" : "modules/Cyaxaress/Course/",
+            "Cyaxaress\\Media\\" : "modules/Cyaxaress/Media/"
         },
         "classmap": [
             "database/seeds",

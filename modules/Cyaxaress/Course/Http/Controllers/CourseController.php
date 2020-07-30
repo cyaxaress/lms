@@ -4,6 +4,7 @@ namespace Cyaxaress\Course\Http\Controllers;
 use Cyaxaress\Category\Repositories\CategoryRepo;
 use Cyaxaress\Course\Http\Requests\CourseRequest;
 use Cyaxaress\Course\Repositories\CourseRepo;
+use Cyaxaress\Media\Services\MediaUploadService;
 use Cyaxaress\User\Repositories\UserRepo;
 
 class CourseController
@@ -22,6 +23,8 @@ class CourseController
 
     public function store(CourseRequest $request, CourseRepo $courseRepo)
     {
+        $request->request->add(['banner_id' => MediaUploadService::upload($request->file('image'))->id ]);
+
         $course = $courseRepo->store($request);
 
         return $course;

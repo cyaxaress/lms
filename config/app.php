@@ -180,6 +180,7 @@ return [
         Cyaxaress\Category\Providers\CategoryServiceProvider::class,
         Cyaxaress\RolePermissions\Providers\RolePermissionsServiceProvider::class,
         Cyaxaress\Course\Providers\CourseServiceProvider::class,
+        Cyaxaress\Media\Providers\MediaServiceProvider::class,
     ],
 
     /*

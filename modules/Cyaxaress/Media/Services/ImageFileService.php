@@ -2,6 +2,7 @@
 namespace Cyaxaress\Media\Services;
 
 
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class ImageFileService
@@ -22,7 +23,7 @@ class ImageFileService
     private static function resize($img, $dir, $filename, $extension)
     {
         $img = Image::make($img);
-        $imgs['original'] =  $filename . $extension;
+        $imgs['original'] =  $filename . '.' . $extension;
         foreach (self::$sizes as $size) {
             $imgs[$size] = $filename . '_'. $size. '.' . $extension;
             $img->resize($size, null, function ($aspect) {
@@ -30,5 +31,12 @@ class ImageFileService
             })->save(storage_path($dir) . $filename . '_'. $size. '.' . $extension);
         }
         return $imgs;
+    }
+
+    public static function delete($media)
+    {
+        foreach ($media->files as $file) {
+            Storage::delete('public\\' . $file);
+        }
     }
 }

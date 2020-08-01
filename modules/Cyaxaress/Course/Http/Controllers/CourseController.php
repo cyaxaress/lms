@@ -2,9 +2,10 @@
 namespace Cyaxaress\Course\Http\Controllers;
 
 use Cyaxaress\Category\Repositories\CategoryRepo;
+use Cyaxaress\Category\Responses\AjaxResponses;
 use Cyaxaress\Course\Http\Requests\CourseRequest;
 use Cyaxaress\Course\Repositories\CourseRepo;
-use Cyaxaress\Media\Services\MediaUploadService;
+use Cyaxaress\Media\Services\MediaFileService;
 use Cyaxaress\User\Repositories\UserRepo;
 
 class CourseController
@@ -24,8 +25,21 @@ class CourseController
 
     public function store(CourseRequest $request, CourseRepo $courseRepo)
     {
-        $request->request->add(['banner_id' => MediaUploadService::upload($request->file('image'))->id ]);
+        $request->request->add(['banner_id' => MediaFileService::upload($request->file('image'))->id ]);
         $courseRepo->store($request);
         return redirect()->route('courses.index');
+    }
+
+    public function destroy($id, CourseRepo $courseRepo)
+    {
+        $course =  $courseRepo->findByid($id);
+
+        if ($course->banner) {
+            $course->banner->delete();
+        }
+
+        $course->delete();
+
+        return AjaxResponses::SuccessResponse();
     }
 }

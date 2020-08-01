@@ -10,7 +10,7 @@ class UserRepo
 {
     public function findByEmail($email)
     {
-        return User::query()->where('email', $email)->first();
+        return User::query()->where('email', $email)->firstOrFail();
     }
 
     public function getTeachers()
@@ -20,6 +20,6 @@ class UserRepo
 
     public function findById($id)
     {
-        return User::find($id);
+        return User::findOrFail($id);
     }
 }

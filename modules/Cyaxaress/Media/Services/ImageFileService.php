@@ -22,9 +22,9 @@ class ImageFileService
     private static function resize($img, $dir, $filename, $extension)
     {
         $img = Image::make($img);
-        $imgs['original'] = $dir . $filename . $extension;
+        $imgs['original'] =  $filename . $extension;
         foreach (self::$sizes as $size) {
-            $imgs[$size] = $dir . $filename . '_'. $size. '.' . $extension;
+            $imgs[$size] = $filename . '_'. $size. '.' . $extension;
             $img->resize($size, null, function ($aspect) {
                 $aspect->aspectRatio();
             })->save(storage_path($dir) . $filename . '_'. $size. '.' . $extension);

@@ -9,9 +9,10 @@ use Cyaxaress\User\Repositories\UserRepo;
 
 class CourseController
 {
-    public function index()
+    public function index(CourseRepo $courseRepo)
     {
-        return 'courses';
+        $courses = $courseRepo->paginate();
+        return view('Courses::index', compact('courses'));
     }
 
     public function create(UserRepo $userRepo, CategoryRepo $categoryRepo)
@@ -24,7 +25,7 @@ class CourseController
     public function store(CourseRequest $request, CourseRepo $courseRepo)
     {
         $request->request->add(['banner_id' => MediaUploadService::upload($request->file('image'))->id ]);
-        $course = $courseRepo->store($request);
-        return $course;
+        $courseRepo->store($request);
+        return redirect()->route('courses.index');
     }
 }

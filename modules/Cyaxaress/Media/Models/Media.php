@@ -15,4 +15,9 @@ class Media extends Model
             MediaFileService::delete($media);
         });
     }
+
+    public function getThumbAttribute()
+    {
+        return '/storage/' .  $this->files[300];
+    }
 }

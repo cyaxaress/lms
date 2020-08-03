@@ -39,6 +39,19 @@ class CourseController
         return view('Courses::edit', compact('course', 'teachers', 'categories'));
     }
 
+    public function update($id, CourseRequest $request, CourseRepo $courseRepo)
+    {
+        $course = $courseRepo->findByid($id);
+        if ($request->hasFile('image')) {
+            $request->request->add(['banner_id' => MediaFileService::upload($request->file('image'))->id ]);
+            $course->banner->delete();
+        }else{
+            $request->request->add(['banner_id' => $course->banner_id]);
+        }
+        $courseRepo->update($id, $request);
+        return redirect(route('courses.index'));
+    }
+
     public function destroy($id, CourseRepo $courseRepo)
     {
         $course =  $courseRepo->findByid($id);

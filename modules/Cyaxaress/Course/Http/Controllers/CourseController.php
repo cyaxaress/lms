@@ -64,4 +64,31 @@ class CourseController
 
         return AjaxResponses::SuccessResponse();
     }
+
+    public function accept($id, CourseRepo $courseRepo)
+    {
+        if ($courseRepo->updateConfirmationStatus($id, Course::CONFIRMATION_STATUS_ACCEPTED)){
+            return AjaxResponses::SuccessResponse();
+        }
+
+        return AjaxResponses::FailedResponse();
+    }
+
+    public function reject($id, CourseRepo $courseRepo)
+    {
+        if ($courseRepo->updateConfirmationStatus($id, Course::CONFIRMATION_STATUS_REJECTED)){
+            return AjaxResponses::SuccessResponse();
+        }
+
+        return AjaxResponses::FailedResponse();
+    }
+
+    public function lock($id, CourseRepo $courseRepo)
+    {
+        if ($courseRepo->updateStatus($id, Course::STATUS_LOCKED)){
+            return AjaxResponses::SuccessResponse();
+        }
+
+        return AjaxResponses::FailedResponse();
+    }
 }

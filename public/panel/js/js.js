@@ -211,12 +211,34 @@ $('.discounts #discounts-field-2').on('click', function (e) {
 $('.discounts #discounts-field-1').on('click', function (e) {
     $('.discounts .dropdown-select').removeClass('is-active')
 });
+function updateConfirmationStatus(event, route, message, status, field = 'confirmation_status') {
+    event.preventDefault();
+    if(confirm(message)){
+        $.post(route, { _method: "PATCH", _token: $('meta[name="_token"]').attr('content') })
+            .done(function (response) {
+                $(event.target).closest('tr').find('td.' + field).text(status);
+                $.toast({
+                    heading: 'عملیات موفق',
+                    text: response.message,
+                    showHideTransition: 'slide',
+                    icon: 'success'
+                })
+            })
+            .fail(function (response) {
+                $.toast({
+                    heading: 'عملیات ناموفق',
+                    text: response.message,
+                    showHideTransition: 'slide',
+                    icon: 'error'
+                })
+            })
+    }
+}
 
 function deleteItem(event, route) {
     event.preventDefault();
     if(confirm('آیا از حذف این آیتم اطمینان دارید؟')){
         $.post(route, { _method: "delete", _token: $('meta[name="_token"]').attr('content') })
-
             .done(function (response) {
                 event.target.closest('tr').remove();
                 $.toast({

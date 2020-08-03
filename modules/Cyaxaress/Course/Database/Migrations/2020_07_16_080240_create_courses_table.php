@@ -25,6 +25,7 @@ class CreateCoursesTable extends Migration
             $table->string('percent', 5);
             $table->enum('type', \Cyaxaress\Course\Models\Course::$types);
             $table->enum('status', \Cyaxaress\Course\Models\Course::$statuses);
+            $table->enum('confirmation_status', \Cyaxaress\Course\Models\Course::$confirmationStatuses);
             $table->longText('body')->nullable();
             $table->timestamps();
 

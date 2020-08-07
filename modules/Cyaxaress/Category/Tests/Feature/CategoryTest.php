@@ -3,6 +3,7 @@ namespace Cyaxaress\Category\Tests\Feature;
 
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Course\Database\Seeds\RolePermissionTableSeeder;
+use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -17,7 +18,7 @@ class CategoryTest extends TestCase
     {
         $this->actionAsAdmin();
         $this->seed(RolePermissionTableSeeder::class);
-        auth()->user()->givePermissionTo('manage categories');
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_CATEGORIES);
         $this->get(route('categories.index'))->assertOk();
     }
     public function test_normal_user_can_not_see_categories_panel()
@@ -31,7 +32,7 @@ class CategoryTest extends TestCase
         $this->withoutExceptionHandling();
         $this->actionAsAdmin();
         $this->seed(RolePermissionTableSeeder::class);
-        auth()->user()->givePermissionTo('manage categories');
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_CATEGORIES);
         $this->createCategory();
 
         $this->assertEquals(1, Category::all()->count());
@@ -42,7 +43,7 @@ class CategoryTest extends TestCase
         $newTitle =  'aasdf123';
         $this->actionAsAdmin();
         $this->seed(RolePermissionTableSeeder::class);
-        auth()->user()->givePermissionTo('manage categories');
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_CATEGORIES);
         $this->createCategory();
         $this->assertEquals(1, Category::all()->count());
         $this->patch(route('categories.update', 1 ), ['title' => $newTitle, "slug" => $this->faker->word]);
@@ -53,7 +54,7 @@ class CategoryTest extends TestCase
     {
         $this->actionAsAdmin();
         $this->seed(RolePermissionTableSeeder::class);
-        auth()->user()->givePermissionTo('manage categories');
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_CATEGORIES);
         $this->createCategory();
         $this->assertEquals(1, Category::all()->count());
 

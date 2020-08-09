@@ -1,6 +1,7 @@
 <?php
 namespace Cyaxaress\Course\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Cyaxaress\Category\Repositories\CategoryRepo;
 use Cyaxaress\Category\Responses\AjaxResponses;
 use Cyaxaress\Course\Http\Requests\CourseRequest;
@@ -9,10 +10,11 @@ use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Media\Services\MediaFileService;
 use Cyaxaress\User\Repositories\UserRepo;
 
-class CourseController
+class CourseController extends Controller
 {
     public function index(CourseRepo $courseRepo)
     {
+        $this->authorize('manage', Course::class);
         $courses = $courseRepo->paginate();
         return view('Courses::index', compact('courses'));
     }

@@ -2,6 +2,9 @@
 namespace Cyaxaress\Course\Providers;
 
 use Cyaxaress\Course\Database\Seeds\RolePermissionTableSeeder;
+use Cyaxaress\Course\Models\Course;
+use Cyaxaress\Course\Policies\CoursePolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class CourseServiceProvider extends ServiceProvider
@@ -14,6 +17,7 @@ class CourseServiceProvider extends ServiceProvider
         $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/Lang/');
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/Lang/', "Courses");
         \DatabaseSeeder::$seeders[] = RolePermissionTableSeeder::class;
+        Gate::policy(Course::class, CoursePolicy::class);
     }
 
     public function boot()

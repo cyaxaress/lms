@@ -3,6 +3,7 @@ namespace Cyaxaress\Category\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Cyaxaress\Category\Http\Requests\CategoryRequest;
+use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Category\Repositories\CategoryRepo;
 use Cyaxaress\Category\Responses\AjaxResponses;
 
@@ -15,6 +16,7 @@ class CategoryController extends Controller
     }
     public function index()
     {
+        $this->authorize('manage', Category::class);
         $categories = $this->repo->all();
         return view('Categories::index', compact('categories'));
     }

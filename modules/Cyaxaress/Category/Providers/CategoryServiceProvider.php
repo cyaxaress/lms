@@ -1,6 +1,9 @@
 <?php
 namespace Cyaxaress\Category\Providers;
 
+use Cyaxaress\Category\Models\Category;
+use Cyaxaress\Category\Policies\CategoryPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class CategoryServiceProvider extends ServiceProvider
@@ -10,6 +13,7 @@ class CategoryServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/categories_routes.php');
         $this->loadViewsFrom(__DIR__  .'/../Resources/Views/', 'Categories');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        Gate::policy(Category::class, CategoryPolicy::class);
     }
 
     public function boot()

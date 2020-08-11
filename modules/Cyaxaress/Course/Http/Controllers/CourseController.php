@@ -21,6 +21,7 @@ class CourseController extends Controller
 
     public function create(UserRepo $userRepo, CategoryRepo $categoryRepo)
     {
+        $this->authorize('create', Course::class);
         $teachers = $userRepo->getTeachers();
         $categories = $categoryRepo->all();
         return view('Courses::create', compact('teachers', 'categories'));
@@ -36,6 +37,7 @@ class CourseController extends Controller
     public function edit($id, CourseRepo $courseRepo, UserRepo $userRepo, CategoryRepo $categoryRepo)
     {
         $course = $courseRepo->findByid($id);
+        $this->authorize('edit', $course);
         $teachers = $userRepo->getTeachers();
         $categories = $categoryRepo->all();
         return view('Courses::edit', compact('course', 'teachers', 'categories'));

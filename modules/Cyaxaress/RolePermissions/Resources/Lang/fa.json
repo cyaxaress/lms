@@ -3,5 +3,7 @@
     "manage role_permissions" : "مدیریت نقشهای کاربری",
     "manage courses" : "مدیریت دوره ها",
     "teach" : "تدریس",
-    "super admin" : "مدیرکل"
+    "super admin" : "مدیرکل",
+    "manage own courses" : "مدیریت دوره های خود"
+
 }

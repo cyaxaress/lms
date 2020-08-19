@@ -46,9 +46,11 @@ class CourseController extends Controller
     public function update($id, CourseRequest $request, CourseRepo $courseRepo)
     {
         $course = $courseRepo->findByid($id);
+        $this->authorize('edit', $course);
         if ($request->hasFile('image')) {
             $request->request->add(['banner_id' => MediaFileService::upload($request->file('image'))->id ]);
-            $course->banner->delete();
+            if ($course->banner)
+                $course->banner->delete();
         }else{
             $request->request->add(['banner_id' => $course->banner_id]);
         }
@@ -59,7 +61,7 @@ class CourseController extends Controller
     public function destroy($id, CourseRepo $courseRepo)
     {
         $course =  $courseRepo->findByid($id);
-
+        $this->authorize('delete', $course);
         if ($course->banner) {
             $course->banner->delete();
         }
@@ -71,6 +73,7 @@ class CourseController extends Controller
 
     public function accept($id, CourseRepo $courseRepo)
     {
+        $this->authorize('change_confirmation_status', Course::class);
         if ($courseRepo->updateConfirmationStatus($id, Course::CONFIRMATION_STATUS_ACCEPTED)){
             return AjaxResponses::SuccessResponse();
         }
@@ -80,6 +83,7 @@ class CourseController extends Controller
 
     public function reject($id, CourseRepo $courseRepo)
     {
+        $this->authorize('change_confirmation_status', Course::class);
         if ($courseRepo->updateConfirmationStatus($id, Course::CONFIRMATION_STATUS_REJECTED)){
             return AjaxResponses::SuccessResponse();
         }
@@ -89,6 +93,7 @@ class CourseController extends Controller
 
     public function lock($id, CourseRepo $courseRepo)
     {
+        $this->authorize('change_confirmation_status', Course::class);
         if ($courseRepo->updateStatus($id, Course::STATUS_LOCKED)){
             return AjaxResponses::SuccessResponse();
         }

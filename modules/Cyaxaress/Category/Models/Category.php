@@ -1,6 +1,7 @@
 <?php
 namespace Cyaxaress\Category\Models;
 
+use Cyaxaress\Course\Models\Course;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -20,5 +21,10 @@ class Category extends Model
     public function subCategories()
     {
         $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
     }
 }

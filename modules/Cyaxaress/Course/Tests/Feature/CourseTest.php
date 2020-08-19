@@ -92,12 +92,89 @@ class CourseTest extends TestCase
     }
 
     // permitted user can update course
+    public function test_permitted_user_can_update_course()
+    {
+        $this->withoutExceptionHandling();
+        $this->actAsUser();
+        auth()->user()->givePermissionTo([Permission::PERMISSION_MANAGE_OWN_COURSES, Permission::PERMISSION_TEACH]);
+        $course = $this->createCourse();
+        $this->patch(route('courses.update', $course->id), [
+            'title' => 'updated title',
+            "slug" => 'updated slug',
+            'teacher_id' => auth()->id(),
+            'category_id' => $course->category->id,
+            "priority" => 12,
+            "price" => 1450,
+            "percent" => 80,
+            "type" => Course::TYPE_CASH,
+            "image" => UploadedFile::fake()->image('banner.jpg'),
+            "status" => Course::STATUS_COMPLETED,
+        ])->assertRedirect(route('courses.index'));
+        $course = $course->fresh();
+        $this->assertEquals('updated title', $course->title);
+    }
+
+    public function test_normal_user_can_not_update_course()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+
+        $this->actAsUser();
+        auth()->user()->givePermissionTo(Permission::PERMISSION_TEACH);
+
+        $this->patch(route('courses.update', $course->id), [
+            'title' => 'updated title',
+            "slug" => 'updated slug',
+            'teacher_id' => auth()->id(),
+            'category_id' => $course->category->id,
+            "priority" => 12,
+            "price" => 1450,
+            "percent" => 80,
+            "type" => Course::TYPE_CASH,
+            "image" => UploadedFile::fake()->image('banner.jpg'),
+            "status" => Course::STATUS_COMPLETED,
+        ])->assertStatus(403);
+    }
 
     // permitted user can delete course
 
+    public function test_permitted_user_can_delete_course()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $this->delete(route('courses.destroy', $course->id))->assertOk();
+        $this->assertEquals(0, Course::count());
+    }
+
+    public function test_normal_user_can_not_delete_course()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $this->actAsUser();
+        $this->delete(route('courses.destroy', $course->id))->assertStatus(403);
+        $this->assertEquals(1, Course::count());
+    }
     // permitted user can accept course
-    // permitted user can reject course
-    // permitted user can lock course
+    public function test_permitted_user_can_confirmation_status_courses()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $this->patch(route('courses.accept', $course->id), [])->assertOk();
+        $this->patch(route('courses.reject', $course->id), [])->assertOk();
+        $this->patch(route('courses.lock', $course->id), [])->assertOk();
+    }
+
+    public function test_normal_user_can_not_change_confirmation_status_courses()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+
+        $this->actAsUser();
+        $this->patch(route('courses.accept', $course->id), [])->assertStatus(403);
+        $this->patch(route('courses.reject', $course->id), [])->assertStatus(403);
+        $this->patch(route('courses.lock', $course->id), [])->assertStatus(403);
+    }
+
     private function createUser()
     {
         $this->actingAs(factory(User::class)->create());

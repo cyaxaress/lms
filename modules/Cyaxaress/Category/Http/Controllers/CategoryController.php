@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Cyaxaress\Category\Http\Requests\CategoryRequest;
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Category\Repositories\CategoryRepo;
-use Cyaxaress\Category\Responses\AjaxResponses;
+use Cyaxaress\Common\Responses\AjaxResponses;
 
 class CategoryController extends Controller
 {

@@ -39,6 +39,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Cyaxaress\\Common\\" : "modules/Cyaxaress/Common/",
             "Cyaxaress\\User\\" : "modules/Cyaxaress/User/",
             "Cyaxaress\\Dashboard\\" : "modules/Cyaxaress/Dashboard/",
             "Cyaxaress\\Category\\" : "modules/Cyaxaress/Category/",

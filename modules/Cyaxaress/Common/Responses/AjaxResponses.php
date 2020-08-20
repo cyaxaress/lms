@@ -1,5 +1,5 @@
 <?php
-namespace Cyaxaress\Category\Responses;
+namespace Cyaxaress\Common\Responses;
 
 use Illuminate\Http\Response;
 

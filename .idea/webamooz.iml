@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/User" isTestSource="false" packagePrefix="Cyaxaress\User\" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Media" isTestSource="false" packagePrefix="Cyaxaress\Media\" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/User/Tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Common" isTestSource="false" packagePrefix="Cyaxaress\Common\" />
       <sourceFolder url="file://$MODULE_DIR$/tests/Unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Category/Tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />

@@ -3,7 +3,7 @@ namespace Cyaxaress\Course\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Cyaxaress\Category\Repositories\CategoryRepo;
-use Cyaxaress\Category\Responses\AjaxResponses;
+use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\Course\Http\Requests\CourseRequest;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Repositories\CourseRepo;

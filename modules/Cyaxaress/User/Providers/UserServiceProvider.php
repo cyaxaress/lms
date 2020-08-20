@@ -21,5 +21,10 @@ class UserServiceProvider extends ServiceProvider
         $this->loadFactoriesFrom(__DIR__ . '/../Database/Factories');
         $this->loadViewsFrom( __DIR__ . '/../Resources/Views', 'User');
 
+        config()->set('sidebar.items.users', [
+            "icon" => "i-users",
+            "title" => "کاربران",
+            "url" => route('users.index')
+        ]);
     }
 }

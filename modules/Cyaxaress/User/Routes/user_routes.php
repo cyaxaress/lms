@@ -4,6 +4,9 @@ Route::group([
     'namespace' => 'Cyaxaress\User\Http\Controllers',
     'middleware' => 'web'
 ], function ($router) {
+    Route::resource('users', "UserController");
+    Route::post('users/{user}/add/role', "UserController@addRole")->name('users.addRole');
+
     Route::post('/email/verify', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::post('/email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
     Route::get('/email/verify', 'Auth\VerificationController@show')->name('verification.notice');

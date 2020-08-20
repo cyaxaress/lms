@@ -3,6 +3,8 @@
 namespace Cyaxaress\RolePermissions\Providers;
 
 use Cyaxaress\RolePermissions\Models\Permission;
+use Cyaxaress\RolePermissions\Models\Role;
+use Cyaxaress\RolePermissions\Policies\RolePermissionPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +16,7 @@ class RolePermissionsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views/', 'RolePermissions');
         $this->loadJsonTranslationsFrom(__DIR__ . "/../Resources/Lang");
-
+        Gate::policy(Role::class, RolePermissionPolicy::class);
         Gate::before(function ($user) {
             return $user->hasPermissionTo(Permission::PERMISSION_SUPER_ADMIN) ? true : null;
         });

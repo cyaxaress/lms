@@ -1,15 +1,17 @@
 <?php
 namespace Cyaxaress\RolePermissions\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Cyaxaress\Category\Responses\AjaxResponses;
 use Cyaxaress\RolePermissions\Http\Requests\RoleRequest;
 use Cyaxaress\RolePermissions\Http\Requests\RoleUpdateRequest;
+use Cyaxaress\RolePermissions\Models\Role;
 use Cyaxaress\RolePermissions\Repositories\PermissionRepo;
 use Cyaxaress\RolePermissions\Repositories\RoleRepo;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
-class RolePermissionsController
+
+class RolePermissionsController extends Controller
 {
     private $roleRepo;
     private $permissionRepo;
@@ -20,6 +22,7 @@ class RolePermissionsController
     }
     public function index()
     {
+        $this->authorize('index', Role::class);
         $roles = $this->roleRepo->all();
         $permissions = $this->permissionRepo->all();
         return view('RolePermissions::index' , compact('roles', 'permissions'));
@@ -27,11 +30,15 @@ class RolePermissionsController
 
     public function store(RoleRequest $request)
     {
-        return $this->roleRepo->create($request);
+        $this->authorize('create', Role::class);
+        $this->roleRepo->create($request);
+
+        return redirect(route('role-permissions.index'));
     }
 
     public function edit($roleId)
     {
+        $this->authorize('edit', Role::class);
         $role = $this->roleRepo->findById($roleId);
         $permissions = $this->permissionRepo->all();
         return view("RolePermissions::edit", compact('role', 'permissions'));
@@ -39,12 +46,14 @@ class RolePermissionsController
 
     public function update(RoleUpdateRequest $request, $id)
     {
+        $this->authorize('edit', Role::class);
         $this->roleRepo->update($id, $request);
         return redirect(route('role-permissions.index'));
     }
 
     public function destroy($roleId)
     {
+        $this->authorize('delete', Role::class);
         $this->roleRepo->delete($roleId);
         return AjaxResponses::SuccessResponse();
     }

@@ -39,13 +39,16 @@
                     </tbody>
                 </table>
                 <div id="select-role" class="modal">
-                    <form action="{{ route('users.addRole', 0) }}" id="select-role-form">
-                        <select name="roles" id="">
+                    <form action="{{ route('users.addRole', 0) }}" id="select-role-form" method="post">
+                        @csrf
+                        <select name="role" id="">
                             <option value="">یک رول را انتخاب کیند</option>
                             @foreach($roles as $role)
-                                <option value="{{ $role->id }}">{{$role->name}}</option>
+                                <option value="{{ $role->name }}">{{$role->name}}</option>
                             @endforeach
                         </select>
+
+                        <button class="btn btn-webamooz_net mt-2">افزودن</button>
                     </form>
                 </div>
             </div>

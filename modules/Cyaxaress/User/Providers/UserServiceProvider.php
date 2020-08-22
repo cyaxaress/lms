@@ -5,6 +5,8 @@ namespace Cyaxaress\User\Providers;
 
 
 use Cyaxaress\User\Models\User;
+use Cyaxaress\User\Policies\UserPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
@@ -12,6 +14,7 @@ class UserServiceProvider extends ServiceProvider
     public function register()
     {
         config()->set('auth.providers.users.model', User::class);
+        Gate::policy(User::class, UserPolicy::class);
     }
     public function boot()
     {

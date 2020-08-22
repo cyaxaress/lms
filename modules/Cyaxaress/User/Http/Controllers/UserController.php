@@ -34,6 +34,7 @@ class UserController extends Controller
     {
         $this->authorize('addRole', User::class);
         $user->assignRole($request->role);
+        newFeedback('موفقیت آمیز', " نقش کاربری {$request->role}  به کاربر {$user->name} داده شد.", 'success');
         return back();
     }
 }

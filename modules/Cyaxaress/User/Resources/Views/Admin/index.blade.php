@@ -62,6 +62,7 @@
         function setFormAction(userId) {
             $("#select-role-form").attr('action', '{{ route('users.addRole', 0) }}'.replace('/0/', '/' + userId + '/' ))
         }
+        @include('Common::layouts.feedbacks')
     </script>
 @endsection
 

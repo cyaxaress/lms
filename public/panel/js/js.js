@@ -234,7 +234,6 @@ function updateConfirmationStatus(event, route, message, status, field = 'confir
             })
     }
 }
-
 function deleteItem(event, route) {
     event.preventDefault();
     if(confirm('آیا از حذف این آیتم اطمینان دارید؟')){

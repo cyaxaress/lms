@@ -33,6 +33,7 @@
                             </a></td>
                         <td>
                             <a href="" onclick="deleteItem(event, '{{ route('users.destroy', $user->id) }}')" class="item-delete mlg-15" title="حذف"></a>
+                            <a href="{{ route('users.edit', $user->id) }}" class="item-edit " title="ویرایش"></a>
                         </td>
                     </tr>
                     @endforeach

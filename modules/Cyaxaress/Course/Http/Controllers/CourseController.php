@@ -4,7 +4,7 @@ namespace Cyaxaress\Course\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Cyaxaress\Category\Repositories\CategoryRepo;
 use Cyaxaress\Common\Responses\AjaxResponses;
-use Cyaxaress\Course\Http\Requests\CourseRequest;
+use Cyaxaress\Course\Http\Requests\UpdateUserRequest;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Media\Services\MediaFileService;
@@ -27,7 +27,7 @@ class CourseController extends Controller
         return view('Courses::create', compact('teachers', 'categories'));
     }
 
-    public function store(CourseRequest $request, CourseRepo $courseRepo)
+    public function store(UpdateUserRequest $request, CourseRepo $courseRepo)
     {
         $request->request->add(['banner_id' => MediaFileService::upload($request->file('image'))->id ]);
         $courseRepo->store($request);
@@ -43,7 +43,7 @@ class CourseController extends Controller
         return view('Courses::edit', compact('course', 'teachers', 'categories'));
     }
 
-    public function update($id, CourseRequest $request, CourseRepo $courseRepo)
+    public function update($id, UpdateUserRequest $request, CourseRepo $courseRepo)
     {
         $course = $courseRepo->findByid($id);
         $this->authorize('edit', $course);

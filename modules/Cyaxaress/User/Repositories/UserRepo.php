@@ -28,4 +28,28 @@ class UserRepo
     {
         return User::paginate();
     }
+
+    public function update($userId, $values)
+    {
+        $update = [
+            'name' => $values->name,
+            'email' => $values->email,
+            'mobile' => $values->mobile,
+            'username' => $values->username,
+            'headline' => $values->headline,
+            'website' => $values->website,
+            'instagram' => $values->instagram,
+            'linkedin' => $values->linkedin,
+            'twitter' => $values->twitter,
+            'facebook' => $values->facebook,
+            'youtube' => $values->youtube,
+            'status' => $values->status,
+            'bio' => $values->bio,
+            'image_id' => $values->image_id
+        ];
+        if (! is_null($values->password)) {
+            $update['password'] = bcrypt($values->password);
+        }
+        return User::where('id', $userId)->update($update);
+    }
 }

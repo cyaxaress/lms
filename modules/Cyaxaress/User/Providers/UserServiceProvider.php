@@ -23,6 +23,7 @@ class UserServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadFactoriesFrom(__DIR__ . '/../Database/Factories');
         $this->loadViewsFrom( __DIR__ . '/../Resources/Views', 'User');
+        $this->loadJsonTranslationsFrom(__DIR__ . "/../Resources/Lang");
 
         config()->set('sidebar.items.users', [
             "icon" => "i-users",

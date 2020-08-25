@@ -17,6 +17,12 @@ class UserPolicy
             return true;
         }
     }
+    public function edit($user)
+    {
+        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_USERS)) {
+            return true;
+        }
+    }
 
     public function addRole($user)
     {

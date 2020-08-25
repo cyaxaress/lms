@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\User\Models;
 
+use Cyaxaress\Media\Models\Media;
 use Cyaxaress\User\Notifications\ResetPasswordRequestNotification;
 use Cyaxaress\User\Notifications\VerifyMailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -13,6 +14,15 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use HasRoles;
+
+    const STATUS_ACTIVE = "active";
+    const STATUS_INACTIVE = "inactive";
+    const STATUS_BAN = "ban";
+    public static $statuses = [
+      self::STATUS_ACTIVE,
+      self::STATUS_INACTIVE,
+      self::STATUS_BAN
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -49,5 +59,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendResetPasswordRequestNotification()
     {
         $this->notify(new ResetPasswordRequestNotification());
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(Media::class, 'image_id');
     }
 }

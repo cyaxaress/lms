@@ -234,12 +234,12 @@ function updateConfirmationStatus(event, route, message, status, field = 'confir
             })
     }
 }
-function deleteItem(event, route) {
+function deleteItem(event, route, element = 'tr') {
     event.preventDefault();
     if(confirm('آیا از حذف این آیتم اطمینان دارید؟')){
         $.post(route, { _method: "delete", _token: $('meta[name="_token"]').attr('content') })
             .done(function (response) {
-                event.target.closest('tr').remove();
+                event.target.closest(element).remove();
                 $.toast({
                     heading: 'عملیات موفق',
                     text: response.message,

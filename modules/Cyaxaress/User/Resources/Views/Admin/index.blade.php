@@ -26,7 +26,7 @@
                         <td><a href="">
                                 <ul>
                                     @foreach($user->roles as $userRole)
-                                        <li>{{ $userRole->name }}</li>
+                                        <li class="deleteable-list-item">{{ $userRole->name }} <a href=""  onclick="deleteItem(event, '{{ route('users.removeRole', ["user" => $user->id, "role" => $userRole->name]) }}', 'li')" class="item-delete mlg-15 d-none" title="حذف"></a></li>
                                     @endforeach
                                     <li><a href="#select-role"  rel="modal:open" onclick="setFormAction({{ $user->id }})">افزودن نقش کاربری</a></li>
                                 </ul>

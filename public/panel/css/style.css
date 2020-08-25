@@ -1907,3 +1907,7 @@ span.tagRemove:hover {
 .multi-text{
     margin-bottom: 15px;
 }
+
+.deleteable-list-item:hover .item-delete{
+    display: inline-block;
+}

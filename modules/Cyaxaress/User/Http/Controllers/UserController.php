@@ -5,6 +5,7 @@ namespace Cyaxaress\User\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\RolePermissions\Repositories\RoleRepo;
 use Cyaxaress\User\Http\Requests\AddRoleRequest;
 use Cyaxaress\User\Models\User;
@@ -36,5 +37,13 @@ class UserController extends Controller
         $user->assignRole($request->role);
         newFeedback('موفقیت آمیز', " نقش کاربری {$request->role}  به کاربر {$user->name} داده شد.", 'success');
         return back();
+    }
+
+    public function removeRole($userId, $role)
+    {
+        $this->authorize('removeRole', User::class);
+        $user = $this->userRepo->findById($userId);
+        $user->removeRole($role);
+        return AjaxResponses::SuccessResponse();
     }
 }

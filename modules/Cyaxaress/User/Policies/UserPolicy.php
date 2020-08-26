@@ -24,6 +24,13 @@ class UserPolicy
         }
     }
 
+    public function manualVerify($user)
+    {
+        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_USERS)) {
+            return true;
+        }
+    }
+
     public function addRole($user)
     {
         if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_USERS)) {

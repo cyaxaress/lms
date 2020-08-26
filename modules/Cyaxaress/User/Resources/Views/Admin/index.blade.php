@@ -14,6 +14,7 @@
                         <th>نام</th>
                         <th>ایمیل</th>
                         <th>نقش کاربری</th>
+                        <th>وضعیت تایید</th>
                         <th>عملیات</th>
                     </tr>
                     </thead>
@@ -23,17 +24,22 @@
                         <td><a href="">{{ $user->id }}</a></td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td><a href="">
+                        <td>
+                            <a href="">
                                 <ul>
                                     @foreach($user->roles as $userRole)
                                         <li class="deleteable-list-item">{{ $userRole->name }} <a href=""  onclick="deleteItem(event, '{{ route('users.removeRole', ["user" => $user->id, "role" => $userRole->name]) }}', 'li')" class="item-delete mlg-15 d-none" title="حذف"></a></li>
                                     @endforeach
                                     <li><a href="#select-role"  rel="modal:open" onclick="setFormAction({{ $user->id }})">افزودن نقش کاربری</a></li>
                                 </ul>
-                            </a></td>
+                            </a>
+                        </td>
+                        <td class="confirmation_status">{{ $user->hasVerifiedEmail() ? 'تایید شده' : 'تایید نشده' }}</td>
                         <td>
                             <a href="" onclick="deleteItem(event, '{{ route('users.destroy', $user->id) }}')" class="item-delete mlg-15" title="حذف"></a>
-                            <a href="{{ route('users.edit', $user->id) }}" class="item-edit " title="ویرایش"></a>
+                            <a href="{{ route('users.edit', $user->id) }}" class="item-edit mlg-15" title="ویرایش"></a>
+                            <a href="" onclick="updateConfirmationStatus(event, '{{ route('users.manualVerify', $user->id) }}',
+                                'آیا از تایید این آیتم اطمینان دارید؟' , 'تایید شده')" class="item-confirm mlg-15" title="تایید"></a>
                         </td>
                     </tr>
                     @endforeach

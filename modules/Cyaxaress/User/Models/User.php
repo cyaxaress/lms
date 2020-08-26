@@ -3,6 +3,7 @@
 namespace Cyaxaress\User\Models;
 
 use Cyaxaress\Media\Models\Media;
+use Cyaxaress\RolePermissions\Models\Role;
 use Cyaxaress\User\Notifications\ResetPasswordRequestNotification;
 use Cyaxaress\User\Notifications\VerifyMailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -19,9 +20,18 @@ class User extends Authenticatable implements MustVerifyEmail
     const STATUS_INACTIVE = "inactive";
     const STATUS_BAN = "ban";
     public static $statuses = [
-      self::STATUS_ACTIVE,
-      self::STATUS_INACTIVE,
-      self::STATUS_BAN
+        self::STATUS_ACTIVE,
+        self::STATUS_INACTIVE,
+        self::STATUS_BAN
+    ];
+
+    public static $defaultUsers = [
+        [
+            'email' => 'admin@admin.com',
+            'password' => 'admin',
+            'name' => 'Admin',
+            'role' => Role::ROLE_SUPER_ADMIN
+        ],
     ];
 
     /**

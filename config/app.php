@@ -175,10 +175,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Cyaxaress\RolePermissions\Providers\RolePermissionsServiceProvider::class,
         Cyaxaress\User\Providers\UserServiceProvider::class,
         Cyaxaress\Dashboard\Providers\DashboardServiceProvider::class,
         Cyaxaress\Category\Providers\CategoryServiceProvider::class,
-        Cyaxaress\RolePermissions\Providers\RolePermissionsServiceProvider::class,
         Cyaxaress\Course\Providers\CourseServiceProvider::class,
         Cyaxaress\Media\Providers\MediaServiceProvider::class,
         \Cyaxaress\Common\Providers\CommonServiceProvider::class

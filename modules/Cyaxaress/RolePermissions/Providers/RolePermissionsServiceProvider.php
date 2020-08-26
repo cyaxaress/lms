@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\RolePermissions\Providers;
 
+use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\RolePermissions\Models\Role;
 use Cyaxaress\RolePermissions\Policies\RolePermissionPolicy;
@@ -16,6 +17,7 @@ class RolePermissionsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views/', 'RolePermissions');
         $this->loadJsonTranslationsFrom(__DIR__ . "/../Resources/Lang");
+        \DatabaseSeeder::$seeders[] = RolePermissionTableSeeder::class;
         Gate::policy(Role::class, RolePermissionPolicy::class);
         Gate::before(function ($user) {
             return $user->hasPermissionTo(Permission::PERMISSION_SUPER_ADMIN) ? true : null;

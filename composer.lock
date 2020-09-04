@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73c7f46e2a58f24b128ee1868fd93522",
+    "content-hash": "7cfb8f7da77e741fe0c0d85db243fc6f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -109,6 +109,34 @@
                 }
             ],
             "time": "2020-04-15T15:59:35+00:00"
+        },
+        {
+            "name": "cyaxaress/common",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "modules/Cyaxaress/Common",
+                "reference": "5a07675035b2e791bb96d442887d9ab31ff569ba"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "\\Cyaxaress\\Common\\Providers\\CommonServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cyaxaress\\Common\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -6424,6 +6452,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
@@ -7467,7 +7496,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "cyaxaress/common": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

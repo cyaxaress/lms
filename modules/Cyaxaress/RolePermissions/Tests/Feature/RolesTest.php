@@ -2,7 +2,7 @@
 
 namespace Cyaxaress\RolePermissions\Tests\Feature;
 
-use Cyaxaress\Course\Database\Seeds\RolePermissionTableSeeder;
+use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\RolePermissions\Models\Role;
 use Cyaxaress\User\Models\User;

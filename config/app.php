@@ -181,7 +181,6 @@ return [
         Cyaxaress\Category\Providers\CategoryServiceProvider::class,
         Cyaxaress\Course\Providers\CourseServiceProvider::class,
         Cyaxaress\Media\Providers\MediaServiceProvider::class,
-        \Cyaxaress\Common\Providers\CommonServiceProvider::class
     ],
 
     /*

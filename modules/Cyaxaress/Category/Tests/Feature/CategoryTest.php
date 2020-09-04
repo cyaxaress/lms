@@ -2,7 +2,7 @@
 namespace Cyaxaress\Category\Tests\Feature;
 
 use Cyaxaress\Category\Models\Category;
-use Cyaxaress\Course\Database\Seeds\RolePermissionTableSeeder;
+use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

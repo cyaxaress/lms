@@ -3,7 +3,7 @@
 namespace Cyaxaress\Course\Tests\Feature;
 
 use Cyaxaress\Category\Models\Category;
-use Cyaxaress\Course\Database\Seeds\RolePermissionTableSeeder;
+use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;

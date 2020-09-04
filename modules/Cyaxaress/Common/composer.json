@@ -1,0 +1,18 @@
+{
+    "name": "cyaxaress/common",
+    "autoload": {
+        "psr-4": {
+            "Cyaxaress\\Common\\" : "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Cyaxaress\\Common\\Providers\\CommonServiceProvider"
+            ]
+        }
+    }
+}

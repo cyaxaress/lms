@@ -1,7 +1,7 @@
 <?php
 namespace Cyaxaress\Course\Providers;
 
-use Cyaxaress\Course\Database\Seeds\RolePermissionTableSeeder;
+use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Policies\CoursePolicy;
 use Illuminate\Support\Facades\Gate;

@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\User\Models;
 
+use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Media\Models\Media;
 use Cyaxaress\RolePermissions\Models\Role;
 use Cyaxaress\User\Notifications\ResetPasswordRequestNotification;
@@ -68,11 +69,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function sendResetPasswordRequestNotification()
     {
+
         $this->notify(new ResetPasswordRequestNotification());
     }
 
     public function image()
     {
         return $this->belongsTo(Media::class, 'image_id');
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'teacher_id');
     }
 }

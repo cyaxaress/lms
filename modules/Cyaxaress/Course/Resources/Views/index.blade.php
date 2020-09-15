@@ -11,7 +11,7 @@
                     <thead role="rowgroup">
                     <tr role="row" class="title-row">
                         <th>ردیف</th>
-                        <th>ای دی</th>
+                        <th>شناسه</th>
                         <th>بنر</th>
                         <th>عنوان</th>
                         <th>مدرس</th>
@@ -30,7 +30,7 @@
                         <td width="80"><img src="{{ $course->banner->thumb }}" alt="" width="80"></td>
                         <td><a href="">{{ $course->title }}</a></td>
                         <td><a href="">{{ $course->teacher->name }}</a></td>
-                        <td>{{ $course->price }}</td>
+                        <td>{{ $course->price }} (تومان)</td>
                         <td>{{ $course->percent }}%</td>
                         <td class="status">@lang($course->status)</td>
                         <td class="confirmation_status">@lang($course->confirmation_status)</td>

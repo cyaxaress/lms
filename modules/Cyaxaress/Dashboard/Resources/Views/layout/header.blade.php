@@ -13,6 +13,9 @@
                 </div>
             </div>
         </div>
-        <a href="" class="logout" title="خروج"></a>
+        <form action="{{ route('logout') }}" method="post" id="logout">
+            @csrf
+            <a href="" onclick="event.preventDefault(); document.getElementById('logout').submit()" class="logout" title="خروج"></a>
+        </form>
     </div>
 </div>

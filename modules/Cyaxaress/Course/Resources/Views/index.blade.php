@@ -16,6 +16,7 @@
                         <th>عنوان</th>
                         <th>مدرس</th>
                         <th>قیمت</th>
+                        <th>جزئیات</th>
                         <th>درصد مدرس</th>
                         <th>وضعیت</th>
                         <th>وضعیت تایید</th>
@@ -31,6 +32,9 @@
                         <td><a href="">{{ $course->title }}</a></td>
                         <td><a href="">{{ $course->teacher->name }}</a></td>
                         <td>{{ $course->price }} (تومان)</td>
+                        <td>
+                            <a href="{{ route('courses.details', $course->id) }}">مشاهده</a>
+                        </td>
                         <td>{{ $course->percent }}%</td>
                         <td class="status">@lang($course->status)</td>
                         <td class="confirmation_status">@lang($course->confirmation_status)</td>

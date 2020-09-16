@@ -58,6 +58,13 @@ class CourseController extends Controller
         return redirect(route('courses.index'));
     }
 
+    public function details($id, CourseRepo $courseRepo)
+    {
+        $course = $courseRepo->findByid($id);
+        return view('Courses::details', compact('course'));
+
+    }
+
     public function destroy($id, CourseRepo $courseRepo)
     {
         $course =  $courseRepo->findByid($id);

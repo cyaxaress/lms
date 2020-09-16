@@ -32,15 +32,27 @@ class UpdateProfileInformationRequest  extends FormRequest
         ];
 
         if (auth()->user()->hasPermissionTo(Permission::PERMISSION_TEACH)) {
-            $rules = [
-                "username" => 'required|min:3|max:190|unique:users,username,' .  auth()->id(),
-                "cart_number" => 'required|string|size:16',
+            $rules += [
+                "card_number" => 'required|string|size:16',
                 "shaba" => 'required|size:24',
                 "headline" => 'required|min:3|max:60',
                 "bio" => 'required',
             ];
+            $rules['username'] = 'required|min:3|max:190|unique:users,username,' .  auth()->id();
         }
-
         return $rules;
+    }
+
+    public function attributes()
+    {
+        return [
+            'shaba' => 'شماره شبای بانکی',
+            'card_number' => 'شماره کارت بانکی',
+            'username' => 'نام کاربری',
+            'headline' => 'عنوان',
+            'bio' => 'بیو',
+            "password" => 'رمز عبور جدید',
+            "mobile" => "موبایل",
+        ];
     }
 }

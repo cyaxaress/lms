@@ -69,7 +69,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function sendResetPasswordRequestNotification()
     {
-
         $this->notify(new ResetPasswordRequestNotification());
     }
 

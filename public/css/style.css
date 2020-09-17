@@ -513,21 +513,8 @@ a, span {
     transition: opacity 300ms ease;
 }
 
-.article {
-    margin-top: 150px;
-}
 
-.article.mr-202 {
-    margin-top: 201px;
-}
 
-.article.mr-152 {
-    margin-top: 154px;
-}
-
-.article.mr-107 {
-    margin-top: 107px;
-}
 
 .posts, .articles {
     display: -ms-flexbox;
@@ -1129,9 +1116,6 @@ footer {
 
 }
 
-/*.star-fill:hover {*/
-/*    z-index: -12;*/
-/*}*/
 
 .slider-rating .slider-rating-span::after {
     content: attr(data-title);
@@ -1968,6 +1952,7 @@ footer {
     background: #46b2f0;
     position: relative;
     overflow: hidden;
+    white-space: nowrap;
     border-radius: 3px;
 }
 
@@ -2146,14 +2131,17 @@ footer {
 
 
 .account {
-    display: -ms-flexbox;
-    display: -webkit-box;
+    overflow: hidden;
+    min-height: 100vh;
     display: flex;
-    -ms-flex-pack: center;
-    -webkit-box-pack: center;
+    /* Horizontal centering (main axis): */
     justify-content: center;
-    padding: 6%;
-    border-radius: 3px;
+    /* Vertical centering (cross axis): */
+    align-items: center;
+    padding: 0 20px;
+}
+.act .form{
+    padding: 2em 0 !important;
 }
 
 .account h1 {
@@ -2167,6 +2155,8 @@ footer {
 
 .form {
     max-width: 400px;
+    width: 100%;
+
     background: #fff;
     display: -ms-flexbox;
     display: -webkit-box;
@@ -2176,7 +2166,6 @@ footer {
     justify-content: center;
     flex-wrap: wrap;
     -ms-flex-wrap: wrap;
-    flex-direction: column;
     padding: 2em 2em 3em;
     box-shadow: 0 10px 40px -14px rgba(0, 0, 0, 0.25);
     position: relative;
@@ -2300,7 +2289,7 @@ footer {
     font-size: 13px;
     color: #6b7074;
     margin-bottom: 10px;
-    text-align: right;
+    text-align: center;
     margin-top: 15px;
     padding: 0 40px;
 }
@@ -2774,7 +2763,7 @@ footer {
 .dark-mode .head-right div,
 .dark-mode .episodes-list--title,
 .dark-mode .comments .comment-header-detail .comment-header-name,
-.dark-mode .comments .comment-header-detail .comment-header-date,.dark-mode .card-details .author-name,.dark-mode .card-details .date {
+.dark-mode .comments .comment-header-detail .comment-header-date, .dark-mode .card-details .author-name, .dark-mode .card-details .date {
     color: #d1d1d2 !important;
 }
 
@@ -3676,3 +3665,13 @@ textarea {
     max-width: 100% !important;
     transition: all 200ms ease;
 }
+.mrt-150{
+    margin-top: 150px;
+}.mrt-205{
+    margin-top: 205px;
+}
+ .mrt-110{
+     margin-top:110px;
+ } .mrt-170{
+     margin-top:170px;
+ }

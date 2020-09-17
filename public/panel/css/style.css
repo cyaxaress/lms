@@ -1340,7 +1340,7 @@ select {
     justify-content: flex-start;
     margin-bottom: 12px;
     align-items: center;
-    flex-wrap: wrap;
+	flex-wrap: wrap;
 }
 
 .tags li.tagAdd, .tags li.addedTag {
@@ -1375,11 +1375,11 @@ span.tagRemove:hover {
     color: #222222;
 }
 @media (max-width: 414px) {
-    .tab__item{
-        width: 100%;
-        text-align: center;
-        margin-bottom: 5px;
-    }
+  .tab__item{
+      width: 100%;
+      text-align: center;
+      margin-bottom: 5px;
+  }
 }
 
 @media (max-width: 346px) {
@@ -1875,7 +1875,6 @@ span.tagRemove:hover {
 .notification__box .title__noti{
     padding: 15px 0;
 }
-
 .pt-1{
     padding-top: 10px;
 }
@@ -1898,10 +1897,6 @@ span.tagRemove:hover {
 }
 .w-100{
     width: 100%;
-}
-.text, .dropdown-select{
-    margin-bottom: 0 !important;
-    margin-top: 15px;
 }
 
 .multi-text{

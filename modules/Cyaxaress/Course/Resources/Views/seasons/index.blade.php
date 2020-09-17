@@ -24,7 +24,7 @@
                     <a href="" class="item-delete mlg-15" title="حذف"></a>
                     <a href="" class="item-reject mlg-15" title="رد"></a>
                     <a href="" class="item-confirm mlg-15" title="تایید"></a>
-                    <a href="" class="item-edit " title="ویرایش"></a>
+                    <a href="{{ route('seasons.edit', $season->id) }}" class="item-edit " title="ویرایش"></a>
                 </td>
             </tr>
             @endforeach

@@ -27,9 +27,11 @@
 .t-header .login-register-btn {
     display: none
 }
-.study-mode{
+
+.study-mode {
     display: none;
 }
+
 .t-header-left {
     width: auto !important;
     height: auto;
@@ -237,9 +239,11 @@
     opacity: 0;
     transition: opacity 170ms
 }
-.course-teacher-details .top-part img{
+
+.course-teacher-details .top-part img {
     width: 70px;
 }
+
 .overlay.is-active {
     opacity: 1 !important;
     transition: opacity 170ms
@@ -280,9 +284,11 @@
 .dark-mode .main-menu.has-sub > a:before, .dark-mode .main-menu.has-sub > a:after {
     background: #d1d1d2 !important
 }
-.t-header-search-filter-item{
+
+.t-header-search-filter-item {
     width: 150px;
 }
+
 .card-img {
     height: 270px !important;
     max-height: 270px;
@@ -347,16 +353,19 @@
         -ms-flex-direction: column;
         flex-direction: column;
     }
-    .slideshow{
+
+    .slideshow {
         width: 100%;
         margin-bottom: 5px;
     }
-    .top-info .optionals{
+
+    .top-info .optionals {
         display: flex;
         width: 100%;
         justify-content: space-between;
     }
-    .top-info .optionals div{
+
+    .top-info .optionals div {
         width: 49%;
         margin-bottom: 0;
     }
@@ -374,9 +383,11 @@
         height: 185px !important;
     }
 }
+
 .t-header-search-filter-item {
     width: 125px;
 }
+
 @media (max-width: 600px) {
     .comments-list-ul > li {
         margin-right: 90px
@@ -435,22 +446,27 @@
         height: 280px !important;
         max-height: 280px !important;
     }
+
     .t-header-search-filter-item {
         width: 155px;
     }
 }
+
 @media (max-width: 440px) {
     .tutor .tutor-item .tutor-avatar .tutor-image {
         width: 6em !important;
         height: 6em !important;
     }
-    .tutor-item:last-of-type{
+
+    .tutor-item:last-of-type {
         width: 100px;
     }
-    .tutor-item .stat{
+
+    .tutor-item .stat {
         margin-right: unset !important;
     }
-    .tutor-author-name h3{
+
+    .tutor-author-name h3 {
         font-size: 13px;
     }
 }
@@ -459,13 +475,15 @@
     .card-img {
         height: 240px !important
     }
-    .top-info .optionals{
+
+    .top-info .optionals {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
     }
-    .top-info .optionals div{
+
+    .top-info .optionals div {
         width: 100%;
         height: calc(50% - 7.5px);
     }
@@ -474,17 +492,21 @@
         margin-bottom: 13px;
     }
 }
-.team >div{
+
+.team > div {
     width: 100%;
 }
+
 @media (max-width: 375px) {
     .card-img {
         height: 200px !important;
     }
-    .t-header-search-filter-item{
+
+    .t-header-search-filter-item {
         width: 100%;
     }
-    .comments .comment-header-detail{
+
+    .comments .comment-header-detail {
         width: 110px;
     }
 }
@@ -493,8 +515,22 @@
     .card-img {
         height: 177px !important
     }
+
     .tutor .tutor-item .tutor-avatar .tutor-image {
         width: 6em !important;
         height: 5.7em !important;
     }
+}
+
+.after-login {
+    padding: 20px;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex!important;;
+    flex-direction: column;
+    font-size: 13px;
+}
+
+.after-login a {
+    padding: 5px 0;
 }

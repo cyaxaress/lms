@@ -1,0 +1,174 @@
+body {
+    direction: ltr !important;
+}
+
+.t-header-logo {
+    margin-left: unset !important;
+    margin-right: 24px !important;
+}
+
+.t-header-searchbox input {
+    padding: 12px 12px 12px 55px
+}
+
+.t-header-searchbox::before {
+    right: unset !important;
+    left: 10px;
+}
+
+.t-header-left {
+    -ms-flex-pack: start;
+    -webkit-box-pack: start;
+    justify-content: flex-start !important;
+}
+
+.join-teachers a {
+    margin-left: 24px !important;
+    margin-right: 15px;
+}
+
+.login-register-btn {
+    -ms-flex-pack: start;
+    -webkit-box-pack: start;
+    justify-content: flex-start !important;
+}
+
+.login-register-btn::before {
+    transform: translate(0%, -50%) !important;
+}
+
+.login-register-btn::before, .login-register-btn::after {
+    left: unset !important;
+    right: 50% !important;
+}
+
+.btn-login {
+    border-radius: 3px 0 0 3px !important;
+    margin-left: unset !important;
+    margin-right: 1px;
+}
+
+.btn-register {
+    border-radius: 0 3px 3px 0 !important;
+}
+
+.slideshow .prev {
+    right: 0 !important;
+    left: unset !important;
+}
+
+.slideshow:hover .prev {
+    transform: translate(-50%, -50%) !important;
+}
+
+.slideshow:hover .next {
+    transform: translate(50%, -50%) !important;
+}
+
+.b-head a::after {
+    margin-left: 9px;
+    margin-right: unset !important;
+    transform: rotate(-90deg) !important;
+}
+
+.card-title, .card-body, .card-details {
+    text-align: left !important;
+
+}
+
+.card-body img {
+    margin-left: unset !important;
+    margin-right: 5px;
+}
+
+.card-details .time::after {
+    margin-right: unset !important;
+    margin-left: 5px;
+}
+
+.main-row .content-left {
+    padding-right: unset !important;
+    padding-left: 20px;
+}
+
+.product-info-box .total_sales::before {
+    margin-right: 10px;
+    margin-left: unset !important;
+}
+
+.product-info-box .total_sales span {
+    margin-right: unset !important;
+    margin-left: 5px;
+}
+
+.product-meta-info-list .meta-info-unit span:first-child {
+    padding-right: unset !important;
+    padding-left: 20px;
+}
+
+.short-link-a {
+    border-right: unset !important;
+    border-left: 1px solid #e2e7ea;
+    padding: 0 10px 0 27px !important;
+}
+.study-mode{
+    left: unset !important;
+    right: 40px;
+}
+.episodes-list-group-head::before {
+    left: 7px !important;
+    right: unset !important;
+}
+.episodes-list-group-head .head-left::before {
+    left: -4px !important;
+}
+.episodes-list-details .detail-type{
+    margin-left: unset !important;
+    margin-right: 5px;
+}
+.episodes-list-details .detail-download{
+    padding-left: 15px;
+    padding-right: unset !important;
+}
+.comments .comment-header-detail{
+    margin-right: unset !important;
+    margin-left: 20px;
+}
+.txt{
+    text-align: left !important;
+}.txt.txt-l::placeholder{
+    text-align: left !important;
+}.txt::placeholder{
+    text-align: left !important;
+}
+.bt-accrdion .bt-accrdion-li::before {
+    left: unset !important;
+    right: 30px;
+}.bt-accrdion .bt-accrdion-li::after {
+    left: unset !important;
+    right: 34px;
+}
+.user-menu-account{
+    margin-right: unset !important;
+    padding: 0 30px 0 0 !important;
+}
+.user-menu-account .user-image{
+    margin-left: unset !important;
+    margin-right: 8px !important;
+
+}
+.user-menu-account-dropdown ul li::before {
+    margin-left: unset !important;
+    margin-right: 8px !important;
+
+}
+.user-menu-account::before {
+    left: unset !important;
+    right: 0;
+}
+.pagination a.pg-prev::before {
+    transform: rotate(-180deg);
+}
+.pagination a.pg-next::before {
+    transform: scaleX(1) !important;
+}

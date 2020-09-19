@@ -84,9 +84,7 @@ class SeasonController extends Controller
     {
         $season = $this->seasonRepo->findByid($id);
         $this->authorize('delete', $season);
-
         $season->delete();
-
         return AjaxResponses::SuccessResponse();
     }
 }

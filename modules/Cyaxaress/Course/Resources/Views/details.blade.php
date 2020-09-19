@@ -153,7 +153,6 @@
                                 <a href="" class="item-edit " title="ویرایش"></a>
                             </td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>

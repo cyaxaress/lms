@@ -21,7 +21,7 @@ class CreateSeasonsTable extends Migration
             $table->tinyInteger('number')->unsigned();
             $table->enum('confirmation_status', \Cyaxaress\Course\Models\Season::$confirmationStatuses)
                 ->default(\Cyaxaress\Course\Models\Season::CONFIRMATION_STATUS_PENDING);
-            $table->enum('status', \Cyaxaress\Course\Models\Season::$statuses);
+            $table->enum('status', \Cyaxaress\Course\Models\Season::$statuses)->default(\Cyaxaress\Course\Models\Season::STATUS_OPENED);
             $table->timestamps();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('CASCADE');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');

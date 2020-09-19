@@ -3,6 +3,7 @@
 namespace Cyaxaress\User\Tests\Feature;
 
 use Carbon\Laravel\ServiceProvider;
+use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\User\Models\User;
 use Cyaxaress\User\Services\VerifyCodeService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -74,6 +75,7 @@ class RegistrationTest extends TestCase
 
     public function test_verified_user_can_see_home_page()
     {
+        $this->seed(RolePermissionTableSeeder::class);
         $this->registerNewUser();
 
         $this->assertAuthenticated();

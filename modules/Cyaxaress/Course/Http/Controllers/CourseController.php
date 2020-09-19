@@ -61,8 +61,8 @@ class CourseController extends Controller
     public function details($id, CourseRepo $courseRepo)
     {
         $course = $courseRepo->findByid($id);
+        $this->authorize('details', $course);
         return view('Courses::details', compact('course'));
-
     }
 
     public function destroy($id, CourseRepo $courseRepo)
@@ -72,9 +72,7 @@ class CourseController extends Controller
         if ($course->banner) {
             $course->banner->delete();
         }
-
         $course->delete();
-
         return AjaxResponses::SuccessResponse();
     }
 

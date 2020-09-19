@@ -28,7 +28,7 @@ class UserController extends Controller
     }
     public function index(RoleRepo $roleRepo)
     {
-        $this->authorize('addRole', User::class);
+        $this->authorize('index', User::class);
         $users = $this->userRepo->paginate();
         $roles = $roleRepo->all();
         return view("User::Admin.index", compact('users', 'roles'));

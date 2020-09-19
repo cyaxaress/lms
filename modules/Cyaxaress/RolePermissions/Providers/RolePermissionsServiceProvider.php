@@ -29,7 +29,8 @@ class RolePermissionsServiceProvider extends ServiceProvider
         config()->set('sidebar.items.role-permissions', [
             "icon" => "i-role-permissions",
             "title" => "نقشهای کاربری",
-            "url" => route('role-permissions.index')
+            "url" => route('role-permissions.index'),
+            'permission' => Permission::PERMISSION_MANAGE_ROLE_PERMISSIONS
         ]);
     }
 }

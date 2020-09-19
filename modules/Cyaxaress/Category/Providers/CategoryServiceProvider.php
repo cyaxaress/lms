@@ -3,6 +3,7 @@ namespace Cyaxaress\Category\Providers;
 
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Category\Policies\CategoryPolicy;
+use Cyaxaress\RolePermissions\Models\Permission;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,7 +22,8 @@ class CategoryServiceProvider extends ServiceProvider
         config()->set('sidebar.items.categories', [
             "icon" => "i-categories",
             "title" => "دسته بندی ها",
-            "url" => route('categories.index')
+            "url" => route('categories.index'),
+            "permission" => Permission::PERMISSION_MANAGE_CATEGORIES
         ]);
     }
 }

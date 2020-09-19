@@ -6,7 +6,7 @@ use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CoursePolicy
+class SeasonPolicy
 {
     use HandlesAuthorization;
 
@@ -31,16 +31,16 @@ class CoursePolicy
                $user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
     }
 
-    public function edit($user, $course)
+    public function edit($user, $season)
     {
         if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)) return true;
-
-        return $user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) &&  $course->teacher_id == $user->id;
+        return $user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) &&  $season->course->teacher_id == $user->id;
     }
 
-    public function delete($user)
+    public function delete($user, $season)
     {
         if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)) return true;
+        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) && $season->course->teacher_id == $user->id ) return true;
         return null;
     }
 
@@ -50,25 +50,4 @@ class CoursePolicy
         return null;
     }
 
-    public function details($user, $course)
-    {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)) {
-            return true;
-        }
-
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) && $course->teacher_id == $user->id) {
-            return  true;
-        }
-    }
-
-    public function createSeason($user, $course)
-    {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)) {
-            return true;
-        }
-
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) && $course->teacher_id == $user->id) {
-            return true;
-        }
-    }
 }

@@ -4,6 +4,7 @@
     "completed" : "تکمیل شده",
     "not-completed" : "درحال برگذاری",
     "locked" : "قفل شده",
+    "opened" : "باز",
     "accepted" : "تایید شده",
     "rejected" : "رد شده",
     "pending" : "درحال انتظار"

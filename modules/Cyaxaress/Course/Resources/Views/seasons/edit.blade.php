@@ -18,11 +18,3 @@
         </div>
     </div>
 @endsection
-
-@section('js')
-    <script>
-        @include('Common::layouts.feedbacks')
-    </script>
-@endsection
-
-

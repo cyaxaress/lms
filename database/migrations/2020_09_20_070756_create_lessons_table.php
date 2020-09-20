@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSeasonsTable extends Migration
+class CreateLessonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,28 @@ class CreateSeasonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('seasons', function (Blueprint $table) {
+        Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('course_id')->unsigned();
+            $table->bigInteger('season_id')->nullable()->unsigned();
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('media_id')->unsigned()->nullable();
             $table->string('title');
-            $table->tinyInteger('number')->unsigned();
-            $table->enum('confirmation_status', \Cyaxaress\Course\Models\Season::$confirmationStatuses)
+            $table->string('slug');
+            $table->boolean('free')->default(false);
+            $table->longText('body')->nullable();
+            $table->tinyInteger('time')->unsigned()->nullable();
+            $table->integer('priority')->unsigned()->nullable();
+            $table->enum('confirmation_status', \Cyaxaress\Course\Models\Lesson::$confirmationStatuses)
                 ->default(\Cyaxaress\Course\Models\Season::CONFIRMATION_STATUS_PENDING);
-            $table->enum('status', \Cyaxaress\Course\Models\Season::$statuses)
+            $table->enum('status', \Cyaxaress\Course\Models\Lesson::$statuses)
                 ->default(\Cyaxaress\Course\Models\Season::STATUS_OPENED);
             $table->timestamps();
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('CASCADE');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
 
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('CASCADE');
+            $table->foreign('season_id')->references('id')->on('seasons')->onDelete('SET NULL');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('media_id')->references('id')->on('media')->onDelete('SET NULL');
         });
     }
 
@@ -37,6 +45,6 @@ class CreateSeasonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seasons');
+        Schema::dropIfExists('lessons');
     }
 }

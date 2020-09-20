@@ -15,6 +15,11 @@ class SeasonRepo
             ->where('confirmation_status', Season::CONFIRMATION_STATUS_ACCEPTED)
             ->orderBy('number')->get();
     }
+
+    public function findByIdandCourseId($seasonId, $courseId)
+    {
+        return Season::where('course_id', $courseId)->where('id', $seasonId)->first();
+    }
     public function store($id, $values)
     {
         return Season::create([

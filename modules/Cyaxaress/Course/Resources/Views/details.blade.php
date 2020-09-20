@@ -8,8 +8,8 @@
     <div class="row no-gutters  ">
         <div class="col-8 bg-white padding-30 margin-left-10 margin-bottom-15 border-radius-3">
             <div class="margin-bottom-20 flex-wrap font-size-14 d-flex bg-white padding-0">
-                <p class="mlg-15">دوره مقدماتی تا پیشرفته لاراول</p>
-                <a class="color-2b4a83" href="lesson-upload.html">آپلود جلسه جدید</a>
+                <p class="mlg-15">{{ $course->title }}</p>
+                <a class="color-2b4a83" href="{{ route('lessons.create', $course->id) }}">آپلود جلسه جدید</a>
             </div>
             <div class="d-flex item-center flex-wrap margin-bottom-15 operations__btns">
                 <button class="btn all-confirm-btn">تایید همه جلسات</button>

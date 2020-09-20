@@ -9,6 +9,12 @@ use Illuminate\Support\Str;
 
 class SeasonRepo
 {
+    public function getCourseSeasons($course)
+    {
+        return Season::where('course_id', $course)
+            ->where('confirmation_status', Season::CONFIRMATION_STATUS_ACCEPTED)
+            ->orderBy('number')->get();
+    }
     public function store($id, $values)
     {
         return Season::create([
@@ -19,11 +25,6 @@ class SeasonRepo
             'confirmation_status' => Season::CONFIRMATION_STATUS_PENDING,
             'status' => Season::STATUS_OPENED
         ]);
-    }
-
-    public function paginate()
-    {
-        return Course::paginate();
     }
 
     public function findByid($id)

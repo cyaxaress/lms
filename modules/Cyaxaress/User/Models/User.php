@@ -3,6 +3,7 @@
 namespace Cyaxaress\User\Models;
 
 use Cyaxaress\Course\Models\Course;
+use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Models\Season;
 use Cyaxaress\Media\Models\Media;
 use Cyaxaress\RolePermissions\Models\Role;
@@ -86,6 +87,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function seasons()
     {
         return $this->hasMany(Season::class);
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
     }
 
     public function profilePath()

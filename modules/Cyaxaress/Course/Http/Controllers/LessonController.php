@@ -9,6 +9,7 @@ use Cyaxaress\Course\Http\Requests\LessonRequest;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Course\Repositories\SeasonRepo;
+use Cyaxaress\Media\Services\MediaFileService;
 
 class LessonController extends Controller
 {
@@ -31,7 +32,9 @@ class LessonController extends Controller
 
     public function store($course, LessonRequest $request)
     {
-        // todo upload media file
-        $this->lessonRepo->store($request);
+        $request->request->add(["media_id" => MediaFileService::upload($request->file('lesson_file'))->id ]);
+        $this->lessonRepo->store($course, $request);
+        newFeedback();
+        return redirect(route('courses.details', $course));
     }
 }

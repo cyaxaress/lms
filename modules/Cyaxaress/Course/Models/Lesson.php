@@ -3,6 +3,8 @@
 namespace Cyaxaress\Course\Models;
 
 
+use Cyaxaress\Media\Models\Media;
+use Cyaxaress\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
@@ -18,4 +20,20 @@ class Lesson extends Model
 
 
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+    public function season()
+    {
+        return $this->belongsTo(Season::class);
+    }
+    public function media(){
+        return $this->belongsTo(Media::class);
+    }
 }

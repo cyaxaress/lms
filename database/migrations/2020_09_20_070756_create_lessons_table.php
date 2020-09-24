@@ -24,11 +24,11 @@ class CreateLessonsTable extends Migration
             $table->boolean('free')->default(false);
             $table->longText('body')->nullable();
             $table->tinyInteger('time')->unsigned()->nullable();
-            $table->integer('priority')->unsigned()->nullable();
+            $table->integer('number')->unsigned()->nullable();
             $table->enum('confirmation_status', \Cyaxaress\Course\Models\Lesson::$confirmationStatuses)
-                ->default(\Cyaxaress\Course\Models\Season::CONFIRMATION_STATUS_PENDING);
+                ->default(\Cyaxaress\Course\Models\Lesson::CONFIRMATION_STATUS_PENDING);
             $table->enum('status', \Cyaxaress\Course\Models\Lesson::$statuses)
-                ->default(\Cyaxaress\Course\Models\Season::STATUS_OPENED);
+                ->default(\Cyaxaress\Course\Models\Lesson::STATUS_OPENED);
             $table->timestamps();
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('CASCADE');

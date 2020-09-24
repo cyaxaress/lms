@@ -7,6 +7,7 @@ use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\Course\Http\Requests\CourseRequest;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Repositories\CourseRepo;
+use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Media\Services\MediaFileService;
 use Cyaxaress\User\Repositories\UserRepo;
 
@@ -58,11 +59,12 @@ class CourseController extends Controller
         return redirect(route('courses.index'));
     }
 
-    public function details($id, CourseRepo $courseRepo)
+    public function details($id, CourseRepo $courseRepo, LessonRepo $lessonRepo)
     {
         $course = $courseRepo->findByid($id);
+        $lessons = $lessonRepo->paginate();
         $this->authorize('details', $course);
-        return view('Courses::details', compact('course'));
+        return view('Courses::details', compact('course', 'lessons'));
     }
 
     public function destroy($id, CourseRepo $courseRepo)

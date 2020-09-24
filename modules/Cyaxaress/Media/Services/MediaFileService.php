@@ -9,30 +9,17 @@ class MediaFileService
     public static function upload($file)
     {
         $extension = strtolower($file->getClientOriginalExtension());
-
-        switch ($extension) {
-            case 'jpg':
-            case 'png':
-            case 'jpeg':
+        foreach (config('mediaFile.MediaTypeServices') as $key => $service) {
+            if (in_array($extension, $service['extensions'])) {
                 $media = new Media();
-                $media->files = ImageFileService::upload($file);
-                $media->type = 'image';
+                $media->files = $service["handler"]::upload($file);
+                $media->type = $key;
                 $media->user_id = auth()->id();
                 $media->filename = $file->getClientOriginalName();
                 $media->save();
                 return $media;
-                break;
-            case 'avi':
-            case 'mp4':
-                $media = new Media();
-                $media->files = VideoFileService::upload($file);
-                $media->type = "video";
-                $media->user_id = auth()->id();
-                $media->filename = $file->getClientOriginalName();
-                $media->save();
-                return $media;
-                break;
-        };
+            }
+        }
     }
 
     public static function delete($media)

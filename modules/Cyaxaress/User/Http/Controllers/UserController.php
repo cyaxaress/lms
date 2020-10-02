@@ -63,7 +63,7 @@ class UserController extends Controller
     public function updatePhoto(UpdateUserPhoto $request)
     {
         $this->authorize('editProfile', User::class);
-        $media = MediaFileService::privateUpload($request->file('userPhoto'));
+        $media = MediaFileService::publicUpload($request->file('userPhoto'));
         if (auth()->user()->image) auth()->user()->image->delete();
         auth()->user()->image_id = $media->id;
         auth()->user()->save();

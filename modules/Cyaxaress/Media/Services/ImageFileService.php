@@ -7,7 +7,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
-class ImageFileService implements FileServiceContract
+class ImageFileService extends DefaultFileService implements FileServiceContract
 {
     protected static $sizes = ['300', '600'];
 
@@ -29,12 +29,5 @@ class ImageFileService implements FileServiceContract
             })->save(Storage::path($dir) . $filename . '_'. $size. '.' . $extension);
         }
         return $imgs;
-    }
-
-    public static function delete($media)
-    {
-        foreach ($media->files as $file) {
-            Storage::delete('public\\' . $file);
-        }
     }
 }

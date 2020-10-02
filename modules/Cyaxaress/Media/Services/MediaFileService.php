@@ -10,10 +10,12 @@ class MediaFileService
 {
     private static $file;
     private static $dir;
+    private static $isPrivate;
 
     public static function privateUpload(UploadedFile $file){
         self::$file = $file;
         self::$dir = "private/";
+        self::$isPrivate = true;
         return self::upload();
     }
 
@@ -21,6 +23,7 @@ class MediaFileService
     {
         self::$file = $file;
         self::$dir = 'public/';
+        self::$isPrivate = false;
         return self::upload();
     }
     private static function upload()
@@ -57,6 +60,7 @@ class MediaFileService
         $media->type = $key;
         $media->user_id = auth()->id();
         $media->filename = self::$file->getClientOriginalName();
+        $media->is_private = self::$isPrivate;
         $media->save();
         return $media;
     }

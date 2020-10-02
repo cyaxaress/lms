@@ -6,7 +6,7 @@ use Cyaxaress\Media\Contracts\FileServiceContract;
 use Cyaxaress\Media\Models\Media;
 use Illuminate\Support\Facades\Storage;
 
-class VideoFileService implements FileServiceContract
+class VideoFileService extends DefaultFileService implements FileServiceContract
 {
     public static function upload($file, $filename, $dir) : array
     {
@@ -14,11 +14,6 @@ class VideoFileService implements FileServiceContract
         $extension = $file->getClientOriginalExtension();
         $dir = 'private\\';
         Storage::putFileAs( $dir , $file, $filename . '.' . $extension);
-        return ["video" => $dir . $filename .  '.' . $extension];
-    }
-
-    public static function delete(Media $media)
-    {
-        // TODO: Implement delete() method.
+        return ["video" => $filename .  '.' . $extension];
     }
 }

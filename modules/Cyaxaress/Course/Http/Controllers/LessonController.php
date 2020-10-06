@@ -11,6 +11,7 @@ use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Course\Repositories\SeasonRepo;
 use Cyaxaress\Media\Services\MediaFileService;
+use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
@@ -47,5 +48,19 @@ class LessonController extends Controller
         }
         $lesson->delete();
         return AjaxResponses::SuccessResponse();
+    }
+
+    public function destroyMultiple(Request $request)
+    {
+        $ids = explode(',', $request->ids);
+        foreach ($ids as $id) {
+            $lesson = $this->lessonRepo->findByid($id);
+            if ($lesson->media){
+                $lesson->media->delete();
+            }
+            $lesson->delete();
+        }
+        newFeedback();
+        return back();
     }
 }

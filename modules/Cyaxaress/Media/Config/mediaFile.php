@@ -17,7 +17,7 @@ return [
             "extensions" => [
                 "zip", "rar", "tar"
             ],
-            "handler" => \App\ZipFileService::class
+            "handler" => \Cyaxaress\Media\Services\ZipFileService::class
         ]
     ]
 ];

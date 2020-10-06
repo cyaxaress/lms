@@ -5,6 +5,7 @@ namespace Cyaxaress\Course\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\Course\Http\Requests\LessonRequest;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
@@ -36,5 +37,15 @@ class LessonController extends Controller
         $this->lessonRepo->store($course, $request);
         newFeedback();
         return redirect(route('courses.details', $course));
+    }
+
+    public function destroy($courseId, $lessonId)
+    {
+        $lesson = $this->lessonRepo->findByid($lessonId);
+        if ($lesson->media){
+            $lesson->media->delete();
+        }
+        $lesson->delete();
+        return AjaxResponses::SuccessResponse();
     }
 }

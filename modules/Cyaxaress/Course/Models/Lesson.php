@@ -25,15 +25,25 @@ class Lesson extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function course()
     {
         return $this->belongsTo(Course::class);
     }
+
     public function season()
     {
         return $this->belongsTo(Season::class);
     }
-    public function media(){
+
+    public function media()
+    {
         return $this->belongsTo(Media::class);
+    }
+
+    public function getConfirmationStatusCssClass()
+    {
+        if ($this->confirmation_status == self::CONFIRMATION_STATUS_ACCEPTED) return "text-success";
+        elseif ($this->confirmation_status == self::CONFIRMATION_STATUS_REJECTED) return "text-error";
     }
 }

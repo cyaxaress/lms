@@ -50,14 +50,36 @@
                         <td><a href="">{{ $lesson->title}}</a></td>
                         <td>{{ $lesson->season->title }}</td>
                         <td>{{ $lesson->time }} دقیقه </td>
-                        <td>@lang($lesson->confirmation_status)</td>
-                        <td>{{ $lesson->free ? 'همه'  : 'شرکت کنندگان'}}</td>
+                        <td class="confirmation_status">
+                                <span class="{{ $lesson->getConfirmationStatusCssClass() }}">
+                                    @lang($lesson->confirmation_status)
+                                </span>
+                        </td>
+                        <td class="status">
+                            @if($lesson->status == \Cyaxaress\Course\Models\Lesson::STATUS_OPENED)
+                                {{ $lesson->free ? 'همه'  : 'شرکت کنندگان'}}
+                            @else
+                                <span>قفل شده</span>
+                            @endif
+                        </td>
                         <td>
                             <a href=""  onclick="deleteItem(event, '{{ route('lessons.destroy',[$course->id ,$lesson->id]) }}')"
                                class="item-delete mlg-15" title="حذف"></a>
-                            <a href="" class="item-reject mlg-15" title="رد"></a>
-                            <a href="" class="item-lock mlg-15" title="قفل "></a>
-                            <a href="" class="item-confirm mlg-15" title="تایید"></a>
+                            <a href="" onclick="updateConfirmationStatus(event, '{{ route('lessons.accept', $lesson->id) }}',
+                                'آیا از تایید این آیتم اطمینان دارید؟' , 'تایید شده')"
+                               class="item-confirm mlg-15" title="تایید"></a>
+                            <a href="" onclick="updateConfirmationStatus(event, '{{ route('lessons.reject', $lesson->id) }}',
+                                'آیا از رد این آیتم اطمینان دارید؟' ,'رد شده')"
+                               class="item-reject mlg-15" title="رد"></a>
+                            @if($lesson->status == \Cyaxaress\Course\Models\Lesson::STATUS_OPENED)
+                                <a href="" onclick="updateConfirmationStatus(event, '{{ route('lessons.lock', $lesson->id) }}',
+                                    'آیا از قفل کردن این آیتم اطمینان دارید؟' , 'قفل شده', 'status')"
+                                   class="item-lock text-error mlg-15" title="قفل کردن"></a>
+                            @else
+                                <a href="" onclick="updateConfirmationStatus(event, '{{ route('lessons.unlock', $lesson->id) }}',
+                                    'آیا از باز کردن این آیتم اطمینان دارید؟' , 'باز', 'status')"
+                                   class="item-lock mlg-15 text-success" title="باز کردن"></a>
+                            @endif
                             <a href="" class="item-edit " title="ویرایش"></a>
                         </td>
                     </tr>

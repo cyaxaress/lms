@@ -7,6 +7,7 @@ namespace Cyaxaress\Course\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\Course\Http\Requests\LessonRequest;
+use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Course\Repositories\SeasonRepo;
@@ -38,6 +39,35 @@ class LessonController extends Controller
         $this->lessonRepo->store($course, $request);
         newFeedback();
         return redirect(route('courses.details', $course));
+    }
+
+    public function accept($id)
+    {
+        $this->lessonRepo->updateConfirmationStatus($id, Lesson::CONFIRMATION_STATUS_ACCEPTED);
+        return AjaxResponses::SuccessResponse();
+    }
+
+    public function reject($id)
+    {
+        $this->lessonRepo->updateConfirmationStatus($id, Lesson::CONFIRMATION_STATUS_REJECTED);
+        return AjaxResponses::SuccessResponse();
+    }
+
+    public function lock($id)
+    {
+        if ($this->lessonRepo->updateStatus($id, Lesson::STATUS_LOCKED)){
+            return AjaxResponses::SuccessResponse();
+        }
+
+        return AjaxResponses::FailedResponse();
+    }
+    public function unlock($id)
+    {
+        if ($this->lessonRepo->updateStatus($id, Lesson::STATUS_OPENED)){
+            return AjaxResponses::SuccessResponse();
+        }
+
+        return AjaxResponses::FailedResponse();
     }
 
     public function destroy($courseId, $lessonId)

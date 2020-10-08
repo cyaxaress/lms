@@ -50,9 +50,21 @@ class LessonController extends Controller
         return view('Courses::lessons.edit', compact('lesson', 'seasons', 'course'));
     }
 
-    public function update()
+    public function update($courseId, $lessonId, LessonRequest $request)
     {
-        dd('asdf');
+        $lesson = $this->lessonRepo->findByid($lessonId);
+        if ($request->hasFile('lesson_file')) {
+
+            if ($lesson->media)
+                $lesson->media->delete();
+
+            $request->request->add(["media_id" => MediaFileService::privateUpload($request->file('lesson_file'))->id ]);
+        }else{
+            $request->request->add(['media_id'=> $lesson->media_id]);
+        }
+        $this->lessonRepo->update($lessonId, $courseId, $request);
+        newFeedback();
+        return redirect(route('courses.details', $courseId));
     }
     public function accept($id)
     {

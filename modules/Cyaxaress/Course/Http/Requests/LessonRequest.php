@@ -4,6 +4,7 @@ namespace Cyaxaress\Course\Http\Requests;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Rules\ValidSeason;
 use Cyaxaress\Course\Rules\ValidTeacher;
+use Cyaxaress\Media\Services\MediaFileService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -22,15 +23,13 @@ class LessonRequest extends FormRequest
             "number" => 'nullable|numeric',
             "time" => 'required|numeric|min:0|max:255',
             "season_id" => [ new ValidSeason() ],
-            "free" => "required|boolean",
+            "is_free" => "required|boolean",
             "lesson_file" => "required|file|mimes:avi,mkv,mp4,zip,rar",
         ];
 
-//        if (request()->method === 'PATCH') {
-//            $rules['image'] = "nullable|mimes:jpg,png,jpeg";
-//            $rules['slug'] = 'required|min:3|max:190|unique:courses,slug,' . request()->route('course');
-//        }
-
+        if (request()->method === 'PATCH') {
+            $rules['lesson_file'] = 'nullable|file|mimes:' . MediaFileService::getExtensions();
+        }
         return $rules;
     }
 

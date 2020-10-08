@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\Course\Http\Requests\LessonRequest;
 use Cyaxaress\Course\Models\Lesson;
+use Cyaxaress\Course\Models\Season;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Course\Repositories\SeasonRepo;
@@ -41,6 +42,18 @@ class LessonController extends Controller
         return redirect(route('courses.details', $course));
     }
 
+    public function edit($courseId, $lessonId, SeasonRepo $seasonRepo, CourseRepo $courseRepo)
+    {
+        $lesson = $this->lessonRepo->findByid($lessonId);
+        $seasons = $seasonRepo->getCourseSeasons($courseId);
+        $course = $courseRepo->findByid($courseId);
+        return view('Courses::lessons.edit', compact('lesson', 'seasons', 'course'));
+    }
+
+    public function update()
+    {
+        dd('asdf');
+    }
     public function accept($id)
     {
         $this->lessonRepo->updateConfirmationStatus($id, Lesson::CONFIRMATION_STATUS_ACCEPTED);

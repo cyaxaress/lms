@@ -46,4 +46,9 @@ class Lesson extends Model
         if ($this->confirmation_status == self::CONFIRMATION_STATUS_ACCEPTED) return "text-success";
         elseif ($this->confirmation_status == self::CONFIRMATION_STATUS_REJECTED) return "text-error";
     }
+
+    public function isFree()
+    {
+
+    }
 }

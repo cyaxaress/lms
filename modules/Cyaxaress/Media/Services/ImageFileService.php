@@ -3,6 +3,7 @@ namespace Cyaxaress\Media\Services;
 
 
 use Cyaxaress\Media\Contracts\FileServiceContract;
+use Cyaxaress\Media\Models\Media;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -29,5 +30,10 @@ class ImageFileService extends DefaultFileService implements FileServiceContract
             })->save(Storage::path($dir) . $filename . '_'. $size. '.' . $extension);
         }
         return $imgs;
+    }
+
+    public static function thumb(Media $media)
+    {
+        return "/storage/" . $media->files['300'];
     }
 }

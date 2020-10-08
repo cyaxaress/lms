@@ -20,7 +20,8 @@ class LessonRepo
             'user_id' => auth()->id(),
             'body' => $values->body,
             'confirmation_status' => Lesson::CONFIRMATION_STATUS_PENDING,
-            "status"=> Lesson::STATUS_OPENED
+            "status"=> Lesson::STATUS_OPENED,
+            "is_free" => $values->is_free
         ]);
     }
 

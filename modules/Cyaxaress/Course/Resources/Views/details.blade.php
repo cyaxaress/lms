@@ -12,9 +12,9 @@
                 <a class="color-2b4a83" href="{{ route('lessons.create', $course->id) }}">آپلود جلسه جدید</a>
             </div>
             <div class="d-flex item-center flex-wrap margin-bottom-15 operations__btns">
-                <button class="btn all-confirm-btn">تایید همه جلسات</button>
-                <button class="btn confirm-btn">تایید جلسات</button>
-                <button class="btn reject-btn">رد جلسات</button>
+                <button class="btn all-confirm-btn" onclick="acceptAllLessons('{{ route('lessons.acceptAll', $course->id) }}')">تایید همه جلسات</button>
+                <button class="btn confirm-btn" onclick="acceptMultiple('{{ route('lessons.acceptMultiple', $course->id) }}')">تایید جلسات</button>
+                <button class="btn reject-btn" onclick="rejectMultiple('{{ route('lessons.rejectMultiple', $course->id) }}')">رد جلسات</button>
                 <button class="btn delete-btn" onclick="deleteMultiple('{{ route('lessons.destroyMultiple', $course->id) }}')">حذف جلسات</button>
 
             </div>

@@ -72,6 +72,29 @@ class LessonController extends Controller
         return AjaxResponses::SuccessResponse();
     }
 
+    public function acceptAll($courseId)
+    {
+        $this->lessonRepo->acceptAll($courseId);
+        newFeedback();
+        return back();
+    }
+
+    public function acceptMultiple(Request $request)
+    {
+        $ids = explode(',', $request->ids);
+        $this->lessonRepo->updateConfirmationStatus($ids, Lesson::CONFIRMATION_STATUS_ACCEPTED);
+        newFeedback();
+        return back();
+    }
+
+    public function rejectMultiple(Request $request)
+    {
+        $ids = explode(',', $request->ids);
+        $this->lessonRepo->updateConfirmationStatus($ids, Lesson::CONFIRMATION_STATUS_REJECTED );
+        newFeedback();
+        return back();
+    }
+
     public function reject($id)
     {
         $this->lessonRepo->updateConfirmationStatus($id, Lesson::CONFIRMATION_STATUS_REJECTED);

@@ -139,48 +139,46 @@ $('.checkedAll').on('click', function (e) {
         $(".sub-checkbox").prop('checked', false);
     }
 });
+function acceptAllLessons(route) {
+    if (confirm("آیا از تایید همه جلسات این دوره اطمینان دارید؟")) {
+        $("<form action='"+ route +"' method='post'>" +
+            "<input type='hidden' name='_token' value='"+ $('meta[name="_token"]').attr('content') +"' /> "+
+            "<input type='hidden' name='_method' value='patch'> " +
+            "</form>").appendTo('body').submit();
+    }
+}
+function acceptMultiple(route) {
+    doMultipleAction(route, "آیا مطمئن هستید که می خواهید این سطرها را تایید کنید؟",'patch')
+}
+function rejectMultiple(route) {
+    doMultipleAction(route, "آیا مطمئن هستید که می خواهید این سطرها را رد کنید؟",'patch')
+}
 
 function deleteMultiple(route) {
+    doMultipleAction(route,"آیا مطمئن هستید که می خواهید این سطرها را حذف کنید؟" ,"delete")
+}
+function doMultipleAction(route,message, method){
+    var allVals = getSelectedItems();
+    if (allVals.length <= 0) {
+        alert("یک سطر انتخاب کنید");
+    } else {
+        WRN_PROFILE_DELETE = message;
+        var check = confirm(WRN_PROFILE_DELETE);
+        if (check == true) {
+            $("<form action='"+ route +"' method='post'>" +
+                "<input type='hidden' name='_token' value='"+ $('meta[name="_token"]').attr('content') +"' /> "+
+                "<input type='hidden' name='_method' value='"+ method +"'> " +
+                "<input type='hidden' name='ids' value='" + allVals + "'>" +
+                "</form>").appendTo('body').submit();
+        }
+    }
+}
+function getSelectedItems() {
     var allVals = [];
     $(".sub-checkbox:checked").each(function () {
         allVals.push($(this).attr('data-id'));
     });
-    //alert(allVals.length); return false;
-    if (allVals.length <= 0) {
-        alert("یک سطر انتخاب کنید");
-    } else {
-        //$("#loading").show();
-        WRN_PROFILE_DELETE = "آیا مطمئن هستید که می خواهید این سطر را حذف کنید؟";
-        var check = confirm(WRN_PROFILE_DELETE);
-        if (check == true) {
-            //for server side
-
-            $("<form action='"+ route +"' method='post'>" +
-                "<input type='hidden' name='_token' value='"+ $('meta[name="_token"]').attr('content') +"' /> "+
-                "<input type='hidden' name='_method' value='delete'> " +
-                "<input type='hidden' name='ids' value='" + allVals + "'>" +
-                "</form>").appendTo('body').submit();
-
-            // $.ajax({
-            //     type: "POST",
-            //     url: "delete.php",
-            //     cache:false,
-            //     data: {ids: allVals},
-            //     success: function(response)
-            //     {
-            //         $("#loading").hide();
-            //         $("#msgdiv").html(response);
-            //         //referesh table
-            //     }
-            // });
-            //for client side
-            $.each(allVals, function (index, value) {
-                $('table tr').filter("[data-row-id='" + value + "']").remove();
-            });
-
-
-        }
-    }
+    return allVals;
 }
 
 $('.course__detial .item-delete').on('click', function (e) {

@@ -16,7 +16,6 @@
                 <button class="btn confirm-btn" onclick="acceptMultiple('{{ route('lessons.acceptMultiple', $course->id) }}')">تایید جلسات</button>
                 <button class="btn reject-btn" onclick="rejectMultiple('{{ route('lessons.rejectMultiple', $course->id) }}')">رد جلسات</button>
                 <button class="btn delete-btn" onclick="deleteMultiple('{{ route('lessons.destroyMultiple', $course->id) }}')">حذف جلسات</button>
-
             </div>
             <div class="table__box">
                 <table class="table">

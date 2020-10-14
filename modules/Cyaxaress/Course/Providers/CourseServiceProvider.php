@@ -1,9 +1,10 @@
 <?php
 namespace Cyaxaress\Course\Providers;
 
+use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Models\Season;
+use Cyaxaress\Course\Policies\LessonPolicy;
 use Cyaxaress\Course\Policies\SeasonPolicy;
-use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Policies\CoursePolicy;
 use Cyaxaress\RolePermissions\Models\Permission;
@@ -23,6 +24,7 @@ class CourseServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/Lang/', "Courses");
         Gate::policy(Course::class, CoursePolicy::class);
         Gate::policy(Season::class, SeasonPolicy::class);
+        Gate::policy(Lesson::class, LessonPolicy::class);
     }
 
     public function boot()

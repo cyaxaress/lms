@@ -15,7 +15,7 @@ class LessonPolicy
     public function edit($user, $lesson)
     {
         if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) ||
-            ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) && $user->id = $lesson->course->teacher_id)
+            ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) && $user->id == $lesson->course->teacher_id)
         ) {
             return true;
         }
@@ -24,7 +24,7 @@ class LessonPolicy
     public function delete($user, $lesson)
     {
         if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) ||
-            ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) && $user->id = $lesson->course->teacher_id)
+            ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) && $user->id == $lesson->course->teacher_id)
         ) {
             return true;
         }

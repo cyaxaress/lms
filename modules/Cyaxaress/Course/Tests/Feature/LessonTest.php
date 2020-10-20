@@ -91,6 +91,219 @@ class SeasonTest extends TestCase
 
     }
 
+    public function test_permitted_user_can_update_lesson()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $lesson = $this->createLesson($course);
+        $this->patch(route('lessons.update', [$course->id, $lesson->id]), [
+            "title" => "updated title",
+            "time" => "21",
+            "is_free" => 0,
+        ]);
+        $this->assertEquals("updated title", Lesson::find(1)->title);
+
+        $this->actAsUser();
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
+        $this->patch(route('lessons.update', [$course->id, $lesson->id]), [
+            "title" => "updated title 2",
+            "time" => "21",
+            "is_free" => 0,
+        ])->assertStatus(403);
+
+        $this->assertEquals("updated title", Lesson::find(1)->title);
+    }
+
+    public function test_permitted_user_can_accept_lesson()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $lesson = $this->createLesson($course);
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(1)->confirmation_status);
+        $this->patch(route('lessons.accept', $lesson->id));
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_ACCEPTED, Lesson::find(1)->confirmation_status);
+
+        $this->actAsUser();
+        $this->patch(route('lessons.accept', $lesson->id))->assertStatus(403);
+
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
+        $this->patch(route('lessons.accept', $lesson->id))->assertStatus(403);
+    }
+
+    public function test_permitted_user_can_accept_all_lessons()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $this->createLesson($course);
+        $this->createLesson($course);
+
+        $course2 = $this->createCourse();
+        $this->createLesson($course2);
+
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(1)->confirmation_status);
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(2)->confirmation_status);
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(3)->confirmation_status);
+        $this->patch(route('lessons.acceptAll', $course->id));
+        $this->assertEquals($course->lessons()->count(),
+            $course->lessons()
+            ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_ACCEPTED)->count()
+        );
+
+        $this->assertEquals($course2->lessons()->count(),
+            $course2->lessons()
+                ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_PENDING)->count()
+        );
+
+
+        $this->actAsUser();
+        $this->patch(route('lessons.acceptAll', $course2->id))->assertStatus(403);
+        $this->assertEquals($course2->lessons()->count(),
+            $course2->lessons()
+                ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_PENDING)->count()
+        );
+
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
+        $this->patch(route('lessons.acceptAll', $course2->id));
+        $this->assertEquals($course2->lessons()->count(),
+            $course2->lessons()
+                ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_PENDING)->count()
+        );
+    }
+
+    public function test_permitted_user_can_accept_multiple_lessons()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $this->createLesson($course);
+        $this->createLesson($course);
+        $this->createLesson($course);
+
+        $this->patch(route('lessons.acceptMultiple', $course->id), [
+            "ids" => '1,2'
+        ]);
+
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_ACCEPTED, Lesson::find(1)->confirmation_status);
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_ACCEPTED, Lesson::find(2)->confirmation_status);
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(3)->confirmation_status);
+
+        $this->actAsUser();
+        $this->patch(route('lessons.acceptMultiple', $course->id), [
+            "ids" => '3'
+        ])->assertStatus(403);
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(3)->confirmation_status);
+    }
+
+    public function test_permitted_user_can_reject_lesson()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $lesson = $this->createLesson($course);
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(1)->confirmation_status);
+        $this->patch(route('lessons.reject', $lesson->id));
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_REJECTED, Lesson::find(1)->confirmation_status);
+
+        $this->actAsUser();
+        $this->patch(route('lessons.reject', $lesson->id))->assertStatus(403);
+
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
+        $this->patch(route('lessons.reject', $lesson->id))->assertStatus(403);
+    }
+    public function test_permitted_user_can_reject_multiple_lessons()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $this->createLesson($course);
+        $this->createLesson($course);
+        $this->createLesson($course);
+
+        $this->patch(route('lessons.rejectMultiple', $course->id), [
+            "ids" => '1,2'
+        ]);
+
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_REJECTED, Lesson::find(1)->confirmation_status);
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_REJECTED, Lesson::find(2)->confirmation_status);
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(3)->confirmation_status);
+
+        $this->actAsUser();
+        $this->patch(route('lessons.rejectMultiple', $course->id), [
+            "ids" => '3'
+        ])->assertStatus(403);
+        $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(3)->confirmation_status);
+    }
+
+    public function test_permitted_user_can_lock_lesson()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $this->createLesson($course);
+        $this->createLesson($course);
+
+        $this->patch(route('lessons.lock', 1));
+        $this->assertEquals(Lesson::STATUS_LOCKED, Lesson::find(1)->status);
+        $this->assertEquals(Lesson::STATUS_OPENED, Lesson::find(2)->status);
+
+        $this->actAsUser();
+        $this->patch(route('lessons.lock', 2))->assertStatus(403);
+        $this->assertEquals(Lesson::STATUS_OPENED, Lesson::find(2)->status);
+    }
+
+    public function test_permitted_user_can_unlock_lesson()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $this->createLesson($course);
+        $this->createLesson($course);
+        $this->patch(route('lessons.lock', 1));
+        $this->patch(route('lessons.lock', 2));
+        $this->assertEquals(Lesson::STATUS_LOCKED, Lesson::find(1)->status);
+
+        $this->patch(route('lessons.unlock', 1));
+        $this->assertEquals(Lesson::STATUS_OPENED, Lesson::find(1)->status);
+        $this->assertEquals(Lesson::STATUS_LOCKED, Lesson::find(2)->status);
+
+        $this->actAsUser();
+        $this->patch(route('lessons.unlock', 2))->assertStatus(403);
+        $this->assertEquals(Lesson::STATUS_LOCKED, Lesson::find(2)->status);
+    }
+
+    public function test_permitted_user_can_destroy_lesson()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $this->createLesson($course);
+        $this->createLesson($course);
+
+        $this->delete(route('lessons.destroy', [1, 1]))->assertStatus(200);
+        $this->assertEquals(null, Lesson::find(1));
+
+        $this->actAsUser();
+        $this->delete(route('lessons.destroy', [1, 2]))->assertStatus(403);
+        $this->assertEquals(1, Lesson::where('id', 2)->count());
+    }
+
+    public function test_permitted_user_can_destroy_multiple_lessons()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+        $this->createLesson($course);
+        $this->createLesson($course);
+        $this->createLesson($course);
+
+        $this->delete(route('lessons.destroyMultiple', $course->id), [
+            "ids" => '1,2'
+        ]);
+
+        $this->assertEquals(null, Lesson::find(1));
+        $this->assertEquals(null, Lesson::find(2));
+        $this->assertEquals(3, Lesson::find(3)->id);
+
+        $this->actAsUser();
+        $this->delete(route('lessons.destroyMultiple', $course->id), [
+            "ids" => '3'
+        ])->assertStatus(403);
+        $this->assertEquals(3, Lesson::find(3)->id);
+    }
+
 
     private function createUser()
     {

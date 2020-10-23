@@ -3,6 +3,14 @@
     <li><a href="{{ route('courses.index') }}" title="دوره ها">دوره ها</a></li>
 @endsection
 @section('content')
+    <div class="tab__box">
+        <div class="tab__items">
+            <a class="tab__item is-active" href="courses.html">لیست دوره ها</a>
+            <a class="tab__item" href="approved.html">دوره های تایید شده</a>
+            <a class="tab__item" href="new-course.html">دوره های تایید نشده</a>
+            <a href="{{ route('courses.create') }}" title="ایجاد دوره جدید">ایجاد دوره جدید</a>
+        </div>
+    </div>
     <div class="row no-gutters  ">
         <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">
             <p class="box__title">دوره ها</p>
@@ -39,19 +47,23 @@
                         <td class="status">@lang($course->status)</td>
                         <td class="confirmation_status">@lang($course->confirmation_status)</td>
                         <td>
-                            <a href="" onclick="deleteItem(event, '{{ route('courses.destroy', $course->id) }}')" class="item-delete mlg-15" title="حذف"></a>
+                            @can(\Cyaxaress\RolePermissions\Models\Permission::PERMISSION_MANAGE_COURSES)
+                                <a href="" onclick="deleteItem(event, '{{ route('courses.destroy', $course->id) }}')" class="item-delete mlg-15" title="حذف"></a>
+                                <a href="" onclick="updateConfirmationStatus(event, '{{ route('courses.accept', $course->id) }}',
+                                    'آیا از تایید این آیتم اطمینان دارید؟' , 'تایید شده')"
+                                   class="item-confirm mlg-15" title="تایید"></a>
+                                <a href="" onclick="updateConfirmationStatus(event, '{{ route('courses.reject', $course->id) }}',
+                                    'آیا از رد این آیتم اطمینان دارید؟' ,'رد شده')"
+                                   class="item-reject mlg-15" title="رد"></a>
+
+                                <a href="" onclick="updateConfirmationStatus(event, '{{ route('courses.lock', $course->id) }}',
+                                    'آیا از قفل کردن این آیتم اطمینان دارید؟' , 'قفل شده', 'status')"
+                                   class="item-lock mlg-15" title="قفل کردن"></a>
+                            @endcan
+
                             <a href="" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
                             <a href="{{ route('courses.edit',  $course->id) }}" class="item-edit mlg-15 " title="ویرایش"></a>
-                            <a href="" onclick="updateConfirmationStatus(event, '{{ route('courses.accept', $course->id) }}',
-                                'آیا از تایید این آیتم اطمینان دارید؟' , 'تایید شده')"
-                               class="item-confirm mlg-15" title="تایید"></a>
-                            <a href="" onclick="updateConfirmationStatus(event, '{{ route('courses.reject', $course->id) }}',
-                                'آیا از رد این آیتم اطمینان دارید؟' ,'رد شده')"
-                               class="item-reject mlg-15" title="رد"></a>
 
-                            <a href="" onclick="updateConfirmationStatus(event, '{{ route('courses.lock', $course->id) }}',
-                                'آیا از قفل کردن این آیتم اطمینان دارید؟' , 'قفل شده', 'status')"
-                               class="item-lock mlg-15" title="قفل کردن"></a>
                         </td>
                     </tr>
                     @endforeach

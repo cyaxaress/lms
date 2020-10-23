@@ -6,17 +6,23 @@ use Cyaxaress\Category\Repositories\CategoryRepo;
 use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\Course\Http\Requests\CourseRequest;
 use Cyaxaress\Course\Models\Course;
+use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Media\Services\MediaFileService;
+use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Repositories\UserRepo;
 
 class CourseController extends Controller
 {
     public function index(CourseRepo $courseRepo)
     {
-        $this->authorize('manage', Course::class);
-        $courses = $courseRepo->paginate();
+        $this->authorize('index', Course::class);
+        if (auth()->user()->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)) {
+            $courses = $courseRepo->paginate();
+        }else{
+            $courses = $courseRepo->getCoursesByTeacherId(auth()->id());
+        }
         return view('Courses::index', compact('courses'));
     }
 

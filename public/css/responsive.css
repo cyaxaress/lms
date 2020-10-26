@@ -293,7 +293,9 @@
     height: 270px !important;
     max-height: 270px;
 }
-
+.product-info-box .buy:hover::before{
+    width: 2000px;
+}
 @media (max-width: 880px) {
     .card-img {
         height: 240px !important;

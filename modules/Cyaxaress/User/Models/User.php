@@ -10,6 +10,7 @@ use Cyaxaress\RolePermissions\Models\Role;
 use Cyaxaress\User\Notifications\ResetPasswordRequestNotification;
 use Cyaxaress\User\Notifications\VerifyMailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -18,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use HasRoles;
+    use HasFactory;
 
     const STATUS_ACTIVE = "active";
     const STATUS_INACTIVE = "inactive";
@@ -30,11 +32,23 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static $defaultUsers = [
         [
-            'email' => 'admin@admin.com',
+            'email' => 'admin@site.com',
             'password' => 'admin',
             'name' => 'Admin',
             'role' => Role::ROLE_SUPER_ADMIN
         ],
+        [
+            'email' => 'teacher@site.com',
+            'password' => 'teacher',
+            'name' => 'Teacher',
+            'role' => Role::ROLE_TEACHER
+        ],
+        [
+            'email' => 'student@site.com',
+            'password' => 'student',
+            'name' => 'Student',
+            'role' => Role::ROLE_STUDENT
+        ]
     ];
 
     /**

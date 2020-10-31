@@ -307,7 +307,7 @@ class LessonTest extends TestCase
 
     private function createUser()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->actingAs(User::factory()->create());
         $this->seed(RolePermissionTableSeeder::class);
     }
 

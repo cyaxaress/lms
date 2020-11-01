@@ -49,7 +49,7 @@
                         </td>
                         <td><a href="">{{ $lesson->number }}</a></td>
                         <td><a href="">{{ $lesson->title}}</a></td>
-                        <td>{{ $lesson->season->title }}</td>
+                        <td>{{ $lesson->seasson ? $lesson->season->title : '-' }}</td>
                         <td>{{ $lesson->time }} دقیقه </td>
                         <td class="confirmation_status">
                                 <span class="{{ $lesson->getConfirmationStatusCssClass() }}">

@@ -3,6 +3,7 @@ namespace Cyaxaress\Front\Providers;
 
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Category\Repositories\CategoryRepo;
+use Cyaxaress\Course\Repositories\CourseRepo;
 use Illuminate\Support\ServiceProvider;
 
 class FrontServiceProvider extends ServiceProvider
@@ -16,5 +17,12 @@ class FrontServiceProvider extends ServiceProvider
             $categories = (new CategoryRepo())->tree();
             $view->with(compact('categories'));
         });
+
+        view()->composer('Front::layout.latestCourses', function ($view) {
+            $latestCourses = (new CourseRepo())->latestCourses();
+            $view->with(compact('latestCourses'));
+        });
+
+
     }
 }

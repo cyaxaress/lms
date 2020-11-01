@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5",
         "cyaxaress/common": "dev-master",
+        "cyaxaress/front": "dev-master",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -31,6 +32,10 @@
         {
             "type": "path",
             "url": "modules/Cyaxaress/Common"
+        },
+        {
+            "type": "path",
+            "url": "modules/Cyaxaress/Front"
         }
     ],
     "config": {

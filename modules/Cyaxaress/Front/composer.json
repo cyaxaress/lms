@@ -1,0 +1,15 @@
+{
+    "name": "cyaxaress/front",
+    "autoload": {
+        "psr-4": {
+            "Cyaxaress\\Front\\" : "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Cyaxaress\\Front\\Providers\\FrontServiceProvider"
+            ]
+        }
+    }
+}

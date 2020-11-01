@@ -20,11 +20,16 @@ class Category extends Model
 
     public function subCategories()
     {
-        $this->hasMany(Category::class, 'parent_id');
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
     public function courses()
     {
         return $this->hasMany(Course::class);
+    }
+
+    public function path()
+    {
+        return route('categories.show', $this->id);
     }
 }

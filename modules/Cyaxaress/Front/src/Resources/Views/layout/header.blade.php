@@ -8,7 +8,7 @@
     <div class="container">
         <div class="t-header-row">
             <div class="t-header-right">
-                <div class="t-header-logo"><a href="index.html"></a></div>
+                <div class="t-header-logo"><a href="/"></a></div>
                 <div class="t-header-search">
                     <div class="t-header-searchbox">
                         <input type="text" placeholder="جستجو دوره / مقاله / مدرس">
@@ -123,56 +123,52 @@
                 <div class="join-teachers">
                     <a href="become-a-teacher.html">تدریس در وب آموز</a>
                 </div>
-                <!--                                <div class="user-menu-account">-->
-                <!--                                    <div class="user-image">-->
-                <!--                                        <img src="img/profile.jpg" alt="desction">-->
-                <!--                                    </div>-->
-                <!--                                    <span>پروفایل کاربری من </span>-->
-                <!--                                    <div class="user-menu-account-dropdown">-->
-                <!--                                        <ul>-->
-                <!--                                            <li><a href="">مشاهده پروفایل</a></li>-->
-                <!--                                            <li><a href="">خرید های من</a></li>-->
-                <!--                                            <li><a href="">داشبورد</a></li>-->
-                <!--                                            <li><a href="">خروج</a></li>-->
-                <!--                                        </ul>-->
-                <!--                                    </div>-->
-                <!--                                </div>-->
-                <div class="login-register-btn ">
-                    <div><a class="btn-login" href="login.html">ورود</a></div>
-                    <div><a class="btn-register" href="register.html">ثبت نام</a></div>
-                </div>
+                @auth()
+                    <div class="user-menu-account">
+                        <div class="user-image">
+                            <img src="{{ auth()->user()->thumb }}" alt="{{ auth()->user()->name }}">
+                        </div>
+                        <span>پروفایل کاربری من </span>
+                        <div class="user-menu-account-dropdown">
+                            <ul>
+                                <li><a href="{{ route('users.profile') }}">مشاهده پروفایل</a></li>
+                                <li><a href="">خرید های من</a></li>
+                                <li><a href="{{{ route('home') }}}">داشبورد</a></li>
+                                <li><a href="{{ route('logout')}}">خروج</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                @else
+                    <div class="login-register-btn ">
+                        <div><a class="btn-login" href="{{ route('login') }}">ورود</a></div>
+                        <div><a class="btn-register" href="{{ route('register') }}">ثبت نام</a></div>
+                    </div>
+                @endauth
 
             </div>
         </div>
     </div>
     <nav id="navigation" class="navigation">
         <div class="login-register-btn d-none">
-            <div><a class="btn-login" href="login.html">ورود</a></div>
-            <div><a class="btn-register" href="register.html">ثبت نام</a></div>
+            <div><a class="btn-login" href="{{ route('login') }}">ورود</a></div>
+            <div><a class="btn-register" href="{{ route('register') }}">ثبت نام</a></div>
         </div>
         <div class="container">
             <ul class="nav">
-                <li class="main-menu has-sub"><a href="#">برنامه نویسی</a>
-                    <div class="sub-menu">
-                        <div class="container">
-                            <div><a href="android.html">اندروید</a></div>
-                            <div><a href="web.html">وب</a></div>
-                            <div><a href="window.html">ویندوز</a></div>
-                        </div>
-                    </div>
-                    <div class="triangle"></div>
-                </li>
-                <li class="main-menu"><a href="#">گرافیک</a></li>
-                <li class="main-menu has-sub"><a href="#">چندرسانه ای</a>
-                    <div class="sub-menu">
-                        <div class="container">
-                            <div><a href="#">فیلم و صدا</a></div>
-                            <div><a href="#">بازی سازی</a></div>
-                        </div>
-                    </div>
-                    <div class="triangle"></div>
-                </li>
-                <li class="main-menu"><a href="#">کسب و کار</a></li>
+                @foreach($categories as $category)
+                    <li class="main-menu {{ count($category->subCategories) ? 'has-sub' : '' }}"><a href="{{ $category->path() }}">{{ $category->title }}</a>
+                        @if(count($category->subCategories))
+                            <div class="sub-menu">
+                                <div class="container">
+                                    @foreach($category->subCategories as $subCategory)
+                                    <div><a href="{{ $subCategory->path() }}">{{ $subCategory->title }}</a></div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="triangle"></div>
+                        @endif
+                    </li>
+                @endforeach
                 <li class="main-menu d-none"><a href="#">درباره ما</a></li>
                 <li class="main-menu"><a href="contact-us.html">تماس ما</a></li>
                 <li class="main-menu join-teachers-li"><a href="become-a-teacher.html">تدریس در وب آموز</a></li>

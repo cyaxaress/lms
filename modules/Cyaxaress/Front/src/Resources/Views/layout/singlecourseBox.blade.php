@@ -1,5 +1,5 @@
 <div class="col">
-    <a href="react.html">
+    <a href="{{ $courseItem->path() }}">
         <div class="course-status">
             @lang($courseItem->status)
         </div>

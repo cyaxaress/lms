@@ -74,4 +74,14 @@ class Course extends Model
     {
         return route('singleCourse', $this->id . '-' . $this->slug);
     }
+
+    public function lessonsCount()
+    {
+        return (new CourseRepo())->getLessonsCount($this->id);
+    }
+
+    public function shortUrl()
+    {
+        return route('singleCourse', $this->id );
+    }
 }

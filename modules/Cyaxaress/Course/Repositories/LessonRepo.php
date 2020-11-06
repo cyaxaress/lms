@@ -76,4 +76,23 @@ class LessonRepo
     {
         return Lesson::where("course_id", $courseId)->update(['confirmation_status' => Lesson::CONFIRMATION_STATUS_ACCEPTED]);
     }
+
+    public function getAcceptedLessons(int $courseId)
+    {
+        return Lesson::where('course_id', $courseId)
+            ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_ACCEPTED)
+            ->get();
+    }
+
+    public function getFirstLesson(int $courseId)
+    {
+        return Lesson::where('course_id', $courseId)
+            ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_ACCEPTED)
+            ->orderBy('number', 'asc')->first();
+    }
+
+    public function getLesson(int $courseId, int $lessonId)
+    {
+        return Lesson::where('course_id', $courseId)->where('id', $lessonId)->first();
+    }
 }

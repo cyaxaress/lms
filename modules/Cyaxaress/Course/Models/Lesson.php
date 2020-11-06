@@ -51,4 +51,9 @@ class Lesson extends Model
     {
 
     }
+
+    public function path()
+    {
+        return $this->course->path() . '?lesson=l-' . $this->id . "-" . $this->slug;
+    }
 }

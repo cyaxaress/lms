@@ -1,3 +1,10 @@
+<div class="toast">
+    <div>
+        <div class="toast__icon"></div>
+        <div class="toast__message"></div>
+        <div class="toast__close" onclick="toast__close()" ></div>
+    </div>
+</div>
 <footer>
     <a class="scrollToTop"></a>
     <div class="container">

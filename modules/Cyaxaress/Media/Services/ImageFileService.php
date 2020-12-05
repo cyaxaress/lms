@@ -31,6 +31,11 @@ class ImageFileService extends DefaultFileService implements FileServiceContract
         }
         return $imgs;
     }
+    public static function getFilename()
+    {
+        return (static::$media->is_private ? 'private/' : 'public/') . static::$media->files['original'];
+    }
+
 
     public static function thumb(Media $media)
     {

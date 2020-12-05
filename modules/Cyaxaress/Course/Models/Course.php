@@ -38,6 +38,11 @@ class Course extends Model
         return $this->belongsTo(User::class, 'teacher_id');
     }
 
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'course_user', 'course_id', 'user_id');
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

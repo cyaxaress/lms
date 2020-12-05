@@ -21,4 +21,9 @@ class VideoFileService extends DefaultFileService implements FileServiceContract
     {
         return url("/img/video-thumb.png");
     }
+
+    public static function getFilename()
+    {
+        return (static::$media->is_private ? 'private/' : 'public/') . static::$media->files['video'];
+    }
 }

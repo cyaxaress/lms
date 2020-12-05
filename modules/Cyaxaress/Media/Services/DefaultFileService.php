@@ -7,7 +7,7 @@ namespace Cyaxaress\Media\Services;
 use Cyaxaress\Media\Models\Media;
 use Illuminate\Support\Facades\Storage;
 
-class DefaultFileService
+abstract class DefaultFileService
 {
     public static $media;
 
@@ -22,10 +22,7 @@ class DefaultFileService
         }
     }
 
-    public static function getFilename()
-    {
-        return (static::$media->is_private ? 'private/' : 'public/') . static::$media->files['video'];
-    }
+    abstract static function getFilename();
 
     public static function stream(Media $media)
     {

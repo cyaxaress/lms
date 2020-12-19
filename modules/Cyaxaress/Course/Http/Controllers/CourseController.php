@@ -1,4 +1,5 @@
 <?php
+
 namespace Cyaxaress\Course\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -10,6 +11,7 @@ use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Media\Services\MediaFileService;
+use Cyaxaress\Payments\Repositories\PaymentRepo;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Repositories\UserRepo;
 
@@ -20,7 +22,7 @@ class CourseController extends Controller
         $this->authorize('index', Course::class);
         if (auth()->user()->hasAnyPermission([Permission::PERMISSION_MANAGE_COURSES, Permission::PERMISSION_SUPER_ADMIN])) {
             $courses = $courseRepo->paginate();
-        }else{
+        } else {
             $courses = $courseRepo->getCoursesByTeacherId(auth()->id());
         }
         return view('Courses::index', compact('courses'));
@@ -36,7 +38,7 @@ class CourseController extends Controller
 
     public function store(CourseRequest $request, CourseRepo $courseRepo)
     {
-        $request->request->add(['banner_id' => MediaFileService::publicUpload($request->file('image'))->id ]);
+        $request->request->add(['banner_id' => MediaFileService::publicUpload($request->file('image'))->id]);
         $courseRepo->store($request);
         return redirect()->route('courses.index');
     }
@@ -55,10 +57,10 @@ class CourseController extends Controller
         $course = $courseRepo->findByid($id);
         $this->authorize('edit', $course);
         if ($request->hasFile('image')) {
-            $request->request->add(['banner_id' => MediaFileService::publicUpload($request->file('image'))->id ]);
+            $request->request->add(['banner_id' => MediaFileService::publicUpload($request->file('image'))->id]);
             if ($course->banner)
                 $course->banner->delete();
-        }else{
+        } else {
             $request->request->add(['banner_id' => $course->banner_id]);
         }
         $courseRepo->update($id, $request);
@@ -75,7 +77,7 @@ class CourseController extends Controller
 
     public function destroy($id, CourseRepo $courseRepo)
     {
-        $course =  $courseRepo->findByid($id);
+        $course = $courseRepo->findByid($id);
         $this->authorize('delete', $course);
         if ($course->banner) {
             $course->banner->delete();
@@ -87,7 +89,7 @@ class CourseController extends Controller
     public function accept($id, CourseRepo $courseRepo)
     {
         $this->authorize('change_confirmation_status', Course::class);
-        if ($courseRepo->updateConfirmationStatus($id, Course::CONFIRMATION_STATUS_ACCEPTED)){
+        if ($courseRepo->updateConfirmationStatus($id, Course::CONFIRMATION_STATUS_ACCEPTED)) {
             return AjaxResponses::SuccessResponse();
         }
 
@@ -97,7 +99,7 @@ class CourseController extends Controller
     public function reject($id, CourseRepo $courseRepo)
     {
         $this->authorize('change_confirmation_status', Course::class);
-        if ($courseRepo->updateConfirmationStatus($id, Course::CONFIRMATION_STATUS_REJECTED)){
+        if ($courseRepo->updateConfirmationStatus($id, Course::CONFIRMATION_STATUS_REJECTED)) {
             return AjaxResponses::SuccessResponse();
         }
 
@@ -107,15 +109,63 @@ class CourseController extends Controller
     public function lock($id, CourseRepo $courseRepo)
     {
         $this->authorize('change_confirmation_status', Course::class);
-        if ($courseRepo->updateStatus($id, Course::STATUS_LOCKED)){
+        if ($courseRepo->updateStatus($id, Course::STATUS_LOCKED)) {
             return AjaxResponses::SuccessResponse();
         }
 
         return AjaxResponses::FailedResponse();
     }
 
-    public function buy($courseId)
+    public function buy($courseId, CourseRepo $courseRepo)
     {
-        return $courseId;
+        $course = $courseRepo->findByid($courseId);
+
+        if (!$this->courseCanBePurchased($course)) {
+            return back();
+        }
+
+        if (!$this->authUserCanPurchaseCourse($course)) {
+            return back();
+        }
+
+
+
+    }
+
+    private function courseCanBePurchased(Course $course)
+    {
+        if ($course->type == Course::TYPE_FREE) {
+            newFeedback("عملیات ناموفق", "دوره های رایگان قابل خریداری نیستند!", "error");
+            return false;
+        }
+
+        if ($course->status == Course::STATUS_LOCKED) {
+            newFeedback("عملیات ناموفق", "این دوره قفل شده است و قعلا قابل خریداری نیست!", "error");
+            return false;
+        }
+
+        if ($course->confirmation_status != Course::CONFIRMATION_STATUS_ACCEPTED) {
+            newFeedback("عملیات ناموفق", "دوره ی انتخابی شما هنوز تایید نشده است!", "error");
+            return false;
+        }
+
+        PaymentRepo::store();
+
+        return true;
+    }
+
+    private function authUserCanPurchaseCourse(Course $course)
+    {
+        if (auth()->id() == $course->teacher_id) {
+            newFeedback("عملیات ناموفق", "شما مدرس این دوره هستید.", "error");
+            return false;
+        }
+
+        if (auth()->user()->hasAccessToCourse($course)) {
+            newFeedback("عملیات ناموفق", "شما به دوره دسترسی دارید.", "error");
+            return false;
+        }
+
+        return true;
     }
 }

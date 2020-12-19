@@ -7,12 +7,11 @@ use Cyaxaress\Category\Repositories\CategoryRepo;
 use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\Course\Http\Requests\CourseRequest;
 use Cyaxaress\Course\Models\Course;
-use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Media\Services\MediaFileService;
-use Cyaxaress\Payments\Repositories\PaymentRepo;
-use Cyaxaress\Payments\Services\PaymentService;
+use Cyaxaress\Payment\Gateways\Gateway;
+use Cyaxaress\Payment\Services\PaymentService;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Repositories\UserRepo;
 
@@ -131,6 +130,8 @@ class CourseController extends Controller
 
         $amount = $course->getFinalPrice();
         $payment = PaymentService::generate($amount, $course, auth()->user());
+
+        resolve(Gateway::class)->redirect($payment->invoice_id);
 
     }
 

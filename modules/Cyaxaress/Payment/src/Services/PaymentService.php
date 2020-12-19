@@ -1,7 +1,8 @@
 <?php
 
-namespace Cyaxaress\Payments\Services;
+namespace Cyaxaress\Payment\Services;
 
+use Cyaxaress\Payment\Gateways\Gateway;
 use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\Payment\Repositories\PaymentRepo;
 use Cyaxaress\User\Models\User;
@@ -13,8 +14,14 @@ class PaymentService
     {
         if ($amount <= 0 || is_null($paymentable->id) || is_null($buyer->id)) return false;
 
-        $gateway = "";
-        $invoiceId = 0;
+
+        $gateway = resolve(Gateway::class);
+        $invoiceId = $gateway->request($amount, $paymentable->title);
+
+        if (is_array($invoiceId)) {
+            // todo
+            dd($invoiceId);
+        }
 
         if (is_null($paymentable->percent)) {
             $seller_p = $paymentable->percent;
@@ -30,7 +37,7 @@ class PaymentService
             "paymentable_type" => get_class($paymentable),
             "amount" => $amount,
             "invoice_id" => $invoiceId,
-            "gateway" => $gateway,
+            "gateway" => $gateway->getName(),
             "status" => Payment::STATUS_PENDING,
             "seller_p" => $seller_p,
             "seller_share" => $seller_share,

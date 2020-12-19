@@ -12,6 +12,7 @@ use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Media\Services\MediaFileService;
 use Cyaxaress\Payments\Repositories\PaymentRepo;
+use Cyaxaress\Payments\Services\PaymentService;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Repositories\UserRepo;
 
@@ -128,7 +129,8 @@ class CourseController extends Controller
             return back();
         }
 
-
+        $amount = $course->getFinalPrice();
+        $payment = PaymentService::generate($amount, $course, auth()->user());
 
     }
 
@@ -148,9 +150,6 @@ class CourseController extends Controller
             newFeedback("عملیات ناموفق", "دوره ی انتخابی شما هنوز تایید نشده است!", "error");
             return false;
         }
-
-        $amount = 0;
-        $payment = PaymentRepo::generate($amount, $course, auth()->user());
 
         return true;
     }

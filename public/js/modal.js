@@ -29,3 +29,4 @@ showImage()
 
 modal('#Modal1', '800px', '#tutor-image')
 modal('#Modal2', '1000px', '.btn-answer')
+modal('#Modal-buy', '1000px', '.btn-buy')

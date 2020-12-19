@@ -3697,3 +3697,41 @@ textarea {
 .mrt-170 {
     margin-top: 170px;
 }
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: rgba(0,0,0,0);
+    color: #6c757d;
+}
+.table-bordered {
+    border: 1px solid #f0f0f5;
+}
+.table-striped tbody tr:nth-of-type(2n+1) {
+    background-color: #f9f9f9;
+}
+.table th {
+    text-align: initial;
+}
+.table-bordered th, .table-bordered td {
+    border: 1px solid #f0f0f5;
+}
+.table-bordered th, .table-bordered td {
+    border: 1px solid #f0f0f5;
+}
+.table th, .table td {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #f0f0f5;
+}
+.text-red {
+    color: #ff6e6e !important;
+}
+.text-blue {
+    color: #46b2f0 !important;
+}
+
+#Modal-buy p{
+    color: #000 !important;
+    font-size: 18px;
+}

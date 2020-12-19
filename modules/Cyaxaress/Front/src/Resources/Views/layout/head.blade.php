@@ -16,8 +16,9 @@
     <meta property="og:site_name" content="وبسایت آموزشی وب آموز"/>
     <meta property="og:brand" content="وب آموز"/>
     <meta property="og:locale" content="fa"/>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css?v="{{ uniqid() }}>
     <link rel="stylesheet" href="/css/font/font.css">
     <link rel="stylesheet" href="/css/responsive.css" media="(max-width:991px)">
+    <link rel="stylesheet" href="/css/custom.css?v="{{ uniqid() }}>
     @yield('css')
 </head>

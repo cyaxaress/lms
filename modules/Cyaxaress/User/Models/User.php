@@ -134,4 +134,10 @@ class User extends Authenticatable implements MustVerifyEmail
         ) return true;
         return false;
     }
+
+    public function studentsCount()
+    {
+        //todo
+        return 0;
+    }
 }

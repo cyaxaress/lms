@@ -29,6 +29,7 @@ abstract class DefaultFileService
         static::$media = $media;
         $stream = Storage::readStream(static::getFilename());
         return response()->stream(function () use ($stream) {
+            while(ob_get_level() > 0) ob_get_flush();
             fpassthru($stream);
         },
             200,

@@ -1,0 +1,15 @@
+{
+    "name": "cyaxaress/payment",
+    "autoload": {
+        "psr-4": {
+            "Cyaxaress\\Payment\\" : "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Cyaxaress\\Payment\\Providers\\PaymentServiceProvider"
+            ]
+        }
+    }
+}

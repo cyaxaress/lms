@@ -149,7 +149,8 @@ class CourseController extends Controller
             return false;
         }
 
-        PaymentRepo::store();
+        $amount = 0;
+        $payment = PaymentRepo::generate($amount, $course, auth()->user());
 
         return true;
     }

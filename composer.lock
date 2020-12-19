@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "acd5e8ff4a4f99ed0a132827e37ad6c7",
+    "content-hash": "8e0a729fd36ec102cab8ab9b512f91a3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -165,6 +165,31 @@
             "autoload": {
                 "psr-4": {
                     "Cyaxaress\\Front\\": "src"
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "cyaxaress/payment",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "modules/Cyaxaress/Payment",
+                "reference": "3eec0587bf658b885693d15cca1fff38edf7e8e9"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "\\Cyaxaress\\Payment\\Providers\\PaymentServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cyaxaress\\Payment\\": "src"
                 }
             },
             "transport-options": {
@@ -8651,7 +8676,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "cyaxaress/common": 20,
-        "cyaxaress/front": 20
+        "cyaxaress/front": 20,
+        "cyaxaress/payment": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

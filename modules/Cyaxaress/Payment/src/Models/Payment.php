@@ -17,4 +17,9 @@ class Payment extends Model
         self::STATUS_SUCCESS,
         self::STATUS_FAIL,
     ];
+
+    public function paymentable()
+    {
+        return $this->morphTo();
+    }
 }

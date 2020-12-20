@@ -26,13 +26,12 @@ class PaymentController extends Controller
             newFeedback("عملیات ناموفق", $result['message'], "error");
             $paymentRepo->changeStatus($payment->id, Payment::STATUS_FAIL);
             //todo
-//            return redirect()->to($payment->paymentable->path());
-            return redirect("/");
+        }else{
+            // todo success
+            newFeedback("عملیات موفق", "پرداخت با موفقیت انجام شد.", "success");
+            $paymentRepo->changeStatus($payment->id, Payment::STATUS_SUCCESS);
         }
 
-        // todo success
-        newFeedback("عملیات موفق", "پرداخت با موفقیت انجام شد.", "success");
-        $paymentRepo->changeStatus($payment->id, Payment::STATUS_SUCCESS);
-        return redirect("/");
+        return redirect()->to($payment->paymentable->path());
     }
 }

@@ -1,6 +1,7 @@
 <?php
  namespace Cyaxaress\Payment\Providers;
 
+ use Cyaxaress\Course\Models\Course;
  use Cyaxaress\Payment\Gateways\Gateway;
  use Cyaxaress\Payment\Gateways\Zarinpal\ZarinpalAdaptor;
  use Illuminate\Support\Facades\Route;
@@ -20,5 +21,9 @@
         $this->app->singleton(Gateway::class, function ($app) {
             return new ZarinpalAdaptor();
         });
+
+//        Course::resolveRelationUsing("payments", function ($courseModel) {
+//            return $courseModel->morphMany(Payment::class, "paymentable");
+//        });
      }
  }

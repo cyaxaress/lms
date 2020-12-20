@@ -4,6 +4,7 @@ namespace Cyaxaress\Course\Models;
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Media\Models\Media;
+use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -56,6 +57,11 @@ class Course extends Model
     public function lessons()
     {
         return $this->hasMany(Lesson::class);
+    }
+
+    public function payments()
+    {
+        return $this->morphMany(Payment::class, "paymentable");
     }
 
     public function getDuration()

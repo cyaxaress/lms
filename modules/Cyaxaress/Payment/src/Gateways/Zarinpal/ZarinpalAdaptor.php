@@ -3,6 +3,8 @@ namespace Cyaxaress\Payment\Gateways\Zarinpal;
 
 use Cyaxaress\Payment\Contracts\GatewayContract;
 use Cyaxaress\Payment\Models\Payment;
+use Cyaxaress\Payment\Repositories\PaymentRepo;
+use Illuminate\Http\Request;
 
 class ZarinpalAdaptor implements GatewayContract
 {
@@ -11,7 +13,7 @@ class ZarinpalAdaptor implements GatewayContract
     public function request($amount, $description)
     {
         $this->client = new Zarinpal();
-        $callback = "http://webamooz.test/test-verify";
+        $callback = route("payments.callback");
         $result =  $this->client->request("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", $amount, $description, "", "", $callback, true);
         if (isset($result["Status"]) && $result["Status"] == 100)
         {
@@ -27,7 +29,19 @@ class ZarinpalAdaptor implements GatewayContract
 
     public function verify(Payment $payment)
     {
-        // TODO: Implement verify() method.
+        $this->client = new Zarinpal();
+
+        $result = $this->client->verify("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", $payment->amount, true);
+
+        if (isset($result["Status"]) && $result["Status"] == 100)
+        {
+            return $result["RefID"];
+        } else {
+            return [
+              "status" => $result["Status"],
+                "message" => $result["Message"]
+            ];
+        }
     }
 
     public function redirect()
@@ -38,5 +52,10 @@ class ZarinpalAdaptor implements GatewayContract
     public function getName()
     {
         return "zarinpal";
+    }
+
+    public function getInvoiceIdFromRequest(Request $request)
+    {
+        return $request->Authority;
     }
 }

@@ -15,6 +15,7 @@ class CourseServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->register(EventServiceProvider::class);
         $this->loadRoutesFrom(__DIR__ . '/../Routes/courses_routes.php');
         $this->loadRoutesFrom(__DIR__ . '/../Routes/seasons_routes.php');
         $this->loadRoutesFrom(__DIR__ . '/../Routes/lessons_routes.php');

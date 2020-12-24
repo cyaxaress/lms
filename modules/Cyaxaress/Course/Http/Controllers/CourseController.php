@@ -132,7 +132,6 @@ class CourseController extends Controller
         $payment = PaymentService::generate($amount, $course, auth()->user());
 
         resolve(Gateway::class)->redirect($payment->invoice_id);
-
     }
 
     private function courseCanBePurchased(Course $course)

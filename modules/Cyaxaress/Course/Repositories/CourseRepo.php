@@ -86,4 +86,16 @@ class CourseRepo
             ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_ACCEPTED)->count();
     }
 
+    public function addStudentToCourse(Course $course, $studentId)
+    {
+        if (!$this->getCourseStudentById($course, $studentId)) {
+            $course->students()->attach($studentId);
+        }
+    }
+
+    public function getCourseStudentById(Course $course, $studentId)
+    {
+        return $course->students()->where("id", $studentId)->first();
+    }
+
 }

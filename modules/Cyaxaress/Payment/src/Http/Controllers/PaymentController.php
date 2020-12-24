@@ -3,6 +3,7 @@
 namespace Cyaxaress\Payment\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Cyaxaress\Payment\Events\PaymentWasSuccessful;
 use Cyaxaress\Payment\Gateways\Gateway;
 use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\Payment\Repositories\PaymentRepo;
@@ -27,7 +28,7 @@ class PaymentController extends Controller
             $paymentRepo->changeStatus($payment->id, Payment::STATUS_FAIL);
             //todo
         }else{
-            // todo success
+            event(new PaymentWasSuccessful($payment));
             newFeedback("عملیات موفق", "پرداخت با موفقیت انجام شد.", "success");
             $paymentRepo->changeStatus($payment->id, Payment::STATUS_SUCCESS);
         }

@@ -1,11 +1,9 @@
 <?php
  namespace Cyaxaress\Payment\Providers;
 
- use Cyaxaress\Course\Models\Course;
  use Cyaxaress\Payment\Gateways\Gateway;
  use Cyaxaress\Payment\Gateways\Zarinpal\ZarinpalAdaptor;
  use Cyaxaress\RolePermissions\Models\Permission;
- use Illuminate\Support\Facades\Artisan;
  use Illuminate\Support\Facades\Route;
  use Illuminate\Support\ServiceProvider;
 
@@ -25,8 +23,6 @@
         $this->app->singleton(Gateway::class, function ($app) {
             return new ZarinpalAdaptor();
         });
-
-//        dd(Route::getRoutes());
 
          config()->set('sidebar.items.payments', [
              "icon" => "i-transactions",

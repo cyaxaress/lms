@@ -11,14 +11,17 @@ This project is a Learning Management System developed with Laravel framework in
 - Dashboard Module.
 - Users Module.
 - Courses Module.
+- Lessons Modules
 - Categories Module.
 - Role and Permissions Module.
 - Discounts Module.
-- Tickets Module, etc...
+- Tickets Module,
+- Payments Module,
+ etc...
 
-## How is this app developed?
+## How this app developed?
 
-If you want to learn Modular structure and how was this app developed join my online course at [here](https://webamooz.net/laravel-webamooz/view)
+If you want to learn Modular structure and how this app developed join my online course at [here](https://webamooz.net/laravel-webamooz/view)
 
 
 ## Security Vulnerabilities

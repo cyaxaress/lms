@@ -2,9 +2,11 @@
 
 namespace Cyaxaress\Course\Policies;
 
+use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use phpDocumentor\Reflection\Types\True_;
 
 class CoursePolicy
 {
@@ -84,5 +86,14 @@ class CoursePolicy
         if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) && $course->teacher_id == $user->id) {
             return true;
         }
+    }
+
+    public function download($user, $course)
+    {
+        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) ||
+            $user->id === $course->teacher_id ||
+            $course->hasStudent($user->id)
+        ) return true;
+        return false;
     }
 }

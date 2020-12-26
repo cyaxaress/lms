@@ -6,7 +6,7 @@
     </div>
     <div class="episodes-list-section">
         @foreach($lessons as $lesson)
-        <div class="episodes-list-item {{ auth()->check() && auth()->user()->hasAccessToCourse($lesson->course) ? '' : 'lock' }}">
+        <div class="episodes-list-item @cannot("download", $lesson) lock @endcannot" >
             <div class="section-right">
                 <span class="episodes-list-number">{{ $lesson->number }}</span>
                 <div class="episodes-list-title">
@@ -18,7 +18,7 @@
                     <div class="episodes-list-details">
                         <span class="detail-type">@lang($lesson->type)</span>
                         <span class="detail-time">{{ $lesson->time }} دقیقه</span>
-                        <a class="detail-download">
+                        <a class="detail-download" @can("download", $lesson) href="{{ $lesson->downloadLink() }}" @endcan>
                             <i class="icon-download"></i>
                         </a>
                     </div>

@@ -68,6 +68,11 @@ class Course extends Model
     {
         return (new CourseRepo())->getDuration($this->id);
     }
+
+    public function hasStudent($student_id)
+    {
+        return resolve(CourseRepo::class)->hasStudent($this, $student_id);
+    }
     public function formattedDuration()
     {
         $duration =  $this->getDuration();

@@ -61,6 +61,7 @@ class Lesson extends Model
 
     public function downloadLink()
     {
+        if ($this->media_id)
         return URL::temporarySignedRoute('media.download', now()->addDay() , ['media' => $this->media_id]);
     }
 }

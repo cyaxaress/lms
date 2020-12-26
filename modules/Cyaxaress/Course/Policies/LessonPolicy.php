@@ -29,4 +29,13 @@ class LessonPolicy
             return true;
         }
     }
+
+    public function download($user, $lesson)
+    {
+        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) ||
+            $user->id === $lesson->course->teacher_id ||
+            $lesson->course->hasStudent($user->id)
+        ) return true;
+        return false;
+    }
 }

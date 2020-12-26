@@ -98,4 +98,9 @@ class CourseRepo
         return $course->students()->where("id", $studentId)->first();
     }
 
+    public function hasStudent(Course $course, $student_id)
+    {
+        return $course->students->contains($student_id);
+    }
+
 }

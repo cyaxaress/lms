@@ -126,18 +126,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return '/panel/img/profile.jpg';
     }
 
-    public function hasAccessToCourse(Course $course)
-    {
-        if ($this->can('manage', Course::class) ||
-            $this->id === $course->teacher_id ||
-            $course->students->contains($this->id)
-        ) return true;
-        return false;
-    }
 
     public function studentsCount()
     {
-        //todo
-        return 0;
+        return \DB::table("courses")
+            ->select("course_id")->where("teacher_id", $this->id)
+            ->join("course_user", "courses.id", "=", "course_user.course_id")->count();
     }
 }

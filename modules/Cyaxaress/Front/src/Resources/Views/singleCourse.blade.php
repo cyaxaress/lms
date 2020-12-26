@@ -34,7 +34,7 @@
                         @auth
                             @if(auth()->id() == $course->teacher_id)
                                 <p class="mycourse ">شما مدرس این دوره هستید</p>
-                            @elseif(auth()->user()->hasAccessToCourse($course))
+                            @elseif(auth()->user()->can("download", $course))
                                 <p class="mycourse">شما این دوره رو خریداری کرده اید</p>
                             @else
                                 <div class="sell_course">

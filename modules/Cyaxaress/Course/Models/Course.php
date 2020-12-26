@@ -3,6 +3,7 @@ namespace Cyaxaress\Course\Models;
 
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Course\Repositories\CourseRepo;
+use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Media\Models\Media;
 use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\User\Models\User;
@@ -120,5 +121,15 @@ class Course extends Model
     public function shortUrl()
     {
         return route('singleCourse', $this->id );
+    }
+
+    public function downloadLinks() :array
+    {
+        $links = [];
+        foreach (resolve(CourseRepo::class)->getLessons($this->id) as $lesson){
+            $links[] = $lesson->downloadLink();
+        }
+
+        return $links;
     }
 }

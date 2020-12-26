@@ -34,7 +34,8 @@ class LessonPolicy
     {
         if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) ||
             $user->id === $lesson->course->teacher_id ||
-            $lesson->course->hasStudent($user->id)
+            $lesson->course->hasStudent($user->id) ||
+            $lesson->is_free
         ) return true;
         return false;
     }

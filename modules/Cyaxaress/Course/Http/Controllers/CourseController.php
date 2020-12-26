@@ -173,10 +173,11 @@ class CourseController extends Controller
             return false;
         }
 
-        if (auth()->user()->hasAccessToCourse($course)) {
+        if (auth()->user()->can("download", $course)) {
             newFeedback("عملیات ناموفق", "شما به دوره دسترسی دارید.", "error");
             return false;
         }
+
 
         return true;
     }

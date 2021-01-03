@@ -32,5 +32,11 @@
                  Permission::PERMISSION_MANAGE_COURSES,
              ]
          ]);
+
+         config()->set('sidebar.items.my-purchases', [
+             "icon" => "i-my__purchases",
+             "title" => "خریدهای من",
+             "url" => route('purchases.index'),
+         ]);
      }
  }

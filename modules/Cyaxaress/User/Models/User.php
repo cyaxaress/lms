@@ -6,6 +6,7 @@ use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Models\Season;
 use Cyaxaress\Media\Models\Media;
+use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\RolePermissions\Models\Role;
 use Cyaxaress\User\Notifications\ResetPasswordRequestNotification;
 use Cyaxaress\User\Notifications\VerifyMailNotification;
@@ -101,6 +102,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function purchases()
     {
         return $this->belongsToMany(Course::class, 'course_user', 'user_id', 'course_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, "buyer_id");
     }
 
     public function seasons()

@@ -65,4 +65,13 @@ class PaymentController extends Controller
 
         return redirect()->to($payment->paymentable->path());
     }
+
+    public function purchases()
+    {
+        $payments =  auth()->user()->payments()->with("paymentable")->paginate();
+
+        return view("Payment::purchases", compact("payments"));
+    }
+
+
 }

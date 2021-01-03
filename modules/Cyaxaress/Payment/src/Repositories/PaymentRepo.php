@@ -71,6 +71,25 @@ class PaymentRepo
 
         return $this;
     }
+    public function searchAfterDate($date)
+    {
+        if (!is_null($date)) {
+            $this->query->whereDate("created_at", ">=", $date);
+        }
+
+        return $this;
+    }
+
+    public function searchBeforeDate($date)
+    {
+        if (!is_null($date)) {
+            $this->query->whereDate("created_at", "<=", $date);
+        }
+
+        return $this;
+    }
+
+
 
     public function paginate()
     {

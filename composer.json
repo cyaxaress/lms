@@ -19,6 +19,7 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
+        "morilog/jalali": "3.*",
         "spatie/laravel-permission": "^3.13"
     },
     "require-dev": {

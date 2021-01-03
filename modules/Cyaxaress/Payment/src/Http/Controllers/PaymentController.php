@@ -18,6 +18,8 @@ class PaymentController extends Controller
             ->searchEmail($request->email)
             ->searchAmount($request->amount)
             ->searchInvoiceId($request->invoice_id)
+            ->searchAfterDate(dateFromJalali($request->start_date))
+            ->searchBeforeDate(dateFromJalali( $request->end_date))
             ->paginate();
         $last30DaysTotal = $paymentRepo->getLastNDaysTotal(-30);
         $last30DaysBenefit = $paymentRepo->getLastNDaysSiteBenefit(-30);

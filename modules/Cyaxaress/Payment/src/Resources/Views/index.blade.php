@@ -112,7 +112,7 @@
                 }
             },
             xAxis: {
-                categories: [@foreach($dates as $date => $value) '{{ $date }}', @endforeach]
+                categories: [@foreach($dates as $date => $value) '{{ getJalaliFromFormat($date) }}', @endforeach]
             },
             yAxis:{
               title: {
@@ -137,30 +137,33 @@
                     }
                 }]
             },
-            series: [{
+            series: [
+                {
+                    type: 'column',
+                    name: 'درصد سایت',
+                    color: "green",
+                    data: [@foreach($dates as $date => $value) @if($day = $summery->where("date", $date)->first()) {{ $day->totalSiteShare }}, @else 0, @endif @endforeach]
+                },
+                {
                 type: 'column',
                 name: 'تراکنش موفق',
                 data: [@foreach($dates as $date => $value) @if($day = $summery->where("date", $date)->first()) {{ $day->totalAmount }}, @else 0, @endif @endforeach]
                 },
                 {
                     type: 'column',
-                    name: 'درصد سایت',
-                    data: [@foreach($dates as $date => $value) @if($day = $summery->where("date", $date)->first()) {{ $day->totalSiteShare }}, @else 0, @endif @endforeach]
-                },
-                {
-                    type: 'column',
                     name: 'درصد مدرس',
+                    color: "pink",
                     data: [@foreach($dates as $date => $value) @if($day = $summery->where("date", $date)->first()) {{ $day->totalSellerShare }}, @else 0, @endif @endforeach]
-                },
-                {
+                },{
                     type: 'spline',
                     name: 'فروش',
                     data: [@foreach($dates as $date => $value) @if($day = $summery->where("date", $date)->first()) {{ $day->totalAmount }}, @else 0, @endif @endforeach],
                     marker: {
                         lineWidth: 2,
-                        lineColor: Highcharts.getOptions().colors[3],
+                        lineColor: "green",
                         fillColor: 'white'
-                    }
+                    },
+                    color: "green"
                 },
                 {
                     type: 'pie',
@@ -168,11 +171,11 @@
                     data: [{
                         name: 'درصد سایت',
                         y: {{ $last30DaysBenefit }},
-                        color: Highcharts.getOptions().colors[0] // Jane's color
+                        color: "green"
                     }, {
                         name: 'درصد مدرس',
                         y: {{ $last30DaysSellerShare }},
-                        color: Highcharts.getOptions().colors[1] // John's color
+                        color: "pink"
                     },
                     ],
                     center: [100, 80],

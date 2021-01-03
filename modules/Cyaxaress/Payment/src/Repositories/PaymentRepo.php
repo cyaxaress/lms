@@ -10,6 +10,12 @@ use phpDocumentor\Reflection\Types\Integer;
 
 class PaymentRepo
 {
+    private $query;
+    public function __construct()
+    {
+        $this->query = Payment::query();
+    }
+
     public function store($data)
     {
         return Payment::create([
@@ -38,9 +44,37 @@ class PaymentRepo
         ]);
     }
 
+    public function searchEmail($email)
+    {
+        if (!is_null($email)) {
+            $this->query->join("users", "payments.buyer_id", 'users.id')->select("payments.*", "users.email")->where("email", "like", "%" . $email . "%");
+        }
+
+        return $this;
+    }
+
+    public function searchAmount($amount)
+    {
+        if (!is_null($amount)) {
+            $this->query->where("amount",  $amount);
+        }
+
+        return $this;
+    }
+
+
+    public function searchInvoiceId($invoiceId)
+    {
+        if (!is_null($invoiceId)) {
+            $this->query->where("invoice_id", "like", "%" .  $invoiceId . "%");
+        }
+
+        return $this;
+    }
+
     public function paginate()
     {
-        return Payment::query()->latest()->paginate();
+        return $this->query->latest()->paginate();
     }
 
     public function getLastNDaysPayments($status, $days = null)

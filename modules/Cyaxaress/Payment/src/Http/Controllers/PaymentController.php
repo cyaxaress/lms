@@ -15,8 +15,18 @@ class PaymentController extends Controller
     {
         $this->authorize("manage", Payment::class);
         $payments = $paymentRepo->paginate();
-        return view("Payment::index", compact("payments"));
+        $last30DaysTotal = $paymentRepo->getLastNDaysTotal(-30);
+        $last30DaysBenefit = $paymentRepo->getLastNDaysSiteBenefit(-30);
+        $totalSell = $paymentRepo->getLastNDaysTotal();
+        $totalBenefit = $paymentRepo->getLastNDaysSiteBenefit();
+        return view("Payment::index", compact(
+            "payments",
+            "last30DaysTotal",
+            "last30DaysBenefit",
+            "totalSell",
+            "totalBenefit"));
     }
+
     public function callback(Request $request)
     {
         $gateway = resolve(Gateway::class);
@@ -33,7 +43,7 @@ class PaymentController extends Controller
             newFeedback("عملیات ناموفق", $result['message'], "error");
             $paymentRepo->changeStatus($payment->id, Payment::STATUS_FAIL);
             //todo
-        }else{
+        } else {
             event(new PaymentWasSuccessful($payment));
             newFeedback("عملیات موفق", "پرداخت با موفقیت انجام شد.", "success");
             $paymentRepo->changeStatus($payment->id, Payment::STATUS_SUCCESS);

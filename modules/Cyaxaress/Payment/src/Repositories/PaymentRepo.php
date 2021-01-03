@@ -62,6 +62,45 @@ class PaymentRepo
     {
         return $this->getLastNDaysSuccessPayments($days)->sum("site_share");
     }
+    public function getLastNDaysSellerShare($days = null)
+    {
+        return $this->getLastNDaysSuccessPayments($days)->sum("seller_share");
+    }
+
+    public function getDayPayments($day, $status)
+    {
+        return $query = Payment::query()->whereDate("created_at", $day)->where("status", $status)->latest();
+    }
+
+    public function getDaySuccessPayments($day)
+    {
+        return $this->getDayPayments($day, Payment::STATUS_SUCCESS);
+    }
+
+    public function getDayFailedPayments($day)
+    {
+        return $this->getDayPayments($day, Payment::STATUS_FAIL);
+    }
+
+    public function getDaySuccessPaymentsTotal($day)
+    {
+        return $this->getDaySuccessPayments($day)->sum("amount");
+    }
+
+    public function getDayFailedPaymentsTotal($day)
+    {
+        return $this->getDayFailedPayments($day)->sum("amount");
+    }
+
+    public function getDaySiteShare($day)
+    {
+        return $this->getDaySuccessPayments($day)->sum("site_share");
+    }
+    public function getDaySellerShare($day)
+    {
+        return $this->getDaySuccessPayments($day)->sum("seller_share");
+    }
+
 
 
 }

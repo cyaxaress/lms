@@ -3,8 +3,6 @@
 namespace Cyaxaress\Payment\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 use Cyaxaress\Payment\Events\PaymentWasSuccessful;
 use Cyaxaress\Payment\Gateways\Gateway;
 use Cyaxaress\Payment\Models\Payment;

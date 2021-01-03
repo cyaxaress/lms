@@ -92,7 +92,7 @@
                 }
             },
             xAxis: {
-                {{--categories: [@foreach($last30Days as $day) '{{ $day->format("Y-m-d") }}', @endforeach]--}}
+                categories: [@foreach($dates as $date => $value) '{{ $date }}', @endforeach]
             },
             yAxis:{
               title: {

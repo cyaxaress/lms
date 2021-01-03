@@ -2,11 +2,9 @@
 
 namespace Cyaxaress\Payment\Repositories;
 
-use Carbon\Carbon;
 use Cyaxaress\Payment\Models\Payment;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\Integer;
 
 class PaymentRepo
 {
@@ -109,6 +107,51 @@ class PaymentRepo
     {
         return $this->getLastNDaysPayments(Payment::STATUS_SUCCESS, $days);
     }
+
+    public function getUserSuccessPayments($userId)
+    {
+        return Payment::where("seller_id", $userId)->where("status", Payment::STATUS_SUCCESS);;
+    }
+    public function getUserTotalSuccessAmount($userId)
+    {
+        return   $this->getUserSuccessPayments($userId)->sum("amount");
+    }
+
+    public function getUserTotalBenefit($userId)
+    {
+        return   $this->getUserSuccessPayments($userId)->sum("seller_share");
+    }
+
+    public function getUserTotalSellByDay($userId, $date)
+    {
+        return $this->getUserSuccessPayments($userId)->whereDate("created_at", $date)->sum("amount");
+    }
+
+    public function getUserSellCountByDay($userId, $date)
+    {
+        return $this->getUserSuccessPayments($userId)->whereDate("created_at", $date)->count();
+    }
+    public function getUserTotalBenefitByDay($userId, $date)
+    {
+        return  $this->getUserSuccessPayments($userId)->whereDate("created_at", $date)
+            ->sum("seller_share");
+    }
+
+
+    public function getUserTotalBenefitByPeriod($userId, $startDate, $endDate)
+    {
+        return  Payment::where("seller_id", $userId)
+            ->where("status",  Payment::STATUS_SUCCESS)
+            ->whereDate("created_at",  "<= ",$startDate)
+            ->whereDate("created_at" , ">=", $endDate)
+            ->sum("seller_share");
+    }
+
+    public function getUserTotalSiteShare($userId)
+    {
+        return   $this->getUserSuccessPayments($userId)->sum("site_share");
+    }
+
 
     public function getLastNDaysTotal($days = null)
     {

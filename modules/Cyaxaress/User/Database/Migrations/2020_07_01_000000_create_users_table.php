@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
 
             $table->string('card_number', 16)->nullable();
             $table->string('shaba', 24)->nullable();
-
+            $table->bigInteger("balance")->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status', \Cyaxaress\User\Models\User::$statuses)->default('active');

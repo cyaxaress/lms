@@ -2,7 +2,11 @@
 
 namespace Cyaxaress\Payment\Repositories;
 
+use Carbon\Carbon;
 use Cyaxaress\Payment\Models\Payment;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Integer;
 
 class PaymentRepo
 {
@@ -62,6 +66,7 @@ class PaymentRepo
     {
         return $this->getLastNDaysSuccessPayments($days)->sum("site_share");
     }
+
     public function getLastNDaysSellerShare($days = null)
     {
         return $this->getLastNDaysSuccessPayments($days)->sum("seller_share");
@@ -96,11 +101,22 @@ class PaymentRepo
     {
         return $this->getDaySuccessPayments($day)->sum("site_share");
     }
+
     public function getDaySellerShare($day)
     {
         return $this->getDaySuccessPayments($day)->sum("seller_share");
     }
 
-
-
+    public function getDailySummery(Collection $dates)
+    {
+        return Payment::query()->where("created_at", ">=", $dates->keys()->first())
+            ->groupBy("date")
+            ->orderBy("date")
+            ->get([
+                DB::raw("DATE(created_at) as date"),
+                DB::raw("SUM(amount) as totalAmount"),
+                DB::raw("SUM(seller_share) as totalSellerShare"),
+                DB::raw("SUM(site_share) as totalSiteShare"),
+            ]);
+    }
 }

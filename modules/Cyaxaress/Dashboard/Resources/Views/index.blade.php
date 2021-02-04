@@ -40,12 +40,15 @@
     </div>
     <div class="row no-gutters font-size-13 margin-bottom-10">
         <div class="col-8 padding-20 bg-white margin-bottom-10 margin-left-10 border-radius-3">
-            محل قرار گیری نمودار
+            <div class="col-12 bg-white padding-30 margin-bottom-20">
+                <div id="container"></div>
+            </div>
         </div>
         <div class="col-4 info-amount padding-20 bg-white margin-bottom-12-p margin-bottom-10 border-radius-3">
 
             <p class="title icon-outline-receipt">موجودی قابل تسویه </p>
-            <p class="amount-show color-444">600,000<span> تومان </span></p>
+            <p class="amount-show color-444">
+                {{ number_format(auth()->user()->balance) }}<span> تومان </span></p>
             <p class="title icon-sync">در حال تسویه</p>
             <p class="amount-show color-444">0<span> تومان </span></p>
             <a href="/" class=" all-reconcile-text color-2b4a83">همه تسویه حساب ها</a>
@@ -69,40 +72,27 @@
                     <th>نام دوره</th>
                     <th>تاریخ و ساعت</th>
                     <th>وضعیت</th>
-                    <th>عملیات</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr role="row">
-                    <td><a href=""> 1</a></td>
-                    <td><a href="">mohammadnio3@gmail.com</a></td>
-                    <td><a href="">600,000</a></td>
-                    <td><a href="">400,000</a></td>
-                    <td><a href="">400,000</a></td>
-                    <td><a href="">خرید دوره - دوره متخصص php سطح مقدماتی</a></td>
-                    <td><a href=""> 22:14:48 1399/02/23</a></td>
-                    <td><a href="" class="text-success">پرداخت موفق</a></td>
-                    <td class="i__oprations">
-                        <a href="" class="item-delete margin-left-10" title="حذف"></a>
-                        <a href="edit-transaction.html" class="item-edit" title='ویرایش'></a>
-                    </td>
-                </tr>
-                <tr role="row">
-                    <td><a href=""> 1</a></td>
-                    <td><a href="">mohammadniko3@gmail.com</a></td>
-                    <td><a href="">600,000</a></td>
-                    <td><a href="">400,000</a></td>
-                    <td><a href="">400,000</a></td>
-                    <td><a href="">خرید دوره - دوره متخصص php سطح مقدماتی</a></td>
-                    <td><a href=""> 22:14:48 1399/02/23</a></td>
-                    <td><a href="" class="text-error">پرداخت ناموفق</a></td>
-                    <td class="i__oprations">
-                        <a href="" class="item-delete margin-left-10" title="حذف"></a>
-                        <a href="edit-transaction.html" class="item-edit" title='ویرایش'></a>
-                    </td>
-                </tr>
+                @foreach($payments as $payment)
+                    <tr role="row" class="">
+                        <td>{{ $payment->invoice_id }}</td>
+                        <td>{{ $payment->buyer->email }}</td>
+                        <td>{{ $payment->amount }}</td>
+                        <td>{{ $payment->seller_share }}</td>
+                        <td>{{ $payment->site_share }}</td>
+                        <td>{{ $payment->paymentable->title }}</td>
+                        <td>{{ \Morilog\Jalali\Jalalian::fromCarbon($payment->created_at) }}</td>
+                        <td class="@if($payment->status == \Cyaxaress\Payment\Models\Payment::STATUS_SUCCESS) text-success @else text-error @endif">@lang($payment->status)</td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+@endsection
+
+@section("js")
+    @include("Payment::chart")
 @endsection

@@ -203,16 +203,25 @@ class PaymentRepo
         return $this->getDaySuccessPayments($day)->sum("seller_share");
     }
 
-    public function getDailySummery(Collection $dates)
+    public function getDailySummery(Collection $dates, $seller_id = null)
     {
-        return Payment::query()->where("created_at", ">=", $dates->keys()->first())
+        $query =  Payment::query()->where("created_at", ">=", $dates->keys()->first())
             ->groupBy("date")
-            ->orderBy("date")
-            ->get([
-                DB::raw("DATE(created_at) as date"),
-                DB::raw("SUM(amount) as totalAmount"),
-                DB::raw("SUM(seller_share) as totalSellerShare"),
-                DB::raw("SUM(site_share) as totalSiteShare"),
-            ]);
+            ->orderBy("date");
+
+        if (!is_null($seller_id))
+            $query->where("seller_id", $seller_id);
+
+        return $query->get([
+        DB::raw("DATE(created_at) as date"),
+        DB::raw("SUM(amount) as totalAmount"),
+        DB::raw("SUM(seller_share) as totalSellerShare"),
+        DB::raw("SUM(site_share) as totalSiteShare"),
+    ]);
+    }
+
+    public function paymentsBySellerId(int $id)
+    {
+        return Payment::query()->where("seller_id", $id);
     }
 }

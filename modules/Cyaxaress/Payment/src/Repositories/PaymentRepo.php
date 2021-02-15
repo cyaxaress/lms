@@ -20,6 +20,7 @@ class PaymentRepo
             "buyer_id" => $data['buyer_id'],
             "paymentable_id" => $data['paymentable_id'],
             "paymentable_type" => $data['paymentable_type'],
+            "seller_id" => $data['seller_id'],
             "amount" => $data['amount'],
             "invoice_id" => $data['invoice_id'],
             "gateway" => $data['gateway'],

@@ -151,6 +151,7 @@
                 </div>
             </div>
             <div class="content-left">
+                @if($lesson)
                 @if($lesson->media->type == "video")
                 <div class="preview">
                     <video width="100%" controls>
@@ -159,6 +160,7 @@
                 </div>
                 @endif
                 <a href="{{ $lesson->downloadLink() }}" class="episode-download">دانلود این قسمت (قسمت {{ $lesson->number }})</a>
+                @endif
                 <div class="course-description">
                     <div class="course-description-title">توضیحات دوره</div>
                     <div>

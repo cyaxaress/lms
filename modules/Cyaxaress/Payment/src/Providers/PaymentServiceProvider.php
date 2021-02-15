@@ -17,6 +17,7 @@ class PaymentServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
         $this->loadMigrationsFrom(__DIR__ . " /../Database/Migrations");
         Route::middleware("web")->namespace($this->namespace)->group(__DIR__ . "/../Routes/payment_routes.php");
+        Route::middleware("web")->namespace($this->namespace)->group(__DIR__ . "/../Routes/settlement_routes.php");
         $this->loadViewsFrom(__DIR__ . "/../Resources/Views", "Payment");
         $this->loadJsonTranslationsFrom(__DIR__ . "/../Resources/Lang");
     }

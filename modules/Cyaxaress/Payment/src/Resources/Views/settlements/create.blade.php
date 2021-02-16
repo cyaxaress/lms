@@ -8,9 +8,9 @@
     <div class="main-content">
         <form action="{{ route("settlements.store")  }}" method="post" class="padding-30 bg-white font-size-14">
             @csrf
-            <input name="name" type="text" placeholder="نام صاحب حساب" class="text">
-            <input name="cart" type="text" placeholder="شماره کارت" class="text">
-            <input name="amount" type="text" placeholder="مبلغ به تومان" class="text">
+            <x-input name="name" type="text" placeholder="نام صاحب حساب" required/>
+            <x-input name="cart" type="text" placeholder="شماره کارت" required />
+            <x-input name="amount" value="{{ auth()->user()->balance }}" type="text" placeholder="مبلغ به تومان" required />
             <div class="row no-gutters border-2 margin-bottom-15 text-center ">
                 <div class="w-50 padding-20 w-50">موجودی قابل برداشت :‌</div>
                 <div class="bg-fafafa padding-20 w-50"> {{ number_format(auth()->user()->balance) }} تومان</div>

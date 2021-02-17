@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\Payment\Http\Requests;
 
+use Cyaxaress\Payment\Models\Settlement;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SettlementRequest extends FormRequest
@@ -23,6 +24,15 @@ class SettlementRequest extends FormRequest
      */
     public function rules()
     {
+        if (request()->getMethod() === "PATCH") {
+            return [
+                "from.name" => "required_if:status," . Settlement::STATUS_SETTLED,
+                "from.cart" => "required_if:status," . Settlement::STATUS_SETTLED,
+                "to.name" => "required_if:status," . Settlement::STATUS_SETTLED,
+                "to.cart" => "required_if:status," . Settlement::STATUS_SETTLED,
+                "amount" => "required|numeric",
+            ];
+        }
         return [
             "name" => "required",
             "cart" => "required|numeric",
@@ -33,7 +43,7 @@ class SettlementRequest extends FormRequest
     public function attributes()
     {
         return [
-            "cart"=> "شماره کارت",
+            "cart" => "شماره کارت",
             "amount" => "مبلغ تسویه حساب"
         ];
     }

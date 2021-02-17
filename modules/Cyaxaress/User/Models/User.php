@@ -7,6 +7,7 @@ use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Models\Season;
 use Cyaxaress\Media\Models\Media;
 use Cyaxaress\Payment\Models\Payment;
+use Cyaxaress\Payment\Models\Settlement;
 use Cyaxaress\RolePermissions\Models\Role;
 use Cyaxaress\User\Notifications\ResetPasswordRequestNotification;
 use Cyaxaress\User\Notifications\VerifyMailNotification;
@@ -117,6 +118,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function lessons()
     {
         return $this->hasMany(Lesson::class);
+    }
+
+    public function settlements()
+    {
+        return $this->hasMany(Settlement::class);
     }
 
     public function profilePath()

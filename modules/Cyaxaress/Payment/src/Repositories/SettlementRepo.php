@@ -36,4 +36,9 @@ class SettlementRepo
 
         return $this;
     }
+
+    public function find($settlement)
+    {
+        return $this->query->findOrFail($settlement);
+    }
 }

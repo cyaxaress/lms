@@ -30,4 +30,15 @@ class SettlementController extends Controller
         newFeedback();
         return redirect(route("settlements.index"));
     }
+
+    public function edit($settlement, SettlementRepo $repo)
+    {
+        $settlement = $repo->find($settlement);
+        return view("Payment::settlements.edit", compact("settlement"));
+    }
+
+    public function update(SettlementRequest $request)
+    {
+
+    }
 }

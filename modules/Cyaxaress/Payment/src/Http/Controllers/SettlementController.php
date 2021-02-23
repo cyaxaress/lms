@@ -5,6 +5,7 @@ namespace Cyaxaress\Payment\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Cyaxaress\Payment\Http\Requests\SettlementRequest;
 use Cyaxaress\Payment\Repositories\SettlementRepo;
+use Cyaxaress\Payment\Services\SettlementService;
 
 class SettlementController extends Controller
 {
@@ -19,12 +20,9 @@ class SettlementController extends Controller
         return view("Payment::settlements.create");
     }
 
-    public function store(SettlementRequest $request, SettlementRepo $repo)
+    public function store(SettlementRequest $request)
     {
-        $repo->store($request->all());
-        newFeedback();
-        auth()->user()->balance -= $request->amount;
-        auth()->user()->save();
+        SettlementService::store($request->all());
         return redirect(route("settlements.index"));
     }
 
@@ -34,10 +32,9 @@ class SettlementController extends Controller
         return view("Payment::settlements.edit", compact("settlement"));
     }
 
-    public function update($settlement, SettlementRequest $request, SettlementRepo $repo)
+    public function update($settlement, SettlementRequest $request)
     {
-        $repo->update($settlement, $request->all());
-        newFeedback();
+        SettlementService::update($settlement, $request->all());
         return redirect(route("settlements.index"));
     }
 }

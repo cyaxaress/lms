@@ -15,7 +15,7 @@ class SettlementRepo
         $this->query = Settlement::query();
     }
 
-    public function store($request)
+    public function store(array $request)
     {
         return Settlement::query()->create([
             "user_id" => auth()->id(),
@@ -27,7 +27,7 @@ class SettlementRepo
         ]);
     }
 
-    public function update($id, $request)
+    public function update(int $id,array $request)
     {
         return Settlement::query()->where("id", $id)->update([
             "from" => [

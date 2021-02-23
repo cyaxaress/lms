@@ -54,7 +54,7 @@
                     <td><a href="">{{ $settlement->created_at->diffForHumans() }}</a></td>
                     <td><a href=""> {{ $settlement->settled_at? $settlement->settled_at->diffForHumans() : "-" }}</a></td>
                     <td><a href="">{{ $settlement->amount }}</a></td>
-                    <td><a href="" class="text-success">@lang($settlement->status)</a></td>
+                    <td><a href="" class="{{ $settlement->getStatusCssClass()}}">@lang($settlement->status)</a></td>
                     <td>
                         <a href="" class="item-delete mlg-15" title="حذف"></a>
                         <a href="show-comment.html" class="item-reject mlg-15" title="رد"></a>

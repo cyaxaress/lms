@@ -21,13 +21,10 @@ class SettlementController extends Controller
 
     public function store(SettlementRequest $request, SettlementRepo $repo)
     {
-        $repo->store([
-           "cart" => $request->cart,
-           "name" => $request->name,
-            "amount" => $request->amount
-        ]);
-
+        $repo->store($request->all());
         newFeedback();
+        auth()->user()->balance -= $request->amount;
+        auth()->user()->save();
         return redirect(route("settlements.index"));
     }
 
@@ -37,8 +34,10 @@ class SettlementController extends Controller
         return view("Payment::settlements.edit", compact("settlement"));
     }
 
-    public function update(SettlementRequest $request)
+    public function update($settlement, SettlementRequest $request, SettlementRepo $repo)
     {
-
+        $repo->update($settlement, $request->all());
+        newFeedback();
+        return redirect(route("settlements.index"));
     }
 }

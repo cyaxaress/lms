@@ -5,7 +5,6 @@
 
 @endsection
 @section('content')
-    {{dd($errors)}}
     <div class="main-content">
         <form action="{{ route("settlements.update", $settlement->id)  }}" method="post" class="padding-30 bg-white font-size-14">
             @csrf

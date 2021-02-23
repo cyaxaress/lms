@@ -36,7 +36,7 @@
                     <th>شناسه تسویه</th>
                     <th>مبدا</th>
                     <th>مقصد</th>
-                    <th>شماره کارت</th>
+                    <th> شماره کارت مقصد</th>
                     <th>تاریخ درخواست واریز</th>
                     <th>تاریخ واریز شده</th>
                     <th>مبلغ (تومان )</th>
@@ -48,7 +48,7 @@
                 @foreach($settlements as $settlement)
                 <tr role="row">
                     <td><a href="">{{ $settlement->transaction_id ?? "-" }}</a></td>
-                    <td><a href="">{{ $settlement->from? $settlement->from->name : "-" }}</a></td>
+                    <td><a href="">{{ $settlement->from? $settlement->from["name"] : "-" }}</a></td>
                     <td><a href="">{{ $settlement->to? $settlement->to["name"] : "-" }}</a></td>
                     <td><a href="">{{ $settlement->to? $settlement->to["cart"] : "-" }}</a></td>
                     <td><a href="">{{ $settlement->created_at->diffForHumans() }}</a></td>

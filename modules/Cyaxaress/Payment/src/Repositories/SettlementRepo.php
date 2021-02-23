@@ -9,19 +9,36 @@ use Cyaxaress\Payment\Models\Settlement;
 class SettlementRepo
 {
     private $query;
+
     public function __construct()
     {
         $this->query = Settlement::query();
     }
-    public function store($data)
+
+    public function store($request)
     {
         return Settlement::query()->create([
             "user_id" => auth()->id(),
-           "to" => [
-               "cart" => $data["cart"],
-               "name" => $data["name"]
-           ],
-            "amount" => $data["amount"]
+            "to" => [
+                "cart" => $request["cart"],
+                "name" => $request["name"]
+            ],
+            "amount" => $request["amount"]
+        ]);
+    }
+
+    public function update($id, $request)
+    {
+        return Settlement::query()->where("id", $id)->update([
+            "from" => [
+                "name" => $request["from"]["name"],
+                "cart" => $request["from"]["cart"]
+            ],
+            "to" => [
+                "name" => $request["to"]["name"],
+                "cart" => $request["to"]["cart"]
+            ],
+            "status" => $request["status"]
         ]);
     }
 

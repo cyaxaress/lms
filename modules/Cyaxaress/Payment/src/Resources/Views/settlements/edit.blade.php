@@ -1,6 +1,6 @@
 @extends('Dashboard::master')
 @section('breadcrumb')
-    <li><a href="{{ route('purchases.index') }}" title="تسویه حساب ها">تسویه حساب ها</a></li>
+    <li><a href="{{ route('settlements.index') }}" title="تسویه حساب ها">تسویه حساب ها</a></li>
     <li><a href="#" title="ویرایش درخواست تسویه حساب">ویرایش درخواست تسویه حساب</a></li>
 
 @endsection
@@ -17,7 +17,7 @@
             <x-input name="amount" value="{{ $settlement->amount }}" type="text" placeholder="مبلغ به تومان" required />
             <x-select name="status" >
                 @foreach(\Cyaxaress\Payment\Models\Settlement::$statues as $status)
-                    <option value="{{ $status }}">@lang($status)</option>
+                    <option value="{{ $status }}" {{ $settlement->status == $status ? "selected"  : ""}}>@lang($status)</option>
                 @endforeach
             </x-select>
             <div class="row no-gutters border-2 margin-bottom-15 text-center ">

@@ -64,4 +64,22 @@ class SettlementRepo
         $this->query = $this->query->latest();
         return $this->query;
     }
+
+    public function getLatestPendingSettlement($userId)
+    {
+        return Settlement::query()
+            ->where("user_id", $userId)
+            ->where("status", Settlement::STATUS_PENDING)
+            ->latest()
+            ->first();
+    }
+
+    public function getLatestSettlement($userId)
+    {
+        return Settlement::query()
+            ->where("user_id", $userId)
+            ->latest()
+            ->first();
+    }
+
 }

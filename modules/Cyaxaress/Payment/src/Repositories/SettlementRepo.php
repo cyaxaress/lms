@@ -58,4 +58,10 @@ class SettlementRepo
     {
         return $this->query->findOrFail($settlement);
     }
+
+    public function latest()
+    {
+        $this->query = $this->query->latest();
+        return $this->query;
+    }
 }

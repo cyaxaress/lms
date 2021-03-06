@@ -11,7 +11,7 @@ class SettlementController extends Controller
 {
     public function index(SettlementRepo $repo)
     {
-        $settlements = $repo->paginate();
+        $settlements = $repo->latest()->paginate();
         return view("Payment::settlements.index", compact("settlements"));
     }
 

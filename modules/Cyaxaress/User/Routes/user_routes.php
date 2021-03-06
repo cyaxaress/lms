@@ -10,6 +10,7 @@ Route::group([
     Route::post('users/photo', "UserController@updatePhoto")->name('users.photo');
     Route::get('edit-profile', "UserController@profile")->name('users.profile');
     Route::post('edit-profile', ["uses" => "UserController@updateProfile", "as" => 'users.profile']);
+    Route::get('users/{user}/info', ["uses" => "UserController@info", "as" => 'users.info']);
     Route::resource('users', "UserController");
 });
 

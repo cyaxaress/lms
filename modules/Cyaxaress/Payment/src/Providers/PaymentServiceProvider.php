@@ -4,6 +4,8 @@ namespace Cyaxaress\Payment\Providers;
 
 use Cyaxaress\Payment\Gateways\Gateway;
 use Cyaxaress\Payment\Gateways\Zarinpal\ZarinpalAdaptor;
+use Cyaxaress\Payment\Models\Settlement;
+use Cyaxaress\Payment\Policies\SettlementPolicy;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -20,6 +22,7 @@ class PaymentServiceProvider extends ServiceProvider
         Route::middleware("web")->namespace($this->namespace)->group(__DIR__ . "/../Routes/settlement_routes.php");
         $this->loadViewsFrom(__DIR__ . "/../Resources/Views", "Payment");
         $this->loadJsonTranslationsFrom(__DIR__ . "/../Resources/Lang");
+        \Gate::policy(Settlement::class, SettlementPolicy::class);
     }
 
     public function boot()
@@ -47,17 +50,18 @@ class PaymentServiceProvider extends ServiceProvider
             "icon" => "i-checkouts",
             "title" => " تسویه حساب ها",
             "url" => route('settlements.index'),
-//            "permission" => [
-//                Permission::PERMISSION_MANAGE_COURSES,
-//            ]
+            "permission" => [
+                Permission::PERMISSION_TEACH,
+                Permission::PERMISSION_MANAGE_SETTLEMENTS
+            ]
         ]);
         config()->set('sidebar.items.settlementsRequest', [
             "icon" => "i-checkout__request",
             "title" => "درخواست تسویه",
             "url" => route('settlements.create'),
-//            "permission" => [
-//                Permission::PERMISSION_MANAGE_COURSES,
-//            ]
+            "permission" => [
+                Permission::PERMISSION_TEACH,
+            ]
         ]);
     }
 }

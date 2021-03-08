@@ -12,6 +12,7 @@
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/User/Tests/Unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Dashboard" isTestSource="false" packagePrefix="Cyaxaress\Dashboard\" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Discount/src" isTestSource="false" packagePrefix="Cyaxaress\Discount\" />
       <sourceFolder url="file://$MODULE_DIR$/tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Category" isTestSource="false" packagePrefix="Cyaxaress\Category\" />

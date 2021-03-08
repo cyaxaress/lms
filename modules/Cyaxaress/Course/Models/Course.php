@@ -1,9 +1,11 @@
 <?php
+
 namespace Cyaxaress\Course\Models;
 
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
+use Cyaxaress\Discount\Models\Discount;
 use Cyaxaress\Media\Models\Media;
 use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\User\Models\User;
@@ -70,6 +72,11 @@ class Course extends Model
         return $this->payments()->latest()->first();
     }
 
+    public function discounts()
+    {
+        return $this->morphToMany(Discount::class, "discountable");
+    }
+
     public function getDuration()
     {
         return (new CourseRepo())->getDuration($this->id);
@@ -79,10 +86,11 @@ class Course extends Model
     {
         return resolve(CourseRepo::class)->hasStudent($this, $student_id);
     }
+
     public function formattedDuration()
     {
-        $duration =  $this->getDuration();
-        $h  =round($duration / 60) < 10 ? '0' .  round($duration / 60) :  round($duration / 60);
+        $duration = $this->getDuration();
+        $h = round($duration / 60) < 10 ? '0' . round($duration / 60) : round($duration / 60);
         $m = ($duration % 60) < 10 ? '0' . ($duration % 60) : ($duration % 60);
         return $h . ':' . $m . ":00";
     }
@@ -103,6 +111,7 @@ class Course extends Model
         // todo
         return 0;
     }
+
     public function getFinalPrice()
     {
         return $this->price - $this->getDiscountAmount();
@@ -125,13 +134,13 @@ class Course extends Model
 
     public function shortUrl()
     {
-        return route('singleCourse', $this->id );
+        return route('singleCourse', $this->id);
     }
 
-    public function downloadLinks() :array
+    public function downloadLinks(): array
     {
         $links = [];
-        foreach (resolve(CourseRepo::class)->getLessons($this->id) as $lesson){
+        foreach (resolve(CourseRepo::class)->getLessons($this->id) as $lesson) {
             $links[] = $lesson->downloadLink();
         }
 

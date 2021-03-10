@@ -16,6 +16,7 @@ class CreateDiscountsTable extends Migration
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id");
+            $table->string("code")->nullable();
             $table->tinyInteger("percent")->unsigned();
             $table->bigInteger("usage_limitation")->nullable()->unsigned(); // null means unlimited
             $table->timestamp("expire_at")->nullable();

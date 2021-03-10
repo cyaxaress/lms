@@ -41,9 +41,10 @@
             <div class="col-4 bg-white">
                 <p class="box__title">ایجاد تخفیف جدید</p>
                 <form action="" method="post" class="padding-30">
-                    <input type="number" placeholder="درصد تخفیف" class="text" name="percent">
-                    <input type="number" placeholder="محدودیت افراد" class="text" name="usage_limitation">
-                    <input type="text" id="expire_at" placeholder="محدودیت زمانی به ساعت" class="text" name="expire_at">
+                    <x-input type="text" placeholder="کد تخفیف" name="code" required />
+                    <x-input type="number" placeholder="درصد تخفیف" name="percent" required />
+                    <x-input type="number" placeholder="محدودیت افراد" name="usage_limitation" />
+                    <x-input type="text" id="expire_at" placeholder="محدودیت زمانی به ساعت" name="expire_at" />
                     <p class="box__title">این تخفیف برای</p>
                     <div class="notificationGroup">
                         <input id="discounts-field-1" class="discounts-field-pn" name="discounts-field" type="radio"/>
@@ -53,15 +54,17 @@
                         <input id="discounts-field-2" class="discounts-field-pn" name="discounts-field" type="radio"/>
                         <label for="discounts-field-2">دوره خاص</label>
                     </div>
-                    <select name="">
-                        @foreach($courses as $course)
-                        <option value="{{ $course->id }}">{{ $course->title }}</option>
-                        @endforeach
-                    </select>
-                    <input type="text" placeholder="لینک اطلاعات بیشتر" class="text">
-                    <input type="text" placeholder="توضیحات" class="text margin-bottom-15">
+                    <div id="selectCourseContainer" class="d-none">
+                        <select name="courses[]" class="mySelect2" placeholder="klsdjf" multiple>
+                            @foreach($courses as $course)
+                                <option value="{{ $course->id }}">{{ $course->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <x-input type="text" name="link" placeholder="لینک اطلاعات بیشتر" />
+                    <x-input type="text" name="description" placeholder="توضیحات" class="margin-bottom-15" />
 
-                    <button class="btn btn-webamooz_net">اضافه کردن</button>
+                    <button type="submit" class="btn btn-webamooz_net">اضافه کردن</button>
                 </form>
             </div>
         </div>
@@ -70,9 +73,14 @@
 
 @section("js")
     <script src="/assets/persianDatePicker/js/persianDatepicker.min.js"></script>
+    <script src="/js/select2.min.js"></script>
     <script>
         $("#expire_at").persianDatepicker({
             formatDate: "YYYY/MM/DD hh:mm"
+        });
+
+        $('.mySelect2').select2({
+            placeholder: "یک یا چند دوره را انتخاب کنید..."
         });
     </script>
 
@@ -80,4 +88,5 @@
 
 @section("css")
     <link rel="stylesheet" href="/assets/persianDatePicker/css/persianDatepicker-default.css">
+    <link href="/css/select2.min.css" rel="stylesheet" />
 @endsection

@@ -5,3 +5,14 @@
 .w-100{
     width: 100% !important;
 }
+.select2{
+    width: 100% !important;
+}
+
+.selection{
+    display: block !important;
+}
+
+.select2-search__field{
+    height: 18px !important;
+}

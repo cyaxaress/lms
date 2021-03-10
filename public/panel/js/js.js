@@ -207,10 +207,10 @@ $('.create-ads .ads-field-banner').on('click', function (e) {
     $('.file-upload').show()
 });
 $('.discounts #discounts-field-2').on('click', function (e) {
-    $('.discounts .dropdown-select').addClass('is-active')
+    $('#selectCourseContainer').removeClass('d-none')
 });
 $('.discounts #discounts-field-1').on('click', function (e) {
-    $('.discounts .dropdown-select').removeClass('is-active')
+    $('#selectCourseContainer').addClass('d-none')
 });
 function updateConfirmationStatus(event, route, message, status, field = 'confirmation_status') {
     event.preventDefault();

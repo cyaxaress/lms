@@ -23,9 +23,9 @@
                             <tbody>
                             <tr role="row" class="">
                                 @foreach($discounts as $discount)
-                                <td><a href="">{{ $discount->code }}</a></td>
-                                <td><a href="">{{ $discount->percent }}%</a></td>
-                                <td>{{ createFromCarbon($discount->expire_at) }}</td>
+                                <td><a href="">{{ $discount->code ?? "-" }}</a></td>
+                                <td><a href="">{{ $discount->percent }}%</a> برای @lang($discount->type)</td>
+                                <td>{{ $discount->expire_at ? createFromCarbon($discount->expire_at) : "بدون تاریخ انقضا" }}</td>
                                 <td>{{ $discount->description }}</td>
                                 <td>{{ $discount->uses }} نفر</td>
                                 <td>
@@ -43,17 +43,17 @@
                 <p class="box__title">ایجاد تخفیف جدید</p>
                 <form action="{{ route("discounts.store") }}" method="post" class="padding-30">
                     @csrf
-                    <x-input type="text" placeholder="کد تخفیف" name="code" required />
+                    <x-input type="text" placeholder="کد تخفیف" name="code"/>
                     <x-input type="number" placeholder="درصد تخفیف" name="percent" required />
                     <x-input type="number" placeholder="محدودیت افراد" name="usage_limitation" />
                     <x-input type="text" id="expire_at" placeholder="محدودیت زمانی به ساعت" name="expire_at" />
                     <p class="box__title">این تخفیف برای</p>
                     <div class="notificationGroup">
-                        <input id="discounts-field-1" class="discounts-field-pn" name="discounts-field" type="radio"/>
+                        <input id="discounts-field-1" class="discounts-field-pn" name="type" value="all" type="radio"/>
                         <label for="discounts-field-1">همه دوره ها</label>
                     </div>
                     <div class="notificationGroup">
-                        <input id="discounts-field-2" class="discounts-field-pn" name="discounts-field" type="radio"/>
+                        <input id="discounts-field-2" class="discounts-field-pn" name="type" value="special" type="radio"/>
                         <label for="discounts-field-2">دوره خاص</label>
                     </div>
                     <div id="selectCourseContainer" class="d-none">

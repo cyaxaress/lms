@@ -20,6 +20,7 @@ class DiscountController
 
     public function store(DiscountRequest $request, DiscountRepo $repo)
     {
+//        return $request->all();
         $repo->store($request->all());
 
         newFeedback();

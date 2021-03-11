@@ -24,12 +24,17 @@ class DiscountRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules =  [
             "code" => "nullable|max:50|unique:discounts,code",
             "percent" => "required|numeric|min:1|max:100",
             "usage_limitation" => "nullable|numeric|min:1|max:1000000000",
             "expire_at" => ["nullable",new ValidJalaliDate()],
             "courses" => "nullable|array",
         ];
+        if (request()->getMethod() == "PATCH"){
+            $rules["code"] = "nullable|max:50|unique:discounts,code," . request()->route("discount")->id;
+        }
+
+        return $rules;
     }
 }

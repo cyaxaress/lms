@@ -29,8 +29,8 @@
                                 <td>{{ $discount->description }}</td>
                                 <td>{{ $discount->uses }} نفر</td>
                                 <td>
-                                    <a href="" class="item-delete mlg-15"></a>
-                                    <a href="edit-discount.html" class="item-edit " title="ویرایش"></a>
+                                    <a href="" onclick="deleteItem(event, '{{ route('discounts.destroy', $discount->id) }}')" class="item-delete mlg-15" title="حذف"></a>
+                                    <a href="{{ route("discounts.edit", $discount->id) }}" class="item-edit " title="ویرایش"></a>
                                 </td>
                             </tr>
                             @endforeach

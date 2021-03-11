@@ -1,9 +1,12 @@
 <?php
 namespace Cyaxaress\Discount\Providers;
 
+use Cyaxaress\Discount\Models\Discount;
+use Cyaxaress\Discount\Policies\DiscountPolicy;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate;
 
 class DiscountServiceProvider extends ServiceProvider
 {
@@ -16,6 +19,7 @@ class DiscountServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__  .'/../Resources/Views/', 'Discounts');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadJsonTranslationsFrom(__DIR__ . "/../Resources/Lang/");
+        Gate::policy(Discount::class, DiscountPolicy::class);
     }
 
     public function boot()

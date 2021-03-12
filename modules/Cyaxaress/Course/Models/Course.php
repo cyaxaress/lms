@@ -7,6 +7,7 @@ use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Discount\Models\Discount;
 use Cyaxaress\Discount\Repositories\DiscountRepo;
+use Cyaxaress\Discount\Services\DiscountService;
 use Cyaxaress\Media\Models\Media;
 use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\User\Models\User;
@@ -114,7 +115,7 @@ class Course extends Model
 
     public function getDiscountAmount()
     {
-        return $this->price * ((float) ("0." . $this->getDiscountPercent()));
+        return DiscountService::calculateDiscountAmount($this->price, $this->getDiscountPercent());
     }
 
     public function getFinalPrice()

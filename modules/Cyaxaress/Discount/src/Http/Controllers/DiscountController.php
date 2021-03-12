@@ -5,11 +5,14 @@ namespace Cyaxaress\Discount\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Discount\Http\Requests\DiscountRequest;
 use Cyaxaress\Discount\Models\Discount;
 use Cyaxaress\Discount\Repositories\DiscountRepo;
+use Cyaxaress\Discount\Services\DiscountService;
+use http\Env\Response;
 
 class DiscountController extends Controller
 {
@@ -50,5 +53,25 @@ class DiscountController extends Controller
         $this->authorize("manage", Discount::class);
         $discount->delete();
         return AjaxResponses::SuccessResponse();
+    }
+
+    public function check($code, Course $course, DiscountRepo $repo)
+    {
+        $discount = $repo->getValidDiscountByCode($code, $course->id);
+        if ($discount){
+            $discountAmount = DiscountService::calculateDiscountAmount($course->price, $discount->percent);
+            $discountPercent = $discount->percent;
+            $response = [
+                "status" => "valid",
+                "payableAmount" => $course->price - $discountAmount,
+                "discountAmount" => $discountAmount,
+                "discountPercent" => $discountPercent
+            ];
+            return response()->json($response);
+        }
+
+        return \response()->json([
+            "status" => "invalid"
+        ])->setStatusCode(422);
     }
 }

@@ -30,6 +30,7 @@ class DiscountRequest extends FormRequest
             "usage_limitation" => "nullable|numeric|min:0|max:1000000000",
             "expire_at" => ["nullable",new ValidJalaliDate()],
             "courses" => "nullable|array",
+            "type" => "required"
         ];
         if (request()->getMethod() == "PATCH"){
             $rules["code"] = "nullable|max:50|unique:discounts,code," . request()->route("discount")->id;

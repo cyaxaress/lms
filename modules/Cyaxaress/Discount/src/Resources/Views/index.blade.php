@@ -48,6 +48,7 @@
                     <x-input type="number" placeholder="محدودیت افراد" name="usage_limitation" />
                     <x-input type="text" id="expire_at" placeholder="محدودیت زمانی به ساعت" name="expire_at" />
                     <p class="box__title">این تخفیف برای</p>
+                    <x-validation-error field='type'/>
                     <div class="notificationGroup">
                         <input id="discounts-field-1" class="discounts-field-pn" name="type" value="all" type="radio"/>
                         <label for="discounts-field-1">همه دوره ها</label>
@@ -78,7 +79,7 @@
     <script src="/js/select2.min.js"></script>
     <script>
         $("#expire_at").persianDatepicker({
-            formatDate: "YYYY/MM/DD hh:mm"
+            formatDate: "YYYY/0M/0D hh:mm",
         });
 
         $('.mySelect2').select2({

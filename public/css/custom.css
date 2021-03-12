@@ -16,3 +16,8 @@
 .select2-search__field{
     height: 18px !important;
 }
+.loading{
+    height: 25px;
+    position: absolute;
+    left: 5px;
+}

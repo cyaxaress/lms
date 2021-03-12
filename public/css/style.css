@@ -3732,6 +3732,21 @@ table {
 }
 
 #Modal-buy p{
-    color: #000 !important;
+    color: #000;
     font-size: 18px;
+}
+.text-success {
+    color: #00b894 !important;
+}
+
+.text-info {
+    color: #189bc3 !important;
+}
+
+.text-warning {
+    color: #e3a507 !important;
+}
+
+.text-error {
+    color: #e73368 !important;
 }

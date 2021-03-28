@@ -118,9 +118,18 @@ class Course extends Model
         return DiscountService::calculateDiscountAmount($this->price, $this->getDiscountPercent());
     }
 
-    public function getFinalPrice()
+    public function getFinalPrice($code = null)
     {
-        return $this->price - $this->getDiscountAmount();
+        $amount =  $this->price - $this->getDiscountAmount();
+        if ($code){
+            $repo = new DiscountRepo();
+            $discount = $repo->getValidDiscountByCode($code, $this->id);
+            if ($discount){
+                $amount = $amount - DiscountService::calculateDiscountAmount($amount, $discount->percent);
+            }
+        }
+
+        return $amount;
     }
 
     public function getFormattedFinalPrice()

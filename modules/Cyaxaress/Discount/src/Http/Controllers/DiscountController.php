@@ -57,6 +57,7 @@ class DiscountController extends Controller
 
     public function check($code, Course $course, DiscountRepo $repo)
     {
+
         $discount = $repo->getValidDiscountByCode($code, $course->id);
         if ($discount){
             $discountAmount = DiscountService::calculateDiscountAmount($course->price, $discount->percent);

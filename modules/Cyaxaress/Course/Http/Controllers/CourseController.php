@@ -135,7 +135,7 @@ class CourseController extends Controller
             return back();
         }
 
-        $amount = $course->getFinalPrice();
+        $amount = $course->getFinalPrice(request()->code);
         if ($amount <= 0){
             $courseRepo->addStudentToCourse($course, auth()->id());
             newFeedback("عملیات موفقیت آمیز", "شما با موفقیت در دوره ثبت نام کردید.");

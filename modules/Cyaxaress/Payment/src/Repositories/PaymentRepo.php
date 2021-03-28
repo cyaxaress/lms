@@ -9,14 +9,15 @@ use Illuminate\Support\Facades\DB;
 class PaymentRepo
 {
     private $query;
+
     public function __construct()
     {
         $this->query = Payment::query();
     }
 
-    public function store($data)
+    public function store($data, $discounts = [])
     {
-        return Payment::create([
+        $payment = Payment::create([
             "buyer_id" => $data['buyer_id'],
             "paymentable_id" => $data['paymentable_id'],
             "paymentable_type" => $data['paymentable_type'],
@@ -29,6 +30,13 @@ class PaymentRepo
             "seller_share" => $data['seller_share'],
             "site_share" => $data['site_share'],
         ]);
+
+        foreach ($discounts as $discount) $discountIds[] = $discount->id;
+
+        if (isset($discountIds))
+            $payment->discounts()->sync($discountIds);
+
+        return $payment;
     }
 
     public function findByInvoiceId($invoiceId)
@@ -55,7 +63,7 @@ class PaymentRepo
     public function searchAmount($amount)
     {
         if (!is_null($amount)) {
-            $this->query->where("amount",  $amount);
+            $this->query->where("amount", $amount);
         }
 
         return $this;
@@ -65,11 +73,12 @@ class PaymentRepo
     public function searchInvoiceId($invoiceId)
     {
         if (!is_null($invoiceId)) {
-            $this->query->where("invoice_id", "like", "%" .  $invoiceId . "%");
+            $this->query->where("invoice_id", "like", "%" . $invoiceId . "%");
         }
 
         return $this;
     }
+
     public function searchAfterDate($date)
     {
         if (!is_null($date)) {
@@ -87,7 +96,6 @@ class PaymentRepo
 
         return $this;
     }
-
 
 
     public function paginate()
@@ -113,14 +121,15 @@ class PaymentRepo
     {
         return Payment::where("seller_id", $userId)->where("status", Payment::STATUS_SUCCESS);;
     }
+
     public function getUserTotalSuccessAmount($userId)
     {
-        return   $this->getUserSuccessPayments($userId)->sum("amount");
+        return $this->getUserSuccessPayments($userId)->sum("amount");
     }
 
     public function getUserTotalBenefit($userId)
     {
-        return   $this->getUserSuccessPayments($userId)->sum("seller_share");
+        return $this->getUserSuccessPayments($userId)->sum("seller_share");
     }
 
     public function getUserTotalSellByDay($userId, $date)
@@ -132,25 +141,26 @@ class PaymentRepo
     {
         return $this->getUserSuccessPayments($userId)->whereDate("created_at", $date)->count();
     }
+
     public function getUserTotalBenefitByDay($userId, $date)
     {
-        return  $this->getUserSuccessPayments($userId)->whereDate("created_at", $date)
+        return $this->getUserSuccessPayments($userId)->whereDate("created_at", $date)
             ->sum("seller_share");
     }
 
 
     public function getUserTotalBenefitByPeriod($userId, $startDate, $endDate)
     {
-        return  Payment::where("seller_id", $userId)
-            ->where("status",  Payment::STATUS_SUCCESS)
-            ->whereDate("created_at",  "<= ",$startDate)
-            ->whereDate("created_at" , ">=", $endDate)
+        return Payment::where("seller_id", $userId)
+            ->where("status", Payment::STATUS_SUCCESS)
+            ->whereDate("created_at", "<= ", $startDate)
+            ->whereDate("created_at", ">=", $endDate)
             ->sum("seller_share");
     }
 
     public function getUserTotalSiteShare($userId)
     {
-        return   $this->getUserSuccessPayments($userId)->sum("site_share");
+        return $this->getUserSuccessPayments($userId)->sum("site_share");
     }
 
 
@@ -206,7 +216,7 @@ class PaymentRepo
 
     public function getDailySummery(Collection $dates, $seller_id = null)
     {
-        $query =  Payment::query()->where("created_at", ">=", $dates->keys()->first())
+        $query = Payment::query()->where("created_at", ">=", $dates->keys()->first())
             ->groupBy("date")
             ->orderBy("date");
 
@@ -214,11 +224,11 @@ class PaymentRepo
             $query->where("seller_id", $seller_id);
 
         return $query->get([
-        DB::raw("DATE(created_at) as date"),
-        DB::raw("SUM(amount) as totalAmount"),
-        DB::raw("SUM(seller_share) as totalSellerShare"),
-        DB::raw("SUM(site_share) as totalSiteShare"),
-    ]);
+            DB::raw("DATE(created_at) as date"),
+            DB::raw("SUM(amount) as totalAmount"),
+            DB::raw("SUM(seller_share) as totalSellerShare"),
+            DB::raw("SUM(site_share) as totalSiteShare"),
+        ]);
     }
 
     public function paymentsBySellerId(int $id)

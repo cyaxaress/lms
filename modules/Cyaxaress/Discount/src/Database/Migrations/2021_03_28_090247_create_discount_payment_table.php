@@ -16,7 +16,6 @@ class CreateDiscountPaymentTable extends Migration
         Schema::create('discount_payment', function (Blueprint $table) {
             $table->foreignId("discount_id");
             $table->foreignId("payment_id");
-            $table->timestamps();
             $table->primary(["discount_id", "payment_id"]);
             $table->foreign("discount_id")->references("id")->on("discounts")->onDelete("CASCADE");
             $table->foreign("payment_id")->references("id")->on("payments")->onDelete("CASCADE");

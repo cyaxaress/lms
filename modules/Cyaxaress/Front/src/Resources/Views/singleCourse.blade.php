@@ -39,7 +39,7 @@
                             @else
                                 <div class="sell_course">
                                     <strong>قیمت :</strong>
-                                    @if($course->getDiscountPercent())
+                                    @if($course->getDiscount())
                                         <del class="discount-Price">{{ $course->getFormattedPrice() }}</del>
                                     @endif
                                     <p class="price">
@@ -53,7 +53,7 @@
                         @else
                             <div class="sell_course ">
                                 <strong>قیمت :</strong>
-                                @if($course->getDiscountPercent())
+                                @if($course->getDiscount())
                                 <del class="discount-Price">{{ $course->getFormattedPrice() }}</del>
                                 @endif
                                 <p class="price">

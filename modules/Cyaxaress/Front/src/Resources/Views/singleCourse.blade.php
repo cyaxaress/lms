@@ -54,7 +54,7 @@
                             <div class="sell_course ">
                                 <strong>قیمت :</strong>
                                 @if($course->getDiscount())
-                                <del class="discount-Price">{{ $course->getFormattedPrice() }}</del>
+                                    <del class="discount-Price">{{ $course->getFormattedPrice() }}</del>
                                 @endif
                                 <p class="price">
                         <span class="woocommerce-Price-amount amount">{{ $course->getFormattedPrice() }}
@@ -156,14 +156,15 @@
             </div>
             <div class="content-left">
                 @if($lesson)
-                @if($lesson->media->type == "video")
-                <div class="preview">
-                    <video width="100%" controls>
-                        <source src="{{ $lesson->downloadLink() }}" type="video/mp4">
-                    </video>
-                </div>
-                @endif
-                <a href="{{ $lesson->downloadLink() }}" class="episode-download">دانلود این قسمت (قسمت {{ $lesson->number }})</a>
+                    @if($lesson->media->type == "video")
+                        <div class="preview">
+                            <video width="100%" controls>
+                                <source src="{{ $lesson->downloadLink() }}" type="video/mp4">
+                            </video>
+                        </div>
+                    @endif
+                    <a href="{{ $lesson->downloadLink() }}" class="episode-download">دانلود این قسمت
+                        (قسمت {{ $lesson->number }})</a>
                 @endif
                 <div class="course-description">
                     <div class="course-description-title">توضیحات دوره</div>
@@ -208,15 +209,19 @@
                             </tr>
                             <tr>
                                 <th>درصد تخفیف</th>
-                                <td id="discountPercent">{{ $course->getDiscountPercent() }}%</td>
+                                <td><span id="discountPercent" data-value="{{ $course->getDiscountPercent()  }}">{{ $course->getDiscountPercent() }}</span>%</td>
                             </tr>
                             <tr>
-                                <th> مبلغ تخفیف </th>
-                                <td class="text-red" id="discountAmount"> {{ $course->getDiscountAmount() }} تومان</td>
+                                <th> مبلغ تخفیف</th>
+                                <td class="text-red"><span
+                                        id="discountAmount" data-value="{{ $course->getDiscountAmount()  }}"> {{ $course->getDiscountAmount() }}</span> تومان
+                                </td>
                             </tr>
                             <tr>
-                                <th> قابل پرداخت </th>
-                                <td class="text-blue" id="payableAmount"> {{ $course->getFormattedFinalPrice() }} تومان</td>
+                                <th> قابل پرداخت</th>
+                                <td class="text-blue"><span
+                                        id="payableAmount" data-value="{{ $course->getFinalPrice()  }}">{{ $course->getFormattedFinalPrice() }}</span> تومان
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -231,17 +236,17 @@
 @section('js')
     <script src="/js/modal.js"></script>
     <script>
-        function checkDiscountCode(){
+        function checkDiscountCode() {
             $("#loading").removeClass("d-none")
-            const code =  $("#code").val();
+            const code = $("#code").val();
             const url = "{{ route("discounts.check", ["code", $course->id]) }}";
             $("#loading").addClass("d-none")
             $("#response").text("")
             $.get(url.replace("code", code))
                 .done(function (data) {
-                    $("#discountPercent").text(data.discountPercent + "%")
-                    $("#discountAmount").text(data.discountAmount + " تومان")
-                    $("#payableAmount").text(data.payableAmount + " تومان")
+                    $("#discountPercent").text( parseInt($("#discountPercent").attr("data-value")) +  data.discountPercent)
+                    $("#discountAmount").text(parseInt($("#discountAmount").attr("data-value")) + data.discountAmount)
+                    $("#payableAmount").text(parseInt($("#payableAmount").attr("data-value")) - data.discountAmount)
                     $("#response").text("کد تخفیف با موفقیت اعمال شد.").removeClass("text-error").addClass("text-success")
                 })
                 .fail(function (data) {

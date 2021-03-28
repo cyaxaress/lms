@@ -39,7 +39,9 @@
                             @else
                                 <div class="sell_course">
                                     <strong>قیمت :</strong>
-                                    <del class="discount-Price">{{ $course->getFormattedPrice() }}</del>
+                                    @if($course->getDiscountPercent())
+                                        <del class="discount-Price">{{ $course->getFormattedPrice() }}</del>
+                                    @endif
                                     <p class="price">
                         <span class="woocommerce-Price-amount amount">{{ $course->getFormattedFinalPrice() }}
                             <span class="woocommerce-Price-currencySymbol">تومان</span>
@@ -51,7 +53,9 @@
                         @else
                             <div class="sell_course ">
                                 <strong>قیمت :</strong>
+                                @if($course->getDiscountPercent())
                                 <del class="discount-Price">{{ $course->getFormattedPrice() }}</del>
+                                @endif
                                 <p class="price">
                         <span class="woocommerce-Price-amount amount">{{ $course->getFormattedPrice() }}
                             <span class="woocommerce-Price-currencySymbol">تومان</span>

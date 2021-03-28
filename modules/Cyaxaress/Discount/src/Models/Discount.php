@@ -5,6 +5,7 @@ namespace Cyaxaress\Discount\Models;
 
 
 use Cyaxaress\Course\Models\Course;
+use Cyaxaress\Payment\Models\Payment;
 use Illuminate\Database\Eloquent\Model;
 
 class Discount extends Model
@@ -22,5 +23,10 @@ class Discount extends Model
     public function courses()
     {
         return $this->morphedByMany(Course::class, "discountable");
+    }
+
+    public function payments()
+    {
+        return $this->belongsToMany(Payment::class, "discount_payment");
     }
 }

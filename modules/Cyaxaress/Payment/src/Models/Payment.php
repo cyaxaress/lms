@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\Payment\Models;
 
+use Cyaxaress\Discount\Models\Discount;
 use Cyaxaress\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,6 +23,11 @@ class Payment extends Model
     public function paymentable()
     {
         return $this->morphTo();
+    }
+
+    public function discounts()
+    {
+        return $this->belongsToMany(Discount::class, "discount_payment");
     }
 
     public function buyer()

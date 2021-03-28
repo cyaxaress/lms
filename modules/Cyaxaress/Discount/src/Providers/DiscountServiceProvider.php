@@ -13,6 +13,7 @@ class DiscountServiceProvider extends ServiceProvider
     public $namespace = "Cyaxaress\Discount\Http\Controllers";
     public function register()
     {
+        $this->app->register(EventServiceProvider::class);
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(__DIR__ . '/../Routes/discount_routes.php');

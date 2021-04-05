@@ -10,6 +10,7 @@ use Cyaxaress\Discount\Repositories\DiscountRepo;
 use Cyaxaress\Discount\Services\DiscountService;
 use Cyaxaress\Media\Models\Media;
 use Cyaxaress\Payment\Models\Payment;
+use Cyaxaress\Ticket\Models\Ticket;
 use Cyaxaress\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -62,6 +63,11 @@ class Course extends Model
     public function lessons()
     {
         return $this->hasMany(Lesson::class);
+    }
+
+    public function tickets()
+    {
+        return $this->morphMany(Ticket::class, "ticketable");
     }
 
     public function payments()

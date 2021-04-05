@@ -9,6 +9,8 @@ use Cyaxaress\Media\Models\Media;
 use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\Payment\Models\Settlement;
 use Cyaxaress\RolePermissions\Models\Role;
+use Cyaxaress\Ticket\Models\Reply;
+use Cyaxaress\Ticket\Models\Ticket;
 use Cyaxaress\User\Notifications\ResetPasswordRequestNotification;
 use Cyaxaress\User\Notifications\VerifyMailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -123,6 +125,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function settlements()
     {
         return $this->hasMany(Settlement::class);
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function ticketReplies()
+    {
+        return $this->hasMany(Reply::class);
     }
 
     public function profilePath()

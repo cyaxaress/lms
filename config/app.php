@@ -182,6 +182,7 @@ return [
         Cyaxaress\Course\Providers\CourseServiceProvider::class,
         Cyaxaress\Media\Providers\MediaServiceProvider::class,
         Cyaxaress\Discount\Providers\DiscountServiceProvider::class,
+        Cyaxaress\Ticket\Providers\TicketServiceProvider::class,
     ],
 
     /*

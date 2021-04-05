@@ -63,7 +63,8 @@
             "Cyaxaress\\RolePermissions\\" : "modules/Cyaxaress/RolePermissions/",
             "Cyaxaress\\Course\\" : "modules/Cyaxaress/Course/",
             "Cyaxaress\\Media\\" : "modules/Cyaxaress/Media/",
-            "Cyaxaress\\Discount\\" : "modules/Cyaxaress/Discount/src"
+            "Cyaxaress\\Discount\\" : "modules/Cyaxaress/Discount/src",
+            "Cyaxaress\\Ticket\\" : "modules/Cyaxaress/Tickets/src"
         },
         "classmap": [
             "database/seeds",

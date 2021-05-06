@@ -13,6 +13,7 @@ class TicketServiceProvider extends ServiceProvider {
     public $namespace = "Cyaxaress\Ticket\Http\Controllers";
     public function register()
     {
+        $this->loadViewsFrom(__DIR__ . "/../Resources/Views", "Tickets");
         $this->loadMigrationsFrom(__DIR__ . "/../Database/Migrations");
         Route::middleware('web')
             ->namespace($this->namespace)

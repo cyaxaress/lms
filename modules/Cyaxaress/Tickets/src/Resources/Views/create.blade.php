@@ -8,10 +8,10 @@
         <p class="box__title">ایجاد تیکت جدید</p>
         <div class="row no-gutters bg-white">
             <div class="col-12">
-                <form action="" class="padding-30">
+                <form action="{{ route("tickets.store") }}" method="post" enctype="multipart/form-data" class="padding-30">
+                    @csrf
                     <x-input type="text" class="text" name="title" placeholder="عنوان تیکت" required />
                     <x-textarea placeholder="متن تیکت" name="body" class="text" required/>
-
                     <x-file name="attachment" placeholder="آپلود فایل پیویست" />
                     <button class="btn btn-webamooz_net">ایجاد مقاله</button>
                 </form>

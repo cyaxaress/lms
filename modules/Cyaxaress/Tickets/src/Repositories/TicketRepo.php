@@ -8,4 +8,13 @@ class TicketRepo{
     {
         return Ticket::query()->latest()->paginate();
     }
+
+    public function store($title)
+    {
+        return Ticket::query()->create([
+            "title" => $title,
+            "user_id" => auth()->id(),
+
+        ]);
+    }
 }

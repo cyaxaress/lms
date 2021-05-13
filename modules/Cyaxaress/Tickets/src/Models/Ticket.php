@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model{
 
     const STATUS_OPEN = "open";
-    const STATUS_CLOSE = "open";
-    const STATUS_PENDING = "open";
+    const STATUS_CLOSE = "close";
+    const STATUS_PENDING = "pending";
 
     static $statuses = [
         self::STATUS_OPEN,
         self::STATUS_CLOSE,
         self::STATUS_PENDING
     ];
+
+    protected $guarded = [];
 
     public function replies()
     {

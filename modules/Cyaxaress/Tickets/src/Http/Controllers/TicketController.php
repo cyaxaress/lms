@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Cyaxaress\Media\Services\MediaFileService;
 use Cyaxaress\Ticket\Http\Requests\TicketRequest;
 use Cyaxaress\Ticket\Repositories\TicketRepo;
+use Cyaxaress\Ticket\Services\ReplyService;
 
 class TicketController extends Controller{
     public function index(TicketRepo $repo)
@@ -20,12 +21,9 @@ class TicketController extends Controller{
 
     public function store(TicketRequest $request, TicketRepo $repo)
     {
-        $ticket = $repo->store($request);
-
-        $media_id = null;
-        if ($request->hasFile("attachment")){
-            $media_id = MediaFileService::privateUpload($request->attachment)->id;
-        }
-
+        $ticket = $repo->store($request->title);
+        ReplyService::store($ticket, $request->body, $request->attachment);
+        newFeedback();
+        return redirect()->route("tickets.index");
     }
 }

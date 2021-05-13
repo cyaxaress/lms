@@ -2,6 +2,7 @@
 namespace Cyaxaress\Ticket\Repositories;
 
 use Cyaxaress\Ticket\Models\Ticket;
+use Illuminate\Database\Eloquent\Model;
 
 class TicketRepo{
     public function paginateAll()
@@ -9,7 +10,7 @@ class TicketRepo{
         return Ticket::query()->latest()->paginate();
     }
 
-    public function store($title)
+    public function store($title) : Model
     {
         return Ticket::query()->create([
             "title" => $title,

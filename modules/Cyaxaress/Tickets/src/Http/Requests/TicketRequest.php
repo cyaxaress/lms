@@ -15,7 +15,7 @@ class TicketRequest extends FormRequest
         return [
             "title" => 'required|min:3|max:190',
             "body" => "required",
-            "attachment" => "nullable|file|mimes:avi,mkv,mp4,zip,rar|max:10240",
+            "attachment" => "nullable|file|mimes:avi,mkv,mp4,zip,rar|max:102400",
         ];
     }
 

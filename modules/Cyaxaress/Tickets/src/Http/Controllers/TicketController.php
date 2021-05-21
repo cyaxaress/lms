@@ -2,6 +2,7 @@
 namespace Cyaxaress\Ticket\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\Ticket\Http\Requests\ReplyRequest;
 use Cyaxaress\Ticket\Http\Requests\TicketRequest;
 use Cyaxaress\Ticket\Models\Ticket;
@@ -39,5 +40,12 @@ class TicketController extends Controller{
         ReplyService::store($ticket, $request->body, $request->attachment);
         newFeedback();
         return redirect()->route("tickets.show", $ticket->id);
+    }
+
+    public function close(Ticket $ticket, TicketRepo $repo)
+    {
+        $repo->setStatus($ticket->id, Ticket::STATUS_CLOSE);
+        newFeedback();
+        return redirect()->route("tickets.index");
     }
 }

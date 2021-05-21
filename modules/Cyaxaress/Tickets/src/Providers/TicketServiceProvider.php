@@ -29,7 +29,6 @@ class TicketServiceProvider extends ServiceProvider {
             "icon" => "i-tickets",
             "title" => "تیکت های پشتیبانی",
             "url" => route('tickets.index'),
-            "permission" => Permission::PERMISSION_MANAGE_CATEGORIES
         ]);
     }
 }

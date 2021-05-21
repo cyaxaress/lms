@@ -2,7 +2,9 @@
 namespace Cyaxaress\Ticket\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Cyaxaress\Ticket\Http\Requests\ReplyRequest;
 use Cyaxaress\Ticket\Http\Requests\TicketRequest;
+use Cyaxaress\Ticket\Models\Ticket;
 use Cyaxaress\Ticket\Repositories\TicketRepo;
 use Cyaxaress\Ticket\Services\ReplyService;
 
@@ -30,5 +32,12 @@ class TicketController extends Controller{
         ReplyService::store($ticket, $request->body, $request->attachment);
         newFeedback();
         return redirect()->route("tickets.index");
+    }
+
+    public function reply(Ticket $ticket, ReplyRequest $request)
+    {
+        ReplyService::store($ticket, $request->body, $request->attachment);
+        newFeedback();
+        return redirect()->route("tickets.show", $ticket->id);
     }
 }

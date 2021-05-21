@@ -23,4 +23,9 @@ class TicketRepo{
     {
         return Ticket::query()->with("replies")->findOrFail($ticket);
     }
+
+    public function setStatus($id, string $status)
+    {
+        return Ticket::query()->where("id", $id)->update(["status" => $status]);
+    }
 }

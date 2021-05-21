@@ -3,6 +3,14 @@
     <li><a href="{{ route('tickets.index') }}" title="تیکت ها">تیکت ها</a></li>
 @endsection
 @section('content')
+    <div class="tab__box">
+        <div class="tab__items">
+            <a class="tab__item is-active" href="{{ route("tickets.index") }}">همه تیکت ها</a>
+            <a class="tab__item " href="tickets.html">جدید ها (خوانده نشده)</a>
+            <a class="tab__item " href="tickets.html">پاسخ داده شده ها</a>
+            <a class="tab__item " href="{{ route("tickets.create") }}">ارسال تیکت جدید</a>
+        </div>
+    </div>
     <div class="row no-gutters  ">
         <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">
             <p class="box__title">تیکت ها</p>

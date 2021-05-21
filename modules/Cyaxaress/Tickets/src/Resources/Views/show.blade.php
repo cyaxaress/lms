@@ -14,10 +14,10 @@
             </div>
         </div>
         @foreach($ticket->replies as $reply)
-            <div class="transition-comment is-answer">
+            <div class="transition-comment {{ $reply->user_id == $ticket->user_id ? "" : "is-answer" }}">
                 <div class="transition-comment-header">
                <span>
-                    <img src="img/profile.jpg" class="logo-pic">
+                    <img src="{{ $reply->user->thumb}}" class="logo-pic">
                </span>
                     <span class="nav-comment-status">
                     <p class="username">کاربر : {{ $reply->user->name }}</p>
@@ -60,8 +60,10 @@
     </div>
     <div class="answer-comment">
         <p class="p-answer-comment">ارسال پاسخ</p>
-        <form action="" method="post">
-            <textarea class="textarea" placeholder="متن پاسخ نظر"></textarea>
+        <form action="{{ route("tickets.reply", $ticket->id) }}" method="post" enctype="multipart/form-data" class="padding-30">
+            @csrf
+            <x-textarea placeholder="متن پاسخ" name="body" class="text" required/>
+            <x-file name="attachment" placeholder="آپلود فایل پیویست" />
             <button class="btn btn-webamooz_net">ارسال پاسخ</button>
         </form>
     </div>

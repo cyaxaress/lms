@@ -13,7 +13,7 @@
                     <x-input type="text" class="text" name="title" placeholder="عنوان تیکت" required />
                     <x-textarea placeholder="متن تیکت" name="body" class="text" required/>
                     <x-file name="attachment" placeholder="آپلود فایل پیویست" />
-                    <button class="btn btn-webamooz_net">ایجاد مقاله</button>
+                    <button class="btn btn-webamooz_net">ایجاد تیکت</button>
                 </form>
             </div>
         </div>

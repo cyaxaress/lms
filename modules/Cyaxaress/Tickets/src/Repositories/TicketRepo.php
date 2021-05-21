@@ -18,4 +18,9 @@ class TicketRepo{
 
         ]);
     }
+
+    public function findOrFailWithReplies($ticket)
+    {
+        return Ticket::query()->with("replies")->findOrFail($ticket);
+    }
 }

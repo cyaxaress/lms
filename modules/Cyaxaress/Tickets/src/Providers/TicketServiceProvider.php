@@ -1,6 +1,7 @@
 <?php
 namespace Cyaxaress\Ticket\Providers;
 
+use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\Ticket\Models\Reply;
 use Cyaxaress\Ticket\Models\Ticket;
 use Cyaxaress\Ticket\Policies\ReplyPolicy;
@@ -24,6 +25,11 @@ class TicketServiceProvider extends ServiceProvider {
 
     public function boot()
     {
-
+        config()->set('sidebar.items.tickets', [
+            "icon" => "i-tickets",
+            "title" => "تیکت های پشتیبانی",
+            "url" => route('tickets.index'),
+            "permission" => Permission::PERMISSION_MANAGE_CATEGORIES
+        ]);
     }
 }

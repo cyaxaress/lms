@@ -5,6 +5,7 @@ return [
         'courses' => [],
         'categories' => [],
         'discounts' => [],
+        'tickets' => [],
         'users' => [],
         'role-permissions' => [],
         'usersInformation' => [],

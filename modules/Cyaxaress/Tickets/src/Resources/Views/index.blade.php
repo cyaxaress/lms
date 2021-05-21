@@ -11,6 +11,7 @@
                     <thead role="rowgroup">
                     <tr role="row" class="title-row">
                         <th>شناسه</th>
+                        <th>عنوان تیکت</th>
                         <th>نام ارسال کننده</th>
                         <th>ایمیل ارسال کننده</th>
                         <th>آخرین بروزرسانی</th>
@@ -22,6 +23,7 @@
                     @foreach($tickets as $ticket)
                         <tr role="row" class="">
                             <td><a href="">{{ $ticket->id }}</a></td>
+                            <td><a href="{{ route("tickets.show", $ticket->id) }}">{{ $ticket->title }}</a></td>
                             <td>{{ $ticket->user->name }}</td>
                             <td>{{ $ticket->user->email }}</td>
                             <td>{{ $ticket->updated_at }}</td>

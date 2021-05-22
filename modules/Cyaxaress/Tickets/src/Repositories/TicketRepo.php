@@ -5,9 +5,13 @@ use Cyaxaress\Ticket\Models\Ticket;
 use Illuminate\Database\Eloquent\Model;
 
 class TicketRepo{
-    public function paginateAll()
+    public function paginateAll($user_id = null)
     {
-        return Ticket::query()->latest()->paginate();
+        $query = Ticket::query();
+        if ($user_id){
+            $query->where("user_id", $user_id);
+        }
+        return $query->latest()->paginate();
     }
 
     public function store($title) : Model

@@ -2,18 +2,19 @@
 
 namespace Cyaxaress\Ticket\Policies;
 
-use Cyaxaress\User\Models\User;
+use Cyaxaress\RolePermissions\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TicketPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
+    public function show($user, $ticket)
+    {
+        if (($user->id == $ticket->user_id) ||
+            ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_TICKETS))) return true;
+    }
+
     public function __construct()
     {
         //

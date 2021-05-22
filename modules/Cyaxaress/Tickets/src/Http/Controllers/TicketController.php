@@ -2,9 +2,11 @@
 namespace Cyaxaress\Ticket\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\Ticket\Http\Requests\ReplyRequest;
 use Cyaxaress\Ticket\Http\Requests\TicketRequest;
+use Cyaxaress\Ticket\Models\Reply;
 use Cyaxaress\Ticket\Models\Ticket;
 use Cyaxaress\Ticket\Repositories\TicketRepo;
 use Cyaxaress\Ticket\Services\ReplyService;
@@ -54,5 +56,16 @@ class TicketController extends Controller{
         $repo->setStatus($ticket->id, Ticket::STATUS_CLOSE);
         newFeedback();
         return redirect()->route("tickets.index");
+    }
+
+    public function destroy(Ticket $ticket)
+    {
+        $this->authorize("delete", $ticket);
+        $hasAttachments = Reply::query()->where("ticket_id", $ticket->id)->whereNotNull("media_id")->with("media")->get();
+        foreach ($hasAttachments as $reply){
+            $reply->media->delete();
+        }
+        $ticket->delete();
+        return AjaxResponses::SuccessResponse();
     }
 }

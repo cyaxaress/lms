@@ -10,12 +10,19 @@ use Cyaxaress\Ticket\Models\Reply;
 use Cyaxaress\Ticket\Models\Ticket;
 use Cyaxaress\Ticket\Repositories\TicketRepo;
 use Cyaxaress\Ticket\Services\ReplyService;
+use Illuminate\Http\Request;
 
 class TicketController extends Controller{
-    public function index(TicketRepo $repo)
+    public function index(TicketRepo $repo, Request $request)
     {
         if(auth()->user()->can(Permission::PERMISSION_MANAGE_TICKETS)){
-            $tickets = $repo->paginateAll();
+            $tickets = $repo->joinUsers()
+                ->searchEmail($request->email)
+                ->searchName($request->name)
+                ->searchTitle($request->title)
+                ->searchDate(dateFromJalali($request->date))
+                ->searchStatus($request->status)
+                ->paginate();
         }else{
             $tickets = $repo->paginateAll(auth()->id());
         }

@@ -19,6 +19,7 @@ class TicketServiceProvider extends ServiceProvider {
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(__DIR__ . '/../Routes/web.php');
+        $this->loadJsonTranslationsFrom(__DIR__ . "/../Resources/Lang");
         Gate::policy(Ticket::class, TicketPolicy::class);
         Gate::policy(Reply::class, ReplyPolicy::class);
     }

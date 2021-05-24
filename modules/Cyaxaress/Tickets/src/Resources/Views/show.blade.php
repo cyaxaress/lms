@@ -27,43 +27,25 @@
                     </div>
                 </div>
                 <div class="transition-comment-body">
-                        <pre>{!! $reply->body !!}</pre>
-                    <div>
+                    <pre>{!! $reply->body !!}
+                        <div class="border-top margin-top-6">
+                            @if($reply->media_id)
+                                <a href="{{ $reply->attachmentLink() }}" class="text-success">دانلود فایل پیوست</a>
+                            @endif
+                        </div>
+                    </pre>
 
-                    </div>
                 </div>
             </div>
         @endforeach
-
-        <div class="transition-comment ">
-            <div class="transition-comment-header">
-                       <span>
-                                         <img src="img/profile.jpg" class="logo-pic">
-                       </span>
-                <span class="nav-comment-status">
-                            <p class="username">مدیر : وب آموز</p>
-                            <p class="comment-date">10 ماه پیش</p></span>
-                <div>
-
-                </div>
-            </div>
-            <div class="transition-comment-body">
-                        <pre>سلام خسته نباشید من زرین کارتم دستم رسیده و الان میخام گردش مالی رو چک کنم ولی
- رمز دوم و cvv2 رو که میزنم  خطا میده  و گردش مالی رو چک نمیکنه مشکل کجاست؟
-فایل رو ضمیمه میکنم ببنید
-من باید برم جایی این کارت رو فعال کنم؟ یا خیر فعال شده هستش؟</pre>
-                <div>
-
-                </div>
-            </div>
-        </div>
     </div>
     <div class="answer-comment">
         <p class="p-answer-comment">ارسال پاسخ</p>
-        <form action="{{ route("tickets.reply", $ticket->id) }}" method="post" enctype="multipart/form-data" class="padding-30">
+        <form action="{{ route("tickets.reply", $ticket->id) }}" method="post" enctype="multipart/form-data"
+              class="padding-30">
             @csrf
             <x-textarea placeholder="متن پاسخ" name="body" class="text" required/>
-            <x-file name="attachment" placeholder="آپلود فایل پیویست" />
+            <x-file name="attachment" placeholder="آپلود فایل پیویست"/>
             <button class="btn btn-webamooz_net">ارسال پاسخ</button>
         </form>
     </div>

@@ -21,3 +21,7 @@
     position: absolute;
     left: 5px;
 }
+
+.margin-top-6 {
+    margin-top: 60px !important;
+}

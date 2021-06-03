@@ -183,6 +183,8 @@ return [
         Cyaxaress\Media\Providers\MediaServiceProvider::class,
         Cyaxaress\Discount\Providers\DiscountServiceProvider::class,
         Cyaxaress\Ticket\Providers\TicketServiceProvider::class,
+        Cyaxaress\Comment\Providers\CommentServiceProvider::class,
+
     ],
 
     /*

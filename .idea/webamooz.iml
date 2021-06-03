@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/tests/Unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Category/Tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Tickets/src" isTestSource="false" packagePrefix="Cyaxaress\Ticket\" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Comment/src" isTestSource="false" packagePrefix="Cyaxaress\Comment\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/RolePermissions" isTestSource="false" packagePrefix="Cyaxaress\RolePermissions\" />
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />

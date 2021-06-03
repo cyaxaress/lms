@@ -64,7 +64,8 @@
             "Cyaxaress\\Course\\" : "modules/Cyaxaress/Course/",
             "Cyaxaress\\Media\\" : "modules/Cyaxaress/Media/",
             "Cyaxaress\\Discount\\" : "modules/Cyaxaress/Discount/src",
-            "Cyaxaress\\Ticket\\" : "modules/Cyaxaress/Tickets/src"
+            "Cyaxaress\\Ticket\\" : "modules/Cyaxaress/Tickets/src",
+            "Cyaxaress\\Comment\\" : "modules/Cyaxaress/Comment/src"
         },
         "classmap": [
             "database/seeds",

@@ -3,8 +3,10 @@
         <h3>نظرات ( 180 )</h3>
         <p>نظر خود را در مورد این مقاله مطرح کنید</p>
     </div>
-    <form action="{{ route("comments.store", $course->id) }}" method="post">
+    <form action="{{ route("comments.store") }}" method="post">
         @csrf
+        <input type="hidden" name="commentable_type" value="{{ get_class($course) }}">
+        <input type="hidden" name="commentable_id" value="{{ $course->id }}">
         <div class="ct-row">
             <div class="ct-textarea">
                 <x-textarea name="body" placeholder="ارسال نظر..."/>

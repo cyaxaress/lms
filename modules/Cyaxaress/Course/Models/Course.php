@@ -3,6 +3,7 @@
 namespace Cyaxaress\Course\Models;
 
 use Cyaxaress\Category\Models\Category;
+use Cyaxaress\Comment\Models\Comment;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Discount\Models\Discount;
@@ -191,5 +192,10 @@ class Course extends Model
         }
 
         return $links;
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

@@ -16,6 +16,8 @@ class Comment extends Model
         self::STATUS_NEW
     ];
 
+    protected $guarded = [];
+
     public function commentable()
     {
         return $this->morphTo();

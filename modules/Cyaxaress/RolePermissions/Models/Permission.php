@@ -4,6 +4,8 @@
 namespace Cyaxaress\RolePermissions\Models;
 
 
+use Symfony\Component\Console\EventListener\ErrorListener;
+
 class Permission extends \Spatie\Permission\Models\Permission
 {
     const PERMISSION_MANAGE_CATEGORIES = 'manage categories';
@@ -15,6 +17,7 @@ class Permission extends \Spatie\Permission\Models\Permission
     const PERMISSION_MANAGE_SETTLEMENTS = 'manage settlements';
     const PERMISSION_MANAGE_DISCOUNT = 'manage discounts';
     const PERMISSION_MANAGE_TICKETS = "manage tickets";
+    const PERMISSION_MANAGE_COMMENTS = "manage comments";
     const PERMISSION_TEACH = 'teach';
     static $permissions = [
         self::PERMISSION_SUPER_ADMIN,
@@ -27,7 +30,8 @@ class Permission extends \Spatie\Permission\Models\Permission
         self::PERMISSION_MANAGE_PAYMENTS,
         self::PERMISSION_MANAGE_SETTLEMENTS,
         self::PERMISSION_MANAGE_DISCOUNT,
-        self::PERMISSION_MANAGE_TICKETS
+        self::PERMISSION_MANAGE_TICKETS,
+        self::PERMISSION_MANAGE_COMMENTS
     ];
 
     const PERMISSION_SUPER_ADMIN = 'super admin';

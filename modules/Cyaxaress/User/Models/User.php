@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\User\Models;
 
+use Cyaxaress\Comment\Models\Comment;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Models\Season;
@@ -135,6 +136,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function ticketReplies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function profilePath()

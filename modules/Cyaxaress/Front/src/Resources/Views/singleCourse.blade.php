@@ -230,7 +230,7 @@
                 </div>
             </div>
         </div>
-        @include("Front::comments.index")
+        @include("Front::comments.index", ["commentable" => $course])
     </main>
 @endsection
 

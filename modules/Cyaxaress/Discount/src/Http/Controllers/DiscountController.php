@@ -12,7 +12,6 @@ use Cyaxaress\Discount\Http\Requests\DiscountRequest;
 use Cyaxaress\Discount\Models\Discount;
 use Cyaxaress\Discount\Repositories\DiscountRepo;
 use Cyaxaress\Discount\Services\DiscountService;
-use http\Env\Response;
 
 class DiscountController extends Controller
 {

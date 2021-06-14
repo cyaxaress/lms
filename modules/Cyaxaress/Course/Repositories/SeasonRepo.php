@@ -3,9 +3,7 @@
 namespace Cyaxaress\Course\Repositories;
 
 
-use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Models\Season;
-use Illuminate\Support\Str;
 
 class SeasonRepo
 {

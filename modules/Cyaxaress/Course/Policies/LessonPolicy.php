@@ -4,7 +4,6 @@
 namespace Cyaxaress\Course\Policies;
 
 
-use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

@@ -4,8 +4,6 @@ namespace Cyaxaress\Course\Listeners;
 
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Repositories\CourseRepo;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class RegisterUserInTheCourse
 {

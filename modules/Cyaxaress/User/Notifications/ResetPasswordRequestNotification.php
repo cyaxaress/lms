@@ -5,7 +5,6 @@ namespace Cyaxaress\User\Notifications;
 use Cyaxaress\User\Mail\ResetPasswordRequestMail;
 use Cyaxaress\User\Services\VerifyCodeService;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 
 class ResetPasswordRequestNotification extends Notification

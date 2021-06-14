@@ -4,7 +4,6 @@ namespace Cyaxaress\Course\Models;
 
 
 use Cyaxaress\Media\Models\Media;
-use Cyaxaress\Media\Services\MediaFileService;
 use Cyaxaress\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;

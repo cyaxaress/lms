@@ -2,7 +2,6 @@
 
 namespace Cyaxaress\Payment\Providers;
 
-use Cyaxaress\Course\Listeners\RegisterUserInTheCourse;
 use Cyaxaress\Payment\Events\PaymentWasSuccessful;
 use Cyaxaress\Payment\Listeners\AddSellersShareToHisAccount;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

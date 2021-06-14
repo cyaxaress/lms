@@ -3,16 +3,14 @@
 namespace Cyaxaress\Course\Tests\Feature;
 
 use Cyaxaress\Category\Models\Category;
-use Cyaxaress\Course\Models\Lesson;
-use Cyaxaress\Course\Models\Season;
-use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\Course\Models\Course;
+use Cyaxaress\Course\Models\Lesson;
+use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class LessonTest extends TestCase

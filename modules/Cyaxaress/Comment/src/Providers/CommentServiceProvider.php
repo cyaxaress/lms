@@ -1,8 +1,8 @@
 <?php
 
 namespace Cyaxaress\Comment\Providers;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class CommentServiceProvider extends ServiceProvider
 {

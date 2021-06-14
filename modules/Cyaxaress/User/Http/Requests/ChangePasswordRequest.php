@@ -3,7 +3,6 @@
 namespace Cyaxaress\User\Http\Requests;
 
 use Cyaxaress\User\Rules\ValidPassword;
-use Cyaxaress\User\Services\VerifyCodeService;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ChangePasswordRequest extends FormRequest

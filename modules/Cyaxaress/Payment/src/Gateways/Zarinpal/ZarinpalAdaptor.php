@@ -3,7 +3,6 @@ namespace Cyaxaress\Payment\Gateways\Zarinpal;
 
 use Cyaxaress\Payment\Contracts\GatewayContract;
 use Cyaxaress\Payment\Models\Payment;
-use Cyaxaress\Payment\Repositories\PaymentRepo;
 use Illuminate\Http\Request;
 
 class ZarinpalAdaptor implements GatewayContract

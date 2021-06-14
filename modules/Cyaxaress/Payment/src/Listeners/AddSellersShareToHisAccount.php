@@ -2,9 +2,6 @@
 
 namespace Cyaxaress\Payment\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
 class AddSellersShareToHisAccount
 {
     public function __construct()

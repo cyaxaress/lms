@@ -4,9 +4,9 @@ namespace Cyaxaress\Discount\Providers;
 use Cyaxaress\Discount\Models\Discount;
 use Cyaxaress\Discount\Policies\DiscountPolicy;
 use Cyaxaress\RolePermissions\Models\Permission;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class DiscountServiceProvider extends ServiceProvider
 {

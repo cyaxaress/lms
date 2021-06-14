@@ -4,9 +4,9 @@ namespace Cyaxaress\User\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Cyaxaress\User\Models\User;
 use Cyaxaress\User\Rules\ValidMobile;
 use Cyaxaress\User\Rules\ValidPassword;
-use Cyaxaress\User\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

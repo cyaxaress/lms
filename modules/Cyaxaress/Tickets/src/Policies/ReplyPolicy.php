@@ -2,7 +2,6 @@
 
 namespace Cyaxaress\Ticket\Policies;
 
-use Cyaxaress\User\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ReplyPolicy

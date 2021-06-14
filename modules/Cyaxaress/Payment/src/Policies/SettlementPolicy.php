@@ -3,7 +3,6 @@
 namespace Cyaxaress\Payment\Policies;
 
 use Cyaxaress\RolePermissions\Models\Permission;
-use Cyaxaress\User\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SettlementPolicy

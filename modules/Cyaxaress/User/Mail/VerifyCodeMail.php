@@ -4,7 +4,6 @@ namespace Cyaxaress\User\Mail;
 
 use Cyaxaress\User\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 

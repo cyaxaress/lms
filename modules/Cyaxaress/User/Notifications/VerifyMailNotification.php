@@ -5,8 +5,6 @@ namespace Cyaxaress\User\Notifications;
 use Cyaxaress\User\Mail\VerifyCodeMail;
 use Cyaxaress\User\Services\VerifyCodeService;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class VerifyMailNotification extends Notification

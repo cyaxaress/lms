@@ -2,12 +2,10 @@
 
 namespace Cyaxaress\User\Tests\Feature;
 
-use Carbon\Laravel\ServiceProvider;
 use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\User\Models\User;
 use Cyaxaress\User\Services\VerifyCodeService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class RegistrationTest extends TestCase

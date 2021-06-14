@@ -2,11 +2,9 @@
 
 namespace Cyaxaress\Course\Policies;
 
-use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use phpDocumentor\Reflection\Types\True_;
 
 class CoursePolicy
 {

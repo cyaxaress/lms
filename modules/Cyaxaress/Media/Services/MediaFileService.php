@@ -5,7 +5,6 @@ namespace Cyaxaress\Media\Services;
 use Cyaxaress\Media\Contracts\FileServiceContract;
 use Cyaxaress\Media\Models\Media;
 use Illuminate\Http\UploadedFile;
-use phpDocumentor\Reflection\Types\Void_;
 
 class MediaFileService
 {

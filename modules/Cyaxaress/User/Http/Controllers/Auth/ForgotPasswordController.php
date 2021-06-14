@@ -5,12 +5,9 @@ namespace Cyaxaress\User\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Cyaxaress\User\Http\Requests\ResetPasswordVerifyCodeRequest;
 use Cyaxaress\User\Http\Requests\SendResetPasswordVerifyCodeRequest;
-use Cyaxaress\User\Http\Requests\VerifyCodeRequest;
-use Cyaxaress\User\Models\User;
 use Cyaxaress\User\Repositories\UserRepo;
 use Cyaxaress\User\Services\VerifyCodeService;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Illuminate\Http\Request;
 
 class ForgotPasswordController extends Controller
 {

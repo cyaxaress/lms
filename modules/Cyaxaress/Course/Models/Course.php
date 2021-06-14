@@ -3,9 +3,8 @@
 namespace Cyaxaress\Course\Models;
 
 use Cyaxaress\Category\Models\Category;
-use Cyaxaress\Comment\Models\Comment;
+use Cyaxaress\Comment\Traits\HasComments;
 use Cyaxaress\Course\Repositories\CourseRepo;
-use Cyaxaress\Course\Repositories\LessonRepo;
 use Cyaxaress\Discount\Models\Discount;
 use Cyaxaress\Discount\Repositories\DiscountRepo;
 use Cyaxaress\Discount\Services\DiscountService;
@@ -17,9 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    /**
-     * @var mixed
-     */
+    use HasComments;
 
     protected $guarded = [];
     const TYPE_FREE = 'free';
@@ -192,17 +189,5 @@ class Course extends Model
         }
 
         return $links;
-    }
-
-    public function comments()
-    {
-        return $this->morphMany(Comment::class, 'commentable');
-    }
-
-    public function approvedComments()
-    {
-        return $this->morphMany(Comment::class, 'commentable')
-            ->where("status", Comment::STATUS_APPROVED)
-            ->whereNull("comment_id")->with("comments");
     }
 }

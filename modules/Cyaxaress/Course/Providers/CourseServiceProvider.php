@@ -1,12 +1,12 @@
 <?php
 namespace Cyaxaress\Course\Providers;
 
+use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Models\Season;
+use Cyaxaress\Course\Policies\CoursePolicy;
 use Cyaxaress\Course\Policies\LessonPolicy;
 use Cyaxaress\Course\Policies\SeasonPolicy;
-use Cyaxaress\Course\Models\Course;
-use Cyaxaress\Course\Policies\CoursePolicy;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;

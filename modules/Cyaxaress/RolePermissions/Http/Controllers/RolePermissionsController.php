@@ -8,7 +8,6 @@ use Cyaxaress\RolePermissions\Http\Requests\RoleUpdateRequest;
 use Cyaxaress\RolePermissions\Models\Role;
 use Cyaxaress\RolePermissions\Repositories\PermissionRepo;
 use Cyaxaress\RolePermissions\Repositories\RoleRepo;
-use Spatie\Permission\Models\Permission;
 
 
 class RolePermissionsController extends Controller

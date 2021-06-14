@@ -3,7 +3,6 @@
 namespace Cyaxaress\Payment\Models;
 
 use Cyaxaress\User\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Settlement extends Model

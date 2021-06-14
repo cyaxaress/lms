@@ -1,8 +1,6 @@
 <?php
 namespace Cyaxaress\Course\Rules;
 use Cyaxaress\Course\Repositories\SeasonRepo;
-use Cyaxaress\RolePermissions\Models\Permission;
-use Cyaxaress\User\Repositories\UserRepo;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidSeason implements Rule

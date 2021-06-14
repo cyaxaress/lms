@@ -4,7 +4,6 @@ namespace Cyaxaress\Dashboard\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Cyaxaress\Payment\Repositories\PaymentRepo;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {

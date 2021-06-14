@@ -2,7 +2,6 @@
 
 namespace Cyaxaress\Ticket\Tests\Feature;
 
-use Cyaxaress\Category\Models\Category;
 use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\Ticket\Models\Ticket;

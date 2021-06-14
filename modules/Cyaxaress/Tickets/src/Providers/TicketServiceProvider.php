@@ -1,14 +1,13 @@
 <?php
 namespace Cyaxaress\Ticket\Providers;
 
-use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\Ticket\Models\Reply;
 use Cyaxaress\Ticket\Models\Ticket;
 use Cyaxaress\Ticket\Policies\ReplyPolicy;
 use Cyaxaress\Ticket\Policies\TicketPolicy;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class TicketServiceProvider extends ServiceProvider {
     public $namespace = "Cyaxaress\Ticket\Http\Controllers";

@@ -1,10 +1,7 @@
 <?php
 namespace Cyaxaress\Course\Http\Requests;
 
-use Cyaxaress\Course\Models\Course;
-use Cyaxaress\Course\Rules\ValidTeacher;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class SeasonRequest extends FormRequest
 {

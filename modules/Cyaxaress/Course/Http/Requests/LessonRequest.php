@@ -1,12 +1,9 @@
 <?php
 namespace Cyaxaress\Course\Http\Requests;
 
-use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Rules\ValidSeason;
-use Cyaxaress\Course\Rules\ValidTeacher;
 use Cyaxaress\Media\Services\MediaFileService;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class LessonRequest extends FormRequest
 {

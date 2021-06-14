@@ -5,13 +5,13 @@ namespace Cyaxaress\User\Providers;
 
 
 use Cyaxaress\RolePermissions\Models\Permission;
-use Cyaxaress\User\Http\Middleware\StoreUserIp;
 use Cyaxaress\User\Database\Seeds\UsersTableSeeder;
+use Cyaxaress\User\Http\Middleware\StoreUserIp;
 use Cyaxaress\User\Models\User;
 use Cyaxaress\User\Policies\UserPolicy;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserServiceProvider extends ServiceProvider
 {

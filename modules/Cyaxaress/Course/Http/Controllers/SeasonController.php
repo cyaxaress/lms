@@ -2,14 +2,12 @@
 
 namespace Cyaxaress\Course\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Cyaxaress\Common\Responses\AjaxResponses;
 use Cyaxaress\Course\Http\Requests\SeasonRequest;
-use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Models\Season;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Course\Repositories\SeasonRepo;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class SeasonController extends Controller
 {

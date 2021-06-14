@@ -4,8 +4,6 @@
 namespace Cyaxaress\RolePermissions\Models;
 
 
-use Symfony\Component\Console\EventListener\ErrorListener;
-
 class Permission extends \Spatie\Permission\Models\Permission
 {
     const PERMISSION_MANAGE_CATEGORIES = 'manage categories';

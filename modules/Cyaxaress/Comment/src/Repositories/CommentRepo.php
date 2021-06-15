@@ -7,6 +7,12 @@ use Cyaxaress\RolePermissions\Models\Permission;
 
 class CommentRepo
 {
+
+    public function paginate()
+    {
+        return Comment::query()->latest()->paginate();
+    }
+
     public function store($data)
     {
         return Comment::query()->create([

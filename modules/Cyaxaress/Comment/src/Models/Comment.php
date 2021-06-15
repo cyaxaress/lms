@@ -39,5 +39,12 @@ class Comment extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function getStatusCssClass()
+    {
+        if ($this->status == self::STATUS_APPROVED) return "text-success";
+        elseif ($this->status == self::STATUS_REJECTED) return "text-error";
+
+        return "text-warning";
+    }
 
 }

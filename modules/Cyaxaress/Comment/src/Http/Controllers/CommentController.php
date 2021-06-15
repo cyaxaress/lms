@@ -6,6 +6,14 @@ use Cyaxaress\Comment\Http\Requests\CommentRequest;
 use Cyaxaress\Comment\Repositories\CommentRepo;
 
 class CommentController extends Controller{
+
+    public function index(CommentRepo $repo)
+    {
+        $comments = $repo->paginate();
+
+        return view("Comments::index", compact("comments"));
+    }
+
     public function store(CommentRequest $request, CommentRepo $repo)
     {
         $commentable = $request->commentable_type::findOrFail($request->commentable_id);

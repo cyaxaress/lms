@@ -14,6 +14,7 @@ class CommentServiceProvider extends ServiceProvider
         Route::middleware(['web', 'auth'])
             ->namespace($this->namespace)
             ->group(__DIR__ . "/../Routes/comments_routes.php");
+        $this->loadJsonTranslationsFrom(__DIR__ . "/../Resources/Lang");
     }
 
     public function boot()

@@ -37,4 +37,9 @@ class CommentRepo
             ->where("id", $id)
             ->first();
     }
+
+    public function findOrFail($id)
+    {
+        return Comment::query()->findOrFail($id);
+    }
 }

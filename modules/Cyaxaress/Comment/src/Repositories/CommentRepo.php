@@ -42,4 +42,9 @@ class CommentRepo
     {
         return Comment::query()->findOrFail($id);
     }
+
+    public function paginateParents()
+    {
+        return Comment::query()->whereNull("comment_id")->withCount("notApprovedComments")->latest()->paginate();
+    }
 }

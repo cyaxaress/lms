@@ -19,7 +19,7 @@
                         <input type="text"  class="text"  placeholder="قسمتی از متن">
                         <input type="text"  class="text"  placeholder="ایمیل">
                         <input type="text"  class="text margin-bottom-20"  placeholder="نام و نام خانوادگی">
-                        <btutton class="btn btn-webamooz_net">جستجو</btutton>
+                        <button class="btn btn-webamooz_net">جستجو</button>
                     </div>
                 </div>
             </form>
@@ -47,7 +47,7 @@
                 <td><a href="{{ $comment->commentable->path() }}">{{ $comment->commentable->title }}</a></td>
                 <td>{{ $comment->body }}</td>
                 <td>{{ \Morilog\Jalali\Jalalian::fromCarbon($comment->created_at) }}</td>
-                <td>{{ $comment->comments()->count() }}</td>
+                <td>{{ $comment->comments()->count() }} ({{ $comment->not_approved_comments_count }})</td>
                 <td class="{{ $comment->getStatusCssClass() }}">@lang($comment->status)</td>
                 <td>
                     <a href="" onclick="deleteItem(event, '{{ route('comments.destroy', $comment->id) }}')" class="item-delete mlg-15" title="حذف"></a>

@@ -39,6 +39,11 @@ class Comment extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function notApprovedComments()
+    {
+        return $this->hasMany(Comment::class)->where("status", self::STATUS_NEW);
+    }
+
     public function getStatusCssClass()
     {
         if ($this->status == self::STATUS_APPROVED) return "text-success";

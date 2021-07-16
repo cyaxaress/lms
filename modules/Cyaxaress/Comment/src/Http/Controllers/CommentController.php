@@ -32,7 +32,7 @@ class CommentController extends Controller{
     public function accept($id, CommentRepo $commentRepo)
     {
 //        $this->authorize('change_confirmation_status', Course::class);
-        if ($commentRepo->updateStatus($id, Comment::STATUS_REJECTED)) {
+        if ($commentRepo->updateStatus($id, Comment::STATUS_APPROVED)) {
             return AjaxResponses::SuccessResponse();
         }
 
@@ -52,7 +52,7 @@ class CommentController extends Controller{
     public function destroy($id, CommentRepo $repo)
     {
         $comment = $repo->findOrFail($id);
-        $comment->delete();
+//        $comment->delete();
         return AjaxResponses::SuccessResponse();
     }
 }

@@ -25,3 +25,7 @@
 .margin-top-6 {
     margin-top: 60px !important;
 }
+.comment-actions{
+    float: left;
+    margin-top: 25px;
+}

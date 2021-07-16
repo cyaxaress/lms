@@ -47,4 +47,11 @@ class CommentRepo
     {
         return Comment::query()->whereNull("comment_id")->withCount("notApprovedComments")->latest()->paginate();
     }
+
+    public function updateStatus($id, string $status)
+    {
+        return Comment::query()->where("id", $id)->update([
+            "status" => $status
+        ]);
+    }
 }

@@ -48,13 +48,16 @@
                 <td>{{ $comment->body }}</td>
                 <td>{{ \Morilog\Jalali\Jalalian::fromCarbon($comment->created_at) }}</td>
                 <td>{{ $comment->comments()->count() }} ({{ $comment->not_approved_comments_count }})</td>
-                <td class="{{ $comment->getStatusCssClass() }}">@lang($comment->status)</td>
+                <td class="confirmation_status {{ $comment->getStatusCssClass() }}">@lang($comment->status)</td>
                 <td>
                     <a href="" onclick="deleteItem(event, '{{ route('comments.destroy', $comment->id) }}')" class="item-delete mlg-15" title="حذف"></a>
-                    <a href="show-comment.html"  class="item-reject mlg-15" title="رد"></a>
-                    <a href="show-comment.html" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
-                    <a href="show-comment.html"  class="item-confirm mlg-15" title="تایید"></a>
-                    <a href="edit-comment.html" class="item-edit " title="ویرایش"></a>
+                    <a href="{{ route("comments.show", $comment->id) }}" class="item-eye mlg-15" title="مشاهده"></a>
+                    <a href="" onclick="updateConfirmationStatus(event, '{{ route('comments.accept', $comment->id) }}',
+                        'آیا از تایید این آیتم اطمینان دارید؟' , 'تایید شده')"
+                       class="item-confirm mlg-15" title="تایید"></a>
+                    <a href="" onclick="updateConfirmationStatus(event, '{{ route('comments.reject', $comment->id) }}',
+                        'آیا از رد این آیتم اطمینان دارید؟' ,'رد شده')"
+                       class="item-reject mlg-15" title="رد"></a>
                 </td>
             </tr>
             @endforeach

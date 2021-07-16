@@ -8,6 +8,6 @@
     <link rel="stylesheet" href="/panel/css/responsive_991.css" media="(max-width:991px)">
     <link rel="stylesheet" href="/panel/css/responsive_768.css" media="(max-width:768px)">
     <link rel="stylesheet" href="/panel/css/font.css">
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/custom.css?v=1.0.1">
     @yield('css')
 </head>

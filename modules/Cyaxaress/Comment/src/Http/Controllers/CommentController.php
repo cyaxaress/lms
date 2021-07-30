@@ -11,7 +11,12 @@ class CommentController extends Controller{
 
     public function index(CommentRepo $repo)
     {
-        $comments = $repo->paginateParents();
+        $comments = $repo
+            ->searchBody(request("body"))
+            ->searchEmail(request("email"))
+            ->searchName(request("name"))
+            ->searchStatus(request("status"))
+            ->paginateParents();
         return view("Comments::index", compact("comments"));
     }
 
@@ -51,7 +56,7 @@ class CommentController extends Controller{
     public function destroy($id, CommentRepo $repo)
     {
         $comment = $repo->findOrFail($id);
-//        $comment->delete();
+        $comment->delete();
         return AjaxResponses::SuccessResponse();
     }
 }

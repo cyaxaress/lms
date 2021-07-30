@@ -5,21 +5,22 @@
 @section('content')
     <div class="tab__box">
         <div class="tab__items">
-            <a class="tab__item is-active" href="comments.html"> همه نظرات</a>
-            <a class="tab__item " href="comments.html">نظرات تاییده نشده</a>
-            <a class="tab__item " href="comments.html">نظرات تاییده شده</a>
+            <a class="tab__item {{ request("status") == "" ? "is-active" : "" }}" href="{{ route("comments.index") }}?status="> همه نظرات</a>
+            <a class="tab__item {{ request("status") == "new" ? "is-active" : "" }}" href="{{ route("comments.index") }}?status=new">نظرات تاییده نشده</a>
+            <a class="tab__item {{ request("status") == "rejected" ? "is-active" : "" }}" href="{{ route("comments.index") }}?status=rejected">نظرات رد شده</a>
+            <a class="tab__item {{ request("status") == "approved" ? "is-active" : "" }}" href="{{ route("comments.index") }}?status=approved">نظرات تاییده شده</a>
         </div>
     </div>
     <div class="bg-white padding-20">
         <div class="t-header-search">
-            <form action="" onclick="event.preventDefault();">
+            <form action="">
                 <div class="t-header-searchbox font-size-13">
                     <input type="text" class="text search-input__box font-size-13" placeholder="جستجوی در نظرات">
                     <div class="t-header-search-content ">
-                        <input type="text"  class="text"  placeholder="قسمتی از متن">
-                        <input type="text"  class="text"  placeholder="ایمیل">
-                        <input type="text"  class="text margin-bottom-20"  placeholder="نام و نام خانوادگی">
-                        <button class="btn btn-webamooz_net">جستجو</button>
+                        <input type="text"  class="text" name="body"  placeholder="قسمتی از متن">
+                        <input type="text"  class="text" name="email"  placeholder="ایمیل">
+                        <input type="text"  class="text margin-bottom-20" name="name"  placeholder="نام و نام خانوادگی">
+                        <button type="submit" class="btn btn-webamooz_net">جستجو</button>
                     </div>
                 </div>
             </form>

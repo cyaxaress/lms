@@ -1,9 +1,18 @@
 <div class="container">
     <div class="comments">
+        @auth()
         @include("Front::comments.create", ["commentable" => $course])
-
+        @else
+            <div class="comment-main">
+                <div class="ct-header">
+                    <p>برای ثبت دیدگاه باید ابتدا <a href="{{ route("login") }}">وارد سایت</a> شوید</p>
+                </div>
+            </div>
+        @endauth
         <div class="comments-list">
+            @auth()
             @include("Front::comments.reply", ["commentable" => $course])
+            @endauth
             @foreach($commentable->approvedComments as $comment)
                 <ul class="comment-list-ul">
                     <div class="div-btn-answer">

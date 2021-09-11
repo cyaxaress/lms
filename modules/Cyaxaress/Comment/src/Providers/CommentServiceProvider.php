@@ -1,7 +1,10 @@
 <?php
 
 namespace Cyaxaress\Comment\Providers;
+use Cyaxaress\Comment\Policies\CommentPolicy;
+use Cyaxaress\Comment\Models\Comment;
 use Cyaxaress\RolePermissions\Models\Permission;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,6 +19,8 @@ class CommentServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(__DIR__ . "/../Routes/comments_routes.php");
         $this->loadJsonTranslationsFrom(__DIR__ . "/../Resources/Lang");
+
+        Gate::policy(Comment::class, CommentPolicy::class);
     }
 
     public function boot()
@@ -24,7 +29,7 @@ class CommentServiceProvider extends ServiceProvider
             "icon" => "i-comments",
             "title" => "نظرات",
             "url" => route('comments.index'),
-            "permission" => Permission::PERMISSION_MANAGE_COMMENTS
+            "permission" => [Permission::PERMISSION_MANAGE_COMMENTS, Permission::PERMISSION_TEACH]
         ]);
     }
 }

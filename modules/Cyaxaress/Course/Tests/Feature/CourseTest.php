@@ -195,7 +195,7 @@ class CourseTest extends TestCase
     private function actionAsSuperAdmin()
     {
         $this->createUser();
-        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_COURSES);
+        auth()->user()->givePermissionTo(Permission::PERMISSION_SUPER_ADMIN);
     }
 
     private function createCourse()

@@ -51,14 +51,18 @@
                 <td>{{ $comment->comments()->count() }} ({{ $comment->not_approved_comments_count }})</td>
                 <td class="confirmation_status {{ $comment->getStatusCssClass() }}">@lang($comment->status)</td>
                 <td>
-                    <a href="" onclick="deleteItem(event, '{{ route('comments.destroy', $comment->id) }}')" class="item-delete mlg-15" title="حذف"></a>
                     <a href="{{ route("comments.show", $comment->id) }}" class="item-eye mlg-15" title="مشاهده"></a>
+                    @if(auth()->user()->hasAnyPermission(
+                        \Cyaxaress\RolePermissions\Models\Permission::PERMISSION_SUPER_ADMIN,
+                        \Cyaxaress\RolePermissions\Models\Permission::PERMISSION_MANAGE_COMMENTS))
+                    <a href="" onclick="deleteItem(event, '{{ route('comments.destroy', $comment->id) }}')" class="item-delete mlg-15" title="حذف"></a>
                     <a href="" onclick="updateConfirmationStatus(event, '{{ route('comments.accept', $comment->id) }}',
                         'آیا از تایید این آیتم اطمینان دارید؟' , 'تایید شده')"
                        class="item-confirm mlg-15" title="تایید"></a>
                     <a href="" onclick="updateConfirmationStatus(event, '{{ route('comments.reject', $comment->id) }}',
                         'آیا از رد این آیتم اطمینان دارید؟' ,'رد شده')"
                        class="item-reject mlg-15" title="رد"></a>
+                    @endif
                 </td>
             </tr>
             @endforeach

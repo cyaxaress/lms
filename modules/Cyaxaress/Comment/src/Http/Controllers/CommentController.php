@@ -25,7 +25,7 @@ class CommentController extends Controller
         if (!auth()->user()->hasAnyPermission(Permission::PERMISSION_MANAGE_COMMENTS, Permission::PERMISSION_SUPER_ADMIN)) {
             $comments->query->whereHasMorph("commentable", [Course::class] , function ($query) {
                 return $query->where("teacher_id", auth()->id());
-            });
+            })->where("status", Comment::STATUS_APPROVED);
         }
 
         $comments = $comments->paginateParents();

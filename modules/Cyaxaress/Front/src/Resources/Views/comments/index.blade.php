@@ -15,9 +15,11 @@
             @endauth
             @foreach($commentable->approvedComments as $comment)
                 <ul class="comment-list-ul">
+                    @auth
                     <div class="div-btn-answer">
                         <button class="btn-answer" onclick="setCommentId({{ $comment->id }})">پاسخ به دیدگاه</button>
                     </div>
+                    @endauth
                     <li class="is-comment">
                         <div class="comment-header">
                             <div class="comment-header-avatar">

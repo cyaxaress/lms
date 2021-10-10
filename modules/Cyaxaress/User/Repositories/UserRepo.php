@@ -55,6 +55,7 @@ class UserRepo
     public function updateProfile($request)
     {
         auth()->user()->name = $request->name;
+        auth()->user()->telegram = $request->telegram;
         if (auth()->user()->email != $request->email) {
             auth()->user()->email = $request->email;
             auth()->user()->email_verified_at = null;

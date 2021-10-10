@@ -145,6 +145,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function profilePath()
     {
+        return null;
         return $this->username ? route('viewProfile', $this->username) : route('viewProfile', 'username');
     }
 

@@ -21,7 +21,12 @@ class CommentSubmittedNotification extends Notification
 
     public function via($notifiable): array
     {
-        return ['mail', TelegramChannel::class];
+        $channels = [
+            "mail"
+        ];
+        if (!is_null($notifiable->telegram)) $channels[] = TelegramChannel::class;
+
+        return $channels;
     }
 
     public function toMail($notifiable)
@@ -31,16 +36,10 @@ class CommentSubmittedNotification extends Notification
 
     public function toTelegram($notifiable)
     {
+        if (!is_null($notifiable->telegram))
         return TelegramMessage::create()
-            // Optional recipient user id.
-            ->to(118718802)
-            // Markdown supported.
+            ->to($notifiable->telegram)
             ->content("یک دیدگاه جدید برای دوره ی شما در وب آموز ارسال شده است.")
-
-            // (Optional) Blade template for the content.
-            // ->view('notification', ['url' => $url])
-
-            // (Optional) Inline Buttons
             ->button('مشاهده دوره', $this->comment->commentable->path())
             ->button('مدیریت دیدگاه ها', route("comments.index"));
     }

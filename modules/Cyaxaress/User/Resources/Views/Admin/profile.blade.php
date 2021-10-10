@@ -20,6 +20,7 @@
                 <x-input type="text" name="card_number" placeholder="شماره کارت بانکی" value="{{ auth()->user()->card_number }}" class="text-left"  />
                 <x-input type="text" name="shaba" placeholder="شماره شبا بانکی" value="{{ auth()->user()->shaba }}" class="text-left"  />
                 <x-input type="text" name="username" placeholder="نام کاربری و آدرس پروفایل" value="{{ auth()->user()->username }}" class="text-left"  />
+                    <x-input type="text" name="telegram" placeholder="ایدی شما در تلگرام جهت دریافت نوتیفیکیشن" value="{{ auth()->user()->telegram }}" class="text-left"  />
                 <p class="input-help text-left margin-bottom-12" dir="ltr">
                     <a href="{{ auth()->user()->profilePath() }}">{{ auth()->user()->profilePath() }}</a>
                 </p>

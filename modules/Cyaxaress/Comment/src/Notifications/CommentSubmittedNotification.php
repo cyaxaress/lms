@@ -2,6 +2,8 @@
 
 namespace Cyaxaress\Comment\Notifications;
 
+use Cyaxaress\Comment\Mail\CommentSubmittedMail;
+use Cyaxaress\User\Mail\ResetPasswordRequestMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -22,13 +24,9 @@ class CommentSubmittedNotification extends Notification
         return ['mail'];
     }
 
-    public function toMail($notifiable): MailMessage
+    public function toMail($notifiable)
     {
-        dd("email notification", $this->comment);
-        return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+        return (new CommentSubmittedMail($this->comment))->to($notifiable->email);
     }
 
     public function toArray($notifiable): array

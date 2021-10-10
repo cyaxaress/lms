@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\Comment\Http\Controllers;
 
+use Cyaxaress\Comment\Events\CommentSubmittedEvent;
 use App\Http\Controllers\Controller;
 use Cyaxaress\Comment\Http\Requests\CommentRequest;
 use Cyaxaress\Comment\Models\Comment;
@@ -42,7 +43,8 @@ class CommentController extends Controller
 
     public function store(CommentRequest $request, CommentRepo $repo)
     {
-        $repo->store($request->all());
+        $comment = $repo->store($request->all());
+        event(new CommentSubmittedEvent($comment));
         newFeedback("عملیات موفقیت آمیز", "دیدگاه شما با ثبت گردید.");
         return back();
     }

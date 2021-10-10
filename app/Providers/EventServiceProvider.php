@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Cyaxaress\Comment\Events\CommentSubmittedEvent;
+use Cyaxaress\Comment\Listeners\CommentSubmittedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,14 +19,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        CommentSubmittedEvent::class => [
+            CommentSubmittedListener::class
+        ]
     ];
 
-    /**
-     * Register any events for your application.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 

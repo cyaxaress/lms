@@ -25,8 +25,8 @@ class CommentSubmittedNotification extends Notification
         $channels = [
             "mail"
         ];
-        if (!is_null($notifiable->telegram)) $channels[] = TelegramChannel::class;
-        if (!is_null($notifiable->mobile)) $channels[] = KavenegarChannel::class;
+        if (!empty($notifiable->telegram)) $channels[] = TelegramChannel::class;
+        if (!empty($notifiable->mobile)) $channels[] = KavenegarChannel::class;
 
         return $channels;
     }
@@ -38,7 +38,7 @@ class CommentSubmittedNotification extends Notification
 
     public function toTelegram($notifiable)
     {
-        if (!is_null($notifiable->telegram))
+        if (!empty($notifiable->telegram))
         return TelegramMessage::create()
             ->to($notifiable->telegram)
             ->content("یک دیدگاه جدید برای دوره ی شما در وب آموز ارسال شده است.")

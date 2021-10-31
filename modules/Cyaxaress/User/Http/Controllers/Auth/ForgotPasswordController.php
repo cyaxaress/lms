@@ -33,8 +33,8 @@ class ForgotPasswordController extends Controller
     public function sendVerifyCodeEmail(SendResetPasswordVerifyCodeRequest $request, UserRepo $userRepo)
     {
         $user = $userRepo->findByEmail($request->email);
-
-        if ($user && ! VerifyCodeService::has($user->id)) {
+        VerifyCodeService::delete($user->id);
+        if ($user) {
             $user->sendResetPasswordRequestNotification();
         }
 

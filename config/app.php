@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Kavenegar\LaravelNotification\KavenegarServiceProvider::class,
         /*
          * Application Service Providers...
          */

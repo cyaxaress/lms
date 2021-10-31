@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e6a7cf1a980758619be0c8802e95728",
+    "content-hash": "3adde73bd7a9167695c2248cf95b372c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1075,6 +1075,103 @@
                 "source": "https://github.com/Intervention/image/tree/master"
             },
             "time": "2019-11-02T09:15:47+00:00"
+        },
+        {
+            "name": "kavenegar/laravel-notification",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KaveNegar/kavenegar-laravel-notification.git",
+                "reference": "c0b8a3bcb712b5132f1973b73ac958519a5e18da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KaveNegar/kavenegar-laravel-notification/zipball/c0b8a3bcb712b5132f1973b73ac958519a5e18da",
+                "reference": "c0b8a3bcb712b5132f1973b73ac958519a5e18da",
+                "shasum": ""
+            },
+            "require": {
+                "kavenegar/php": "*"
+            },
+            "type": "laravel-package",
+            "autoload": {
+                "psr-4": {
+                    "Kavenegar\\LaravelNotification\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kavenegar API Team",
+                    "email": "support@kavenegar.com"
+                },
+                {
+                    "name": "Ghobad Palvaneh",
+                    "email": "ghobad.vm@gmail.com"
+                }
+            ],
+            "description": "laravel notificatiion channel for Kavenegar",
+            "keywords": [
+                "api",
+                "kavenegar",
+                "laravel",
+                "notificatiion",
+                "sms"
+            ],
+            "support": {
+                "issues": "https://github.com/KaveNegar/kavenegar-laravel-notification/issues",
+                "source": "https://github.com/KaveNegar/kavenegar-laravel-notification/tree/1.0.5"
+            },
+            "time": "2017-04-04T06:30:40+00:00"
+        },
+        {
+            "name": "kavenegar/php",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kavenegar/kavenegar-php.git",
+                "reference": "884561b8d8c91b01f7db25284c2be9923c809412"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kavenegar/kavenegar-php/zipball/884561b8d8c91b01f7db25284c2be9923c809412",
+                "reference": "884561b8d8c91b01f7db25284c2be9923c809412",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kavenegar\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kavenegar API Team",
+                    "email": "support@kavenegar.com"
+                }
+            ],
+            "description": "A PHP wrapper for Kavenegar's API",
+            "homepage": "http://github.com/Kavenegar/kavenegar-php",
+            "keywords": [
+                "api",
+                "kavenegar",
+                "sms"
+            ],
+            "support": {
+                "issues": "https://github.com/kavenegar/kavenegar-php/issues",
+                "source": "https://github.com/kavenegar/kavenegar-php/tree/master"
+            },
+            "time": "2019-02-26T12:49:19+00:00"
         },
         {
             "name": "laravel-notification-channels/telegram",

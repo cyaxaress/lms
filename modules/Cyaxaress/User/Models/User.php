@@ -164,4 +164,9 @@ class User extends Authenticatable implements MustVerifyEmail
             ->select("course_id")->where("teacher_id", $this->id)
             ->join("course_user", "courses.id", "=", "course_user.course_id")->count();
     }
+
+    public function routeNotificationForSms()
+    {
+        return $this->mobile;
+    }
 }

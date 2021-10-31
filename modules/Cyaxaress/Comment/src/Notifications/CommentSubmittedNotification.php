@@ -5,6 +5,7 @@ namespace Cyaxaress\Comment\Notifications;
 use Cyaxaress\Comment\Mail\CommentSubmittedMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
+use Kavenegar\LaravelNotification\KavenegarChannel;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
 
@@ -25,6 +26,7 @@ class CommentSubmittedNotification extends Notification
             "mail"
         ];
         if (!is_null($notifiable->telegram)) $channels[] = TelegramChannel::class;
+        if (!is_null($notifiable->mobile)) $channels[] = KavenegarChannel::class;
 
         return $channels;
     }
@@ -42,6 +44,11 @@ class CommentSubmittedNotification extends Notification
             ->content("یک دیدگاه جدید برای دوره ی شما در وب آموز ارسال شده است.")
             ->button('مشاهده دوره', $this->comment->commentable->path())
             ->button('مدیریت دیدگاه ها', route("comments.index"));
+    }
+
+    public function toSMS($notifiable)
+    {
+        return 'یک دیدگاه جدید برای دوره ی شما در وب آموز ارسال شده است. جهت مشاهده و ارسال پاسخ روی لینک زیر کلیک فرمایید.' . "\n" .  route("comments.index");
     }
 
     public function toArray($notifiable): array

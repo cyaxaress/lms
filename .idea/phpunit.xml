@@ -8,6 +8,8 @@
         <option value="$PROJECT_DIR$/modules/Cyaxaress/User/Tests/Feature" />
         <option value="$PROJECT_DIR$/modules/Cyaxaress/User/Tests/Unit" />
         <option value="$PROJECT_DIR$/modules/Cyaxaress/Category/Tests/Feature" />
+        <option value="$PROJECT_DIR$/modules/Cyaxaress/Course/Tests/Feature" />
+        <option value="$PROJECT_DIR$/modules/Cyaxaress/RolePermissions/Tests/Feature" />
       </list>
     </option>
   </component>

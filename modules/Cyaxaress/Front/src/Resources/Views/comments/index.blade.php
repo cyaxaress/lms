@@ -13,7 +13,7 @@
             @auth()
             @include("Front::comments.reply", ["commentable" => $course])
             @endauth
-            @foreach($commentable->approvedComments as $comment)
+            @foreach($commentable->approvedComments()->latest()->get() as $comment)
                 <ul class="comment-list-ul">
                     @auth
                     <div class="div-btn-answer">

@@ -2,29 +2,32 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/User" isTestSource="false" packagePrefix="Cyaxaress\User\" />
-      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Media" isTestSource="false" packagePrefix="Cyaxaress\Media\" />
-      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/User/Tests/Feature" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/tests/Unit" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Category/Tests/Feature" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Tickets/src" isTestSource="false" packagePrefix="Cyaxaress\Ticket\" />
-      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Comment/src" isTestSource="false" packagePrefix="Cyaxaress\Comment\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/RolePermissions" isTestSource="false" packagePrefix="Cyaxaress\RolePermissions\" />
-      <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
-      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/User/Tests/Unit" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Dashboard" isTestSource="false" packagePrefix="Cyaxaress\Dashboard\" />
-      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Discount/src" isTestSource="false" packagePrefix="Cyaxaress\Discount\" />
-      <sourceFolder url="file://$MODULE_DIR$/tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Comment/src" isTestSource="false" packagePrefix="Cyaxaress\Comment\" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Tickets/src" isTestSource="false" packagePrefix="Cyaxaress\Ticket\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/RolePermissions" isTestSource="false" packagePrefix="Cyaxaress\RolePermissions\" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/User" isTestSource="false" packagePrefix="Cyaxaress\User\" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Dashboard" isTestSource="false" packagePrefix="Cyaxaress\Dashboard\" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Category" isTestSource="false" packagePrefix="Cyaxaress\Category\" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Discount/src" isTestSource="false" packagePrefix="Cyaxaress\Discount\" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Course" isTestSource="false" packagePrefix="Cyaxaress\Course\" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Media" isTestSource="false" packagePrefix="Cyaxaress\Media\" />
+      <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/Unit" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/User/Tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/User/Tests/Unit" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Category/Tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Course/Tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/RolePermissions/Tests/Feature" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/asm89/stack-cors" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/beberlei/assert" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/cyaxaress/common" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cyaxaress/front" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cyaxaress/payment" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />

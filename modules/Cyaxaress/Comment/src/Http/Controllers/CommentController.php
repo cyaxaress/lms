@@ -2,6 +2,8 @@
 
 namespace Cyaxaress\Comment\Http\Controllers;
 
+use Cyaxaress\Comment\Events\CommentApprovedEvent;
+use Cyaxaress\Comment\Events\CommentRejectedEvent;
 use Cyaxaress\Comment\Events\CommentSubmittedEvent;
 use App\Http\Controllers\Controller;
 use Cyaxaress\Comment\Http\Requests\CommentRequest;
@@ -52,7 +54,9 @@ class CommentController extends Controller
     public function accept($id, CommentRepo $commentRepo)
     {
         $this->authorize('manage', Comment::class);
+        $comment = $commentRepo->findOrFail($id);
         if ($commentRepo->updateStatus($id, Comment::STATUS_APPROVED)) {
+            CommentApprovedEvent::dispatch($comment);
             return AjaxResponses::SuccessResponse();
         }
 
@@ -62,7 +66,9 @@ class CommentController extends Controller
     public function reject($id, CommentRepo $commentRepo)
     {
         $this->authorize('manage', Comment::class);
+        $comment = $commentRepo->findOrFail($id);
         if ($commentRepo->updateStatus($id, Comment::STATUS_REJECTED)) {
+            CommentRejectedEvent::dispatch($comment);
             return AjaxResponses::SuccessResponse();
         }
 

@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use Cyaxaress\Comment\Events\CommentApprovedEvent;
+use Cyaxaress\Comment\Events\CommentRejectedEvent;
 use Cyaxaress\Comment\Events\CommentSubmittedEvent;
+use Cyaxaress\Comment\Listeners\CommentApprovedListener;
+use Cyaxaress\Comment\Listeners\CommentRejectedListener;
 use Cyaxaress\Comment\Listeners\CommentSubmittedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -18,6 +22,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        CommentApprovedEvent::class => [
+            CommentApprovedListener::class
+        ],
+        CommentRejectedEvent::class => [
+            CommentRejectedListener::class
         ],
         CommentSubmittedEvent::class => [
             CommentSubmittedListener::class

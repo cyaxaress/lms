@@ -2,9 +2,11 @@
 
 namespace Cyaxaress\Comment\Listeners;
 
+use Cyaxaress\Comment\Notifications\CommentApprovedNotification;
+use Cyaxaress\Comment\Notifications\CommentRejectedNotification;
 use Cyaxaress\Comment\Notifications\CommentSubmittedNotification;
 
-class CommentSubmittedListener
+class CommentRejectedListener
 {
     /**
      * Create the event listener.
@@ -24,8 +26,6 @@ class CommentSubmittedListener
      */
     public function handle($event)
     {
-        // notify comment owner
-        if ($event->comment->comment_id && $event->comment->user_id !== $event->comment->comment->user->id)
-        $event->comment->comment->user->notify(new CommentSubmittedNotification($event->comment));
+        $event->comment->user->notify(new CommentRejectedNotification($event->comment));
     }
 }

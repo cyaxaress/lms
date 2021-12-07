@@ -14,6 +14,9 @@ class CommonServiceProvider extends ServiceProvider
     }
     public function boot()
     {
-
+        view()->composer("Dashboard::layout.header", function ($view) {
+            $notifications = auth()->user()->unreadNotifications;
+            return $view->with(compact("notifications"));
+        });
     }
 }

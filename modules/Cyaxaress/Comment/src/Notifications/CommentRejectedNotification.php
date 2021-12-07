@@ -25,6 +25,7 @@ class CommentRejectedNotification extends Notification
     public function via($notifiable)
     {
         $channels[] = 'mail';
+        $channels[] = 'database';
         if (!empty($notifiable->telegram)) $channels[] = TelegramChannel::class;
         return $channels;
     }
@@ -49,7 +50,8 @@ class CommentRejectedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            "message" => "دیدگاه شما رد شد.",
+            "url" => $this->comment->commentable->path(),
         ];
     }
 }

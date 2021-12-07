@@ -23,7 +23,8 @@ class CommentSubmittedNotification extends Notification
     public function via($notifiable): array
     {
         $channels = [
-            "mail"
+            "mail",
+            "database"
         ];
         if (!empty($notifiable->telegram)) $channels[] = TelegramChannel::class;
         if (!empty($notifiable->mobile)) $channels[] = KavenegarChannel::class;
@@ -54,7 +55,8 @@ class CommentSubmittedNotification extends Notification
     public function toArray($notifiable): array
     {
         return [
-            //
+            "message" => "دیدگاه جدید برای دوره ی شما ثبت شده است.",
+            "url" => route("comments.index"),
         ];
     }
 }

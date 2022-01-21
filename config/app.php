@@ -184,6 +184,7 @@ return [
         Cyaxaress\Discount\Providers\DiscountServiceProvider::class,
         Cyaxaress\Ticket\Providers\TicketServiceProvider::class,
         Cyaxaress\Comment\Providers\CommentServiceProvider::class,
+        Cyaxaress\Slider\Providers\SliderServiceProvider::class,
 
     ],
 

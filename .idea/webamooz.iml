@@ -21,6 +21,7 @@
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Category/Tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Course/Tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/RolePermissions/Tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/Cyaxaress/Slider/src" isTestSource="false" packagePrefix="Cyaxaress\Slider\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/asm89/stack-cors" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/reflection-docblock" />

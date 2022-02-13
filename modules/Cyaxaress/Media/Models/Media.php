@@ -20,4 +20,9 @@ class Media extends Model
     {
         return MediaFileService::thumb($this);
     }
+
+    public function getUrl($quality = "original"): string
+    {
+        return "/storage/" . $this->files[$quality];
+    }
 }

@@ -38,6 +38,7 @@ class CourseController extends Controller
 
     public function store(CourseRequest $request, CourseRepo $courseRepo)
     {
+        $this->authorize('create', Course::class);
         $request->request->add(['banner_id' => MediaFileService::publicUpload($request->file('image'))->id]);
         $courseRepo->store($request);
         return redirect()->route('courses.index');

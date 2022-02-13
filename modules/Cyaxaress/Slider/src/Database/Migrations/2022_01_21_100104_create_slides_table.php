@@ -19,7 +19,7 @@ class CreateSlidesTable extends Migration
             $table->foreignId("media_id")->references("id")->on("media");
             $table->float("priority")->nullable();
             $table->string("link")->nullable();
-            $table->enum("status", \Cyaxaress\Slider\Models\Slide::STATUSES)->default(\Cyaxaress\Slider\Models\Slide::STATUS_ENABLE);
+            $table->boolean("status")->default(true);
             $table->timestamps();
         });
     }

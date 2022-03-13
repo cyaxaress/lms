@@ -35,10 +35,6 @@
     "repositories": [
         {
             "type": "path",
-            "url": "modules/Cyaxaress/Common"
-        },
-        {
-            "type": "path",
             "url": "modules/Cyaxaress/Front"
         },
         {

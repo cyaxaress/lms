@@ -3,5 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/modules/Cyaxaress/Common" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/Cyaxaress/Front" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/Cyaxaress/Payment" vcs="Git" />
   </component>
 </project>

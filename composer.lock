@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e5c572ac138735f6a3d527bb916bdbd",
+    "content-hash": "765e6cb102e8384d4886cd8646098899",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -230,11 +230,18 @@
         {
             "name": "cyaxaress/front",
             "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "modules/Cyaxaress/Front",
-                "reference": "74fcdbfc28f07d0850faf2aaf07e840e34393fa8"
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cyaxaress/lms-front.git",
+                "reference": "3ceea51e85ced5781ae3008dae73464e33c51273"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cyaxaress/lms-front/zipball/3ceea51e85ced5781ae3008dae73464e33c51273",
+                "reference": "3ceea51e85ced5781ae3008dae73464e33c51273",
+                "shasum": ""
+            },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -248,18 +255,28 @@
                     "Cyaxaress\\Front\\": "src"
                 }
             },
-            "transport-options": {
-                "relative": true
-            }
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/cyaxaress/lms-front/issues",
+                "source": "https://github.com/cyaxaress/lms-front/tree/master"
+            },
+            "time": "2022-03-13T16:10:17+00:00"
         },
         {
             "name": "cyaxaress/payment",
             "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "modules/Cyaxaress/Payment",
-                "reference": "3eec0587bf658b885693d15cca1fff38edf7e8e9"
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cyaxaress/lms-payment.git",
+                "reference": "1ea64ab6b62929eb7e953f9aa1c5fd7e95f8b076"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cyaxaress/lms-payment/zipball/1ea64ab6b62929eb7e953f9aa1c5fd7e95f8b076",
+                "reference": "1ea64ab6b62929eb7e953f9aa1c5fd7e95f8b076",
+                "shasum": ""
+            },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -273,9 +290,12 @@
                     "Cyaxaress\\Payment\\": "src"
                 }
             },
-            "transport-options": {
-                "relative": true
-            }
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/cyaxaress/lms-payment/issues",
+                "source": "https://github.com/cyaxaress/lms-payment/tree/master"
+            },
+            "time": "2022-03-13T16:16:17+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

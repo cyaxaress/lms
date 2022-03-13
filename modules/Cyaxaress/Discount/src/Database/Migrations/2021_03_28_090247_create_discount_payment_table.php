@@ -18,7 +18,6 @@ class CreateDiscountPaymentTable extends Migration
             $table->foreignId("payment_id");
             $table->primary(["discount_id", "payment_id"]);
             $table->foreign("discount_id")->references("id")->on("discounts")->onDelete("CASCADE");
-            $table->foreign("payment_id")->references("id")->on("payments")->onDelete("CASCADE");
         });
     }
 

@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <x-file placeholder="آپلود درس *" name="lesson_file" required />
-                <x-textarea placeholder="توضیحات درس" name="body" />
+                <x-text-area placeholder="توضیحات درس" name="body" />
                 <br>
                 <button class="btn btn-webamooz_net">ایجاد درس</button>
             </form>

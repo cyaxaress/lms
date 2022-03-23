@@ -9,7 +9,7 @@
         <input type="hidden" name="commentable_id" value="{{ $commentable->id }}">
         <div class="ct-row">
             <div class="ct-textarea">
-                <x-textarea name="body" placeholder="ارسال نظر..."/>
+                <x-text-area name="body" placeholder="ارسال نظر..."/>
             </div>
         </div>
         <div class="ct-row">

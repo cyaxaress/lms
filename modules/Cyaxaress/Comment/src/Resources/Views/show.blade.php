@@ -26,7 +26,7 @@
                 <input type="hidden" name="comment_id" value="{{ $comment->id }}">
                 <input type="hidden" name="commentable_type" value="{{ get_class($comment->commentable) }}">
                 <input type="hidden" name="commentable_id" value="{{ $comment->commentable->id }}">
-                <x-textarea name="body" placeholder="ارسال نظر..."/>
+                <x-text-area name="body" placeholder="ارسال نظر..."/>
                 <button type="submit" class="btn btn-webamooz_net">ارسال پاسخ</button>
             </form>
             @else

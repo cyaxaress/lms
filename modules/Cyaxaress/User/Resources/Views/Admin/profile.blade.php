@@ -25,7 +25,7 @@
                     <a href="{{ auth()->user()->profilePath() }}">{{ auth()->user()->profilePath() }}</a>
                 </p>
                 <x-input type="text" name="headline" placeholder="عنوان" value="{{ auth()->user()->headline }}" />
-                <x-textarea placeholder="بیو" name="bio" value="{{ auth()->user()->bio }}" />
+                <x-text-area placeholder="بیو" name="bio" value="{{ auth()->user()->bio }}" />
                 @endcan
                 <br>
                 <button class="btn btn-webamooz_net">بروزرسانی پروفایل</button>

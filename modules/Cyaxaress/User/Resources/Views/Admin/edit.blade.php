@@ -32,7 +32,7 @@
 
                 <x-file placeholder="آپلود بنر کاربر" name="image" :value="$user->image"/>
                 <x-input type="password" name="password" placeholder="پسورد جدید" value=""  />
-                <x-textarea placeholder="بیو" name="bio" value="{{ $user->bio }}" />
+                <x-text-area placeholder="بیو" name="bio" value="{{ $user->bio }}" />
                 <br>
                 <button class="btn btn-webamooz_net">بروزرسانی کاربر</button>
             </form>

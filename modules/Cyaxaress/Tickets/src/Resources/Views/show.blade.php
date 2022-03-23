@@ -44,7 +44,7 @@
         <form action="{{ route("tickets.reply", $ticket->id) }}" method="post" enctype="multipart/form-data"
               class="padding-30">
             @csrf
-            <x-textarea placeholder="متن پاسخ" name="body" class="text" required/>
+            <x-text-area placeholder="متن پاسخ" name="body" class="text" required/>
             <x-file name="attachment" placeholder="آپلود فایل پیویست"/>
             <button class="btn btn-webamooz_net">ارسال پاسخ</button>
         </form>

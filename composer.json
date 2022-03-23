@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.2.5|^8.0.0",
         "cyaxaress/common": "dev-master",
         "cyaxaress/front": "9999999-dev",
         "cyaxaress/payment": "9999999-dev",

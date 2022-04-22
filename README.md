@@ -21,7 +21,7 @@ This project is a Learning Management System developed with Laravel framework in
 
 ## How this app developed?
 
-If you want to learn Modular structure and how this app developed join my online course at [here](https://webamooz.net/laravel-webamooz/view)
+If you want to learn Modular structure and how this app developed join my online course at [here](https://webamooz.net/courses/laravel-webamooz/view)
 
 
 ## Security Vulnerabilities

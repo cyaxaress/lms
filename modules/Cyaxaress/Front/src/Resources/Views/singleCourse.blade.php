@@ -171,15 +171,7 @@
                     <div>
                         {!! $course->body !!}
                     </div>
-                    <div class="tags">
-                        <ul>
-                            <li><a href="">ری اکت</a></li>
-                            <li><a href="">reactjs</a></li>
-                            <li><a href="">جاوااسکریپت</a></li>
-                            <li><a href="">javascript</a></li>
-                            <li><a href="">reactjs چیست</a></li>
-                        </ul>
-                    </div>
+                    @includeIf('tag::includes.tags-box',['tags'=>$course->tags])
                 </div>
                 @include('Front::layout.episodes-list')
             </div>
@@ -209,18 +201,24 @@
                             </tr>
                             <tr>
                                 <th>درصد تخفیف</th>
-                                <td><span id="discountPercent" data-value="{{ $course->getDiscountPercent()  }}">{{ $course->getDiscountPercent() }}</span>%</td>
+                                <td><span id="discountPercent"
+                                          data-value="{{ $course->getDiscountPercent()  }}">{{ $course->getDiscountPercent() }}</span>%
+                                </td>
                             </tr>
                             <tr>
                                 <th> مبلغ تخفیف</th>
                                 <td class="text-red"><span
-                                        id="discountAmount" data-value="{{ $course->getDiscountAmount()  }}"> {{ $course->getDiscountAmount() }}</span> تومان
+                                        id="discountAmount"
+                                        data-value="{{ $course->getDiscountAmount()  }}"> {{ $course->getDiscountAmount() }}</span>
+                                    تومان
                                 </td>
                             </tr>
                             <tr>
                                 <th> قابل پرداخت</th>
                                 <td class="text-blue"><span
-                                        id="payableAmount" data-value="{{ $course->getFinalPrice()  }}">{{ $course->getFormattedFinalPrice() }}</span> تومان
+                                        id="payableAmount"
+                                        data-value="{{ $course->getFinalPrice()  }}">{{ $course->getFormattedFinalPrice() }}</span>
+                                    تومان
                                 </td>
                             </tr>
                             </tbody>
@@ -245,7 +243,7 @@
             $("#response").text("")
             $.get(url.replace("code", code))
                 .done(function (data) {
-                    $("#discountPercent").text( parseInt($("#discountPercent").attr("data-value")) +  data.discountPercent)
+                    $("#discountPercent").text(parseInt($("#discountPercent").attr("data-value")) + data.discountPercent)
                     $("#discountAmount").text(parseInt($("#discountAmount").attr("data-value")) + data.discountAmount)
                     $("#payableAmount").text(parseInt($("#payableAmount").attr("data-value")) - data.discountAmount)
                     $("#response").text("کد تخفیف با موفقیت اعمال شد.").removeClass("text-error").addClass("text-success")

@@ -614,6 +614,10 @@ textarea {
     content: "\E083";
 }
 
+.sidebar__nav .i-tags a::before {
+    content: "\E071";
+}
+
 .sidebar__nav .i-courses a::before {
     content: "\E0c2";
 }

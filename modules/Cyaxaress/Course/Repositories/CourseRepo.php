@@ -11,7 +11,8 @@ class CourseRepo
 {
     public function store($values)
     {
-        return Course::create([
+        /** @var Course $course */
+        $course = Course::create([
             'teacher_id' => $values->teacher_id,
             'category_id' => $values->category_id,
             'banner_id' => $values->banner_id,
@@ -37,9 +38,9 @@ class CourseRepo
         return Course::findOrFail($id);
     }
 
-    public function update($id, $values)
+    public function update($course, $values)
     {
-        return Course::where('id', $id)->update([
+        return $course->update([
             'teacher_id' => $values->teacher_id,
             'category_id' => $values->category_id,
             'banner_id' => $values->banner_id,
@@ -51,6 +52,7 @@ class CourseRepo
             'type' => $values->type,
             'status' => $values->status,
             'body' => $values->body,
+            'updated_at' => now(),
         ]);
     }
 

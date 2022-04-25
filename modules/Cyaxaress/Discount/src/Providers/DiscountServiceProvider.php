@@ -27,7 +27,7 @@ class DiscountServiceProvider extends ServiceProvider
     {
         config()->set('sidebar.items.discounts', ["icon" => "i-discounts",
             "title" => "تخفیف ها",
-            "url" => route('discounts.index'),
+            "route_name" => 'discounts.index',
             "permission" => Permission::PERMISSION_MANAGE_DISCOUNT
         ]);
     }

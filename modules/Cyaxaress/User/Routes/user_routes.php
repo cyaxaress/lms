@@ -8,8 +8,8 @@ Route::group([
     Route::delete('users/{user}/remove/{role}/role', "UserController@removeRole")->name('users.removeRole');
     Route::patch('users/{user}/manualVerify', "UserController@manualVerify")->name('users.manualVerify');
     Route::post('users/photo', "UserController@updatePhoto")->name('users.photo');
-    Route::get('edit-profile', "UserController@profile")->name('users.profile');
     Route::post('edit-profile', ["uses" => "UserController@updateProfile", "as" => 'users.profile']);
+    Route::get('edit-profile', "UserController@profile");
     Route::get('users/{user}/info', ["uses" => "UserController@info", "as" => 'users.info']);
     Route::resource('users', "UserController");
 });
@@ -25,7 +25,7 @@ Route::group([
 
     // login
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-    Route::post('/login', 'Auth\LoginController@login')->name('login');
+    Route::post('/login', 'Auth\LoginController@login');
 
     // logout
     Route::any('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -45,5 +45,5 @@ Route::group([
 
     // register
     Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-    Route::post('/register', 'Auth\RegisterController@register')->name('register');
+    Route::post('/register', 'Auth\RegisterController@register');
 });

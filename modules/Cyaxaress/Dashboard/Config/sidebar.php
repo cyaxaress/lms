@@ -7,8 +7,8 @@ return [
         'discounts' => [],
         'tickets' => [],
         'users' => [],
+        'tags' => [],
         'role-permissions' => [],
         'usersInformation' => [],
-
     ]
 ];

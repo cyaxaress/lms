@@ -9,9 +9,10 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5|^8.0.0",
+        "alikeshtkar/tag": "dev-master",
         "cyaxaress/common": "dev-master",
-        "cyaxaress/front": "9999999-dev",
-        "cyaxaress/payment": "9999999-dev",
+        "cyaxaress/front": "dev-master",
+        "cyaxaress/payment": "dev-master",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -24,6 +25,12 @@
         "morilog/jalali": "3.*",
         "spatie/laravel-permission": "^3.13"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./modules/**/**/"
+        }
+    ],
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.7",
         "facade/ignition": "^2.3.6",

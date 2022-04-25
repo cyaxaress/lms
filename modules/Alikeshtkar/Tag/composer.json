@@ -1,0 +1,34 @@
+{
+    "name": "alikeshtkar/tag",
+    "description": "Tag feature for learning management system project - [Bicoo.ir]",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Alikeshtkar\\Tag\\": "src/",
+            "Alikeshtkar\\Tag\\Database\\": "database/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Alikeshtkar\\Tag\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ali Keshtkar",
+            "email": "alikeshtkar262@gmail.com"
+        }
+    ],
+    "require": {
+        "cviebrock/eloquent-sluggable": "*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alikeshtkar\\Tag\\Providers\\TagServiceProvider",
+                "Alikeshtkar\\Tag\\Providers\\RouteServiceProvider"
+            ]
+        }
+    }
+}

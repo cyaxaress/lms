@@ -8,7 +8,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "\\Cyaxaress\\Payment\\Providers\\PaymentServiceProvider"
+                "Cyaxaress\\Payment\\Providers\\PaymentServiceProvider"
             ]
         }
     }

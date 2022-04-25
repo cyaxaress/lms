@@ -25,9 +25,6 @@
                     @endforeach
                 </x-select>
 
-
-                <x-tag-select name="tags"/>
-
                 <x-select name="type" required>
                     <option value="">نوع دوره</option>
                     @foreach(\Cyaxaress\Course\Models\Course::$types as $type)
@@ -54,7 +51,7 @@
                         >{{ $category->title }}</option>
                     @endforeach
                 </x-select>
-
+                <x-tag-tag-select name="tags" class="select-tag"/>
                 <x-file placeholder="آپلود بنر دوره" name="image" required />
                 <x-text-area placeholder="توضیحات دوره" name="body" />
                 <br>
@@ -64,6 +61,16 @@
     </div>
 @endsection
 
+@section('css')
+    <link rel="stylesheet" href="/css/select2.min.css">
+@endsection
 @section('js')
     <script src="/panel/js/tagsInput.js?v=12"></script>
+    <script src="/js/select2.min.js"></script>
+    <script>
+        $('.select-tag').select2({
+            placeholder: "برچسب‌ها",
+            tags: true
+        });
+    </script>
 @endsection

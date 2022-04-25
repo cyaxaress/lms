@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\Course\Models;
 
+use Alikeshtkar\Tag\Traits\Taggable;
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Comment\Traits\HasComments;
 use Cyaxaress\Course\Repositories\CourseRepo;
@@ -13,10 +14,11 @@ use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\Ticket\Models\Ticket;
 use Cyaxaress\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Course extends Model
 {
-    use HasComments;
+    use HasComments,Taggable;
 
     protected $guarded = [];
     const TYPE_FREE = 'free';

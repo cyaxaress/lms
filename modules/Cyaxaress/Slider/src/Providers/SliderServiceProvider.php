@@ -28,7 +28,7 @@ class SliderServiceProvider extends ServiceProvider
         config()->set('sidebar.items.slider', [
             "icon" => "i-courses",
             "title" => "اسلایدر",
-            "url" => route('slides.index'),
+            "route_name" => 'slides.index',
             "permission" => [
                 Permission::PERMISSION_MANAGE_SLIDES,
             ]

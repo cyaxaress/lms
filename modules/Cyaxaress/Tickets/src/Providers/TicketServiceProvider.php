@@ -28,7 +28,7 @@ class TicketServiceProvider extends ServiceProvider {
         config()->set('sidebar.items.tickets', [
             "icon" => "i-tickets",
             "title" => "تیکت های پشتیبانی",
-            "url" => route('tickets.index'),
+            "route_name" => 'tickets.index',
         ]);
     }
 }

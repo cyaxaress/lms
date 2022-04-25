@@ -64,7 +64,7 @@ class CourseController extends Controller
         } else {
             $request->request->add(['banner_id' => $course->banner_id]);
         }
-        $courseRepo->update($id, $request);
+        $courseRepo->update($course, $request);
         return redirect(route('courses.index'));
     }
 

@@ -1,6 +1,8 @@
 <?php
+
 namespace Cyaxaress\Course\Http\Requests;
 
+use Alikeshtkar\Tag\Traits\HasTag;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Rules\ValidTeacher;
 use Illuminate\Foundation\Http\FormRequest;
@@ -8,6 +10,8 @@ use Illuminate\Validation\Rule;
 
 class CourseRequest extends FormRequest
 {
+    use HasTag;
+
     public function authorize()
     {
         return auth()->check() == true;
@@ -21,7 +25,7 @@ class CourseRequest extends FormRequest
             "priority" => 'nullable|numeric',
             "price" => 'required|numeric|min:0|max:10000000',
             "percent" => 'required|numeric|min:0|max:100',
-            "teacher_id" => ['required','exists:users,id', new ValidTeacher()],
+            "teacher_id" => ['required', 'exists:users,id', new ValidTeacher()],
             "type" => ["required", Rule::in(Course::$types)],
             "status" => ["required", Rule::in(Course::$statuses)],
             "category_id" => "required|exists:categories,id",
@@ -35,6 +39,7 @@ class CourseRequest extends FormRequest
 
         return $rules;
     }
+
 
     public function attributes()
     {

@@ -28,7 +28,7 @@ class CommentServiceProvider extends ServiceProvider
         config()->set('sidebar.items.comments', [
             "icon" => "i-comments",
             "title" => "نظرات",
-            "url" => route('comments.index'),
+            "route_name" => 'comments.index',
             "permission" => [Permission::PERMISSION_MANAGE_COMMENTS, Permission::PERMISSION_TEACH]
         ]);
     }

@@ -24,6 +24,20 @@ php artisan migrate --seed
 php artisan serve
 ```
 
+### Demo users
+```
+Admin:
+username: admin@site.com
+password: admin
+
+Teacher: 
+username: teacher@site.com
+password: teacher
+
+Student: student@site.com
+password: student
+```
+
 ## How this app developed?
 
 If you want to learn Modular structure and how this app developed join my online course at [here](https://webamooz.net/courses/laravel-webamooz/view)

@@ -34,7 +34,8 @@ Teacher:
 username: teacher@site.com
 password: teacher
 
-Student: student@site.com
+Student:
+username: student@site.com
 password: student
 ```
 

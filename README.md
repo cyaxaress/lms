@@ -1,7 +1,5 @@
 #Laravel Learning Management System 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
 ## About This Project
@@ -18,6 +16,28 @@ This project is a Learning Management System developed with Laravel framework in
 - Tickets Module,
 - Payments Module,
  etc...
+ 
+ ## Installation
+```
+composer create-project cyaxaress/lms
+php artisan migrate --seed
+php artisan serve
+```
+
+### Demo users
+```
+Admin:
+username: admin@site.com
+password: admin
+
+Teacher: 
+username: teacher@site.com
+password: teacher
+
+Student:
+username: student@site.com
+password: student
+```
 
 ## How this app developed?
 

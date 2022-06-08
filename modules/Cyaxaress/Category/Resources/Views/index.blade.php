@@ -20,7 +20,7 @@
                     <tbody>
                     @foreach($categories as $category)
                     <tr role="row" class="">
-                        <td><a href="">{{ $category->id }}</a></td>
+                        <td><a href="" >{{ $loop->index+1 }}</a></td>
                         <td><a href="">{{ $category->title }}</a></td>
                         <td>{{ $category->slug }}</td>
                         <td>{{ $category->parent }}</td>

@@ -5,13 +5,13 @@ namespace Cyaxaress\User\Tests\Feature;
 use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\User\Models\User;
 use Cyaxaress\User\Services\VerifyCodeService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Mail;
 use Tests\TestCase;
 
 class RegistrationTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     /**
      * A basic feature test example.
      *

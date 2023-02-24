@@ -2,7 +2,9 @@
 
 namespace Cyaxaress\User\Tests\Feature;
 
+use Cyaxaress\User\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Mail;
 use Tests\TestCase;
 
 class ResetPasswordTest extends TestCase
@@ -16,8 +18,16 @@ class ResetPasswordTest extends TestCase
 
     public function test_user_can_see_enter_verify_code_form_by_correct_email()
     {
-       $this->call('get', route('password.sendVerifyCodeEmail'), ['email' => 'hemn791@gmail.com'])
-           ->assertOk();
+        Mail::fake();
+        $user = User::create(
+            [
+                'name' => 'Hemn',
+                'email' => 'hemn791@gmail.com',
+                'password' => bcrypt('A!123a'),
+            ]
+        );
+        $this->call('get', route('password.sendVerifyCodeEmail'), ['email' => 'hemn791@gmail.com'])
+            ->assertOk();
     }
 
     public function test_user_cannot_see_enter_verify_code_form_by_wrong_email()
@@ -33,5 +43,4 @@ class ResetPasswordTest extends TestCase
         }
         $this->post(route('password.checkVerifyCode'), ['verify_code', 'email' => 'hemn@gmail.com'])->assertStatus(429);
     }
-
 }

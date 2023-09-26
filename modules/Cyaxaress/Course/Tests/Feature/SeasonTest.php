@@ -21,7 +21,6 @@ class SeasonTest extends TestCase
 
     public function test_permitted_user_can_see_course_details_page()
     {
-        $this->assertTrue(Payment::query()->count() > -1);
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->get(route('courses.details', $course->id))->assertOk();

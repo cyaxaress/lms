@@ -3,13 +3,13 @@
 namespace Cyaxaress\User\Tests\Feature;
 
 use Cyaxaress\User\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Mail;
 use Tests\TestCase;
 
 class ResetPasswordTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function test_user_can_see_reset_password_request_form()
     {

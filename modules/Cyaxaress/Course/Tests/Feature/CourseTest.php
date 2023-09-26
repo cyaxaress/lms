@@ -7,7 +7,7 @@ use Cyaxaress\Course\Models\Course;
 use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +15,7 @@ use Tests\TestCase;
 
 class CourseTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     use WithFaker;
 
     // permitted user can see curses index
@@ -213,7 +213,7 @@ class CourseTest extends TestCase
     private function courseData()
     {
         $category = $this->createCategory();
-        return[
+        return [
             'title' => $this->faker->sentence(2),
             "slug" => $this->faker->sentence(2),
             'teacher_id' => auth()->id(),

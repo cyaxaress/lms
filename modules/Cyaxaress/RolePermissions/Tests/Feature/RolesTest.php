@@ -6,14 +6,14 @@ use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\RolePermissions\Models\Role;
 use Cyaxaress\User\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class RolesTest extends TestCase
 {
     use WithFaker;
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function test_permitted_user_can_see_index()
     {
@@ -37,7 +37,7 @@ class RolesTest extends TestCase
                 Permission::PERMISSION_TEACH
             ]
         ])->assertRedirect(route('role-permissions.index'));
-        $this->assertEquals(count(Role::$roles) + 1,Role::count());
+        $this->assertEquals(count(Role::$roles) + 1, Role::count());
     }
 
     public function test_normal_user_can_not_store_roles()
@@ -50,7 +50,7 @@ class RolesTest extends TestCase
                 Permission::PERMISSION_TEACH
             ]
         ])->assertStatus(403);
-        $this->assertEquals(count(Role::$roles),Role::count());
+        $this->assertEquals(count(Role::$roles), Role::count());
     }
 
     public function test_permitted_user_can_see_edit()
@@ -108,7 +108,7 @@ class RolesTest extends TestCase
         $this->actAsUser();
         $role = $this->createRole();
         $this->delete(route('role-permissions.destroy', $role->id))->assertStatus(403);
-        $this->assertEquals(count(Role::$roles) + 1 , Role::count() );
+        $this->assertEquals(count(Role::$roles) + 1, Role::count());
     }
 
     private function createUser()
@@ -136,7 +136,9 @@ class RolesTest extends TestCase
 
     public function createRole()
     {
-        return Role::create(["name" => "testtest",])->syncPermissions([ Permission::PERMISSION_MANAGE_COURSES,
-            Permission::PERMISSION_TEACH]);
+        return Role::create(["name" => "testtest",])->syncPermissions([
+            Permission::PERMISSION_MANAGE_COURSES,
+            Permission::PERMISSION_TEACH
+        ]);
     }
 }

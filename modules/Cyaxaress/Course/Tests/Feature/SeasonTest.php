@@ -8,14 +8,14 @@ use Cyaxaress\Course\Models\Season;
 use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class SeasonTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     use WithFaker;
 
     public function test_permitted_user_can_see_course_details_page()
@@ -83,7 +83,6 @@ class SeasonTest extends TestCase
         $this->post(route('seasons.store', $course->id), [
             'title' => "test season title 2",
         ])->assertStatus(403);
-
     }
 
     public function test_permitted_user_can_see_edit_season_page()
@@ -101,7 +100,6 @@ class SeasonTest extends TestCase
         $course->teacher_id = auth()->id();
         $course->save();
         $this->get(route('seasons.edit', 1))->assertOk();
-
     }
 
     public function test_not_permitted_user_can_not_see_edit_season_page()
@@ -118,7 +116,6 @@ class SeasonTest extends TestCase
 
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $this->get(route('seasons.edit', 1))->assertStatus(403);
-
     }
 
     public function test_permitted_user_can_update_season()
@@ -369,7 +366,7 @@ class SeasonTest extends TestCase
     private function courseData()
     {
         $category = $this->createCategory();
-        return[
+        return [
             'title' => $this->faker->sentence(2),
             "slug" => $this->faker->sentence(2),
             'teacher_id' => auth()->id(),

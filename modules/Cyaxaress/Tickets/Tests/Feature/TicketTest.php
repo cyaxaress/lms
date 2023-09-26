@@ -6,14 +6,14 @@ use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\Ticket\Models\Ticket;
 use Cyaxaress\User\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TicketTest extends TestCase
 {
     use WithFaker;
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function test_user_can_see_tickets()
     {

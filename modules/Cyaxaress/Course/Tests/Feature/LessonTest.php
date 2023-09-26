@@ -8,14 +8,14 @@ use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class LessonTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     use WithFaker;
 
     public function test_user_can_see_create_lesson_form()
@@ -28,7 +28,6 @@ class LessonTest extends TestCase
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $course = $this->createCourse();
         $this->get(route('lessons.create', $course->id))->assertOk();
-
     }
 
     public function test_normal_user_can_not_see_create_lesson_form()
@@ -86,7 +85,6 @@ class LessonTest extends TestCase
         $this->actAsUser();
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $this->get(route('lessons.edit', [$course->id, $lesson->id]))->assertStatus(403);
-
     }
 
     public function test_permitted_user_can_update_lesson()
@@ -142,12 +140,14 @@ class LessonTest extends TestCase
         $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(2)->confirmation_status);
         $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(3)->confirmation_status);
         $this->patch(route('lessons.acceptAll', $course->id));
-        $this->assertEquals($course->lessons()->count(),
+        $this->assertEquals(
+            $course->lessons()->count(),
             $course->lessons()
-            ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_ACCEPTED)->count()
+                ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_ACCEPTED)->count()
         );
 
-        $this->assertEquals($course2->lessons()->count(),
+        $this->assertEquals(
+            $course2->lessons()->count(),
             $course2->lessons()
                 ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_PENDING)->count()
         );
@@ -155,14 +155,16 @@ class LessonTest extends TestCase
 
         $this->actAsUser();
         $this->patch(route('lessons.acceptAll', $course2->id))->assertStatus(403);
-        $this->assertEquals($course2->lessons()->count(),
+        $this->assertEquals(
+            $course2->lessons()->count(),
             $course2->lessons()
                 ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_PENDING)->count()
         );
 
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $this->patch(route('lessons.acceptAll', $course2->id));
-        $this->assertEquals($course2->lessons()->count(),
+        $this->assertEquals(
+            $course2->lessons()->count(),
             $course2->lessons()
                 ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_PENDING)->count()
         );
@@ -326,7 +328,8 @@ class LessonTest extends TestCase
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_COURSES);
     }
 
-    private function createLesson($course){
+    private function createLesson($course)
+    {
         return Lesson::create([
             "title" => "lesson one",
             "slug" => "lesson one",
@@ -349,7 +352,7 @@ class LessonTest extends TestCase
     private function courseData()
     {
         $category = $this->createCategory();
-        return[
+        return [
             'title' => $this->faker->sentence(2),
             "slug" => $this->faker->sentence(2),
             'teacher_id' => auth()->id(),

@@ -3,14 +3,14 @@
 namespace Cyaxaress\User\Tests\Feature;
 
 use Cyaxaress\User\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
     use WithFaker;
-    use RefreshDatabase;
+    use DatabaseMigrations;
     /**
      * A basic feature test example.
      *

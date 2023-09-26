@@ -1,18 +1,19 @@
 <?php
+
 namespace Cyaxaress\Category\Tests\Feature;
 
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
     use WithFaker;
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function test_permitted_user_can_see_categories_panel()
     {
@@ -40,7 +41,7 @@ class CategoryTest extends TestCase
         $this->actionAsAdmin();
         $this->createCategory();
         $this->assertEquals(1, Category::all()->count());
-        $this->patch(route('categories.update', 1 ), ['title' => $newTitle, "slug" => $this->faker->word]);
+        $this->patch(route('categories.update', 1), ['title' => $newTitle, "slug" => $this->faker->word]);
         $this->assertEquals(1, Category::whereTitle($newTitle)->count());
     }
 

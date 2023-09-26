@@ -45,18 +45,16 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 
-      - name: Copy environment file
-        run: cp .env.example .env
-
       - name: Generate app key
         run: php artisan key:generate
 
       - name: Execute tests
         env:
+          APP_ENV: testing
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
           DB_DATABASE: some_test
           DB_USERNAME: root
           DB_PASSWORD: secret
-        run: vendor/bin/phpunit
+        run: php artisan test

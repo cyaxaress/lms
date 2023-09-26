@@ -75,7 +75,7 @@ class RegistrationTest extends TestCase
 
     public function test_verified_user_can_see_home_page()
     {
-        $this->assertTrue(Payment::query()->get() > -1);
+        $this->assertTrue(Payment::query()->count() > -1);
         $this->seed(RolePermissionTableSeeder::class);
         $this->registerNewUser();
 

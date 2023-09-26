@@ -2,16 +2,19 @@
 
 namespace Cyaxaress\User\Tests\Feature;
 
+use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\User\Models\User;
 use Cyaxaress\User\Services\VerifyCodeService;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\WithFaker;
 use Mail;
 use Tests\TestCase;
 
 class RegistrationTest extends TestCase
 {
     use DatabaseMigrations;
+    use WithFaker;
     /**
      * A basic feature test example.
      *
@@ -72,6 +75,7 @@ class RegistrationTest extends TestCase
 
     public function test_verified_user_can_see_home_page()
     {
+        $this->assertTrue(Payment::query()->get() > -1);
         $this->seed(RolePermissionTableSeeder::class);
         $this->registerNewUser();
 

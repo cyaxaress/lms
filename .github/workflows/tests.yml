@@ -54,4 +54,4 @@ jobs:
           DB_DATABASE: some_test
           DB_USERNAME: root
           DB_PASSWORD: secret
-        run: php artisan test --filter test_verified_user_can_see_home_page
+        run: php artisan test

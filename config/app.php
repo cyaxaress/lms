@@ -1,5 +1,8 @@
 <?php
 
+use Cyaxaress\Common\Providers\CommonServiceProvider;
+use Cyaxaress\Front\Providers\FrontServiceProvider;
+
 return [
 
     /*
@@ -186,6 +189,8 @@ return [
         Cyaxaress\Comment\Providers\CommentServiceProvider::class,
         Cyaxaress\Slider\Providers\SliderServiceProvider::class,
         Cyaxaress\Payment\Providers\PaymentServiceProvider::class,
+        FrontServiceProvider::class,
+        CommonServiceProvider::class
 
 
 

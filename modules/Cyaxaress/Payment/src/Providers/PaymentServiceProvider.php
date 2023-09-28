@@ -16,10 +16,10 @@ class PaymentServiceProvider extends ServiceProvider
 
     public function register()
     {
-        dd(__DIR__ . " /../Database/Migrations", file_exists(__DIR__ . " /../Database/Migrations"));
+        dd(__DIR__ . " /../Database/Migrations", file_exists(__DIR__ . "/../Database/Migrations"));
 
         $this->app->register(EventServiceProvider::class);
-        $this->loadMigrationsFrom(__DIR__ . " /../Database/Migrations");
+        $this->loadMigrationsFrom(__DIR__ . "/../Database/Migrations");
         Route::middleware("web")->namespace($this->namespace)->group(__DIR__ . "/../Routes/payment_routes.php");
         Route::middleware("web")->namespace($this->namespace)->group(__DIR__ . "/../Routes/settlement_routes.php");
         $this->loadViewsFrom(__DIR__ . "/../Resources/Views", "Payment");

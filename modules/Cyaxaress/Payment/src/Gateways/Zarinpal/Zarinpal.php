@@ -2,7 +2,7 @@
 
 namespace Cyaxaress\Payment\Gateways\Zarinpal;
 
-class zarinpal
+class Zarinpal
 {
     private function curl_check()
     {

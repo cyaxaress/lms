@@ -11,13 +11,12 @@ class Role extends \Spatie\Permission\Models\Role
     const ROLE_STUDENT = 'student';
     static $roles = [
         self::ROLE_TEACHER => [
-            Permission::PERMISSION_TEACH
+            Permission::PERMISSION_TEACH,
+            Permission::PERMISSION_MANAGE_OWN_COURSES
         ],
         self::ROLE_SUPER_ADMIN => [
             Permission::PERMISSION_SUPER_ADMIN
         ],
-        self::ROLE_STUDENT => [
-
-        ]
+        self::ROLE_STUDENT => []
     ];
 }

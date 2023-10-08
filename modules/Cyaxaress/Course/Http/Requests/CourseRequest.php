@@ -1,4 +1,5 @@
 <?php
+
 namespace Cyaxaress\Course\Http\Requests;
 
 use Cyaxaress\Course\Models\Course;
@@ -21,7 +22,7 @@ class CourseRequest extends FormRequest
             "priority" => 'nullable|numeric',
             "price" => 'required|numeric|min:0|max:10000000',
             "percent" => 'required|numeric|min:0|max:100',
-            "teacher_id" => ['required','exists:users,id', new ValidTeacher()],
+            "teacher_id" => ['sometimes', 'exists:users,id', new ValidTeacher()],
             "type" => ["required", Rule::in(Course::$types)],
             "status" => ["required", Rule::in(Course::$statuses)],
             "category_id" => "required|exists:categories,id",
@@ -54,8 +55,6 @@ class CourseRequest extends FormRequest
 
     public function messages()
     {
-        return [
-
-        ];
+        return [];
     }
 }

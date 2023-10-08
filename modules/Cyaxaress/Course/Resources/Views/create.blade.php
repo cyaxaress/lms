@@ -18,13 +18,14 @@
                     <x-input type="text" placeholder="مبلغ دوره" name="price" class="text-left" required />
                     <x-input type="number" placeholder="درصد مدرس" name="percent" class="text-left" required />
                 </div>
+                @if(hasPermissionTo(Cyaxaress\RolePermissions\Models\Permission::PERMISSION_MANAGE_COURSES))
                 <x-select name="teacher_id" required>
                     <option value="">انتخاب مدرس دوره</option>
                     @foreach($teachers as $teacher)
                     <option value="{{ $teacher->id }}" @if($teacher->id == old('teacher_id')) selected @endif>{{ $teacher->name }}</option>
                     @endforeach
                 </x-select>
-
+                @endif
 
                 <x-tag-select name="tags"/>
 

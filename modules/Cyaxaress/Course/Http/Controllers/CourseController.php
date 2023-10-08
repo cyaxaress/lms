@@ -40,7 +40,13 @@ class CourseController extends Controller
     {
         $this->authorize('create', Course::class);
         $request->request->add(['banner_id' => MediaFileService::publicUpload($request->file('image'))->id]);
-        $courseRepo->store($request);
+        $teacherId = $request->input('teacher_id', auth()->id());
+        if (hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) == false) {
+            $teacherId = auth()->id();
+        }
+        $courseRepo->store($request->merge([
+            'teacher_id' => $teacherId
+        ]));
         return redirect()->route('courses.index');
     }
 
@@ -137,7 +143,7 @@ class CourseController extends Controller
         }
 
         [$amount, $discounts] = $course->getFinalPrice(request()->code, true);
-        if ($amount <= 0){
+        if ($amount <= 0) {
             $courseRepo->addStudentToCourse($course, auth()->id());
             newFeedback("عملیات موفقیت آمیز", "شما با موفقیت در دوره ثبت نام کردید.");
             return redirect($course->path());

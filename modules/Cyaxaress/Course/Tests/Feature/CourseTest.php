@@ -13,6 +13,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class CourseTest extends TestCase
 {
     use DatabaseMigrations;
@@ -89,6 +91,42 @@ class CourseTest extends TestCase
         $this->actAsUser();
         $course = $this->createCourse();
         $this->get(route('courses.edit', $course->id))->assertStatus(403);
+    }
+
+    public function test_manage_own_course_user_can_not_assigne_course_to_others()
+    {
+        $this->actAsUser();
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
+        Storage::fake('local');
+        $otherUser = User::factory()->create();
+        $otherUser->givePermissionTo(Permission::PERMISSION_TEACH);
+        $response = $this->post(route('courses.store'), array_merge($this->courseData(), ['teacher_id' => $otherUser->id]));
+        $response->assertRedirect(route('courses.index'));
+        $this->assertEquals(Course::count(), 1);
+        $course = Course::query()->first();
+        $this->assertEquals($course->teacher_id, auth()->id());
+        $this->assertNotEquals($course->teacher_id, $otherUser->id);
+        $this->get(route('courses.edit', $course->id))->assertStatus(200);
+    }
+
+    public function test_manage_course_user_can_assigne_course_to_others()
+    {
+        $this->actAsUser();
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_COURSES);
+        Storage::fake('local');
+        $otherUser = User::factory()->create();
+        $otherUser->givePermissionTo(Permission::PERMISSION_TEACH);
+        $otherUser->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
+        $response = $this->post(route('courses.store'), array_merge($this->courseData(), ['teacher_id' => $otherUser->id]));
+        $response->assertRedirect(route('courses.index'));
+        $this->assertEquals(Course::count(), 1);
+        $course = Course::query()->first();
+        $this->assertNotEquals($course->teacher_id, auth()->id());
+        $this->assertEquals($course->teacher_id, $otherUser->id);
+        $this->get(route('courses.edit', $course->id))->assertStatus(200);
+        $this->actingAs($otherUser);
+        $this->assertEquals(auth()->id(), $otherUser->id);
+        $this->get(route('courses.edit', $course->id))->assertStatus(200);
     }
 
     // permitted user can update course

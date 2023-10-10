@@ -19,13 +19,13 @@ class CreatePaymentsTable extends Migration
             $table->foreignId('seller_id')->nullable();
             $table->foreignId('paymentable_id');
             $table->string('paymentable_type');
-            $table->string('amount', 10);
+            $table->decimal('amount', 10, 2);
             $table->string('invoice_id');
             $table->string('gateway');
             $table->enum('status', \Cyaxaress\Payment\Models\Payment::$statuses);
             $table->tinyInteger('seller_p')->unsigned();
-            $table->string('seller_share', 10);
-            $table->string('site_share', 10);
+            $table->decimal('seller_share', 10, 2);
+            $table->decimal('site_share', 10, 2);
             $table->timestamps();
         });
     }

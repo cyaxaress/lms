@@ -1,10 +1,10 @@
-name: Tests
+name: Tests | Mysql
 
 on:
   push:
     branches:
       - master
-      - "*.x"
+      - "*"
   pull_request:
   schedule:
     - cron: "0 0 * * *"
@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.1,8.2]
+        php: [8.1, 8.2]
 
     name: PHP ${{ matrix.php }}
 

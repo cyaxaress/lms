@@ -1,4 +1,4 @@
-name: Postgresql Tests
+name: Tests | Postgres
 
 on:
   push:
@@ -63,7 +63,7 @@ jobs:
       - name: Execute tests
         env:
           APP_ENV: testing
-          DB_CONNECTION: postgres
+          DB_CONNECTION: pgsql
           DB_HOST: 127.0.0.1
           DB_PORT: 5432
           DB_DATABASE: postgres

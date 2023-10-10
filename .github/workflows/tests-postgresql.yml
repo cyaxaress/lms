@@ -37,15 +37,13 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
 
     steps:
-      - name: Shutdown Ubuntu MySQL (SUDO)
+      - name: Activate postgres
         run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
-
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql root password: "secret" # Required if "mysql user" is empty, default is empty. The root superuser password
-          mysql database: "some_test"
 
       - name: Checkout code
         uses: actions/checkout@v3

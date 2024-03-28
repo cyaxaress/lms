@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->text('bio')->nullable();
             $table->string('ip')->nullable();
             $table->string('telegram')->nullable();
-            $table->bigInteger("image_id")->unsigned()->nullable();
+            $table->unsignedBigInteger('image_id')->nullable();
 
             $table->string('card_number', 16)->nullable();
             $table->string('shaba', 24)->nullable();
@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('image_id')->references('id')->on('media')->onDelete('SET NULL');
+            $table->foreign('image_id')->references('id')->on('users')->onDelete('SET NULL');
         });
     }
 

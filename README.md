@@ -41,7 +41,7 @@ password: student
 
 ## How this app developed?
 
-If you want to learn Modular structure and how this app developed join my online course at [here](https://webamooz.net/courses/laravel-webamooz/view)
+If you want to learn Modular structure and how this app developed join my online course at [here](https://www.youtube.com/watch?v=uNY_6W1uKQ0&list=PLglcS3nCn86ZduzqLXD0SAHK4xaAFxYdq)
 
 
 ## Security Vulnerabilities

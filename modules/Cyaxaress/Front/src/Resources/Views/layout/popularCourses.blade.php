@@ -16,8 +16,8 @@
                 <div class="card-img"><img src="img/banner/reactjs.png" alt="reactjs"></div>
                 <div class="card-title"><h2>دوره مقدماتی تا پیشرفته reactJs</h2></div>
                 <div class="card-body">
-                    <img src="img/profile.jpg" alt="محمد نیکو">
-                    <span>محمد نیکو</span>
+                    <img src="img/profile.jpg" alt="همن موافقی">
+                    <span>همن موافقی</span>
                 </div>
                 <div class="card-details">
                     <div class="time">135:40:00</div>
@@ -37,8 +37,8 @@
                 <div class="card-img"><img src="img/banner/php.png" alt="php"></div>
                 <div class="card-title"><h2>دوره متخصص php بخش مقدماتی</h2></div>
                 <div class="card-body">
-                    <img src="img/profile.jpg" alt="محمد نیکو">
-                    <span>محمد نیکو</span>
+                    <img src="img/profile.jpg" alt="همن موافقی">
+                    <span>همن موافقی</span>
                 </div>
                 <div class="card-details">
                     <div class="time">135:40:00</div>
@@ -59,8 +59,8 @@
                 <div class="card-title"><h2>دوره ساخت پیام رسان تحت وب مشابه Telegram با Laravel و ReactJs و
                         WebSocket به صورت Spa</h2></div>
                 <div class="card-body">
-                    <img src="img/profile.jpg" alt="محمد نیکو">
-                    <span>محمد نیکو</span>
+                    <img src="img/profile.jpg" alt="همن موافقی">
+                    <span>همن موافقی</span>
                 </div>
                 <div class="card-details">
                     <div class="time">135:40:00</div>
@@ -80,8 +80,8 @@
                 <div class="card-img"><img src="img/banner/angularjs.jpg" alt="reactjs"></div>
                 <div class="card-title"><h2>دوره مقدمات تا پیشرفته انگولار به همراه پروژه فروشگاهی</h2></div>
                 <div class="card-body">
-                    <img src="img/profile.jpg" alt="محمد نیکو">
-                    <span>محمد نیکو</span>
+                    <img src="img/profile.jpg" alt="همن موافقی">
+                    <span>همن موافقی</span>
                 </div>
                 <div class="card-details">
                     <div class="time">135:40:00</div>
@@ -104,8 +104,8 @@
                 <div class="card-img"><img src="img/banner/restfull-lara.jpg" alt="reactjs"></div>
                 <div class="card-title"><h2>دوره تولید و توسعه وب سرویس با </h2></div>
                 <div class="card-body">
-                    <img src="img/profile.jpg" alt="محمد نیکو">
-                    <span>محمد نیکو</span>
+                    <img src="img/profile.jpg" alt="همن موافقی">
+                    <span>همن موافقی</span>
                 </div>
                 <div class="card-details">
                     <div class="time">135:40:00</div>
@@ -125,8 +125,8 @@
                 <div class="card-img"><img src="img/banner/php.png" alt="php"></div>
                 <div class="card-title"><h2>دوره متخصص php بخش مقدماتی</h2></div>
                 <div class="card-body">
-                    <img src="img/profile.jpg" alt="محمد نیکو">
-                    <span>محمد نیکو</span>
+                    <img src="img/profile.jpg" alt="همن موافقی">
+                    <span>همن موافقی</span>
                 </div>
                 <div class="card-details">
                     <div class="time">135:40:00</div>
@@ -146,8 +146,8 @@
                 <div class="card-img"><img src="img/banner/lara.png" alt="laravel"></div>
                 <div class="card-title"><h2>دوره مقدماتی تا پیشرفته لاراول</h2></div>
                 <div class="card-body">
-                    <img src="img/profile.jpg" alt="محمد نیکو">
-                    <span>محمد نیکو</span>
+                    <img src="img/profile.jpg" alt="همن موافقی">
+                    <span>همن موافقی</span>
                 </div>
                 <div class="card-details">
                     <div class="time">135:40:00</div>
@@ -167,8 +167,8 @@
                 <div class="card-img"><img src="img/banner/angularjs.jpg" alt="reactjs"></div>
                 <div class="card-title"><h2>دوره مقدمات تا پیشرفته انگولار به همراه پروژه فروشگاهی</h2></div>
                 <div class="card-body">
-                    <img src="img/profile.jpg" alt="محمد نیکو">
-                    <span>محمد نیکو</span>
+                    <img src="img/profile.jpg" alt="همن موافقی">
+                    <span>همن موافقی</span>
                 </div>
                 <div class="card-details">
                     <div class="time">135:40:00</div>

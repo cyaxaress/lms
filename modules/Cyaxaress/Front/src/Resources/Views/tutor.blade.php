@@ -11,7 +11,7 @@
                             <span class="tutor-image" id="tutor-image">
                                 <img src="{{ $tutor->thumb }}" class="tutor-avatar-img"></span>
                             <div class="tutor-author-name">
-                                <a id="tutor-author-name" href="" title="محمد نیکو">
+                                <a id="tutor-author-name" href="" title="همن موافقی">
                                     <h3 class="title"><span class="tutor-author--name">{{ $tutor->name }}</span></h3>
                                 </a>
                             </div>

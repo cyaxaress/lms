@@ -8,7 +8,7 @@
         <a href="https://t.me/webmooz_net"><img src="img/laravel-tel.png" alt="کانال تلگرام"></a>
     </div>
     <div class="sidebar-pic">
-        <a href="https:webamooz.net/blog"><img src="img/podcast.png" alt="وبلاگ وب آموز"></a>
+        <a href="https:webamooz.net/blog"><img src="img/podcast.png" alt="وبلاگ Hemn_org"></a>
     </div>
     <div class="sidebar-pic">
         <a href="https://t.me/webmooz_net"><img src="img/workinja.png" alt="کانال تلگرام"></a>

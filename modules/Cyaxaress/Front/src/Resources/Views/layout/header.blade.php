@@ -24,7 +24,7 @@
                                     <div class="t-header-search-result-right">
                                         <p>دوره ساخت فریم ورک مشابه لاراول</p>
                                         <p class="t-header-search-result-right-info">
-                                            مدرس دوره : محمد نیکو
+                                            مدرس دوره : همن موافقی
                                         </p>
                                     </div>
                                     <div class="t-header-search-result-left">
@@ -35,7 +35,7 @@
                                     <div class="t-header-search-result-right">
                                         <p>دوره ساخت فریم ورک مشابه لاراول</p>
                                         <p class="t-header-search-result-right-info">
-                                            مدرس دوره : محمد نیکو
+                                            مدرس دوره : همن موافقی
                                         </p>
                                     </div>
                                     <div class="t-header-search-result-left">
@@ -46,7 +46,7 @@
                                     <div class="t-header-search-result-right">
                                         <p>دوره ساخت فریم ورک مشابه لاراول</p>
                                         <p class="t-header-search-result-right-info">
-                                            مدرس دوره : محمد نیکو
+                                            مدرس دوره : همن موافقی
                                         </p>
                                     </div>
                                     <div class="t-header-search-result-left">
@@ -57,7 +57,7 @@
                                     <div class="t-header-search-result-right">
                                         <p>دوره ساخت فریم ورک مشابه لاراول</p>
                                         <p class="t-header-search-result-right-info">
-                                            مدرس دوره : محمد نیکو
+                                            مدرس دوره : همن موافقی
                                         </p>
                                     </div>
                                     <div class="t-header-search-result-left">
@@ -68,7 +68,7 @@
                                     <div class="t-header-search-result-right">
                                         <p>دوره ساخت فریم ورک مشابه لاراول</p>
                                         <p class="t-header-search-result-right-info">
-                                            مدرس دوره : محمد نیکو
+                                            مدرس دوره : همن موافقی
                                         </p>
                                     </div>
                                     <div class="t-header-search-result-left">
@@ -79,7 +79,7 @@
                                     <div class="t-header-search-result-right">
                                         <p>دوره ساخت فریم ورک مشابه لاراول</p>
                                         <p class="t-header-search-result-right-info">
-                                            مدرس دوره : محمد نیکو
+                                            مدرس دوره : همن موافقی
                                         </p>
                                     </div>
                                     <div class="t-header-search-result-left">
@@ -90,7 +90,7 @@
                                     <div class="t-header-search-result-right">
                                         <p>دوره ساخت فریم ورک مشابه لاراول</p>
                                         <p class="t-header-search-result-right-info">
-                                            مدرس دوره : محمد نیکو
+                                            مدرس دوره : همن موافقی
                                         </p>
                                     </div>
                                     <div class="t-header-search-result-left">
@@ -101,7 +101,7 @@
                                     <div class="t-header-search-result-right">
                                         <p>دوره ساخت فریم ورک مشابه لاراول</p>
                                         <p class="t-header-search-result-right-info">
-                                            مدرس دوره : محمد نیکو
+                                            مدرس دوره : همن موافقی
                                         </p>
                                     </div>
                                     <div class="t-header-search-result-left">
@@ -121,7 +121,7 @@
                 </div>
 
                 <div class="join-teachers">
-                    <a href="become-a-teacher.html">تدریس در وب آموز</a>
+                    <a href="become-a-teacher.html">تدریس در Hemn_org</a>
                 </div>
                 @auth()
                     <div class="user-menu-account">
@@ -171,7 +171,7 @@
                 @endforeach
                 <li class="main-menu d-none"><a href="#">درباره ما</a></li>
                 <li class="main-menu"><a href="contact-us.html">تماس ما</a></li>
-                <li class="main-menu join-teachers-li"><a href="become-a-teacher.html">تدریس در وب آموز</a></li>
+                <li class="main-menu join-teachers-li"><a href="become-a-teacher.html">تدریس در Hemn_org</a></li>
                 <li class="main-menu"><a href="https://www.webamooz.net/blog">مقالات</a></li>
             </ul>
 

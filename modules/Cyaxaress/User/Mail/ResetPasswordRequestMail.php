@@ -35,6 +35,6 @@ class ResetPasswordRequestMail extends Mailable
     public function build()
     {
         return $this->markdown('User::mails.reset-password-verify-code')->
-            subject('وب آموز | بازیابی رمز عبور');
+            subject('Hemn_org | بازیابی رمز عبور');
     }
 }

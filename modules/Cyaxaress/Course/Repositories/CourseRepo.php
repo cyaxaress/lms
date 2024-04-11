@@ -73,6 +73,11 @@ class CourseRepo
         return Course::where('confirmation_status', Course::CONFIRMATION_STATUS_ACCEPTED)->latest()->take(8)->get();
     }
 
+    public function popluarCourses()
+    {
+        return Course::where('confirmation_status', Course::CONFIRMATION_STATUS_ACCEPTED)->inRandomOrder()->take(8)->get();
+    }
+
     public function getDuration($id)
     {
         return $this->getLessonsQuery($id)->sum('time');

@@ -24,6 +24,11 @@ class FrontServiceProvider extends ServiceProvider
             $view->with(compact('latestCourses'));
         });
 
+        view()->composer('Front::layout.popularCourses', function ($view) {
+            $popularCourses = (new CourseRepo())->popluarCourses();
+            $view->with(compact('popularCourses'));
+        });
+
         view()->composer('Front::layout.slider', function ($view) {
             $slides = (new SlideRepo())->all();
             $view->with(compact('slides'));

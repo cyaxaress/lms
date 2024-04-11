@@ -6,9 +6,17 @@
         "lms",
         "laravel",
         "cyaxaress",
-        "learning manamgement system"
+        "learning management system"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Hemn Movafeghi",
+            "email": "hemn791@gmail.com",
+            "homepage": "https://www.hemn.org",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.0.1",

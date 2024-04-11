@@ -2,6 +2,7 @@
 
 namespace Cyaxaress\Course\Providers;
 
+use Cyaxaress\Course\Database\Seeds\CourseSeeder;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Models\Lesson;
 use Cyaxaress\Course\Models\Season;
@@ -27,6 +28,8 @@ class CourseServiceProvider extends ServiceProvider
         Gate::policy(Course::class, CoursePolicy::class);
         Gate::policy(Season::class, SeasonPolicy::class);
         Gate::policy(Lesson::class, LessonPolicy::class);
+        \DatabaseSeeder::$seeders[] = CourseSeeder::class;
+
     }
 
     public function boot()

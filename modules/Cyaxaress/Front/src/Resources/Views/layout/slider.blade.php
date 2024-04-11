@@ -2,11 +2,11 @@
     @foreach($slides as $slide)
         @if($slide->link)
             <a href="{{ $slide->link }}">
-                @endif
+        @endif
                 <div class="slide">
                     <img src="{{ $slide->media->getUrl() }}" alt="">
                 </div>
-                @if($slide->link)
+        @if($slide->link)
             </a>
         @endif
     @endforeach

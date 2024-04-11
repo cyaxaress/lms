@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
             User::firstOrCreate(
                 ['email' => $user['email']], [
                     'email' => $user['email'],
+                    'username' => $user['username'],
                     'name' => $user['name'],
                     'password' => bcrypt($user['password']),
                 ])->assignRole($user['role'])->markEmailAsVerified();

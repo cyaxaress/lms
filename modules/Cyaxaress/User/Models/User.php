@@ -42,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
         [
             'email' => 'admin@site.com',
             'password' => 'admin',
-            'admin' => 'admin',
+            'username' => 'admin',
             'name' => 'Admin',
             'role' => Role::ROLE_SUPER_ADMIN,
         ],

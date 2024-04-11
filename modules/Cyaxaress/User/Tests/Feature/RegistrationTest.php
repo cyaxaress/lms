@@ -2,7 +2,6 @@
 
 namespace Cyaxaress\User\Tests\Feature;
 
-use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\User\Models\User;
 use Cyaxaress\User\Services\VerifyCodeService;
@@ -15,12 +14,12 @@ class RegistrationTest extends TestCase
 {
     use DatabaseMigrations;
     use WithFaker;
+
     /**
      * A basic feature test example.
      *
      * @return void
      */
-
     public function test_user_can_see_register_from()
     {
         $response = $this->get(route('register'));
@@ -67,7 +66,7 @@ class RegistrationTest extends TestCase
         $this->assertAuthenticated();
 
         $this->post(route('verification.verify'), [
-            'verify_code' => $code
+            'verify_code' => $code,
         ]);
 
         $this->assertEquals(true, $user->fresh()->hasVerifiedEmail());
@@ -90,12 +89,13 @@ class RegistrationTest extends TestCase
     public function registerNewUser()
     {
         Mail::fake();
+
         return $this->post(route('register'), [
             'name' => 'HMN',
             'email' => 'hemn791@gmail.com',
             'mobile' => '9367853698',
             'password' => 'As25@#',
-            'password_confirmation' => 'As25@#'
+            'password_confirmation' => 'As25@#',
         ]);
     }
 }

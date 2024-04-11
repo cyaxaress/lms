@@ -1,6 +1,7 @@
 <?php
 
 namespace Cyaxaress\User\Http\Controllers\Auth;
+
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Cyaxaress\User\Http\Requests\ChangePasswordRequest;
@@ -37,7 +38,7 @@ class ResetPasswordController extends Controller
     public function reset(ChangePasswordRequest $request)
     {
         UserService::changePassword(auth()->user(), $request->password);
+
         return redirect(route('home'));
     }
-
 }

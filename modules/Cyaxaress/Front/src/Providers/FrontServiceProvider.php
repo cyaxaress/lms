@@ -1,4 +1,5 @@
 <?php
+
 namespace Cyaxaress\Front\Providers;
 
 use Cyaxaress\Category\Repositories\CategoryRepo;
@@ -10,8 +11,8 @@ class FrontServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->loadRoutesFrom(__DIR__ . "/../Routes/front_routes.php");
-        $this->loadViewsFrom(__DIR__ . "/../Resources/Views", "Front");
+        $this->loadRoutesFrom(__DIR__.'/../Routes/front_routes.php');
+        $this->loadViewsFrom(__DIR__.'/../Resources/Views', 'Front');
 
         view()->composer('Front::layout.header', function ($view) {
             $categories = (new CategoryRepo())->tree();
@@ -27,7 +28,6 @@ class FrontServiceProvider extends ServiceProvider
             $slides = (new SlideRepo())->all();
             $view->with(compact('slides'));
         });
-
 
     }
 }

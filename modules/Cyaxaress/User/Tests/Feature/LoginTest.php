@@ -9,8 +9,9 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-    use WithFaker;
     use DatabaseMigrations;
+    use WithFaker;
+
     /**
      * A basic feature test example.
      *
@@ -28,7 +29,7 @@ class LoginTest extends TestCase
 
         $this->post(route('login'), [
             'email' => $user->email,
-            'password' => 'A!123a'
+            'password' => 'A!123a',
         ]);
 
         $this->assertAuthenticated();
@@ -47,7 +48,7 @@ class LoginTest extends TestCase
 
         $this->post(route('login'), [
             'email' => $user->mobile,
-            'password' => 'A!123a'
+            'password' => 'A!123a',
         ]);
 
         $this->assertAuthenticated();

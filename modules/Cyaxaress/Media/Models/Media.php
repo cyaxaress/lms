@@ -1,4 +1,5 @@
 <?php
+
 namespace Cyaxaress\Media\Models;
 
 use Cyaxaress\Media\Services\MediaFileService;
@@ -7,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Media extends Model
 {
     protected $casts = [
-        'files' => 'json'
+        'files' => 'json',
     ];
 
-    protected static function booted(){
+    protected static function booted()
+    {
         static::deleting(function ($media) {
             MediaFileService::delete($media);
         });
@@ -21,8 +23,8 @@ class Media extends Model
         return MediaFileService::thumb($this);
     }
 
-    public function getUrl($quality = "original"): string
+    public function getUrl($quality = 'original'): string
     {
-        return "/storage/" . $this->files[$quality];
+        return '/storage/'.$this->files[$quality];
     }
 }

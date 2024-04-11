@@ -16,10 +16,10 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            "body" => "required",
-            "commentable_id" => "required",
-            "comment_id" => ["nullable", new ApprovedComment()],
-            "commentable_type" => ["required", new CommentableRule()],
+            'body' => 'required',
+            'commentable_id' => 'required',
+            'comment_id' => ['nullable', new ApprovedComment()],
+            'commentable_type' => ['required', new CommentableRule()],
         ];
     }
 }

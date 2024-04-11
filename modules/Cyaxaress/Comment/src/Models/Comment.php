@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    const STATUS_NEW = "new";
-    const STATUS_APPROVED = "approved";
-    const STATUS_REJECTED = "rejected";
+    const STATUS_NEW = 'new';
 
-    static $statues = [
+    const STATUS_APPROVED = 'approved';
+
+    const STATUS_REJECTED = 'rejected';
+
+    public static $statues = [
         self::STATUS_REJECTED,
         self::STATUS_APPROVED,
-        self::STATUS_NEW
+        self::STATUS_NEW,
     ];
 
     protected $guarded = [];
@@ -41,15 +43,17 @@ class Comment extends Model
 
     public function notApprovedComments()
     {
-        return $this->hasMany(Comment::class)->where("status", self::STATUS_NEW);
+        return $this->hasMany(Comment::class)->where('status', self::STATUS_NEW);
     }
 
     public function getStatusCssClass()
     {
-        if ($this->status == self::STATUS_APPROVED) return "text-success";
-        elseif ($this->status == self::STATUS_REJECTED) return "text-error";
+        if ($this->status == self::STATUS_APPROVED) {
+            return 'text-success';
+        } elseif ($this->status == self::STATUS_REJECTED) {
+            return 'text-error';
+        }
 
-        return "text-warning";
+        return 'text-warning';
     }
-
 }

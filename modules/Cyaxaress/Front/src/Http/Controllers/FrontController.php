@@ -26,12 +26,13 @@ class FrontController
         } else {
             $lesson = $lessonRepo->getFirstLesson($courseId);
         }
+
         return view('Front::singleCourse', compact('course', 'lessons', 'lesson'));
     }
 
     public function extractId($slug, $key)
     {
-        return Str::before(Str::after($slug, $key .'-'), '-');
+        return Str::before(Str::after($slug, $key.'-'), '-');
     }
 
     public function singleTutor($username)

@@ -9,13 +9,17 @@ use Illuminate\Http\UploadedFile;
 class MediaFileService
 {
     private static $file;
+
     private static $dir;
+
     private static $isPrivate;
 
-    public static function privateUpload(UploadedFile $file){
+    public static function privateUpload(UploadedFile $file)
+    {
         self::$file = $file;
-        self::$dir = "private/";
+        self::$dir = 'private/';
         self::$isPrivate = true;
+
         return self::upload();
     }
 
@@ -24,8 +28,10 @@ class MediaFileService
         self::$file = $file;
         self::$dir = 'public/';
         self::$isPrivate = false;
+
         return self::upload();
     }
+
     private static function upload()
     {
         $extension = self::normalizeExtension(self::$file);
@@ -36,7 +42,8 @@ class MediaFileService
         }
     }
 
-    static function stream(Media $media){
+    public static function stream(Media $media)
+    {
         foreach (config('mediaFile.MediaTypeServices') as $type => $service) {
             if ($media->type == $type) {
                 return $service['handler']::stream($media);
@@ -57,7 +64,9 @@ class MediaFileService
     {
         return strtolower($file->getClientOriginalExtension());
     }
-    private static function filenameGenerator(){
+
+    private static function filenameGenerator()
+    {
         return uniqid();
     }
 
@@ -70,6 +79,7 @@ class MediaFileService
         $media->filename = self::$file->getClientOriginalName();
         $media->is_private = self::$isPrivate;
         $media->save();
+
         return $media;
     }
 
@@ -85,7 +95,7 @@ class MediaFileService
     public static function getExtensions()
     {
         $extensions = [];
-        foreach (config('mediaFile.MediaTypeServices') as  $service) {
+        foreach (config('mediaFile.MediaTypeServices') as $service) {
             foreach ($service['extensions'] as $extension) {
                 $extensions[] = $extension;
             }

@@ -41,5 +41,4 @@ class PasswordValidationTest extends TestCase
         $result = (new ValidPassword())->passes('', '!@!@ASDFWESD');
         $this->assertEquals(0, $result);
     }
-
 }

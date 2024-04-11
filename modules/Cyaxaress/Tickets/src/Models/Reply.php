@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\URL;
 
 class Reply extends Model
 {
-
     protected $guarded = [];
-    protected $table = "ticket_replies";
+
+    protected $table = 'ticket_replies';
 
     public function ticket()
     {
@@ -30,7 +30,8 @@ class Reply extends Model
 
     public function attachmentLink()
     {
-        if ($this->media_id)
+        if ($this->media_id) {
             return URL::temporarySignedRoute('media.download', now()->addDay(), ['media' => $this->media_id]);
+        }
     }
 }

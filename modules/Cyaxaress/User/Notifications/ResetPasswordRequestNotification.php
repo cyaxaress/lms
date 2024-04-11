@@ -25,6 +25,7 @@ class ResetPasswordRequestNotification extends Notification
     {
         $code = VerifyCodeService::generate();
         VerifyCodeService::store($notifiable->id, $code, 120);
+
         return (new ResetPasswordRequestMail($code))->to($notifiable->email);
     }
 

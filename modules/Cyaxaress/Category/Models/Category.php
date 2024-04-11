@@ -1,4 +1,5 @@
 <?php
+
 namespace Cyaxaress\Category\Models;
 
 use Cyaxaress\Course\Models\Course;
@@ -6,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $guarded= [];
+    protected $guarded = [];
 
     public function getParentAttribute()
     {

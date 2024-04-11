@@ -1,4 +1,5 @@
 <?php
+
 namespace Cyaxaress\Payment\Gateways\Zarinpal;
 
 use Cyaxaress\Payment\Contracts\GatewayContract;
@@ -8,20 +9,22 @@ use Illuminate\Http\Request;
 class ZarinpalAdaptor implements GatewayContract
 {
     private $url;
+
     private $client;
+
     public function request($amount, $description)
     {
         $this->client = new Zarinpal();
-        $callback = route("payments.callback");
-        $result =  $this->client->request("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", $amount, $description, "", "", $callback, true);
-        if (isset($result["Status"]) && $result["Status"] == 100)
-        {
+        $callback = route('payments.callback');
+        $result = $this->client->request('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', $amount, $description, '', '', $callback, true);
+        if (isset($result['Status']) && $result['Status'] == 100) {
             $this->url = $result['StartPay'];
+
             return $result['Authority'];
         } else {
             return [
-                "status" => $result["Status"],
-                "message" => $result["Message"]
+                'status' => $result['Status'],
+                'message' => $result['Message'],
             ];
         }
     }
@@ -30,15 +33,14 @@ class ZarinpalAdaptor implements GatewayContract
     {
         $this->client = new Zarinpal();
 
-        $result = $this->client->verify("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", $payment->amount, true);
+        $result = $this->client->verify('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', $payment->amount, true);
 
-        if (isset($result["Status"]) && $result["Status"] == 100)
-        {
-            return $result["RefID"];
+        if (isset($result['Status']) && $result['Status'] == 100) {
+            return $result['RefID'];
         } else {
             return [
-              "status" => $result["Status"],
-                "message" => $result["Message"]
+                'status' => $result['Status'],
+                'message' => $result['Message'],
             ];
         }
     }
@@ -50,7 +52,7 @@ class ZarinpalAdaptor implements GatewayContract
 
     public function getName()
     {
-        return "zarinpal";
+        return 'zarinpal';
     }
 
     public function getInvoiceIdFromRequest(Request $request)

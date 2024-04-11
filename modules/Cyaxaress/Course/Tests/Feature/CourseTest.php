@@ -13,8 +13,6 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-use function PHPUnit\Framework\assertEquals;
-
 class CourseTest extends TestCase
 {
     use DatabaseMigrations;
@@ -138,15 +136,15 @@ class CourseTest extends TestCase
         $course = $this->createCourse();
         $this->patch(route('courses.update', $course->id), [
             'title' => 'updated title',
-            "slug" => 'updated slug',
+            'slug' => 'updated slug',
             'teacher_id' => auth()->id(),
             'category_id' => $course->category->id,
-            "priority" => 12,
-            "price" => 1450,
-            "percent" => 80,
-            "type" => Course::TYPE_CASH,
-            "image" => UploadedFile::fake()->image('banner.jpg'),
-            "status" => Course::STATUS_COMPLETED,
+            'priority' => 12,
+            'price' => 1450,
+            'percent' => 80,
+            'type' => Course::TYPE_CASH,
+            'image' => UploadedFile::fake()->image('banner.jpg'),
+            'status' => Course::STATUS_COMPLETED,
         ])->assertRedirect(route('courses.index'));
         $course = $course->fresh();
         $this->assertEquals('updated title', $course->title);
@@ -162,15 +160,15 @@ class CourseTest extends TestCase
 
         $this->patch(route('courses.update', $course->id), [
             'title' => 'updated title',
-            "slug" => 'updated slug',
+            'slug' => 'updated slug',
             'teacher_id' => auth()->id(),
             'category_id' => $course->category->id,
-            "priority" => 12,
-            "price" => 1450,
-            "percent" => 80,
-            "type" => Course::TYPE_CASH,
-            "image" => UploadedFile::fake()->image('banner.jpg'),
-            "status" => Course::STATUS_COMPLETED,
+            'priority' => 12,
+            'price' => 1450,
+            'percent' => 80,
+            'type' => Course::TYPE_CASH,
+            'image' => UploadedFile::fake()->image('banner.jpg'),
+            'status' => Course::STATUS_COMPLETED,
         ])->assertStatus(403);
     }
 
@@ -192,6 +190,7 @@ class CourseTest extends TestCase
         $this->delete(route('courses.destroy', $course->id))->assertStatus(403);
         $this->assertEquals(1, Course::count());
     }
+
     // permitted user can accept course
     public function test_permitted_user_can_confirmation_status_courses()
     {
@@ -238,30 +237,32 @@ class CourseTest extends TestCase
 
     private function createCourse()
     {
-        $data = $this->courseData() + ['confirmation_status' => Course::CONFIRMATION_STATUS_PENDING,];
+        $data = $this->courseData() + ['confirmation_status' => Course::CONFIRMATION_STATUS_PENDING];
         unset($data['image']);
+
         return Course::create($data);
     }
 
     private function createCategory()
     {
-        return Category::create(['title' => $this->faker->word, "slug" => $this->faker->word]);
+        return Category::create(['title' => $this->faker->word, 'slug' => $this->faker->word]);
     }
 
     private function courseData()
     {
         $category = $this->createCategory();
+
         return [
             'title' => $this->faker->sentence(2),
-            "slug" => $this->faker->sentence(2),
+            'slug' => $this->faker->sentence(2),
             'teacher_id' => auth()->id(),
             'category_id' => $category->id,
-            "priority" => 12,
-            "price" => 1200,
-            "percent" => 70,
-            "type" => Course::TYPE_FREE,
-            "image" => UploadedFile::fake()->image('banner.jpg'),
-            "status" => Course::STATUS_COMPLETED,
+            'priority' => 12,
+            'price' => 1200,
+            'percent' => 70,
+            'type' => Course::TYPE_FREE,
+            'image' => UploadedFile::fake()->image('banner.jpg'),
+            'status' => Course::STATUS_COMPLETED,
         ];
     }
 }

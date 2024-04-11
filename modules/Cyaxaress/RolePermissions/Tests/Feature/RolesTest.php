@@ -12,8 +12,8 @@ use Tests\TestCase;
 
 class RolesTest extends TestCase
 {
-    use WithFaker;
     use DatabaseMigrations;
+    use WithFaker;
 
     public function test_permitted_user_can_see_index()
     {
@@ -31,11 +31,11 @@ class RolesTest extends TestCase
     {
         $this->actAsAdmin();
         $this->post(route('role-permissions.store'), [
-            "name" => "testtest",
-            "permissions" => [
+            'name' => 'testtest',
+            'permissions' => [
                 Permission::PERMISSION_MANAGE_COURSES,
-                Permission::PERMISSION_TEACH
-            ]
+                Permission::PERMISSION_TEACH,
+            ],
         ])->assertRedirect(route('role-permissions.index'));
         $this->assertEquals(count(Role::$roles) + 1, Role::count());
     }
@@ -44,11 +44,11 @@ class RolesTest extends TestCase
     {
         $this->actAsUser();
         $this->post(route('role-permissions.store'), [
-            "name" => "testtest",
-            "permissions" => [
+            'name' => 'testtest',
+            'permissions' => [
                 Permission::PERMISSION_MANAGE_COURSES,
-                Permission::PERMISSION_TEACH
-            ]
+                Permission::PERMISSION_TEACH,
+            ],
         ])->assertStatus(403);
         $this->assertEquals(count(Role::$roles), Role::count());
     }
@@ -72,13 +72,13 @@ class RolesTest extends TestCase
         $this->actAsAdmin();
         $role = $this->createRole();
         $this->patch(route('role-permissions.update', $role->id), [
-            "name" => "testtest2323",
-            "id" => $role->id,
-            "permissions" => [
-                Permission::PERMISSION_TEACH
-            ]
+            'name' => 'testtest2323',
+            'id' => $role->id,
+            'permissions' => [
+                Permission::PERMISSION_TEACH,
+            ],
         ])->assertRedirect(route('role-permissions.index'));
-        $this->assertEquals("testtest2323", $role->fresh()->name);
+        $this->assertEquals('testtest2323', $role->fresh()->name);
     }
 
     public function test_normal_user_can_not_update_roles()
@@ -86,11 +86,11 @@ class RolesTest extends TestCase
         $this->actAsUser();
         $role = $this->createRole();
         $this->patch(route('role-permissions.update', $role->id), [
-            "name" => "testtest2323",
-            "id" => $role->id,
-            "permissions" => [
-                Permission::PERMISSION_TEACH
-            ]
+            'name' => 'testtest2323',
+            'id' => $role->id,
+            'permissions' => [
+                Permission::PERMISSION_TEACH,
+            ],
         ])->assertStatus(403);
         $this->assertEquals($role->name, $role->fresh()->name);
     }
@@ -136,9 +136,9 @@ class RolesTest extends TestCase
 
     public function createRole()
     {
-        return Role::create(["name" => "testtest",])->syncPermissions([
+        return Role::create(['name' => 'testtest'])->syncPermissions([
             Permission::PERMISSION_MANAGE_COURSES,
-            Permission::PERMISSION_TEACH
+            Permission::PERMISSION_TEACH,
         ]);
     }
 }

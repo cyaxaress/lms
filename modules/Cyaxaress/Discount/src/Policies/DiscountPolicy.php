@@ -21,6 +21,8 @@ class DiscountPolicy
 
     public function manage($user)
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_DISCOUNT)) return true;
+        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_DISCOUNT)) {
+            return true;
+        }
     }
 }

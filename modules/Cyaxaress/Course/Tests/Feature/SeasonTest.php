@@ -5,7 +5,6 @@ namespace Cyaxaress\Course\Tests\Feature;
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Models\Season;
-use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;
@@ -53,8 +52,8 @@ class SeasonTest extends TestCase
         $course = $this->createCourse();
 
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
         $this->assertEquals(1, Season::count());
 
@@ -63,7 +62,7 @@ class SeasonTest extends TestCase
         $course->teacher_id = auth()->id();
         $course->save();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title 2",
+            'title' => 'test season title 2',
         ]);
         $this->assertEquals(2, Season::count());
 
@@ -77,12 +76,12 @@ class SeasonTest extends TestCase
 
         $this->actAsUser();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title 2",
+            'title' => 'test season title 2',
         ])->assertStatus(403);
 
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title 2",
+            'title' => 'test season title 2',
         ])->assertStatus(403);
     }
 
@@ -91,8 +90,8 @@ class SeasonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
         $this->get(route('seasons.edit', 1))->assertOk();
 
@@ -108,8 +107,8 @@ class SeasonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
 
         $this->actAsUser();
@@ -124,26 +123,25 @@ class SeasonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
         $this->assertEquals(1, Season::count());
         $this->patch(route('seasons.edit', 1), [
-            "title" => "title 2"
+            'title' => 'title 2',
         ]);
 
-        $this->assertEquals("title 2", Season::find(1)->title);
-
+        $this->assertEquals('title 2', Season::find(1)->title);
 
         $this->actAsUser();
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $course->teacher_id = auth()->id();
         $course->save();
         $this->patch(route('seasons.edit', 1), [
-            "title" => "title 3",
-            "number" => 5
+            'title' => 'title 3',
+            'number' => 5,
         ]);
-        $this->assertEquals("title 3", Season::find(1)->title);
+        $this->assertEquals('title 3', Season::find(1)->title);
         $this->assertEquals(5, Season::find(1)->number);
     }
 
@@ -152,24 +150,24 @@ class SeasonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
         $this->assertEquals(1, Season::count());
 
         $this->actAsUser();
         $this->patch(route('seasons.edit', 1), [
-            "title" => "title 2"
+            'title' => 'title 2',
         ])->assertStatus(403);
 
-        $this->assertEquals("test season title", Season::find(1)->title);
+        $this->assertEquals('test season title', Season::find(1)->title);
 
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $this->patch(route('seasons.edit', 1), [
-            "title" => "title 2"
+            'title' => 'title 2',
         ])->assertStatus(403);
 
-        $this->assertEquals("test season title", Season::find(1)->title);
+        $this->assertEquals('test season title', Season::find(1)->title);
     }
 
     public function test_permitted_user_can_delete_season()
@@ -177,8 +175,8 @@ class SeasonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
         $this->assertEquals(1, Season::count());
 
@@ -190,8 +188,8 @@ class SeasonTest extends TestCase
         $course->teacher_id = auth()->id();
         $course->save();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
 
         $this->delete(route('seasons.destroy', 2))->assertOk();
@@ -203,8 +201,8 @@ class SeasonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
         $this->assertEquals(1, Season::count());
 
@@ -222,8 +220,8 @@ class SeasonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
         $this->assertEquals(1, Season::count());
 
@@ -236,8 +234,8 @@ class SeasonTest extends TestCase
         $course->teacher_id = auth()->id();
         $course->save();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title 2",
-            "number" => '2'
+            'title' => 'test season title 2',
+            'number' => '2',
         ]);
 
         $this->assertEquals(Season::CONFIRMATION_STATUS_PENDING, Season::find(2)->confirmation_status);
@@ -250,8 +248,8 @@ class SeasonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
         $this->assertEquals(1, Season::count());
 
@@ -264,8 +262,8 @@ class SeasonTest extends TestCase
         $course->teacher_id = auth()->id();
         $course->save();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title 2",
-            "number" => '2'
+            'title' => 'test season title 2',
+            'number' => '2',
         ]);
 
         $this->assertEquals(Season::CONFIRMATION_STATUS_PENDING, Season::find(2)->confirmation_status);
@@ -278,8 +276,8 @@ class SeasonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
         $this->assertEquals(1, Season::count());
 
@@ -292,8 +290,8 @@ class SeasonTest extends TestCase
         $course->teacher_id = auth()->id();
         $course->save();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title 2",
-            "number" => '2'
+            'title' => 'test season title 2',
+            'number' => '2',
         ]);
 
         $this->assertEquals(Season::STATUS_OPENED, Season::find(2)->status);
@@ -306,12 +304,11 @@ class SeasonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('seasons.store', $course->id), [
-            'title' => "test season title",
-            "number" => '1'
+            'title' => 'test season title',
+            'number' => '1',
         ]);
         $this->patch(route('seasons.lock', 1))->assertOk();
         $this->assertEquals(1, Season::count());
-
 
         $this->assertEquals(Season::STATUS_LOCKED, Season::find(1)->status);
         $this->patch(route('seasons.unlock', 1))->assertOk();
@@ -327,7 +324,6 @@ class SeasonTest extends TestCase
         $this->patch(route('seasons.lock', 1))->assertStatus(403);
         $this->assertEquals(Season::STATUS_LOCKED, Season::find(1)->status);
     }
-
 
     private function createUser()
     {
@@ -354,30 +350,32 @@ class SeasonTest extends TestCase
 
     private function createCourse()
     {
-        $data = $this->courseData() + ['confirmation_status' => Course::CONFIRMATION_STATUS_PENDING,];
+        $data = $this->courseData() + ['confirmation_status' => Course::CONFIRMATION_STATUS_PENDING];
         unset($data['image']);
+
         return Course::create($data);
     }
 
     private function createCategory()
     {
-        return Category::create(['title' => $this->faker->word, "slug" => $this->faker->word]);
+        return Category::create(['title' => $this->faker->word, 'slug' => $this->faker->word]);
     }
 
     private function courseData()
     {
         $category = $this->createCategory();
+
         return [
             'title' => $this->faker->sentence(2),
-            "slug" => $this->faker->sentence(2),
+            'slug' => $this->faker->sentence(2),
             'teacher_id' => auth()->id(),
             'category_id' => $category->id,
-            "priority" => 12,
-            "price" => 1200,
-            "percent" => 70,
-            "type" => Course::TYPE_FREE,
-            "image" => UploadedFile::fake()->image('banner.jpg'),
-            "status" => Course::STATUS_COMPLETED,
+            'priority' => 12,
+            'price' => 1200,
+            'percent' => 70,
+            'type' => Course::TYPE_FREE,
+            'image' => UploadedFile::fake()->image('banner.jpg'),
+            'status' => Course::STATUS_COMPLETED,
         ];
     }
 }

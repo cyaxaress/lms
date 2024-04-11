@@ -12,19 +12,19 @@ use Tests\TestCase;
 
 class TicketTest extends TestCase
 {
-    use WithFaker;
     use DatabaseMigrations;
+    use WithFaker;
 
     public function test_user_can_see_tickets()
     {
         $this->actionAsUser();
-        $this->get(route("tickets.index"))->assertOk();
+        $this->get(route('tickets.index'))->assertOk();
     }
 
     public function test_user_can_see_create_tickets()
     {
         $this->actionAsUser();
-        $this->get(route("tickets.create"))->assertOk();
+        $this->get(route('tickets.create'))->assertOk();
     }
 
     public function test_user_can_store_ticket()
@@ -40,7 +40,7 @@ class TicketTest extends TestCase
         $this->createTicket();
         $this->assertEquals(1, Ticket::all()->count());
 
-        $this->delete(route("tickets.destroy", 1))->assertOk();
+        $this->delete(route('tickets.destroy', 1))->assertOk();
     }
 
     public function test_user_can_not_delete_ticket()
@@ -49,9 +49,8 @@ class TicketTest extends TestCase
         $this->createTicket();
         $this->assertEquals(1, Ticket::all()->count());
 
-        $this->delete(route("tickets.destroy", 1))->assertStatus(403);
+        $this->delete(route('tickets.destroy', 1))->assertStatus(403);
     }
-
 
     private function actionAsAdmin()
     {
@@ -68,6 +67,6 @@ class TicketTest extends TestCase
 
     private function createTicket()
     {
-        return $this->post(route('tickets.store'), ['title' => $this->faker->word, "body" => $this->faker->text]);
+        return $this->post(route('tickets.store'), ['title' => $this->faker->word, 'body' => $this->faker->text]);
     }
 }

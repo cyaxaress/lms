@@ -25,7 +25,7 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => ['required', new ValidPassword(), 'confirmed']
+            'password' => ['required', new ValidPassword(), 'confirmed'],
         ];
     }
 }

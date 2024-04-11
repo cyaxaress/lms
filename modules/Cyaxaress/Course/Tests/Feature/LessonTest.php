@@ -43,10 +43,10 @@ class LessonTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('lessons.store', $course->id), [
-            "title" => "lesson one",
-            "time" => "20",
-            "is_free" => 1,
-            "lesson_file" => UploadedFile::fake()->create('asd6f165a1.mp4', 10240)
+            'title' => 'lesson one',
+            'time' => '20',
+            'is_free' => 1,
+            'lesson_file' => UploadedFile::fake()->create('asd6f165a1.mp4', 10240),
         ]);
 
         $this->assertEquals(1, Lesson::query()->count());
@@ -59,10 +59,10 @@ class LessonTest extends TestCase
         $course = $this->createCourse();
         foreach ($notAllowedExtensions as $extension) {
             $this->post(route('lessons.store', $course->id), [
-                "title" => "lesson one",
-                "time" => "20",
-                "is_free" => 1,
-                "lesson_file" => UploadedFile::fake()->create('asd6f165a1.' . $extension, 10240)
+                'title' => 'lesson one',
+                'time' => '20',
+                'is_free' => 1,
+                'lesson_file' => UploadedFile::fake()->create('asd6f165a1.'.$extension, 10240),
             ]);
         }
         $this->assertEquals(0, Lesson::query()->count());
@@ -93,21 +93,21 @@ class LessonTest extends TestCase
         $course = $this->createCourse();
         $lesson = $this->createLesson($course);
         $this->patch(route('lessons.update', [$course->id, $lesson->id]), [
-            "title" => "updated title",
-            "time" => "21",
-            "is_free" => 0,
+            'title' => 'updated title',
+            'time' => '21',
+            'is_free' => 0,
         ]);
-        $this->assertEquals("updated title", Lesson::find(1)->title);
+        $this->assertEquals('updated title', Lesson::find(1)->title);
 
         $this->actAsUser();
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $this->patch(route('lessons.update', [$course->id, $lesson->id]), [
-            "title" => "updated title 2",
-            "time" => "21",
-            "is_free" => 0,
+            'title' => 'updated title 2',
+            'time' => '21',
+            'is_free' => 0,
         ])->assertStatus(403);
 
-        $this->assertEquals("updated title", Lesson::find(1)->title);
+        $this->assertEquals('updated title', Lesson::find(1)->title);
     }
 
     public function test_permitted_user_can_accept_lesson()
@@ -152,7 +152,6 @@ class LessonTest extends TestCase
                 ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_PENDING)->count()
         );
 
-
         $this->actAsUser();
         $this->patch(route('lessons.acceptAll', $course2->id))->assertStatus(403);
         $this->assertEquals(
@@ -179,7 +178,7 @@ class LessonTest extends TestCase
         $this->createLesson($course);
 
         $this->patch(route('lessons.acceptMultiple', $course->id), [
-            "ids" => '1,2'
+            'ids' => '1,2',
         ]);
 
         $this->assertEquals(Lesson::CONFIRMATION_STATUS_ACCEPTED, Lesson::find(1)->confirmation_status);
@@ -188,7 +187,7 @@ class LessonTest extends TestCase
 
         $this->actAsUser();
         $this->patch(route('lessons.acceptMultiple', $course->id), [
-            "ids" => '3'
+            'ids' => '3',
         ])->assertStatus(403);
         $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(3)->confirmation_status);
     }
@@ -208,6 +207,7 @@ class LessonTest extends TestCase
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $this->patch(route('lessons.reject', $lesson->id))->assertStatus(403);
     }
+
     public function test_permitted_user_can_reject_multiple_lessons()
     {
         $this->actAsAdmin();
@@ -217,7 +217,7 @@ class LessonTest extends TestCase
         $this->createLesson($course);
 
         $this->patch(route('lessons.rejectMultiple', $course->id), [
-            "ids" => '1,2'
+            'ids' => '1,2',
         ]);
 
         $this->assertEquals(Lesson::CONFIRMATION_STATUS_REJECTED, Lesson::find(1)->confirmation_status);
@@ -226,7 +226,7 @@ class LessonTest extends TestCase
 
         $this->actAsUser();
         $this->patch(route('lessons.rejectMultiple', $course->id), [
-            "ids" => '3'
+            'ids' => '3',
         ])->assertStatus(403);
         $this->assertEquals(Lesson::CONFIRMATION_STATUS_PENDING, Lesson::find(3)->confirmation_status);
     }
@@ -290,7 +290,7 @@ class LessonTest extends TestCase
         $this->createLesson($course);
 
         $this->delete(route('lessons.destroyMultiple', $course->id), [
-            "ids" => '1,2'
+            'ids' => '1,2',
         ]);
 
         $this->assertEquals(null, Lesson::find(1));
@@ -299,11 +299,10 @@ class LessonTest extends TestCase
 
         $this->actAsUser();
         $this->delete(route('lessons.destroyMultiple', $course->id), [
-            "ids" => '3'
+            'ids' => '3',
         ])->assertStatus(403);
         $this->assertEquals(3, Lesson::find(3)->id);
     }
-
 
     private function createUser()
     {
@@ -331,38 +330,41 @@ class LessonTest extends TestCase
     private function createLesson($course)
     {
         return Lesson::create([
-            "title" => "lesson one",
-            "slug" => "lesson one",
-            "course_id" => $course->id,
-            "user_id" => auth()->id(),
+            'title' => 'lesson one',
+            'slug' => 'lesson one',
+            'course_id' => $course->id,
+            'user_id' => auth()->id(),
         ]);
     }
+
     private function createCourse()
     {
-        $data = $this->courseData() + ['confirmation_status' => Course::CONFIRMATION_STATUS_PENDING,];
+        $data = $this->courseData() + ['confirmation_status' => Course::CONFIRMATION_STATUS_PENDING];
         unset($data['image']);
+
         return Course::create($data);
     }
 
     private function createCategory()
     {
-        return Category::create(['title' => $this->faker->word, "slug" => $this->faker->word]);
+        return Category::create(['title' => $this->faker->word, 'slug' => $this->faker->word]);
     }
 
     private function courseData()
     {
         $category = $this->createCategory();
+
         return [
             'title' => $this->faker->sentence(2),
-            "slug" => $this->faker->sentence(2),
+            'slug' => $this->faker->sentence(2),
             'teacher_id' => auth()->id(),
             'category_id' => $category->id,
-            "priority" => 12,
-            "price" => 1200,
-            "percent" => 70,
-            "type" => Course::TYPE_FREE,
-            "image" => UploadedFile::fake()->image('banner.jpg'),
-            "status" => Course::STATUS_COMPLETED,
+            'priority' => 12,
+            'price' => 1200,
+            'percent' => 70,
+            'type' => Course::TYPE_FREE,
+            'image' => UploadedFile::fake()->image('banner.jpg'),
+            'status' => Course::STATUS_COMPLETED,
         ];
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Cyaxaress\User\Http\Controllers;
-
 
 use App\Http\Controllers\Controller;
 use Cyaxaress\Common\Responses\AjaxResponses;
@@ -26,19 +24,22 @@ class UserController extends Controller
 
         $this->userRepo = $userRepo;
     }
+
     public function index(RoleRepo $roleRepo)
     {
         $this->authorize('index', User::class);
         $users = $this->userRepo->paginate();
         $roles = $roleRepo->all();
-        return view("User::Admin.index", compact('users', 'roles'));
+
+        return view('User::Admin.index', compact('users', 'roles'));
     }
 
     public function info($user, UserRepo $repo)
     {
         $this->authorize('index', User::class);
         $user = $repo->FindByIdFullInfo($user);
-        return view("User::Admin.info", compact("user"));
+
+        return view('User::Admin.info', compact('user'));
     }
 
     public function edit($userId, RoleRepo $roleRepo)
@@ -46,7 +47,8 @@ class UserController extends Controller
         $this->authorize('edit', User::class);
         $user = $this->userRepo->findById($userId);
         $roles = $roleRepo->all();
-        return view("User::Admin.edit", compact('user', 'roles'));
+
+        return view('User::Admin.edit', compact('user', 'roles'));
     }
 
     public function update(UpdateUserRequest $request, $userId)
@@ -55,15 +57,17 @@ class UserController extends Controller
         $user = $this->userRepo->findById($userId);
 
         if ($request->hasFile('image')) {
-            $request->request->add(['image_id' => MediaFileService::publicUpload($request->file('image'))->id ]);
-            if ($user->banner)
+            $request->request->add(['image_id' => MediaFileService::publicUpload($request->file('image'))->id]);
+            if ($user->banner) {
                 $user->banner->delete();
-        }else{
+            }
+        } else {
             $request->request->add(['image_id' => $user->image_id]);
         }
 
         $this->userRepo->update($userId, $request);
         newFeedback();
+
         return redirect()->back();
     }
 
@@ -71,7 +75,9 @@ class UserController extends Controller
     {
         $this->authorize('editProfile', User::class);
         $media = MediaFileService::publicUpload($request->file('userPhoto'));
-        if (auth()->user()->image) auth()->user()->image->delete();
+        if (auth()->user()->image) {
+            auth()->user()->image->delete();
+        }
         auth()->user()->image_id = $media->id;
         auth()->user()->save();
         newFeedback();
@@ -82,6 +88,7 @@ class UserController extends Controller
     public function profile()
     {
         $this->authorize('editProfile', User::class);
+
         return view('User::admin.profile');
     }
 
@@ -90,6 +97,7 @@ class UserController extends Controller
         $this->authorize('editProfile', User::class);
         $this->userRepo->updateProfile($request);
         newFeedback();
+
         return back();
 
     }
@@ -107,6 +115,7 @@ class UserController extends Controller
         $this->authorize('manualVerify', User::class);
         $user = $this->userRepo->findById($userId);
         $user->markEmailAsVerified();
+
         return AjaxResponses::SuccessResponse();
     }
 
@@ -115,6 +124,7 @@ class UserController extends Controller
         $this->authorize('addRole', User::class);
         $user->assignRole($request->role);
         newFeedback('موفقیت آمیز', " نقش کاربری {$request->role}  به کاربر {$user->name} داده شد.", 'success');
+
         return back();
     }
 
@@ -123,6 +133,7 @@ class UserController extends Controller
         $this->authorize('removeRole', User::class);
         $user = $this->userRepo->findById($userId);
         $user->removeRole($role);
+
         return AjaxResponses::SuccessResponse();
     }
 }

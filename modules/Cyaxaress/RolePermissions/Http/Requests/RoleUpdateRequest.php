@@ -24,9 +24,9 @@ class RoleUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "id" => "required|exists:roles,id",
-            "name" => "required|min:3|unique:roles,name," . request()->id,
-            "permissions" => "nullable|array|min:1"
+            'id' => 'required|exists:roles,id',
+            'name' => 'required|min:3|unique:roles,name,'.request()->id,
+            'permissions' => 'nullable|array|min:1',
         ];
     }
 }

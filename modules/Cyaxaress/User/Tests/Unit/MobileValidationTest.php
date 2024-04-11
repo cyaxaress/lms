@@ -17,6 +17,7 @@ class MobileValidationTest extends TestCase
         $result = (new ValidMobile())->passes('', '939147892');
         $this->assertEquals(0, $result);
     }
+
     public function test_mobile_can_not_be_more_than_10_character()
     {
         $result = (new ValidMobile())->passes('', '93914789225');

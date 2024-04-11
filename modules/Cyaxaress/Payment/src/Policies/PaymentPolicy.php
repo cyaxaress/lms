@@ -21,6 +21,8 @@ class PaymentPolicy
 
     public function manage($user)
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_PAYMENTS)) return true;
+        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_PAYMENTS)) {
+            return true;
+        }
     }
 }

@@ -23,16 +23,17 @@ class SlideRequest extends FormRequest
      */
     public function rules()
     {
-        $rules =  [
-            "image" => "required|file|image",
-            "priority" => "nullable|numeric|min:0",
-            "status" => "required|boolean",
-            "link" => "nullable|string|max:200"
+        $rules = [
+            'image' => 'required|file|image',
+            'priority' => 'nullable|numeric|min:0',
+            'status' => 'required|boolean',
+            'link' => 'nullable|string|max:200',
         ];
 
         if (request()->method === 'PATCH') {
-            $rules['image'] = "nullable|file|image";
+            $rules['image'] = 'nullable|file|image';
         }
+
         return $rules;
     }
 }

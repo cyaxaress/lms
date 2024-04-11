@@ -25,25 +25,25 @@ class DashboardController extends Controller
 
         $dates = collect();
         foreach (range(-30, 0) as $i) {
-            $dates->put(now()->addDays($i)->format("Y-m-d"), 0);
+            $dates->put(now()->addDays($i)->format('Y-m-d'), 0);
         }
-        $summery =  $paymentRepo->getDailySummery($dates, auth()->id());
+        $summery = $paymentRepo->getDailySummery($dates, auth()->id());
 
         return view('Dashboard::index', compact(
-                "totalSales",
-                "totalBenefit",
-                "totalSiteShare",
-                "todayBenefit",
-                "last30DaysBenefit",
-                "todaySuccessPaymentsTotal",
-                "todaySuccessPaymentsCount",
-                "last30DaysTotal",
-                "last30DaysSellerShare",
-                "totalSell",
-                "payments",
-                "dates",
-                "summery"
-            )
+            'totalSales',
+            'totalBenefit',
+            'totalSiteShare',
+            'todayBenefit',
+            'last30DaysBenefit',
+            'todaySuccessPaymentsTotal',
+            'todaySuccessPaymentsCount',
+            'last30DaysTotal',
+            'last30DaysSellerShare',
+            'totalSell',
+            'payments',
+            'dates',
+            'summery'
+        )
         );
     }
 }

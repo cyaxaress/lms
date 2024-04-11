@@ -2,9 +2,7 @@
 
 namespace Cyaxaress\Comment\Listeners;
 
-use Cyaxaress\Comment\Notifications\CommentApprovedNotification;
 use Cyaxaress\Comment\Notifications\CommentRejectedNotification;
-use Cyaxaress\Comment\Notifications\CommentSubmittedNotification;
 
 class CommentRejectedListener
 {
@@ -21,7 +19,7 @@ class CommentRejectedListener
     /**
      * Handle the event.
      *
-     * @param object $event
+     * @param  object  $event
      * @return void
      */
     public function handle($event)

@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-   public static $seeders = [];
+    public static $seeders = [];
 
     public function run()
     {

@@ -1,6 +1,7 @@
 <?php
 
 namespace Cyaxaress\User\Http\Controllers\Auth;
+
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -46,7 +47,7 @@ class LoginController extends Controller
 
         return [
             $field => $username,
-            'password' => $request->password
+            'password' => $request->password,
         ];
     }
 
@@ -54,5 +55,4 @@ class LoginController extends Controller
     {
         return view('User::Front.login');
     }
-
 }

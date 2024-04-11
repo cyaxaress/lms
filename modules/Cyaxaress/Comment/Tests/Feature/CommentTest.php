@@ -11,7 +11,6 @@ use Cyaxaress\User\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class CommentTest extends TestCase
@@ -41,9 +40,9 @@ class CommentTest extends TestCase
         $this->actAsUser();
         $course = $this->createCourse();
         $this->post(route('comments.store', [
-            "body" => "my first test comment",
-            "commentable_id" => $course->id,
-            "commentable_type" => get_class($course),
+            'body' => 'my first test comment',
+            'commentable_id' => $course->id,
+            'commentable_type' => get_class($course),
         ]))->assertRedirect();
 
         $this->assertEquals(1, Comment::query()->count());
@@ -54,15 +53,15 @@ class CommentTest extends TestCase
         $this->actAsUser();
         $course = $this->createCourse();
         $this->post(route('comments.store', [
-            "body" => "my first test comment",
-            "commentable_id" => $course->id,
-            "commentable_type" => get_class($course),
+            'body' => 'my first test comment',
+            'commentable_id' => $course->id,
+            'commentable_type' => get_class($course),
         ]));
         $this->post(route('comments.store', [
-            "body" => "my first test comment",
-            "commentable_id" => $course->id,
-            "comment_id" => 1,
-            "commentable_type" => get_class($course),
+            'body' => 'my first test comment',
+            'commentable_id' => $course->id,
+            'comment_id' => 1,
+            'commentable_type' => get_class($course),
         ]));
         $this->assertEquals(1, Comment::query()->count());
     }
@@ -72,15 +71,15 @@ class CommentTest extends TestCase
         $this->actAsAdmin();
         $course = $this->createCourse();
         $this->post(route('comments.store', [
-            "body" => "my first test comment",
-            "commentable_id" => $course->id,
-            "commentable_type" => get_class($course),
+            'body' => 'my first test comment',
+            'commentable_id' => $course->id,
+            'commentable_type' => get_class($course),
         ]));
         $this->post(route('comments.store', [
-            "body" => "my first test comment",
-            "commentable_id" => $course->id,
-            "comment_id" => 1,
-            "commentable_type" => get_class($course),
+            'body' => 'my first test comment',
+            'commentable_id' => $course->id,
+            'comment_id' => 1,
+            'commentable_type' => get_class($course),
         ]));
         $this->assertEquals(2, Comment::query()->count());
     }
@@ -110,30 +109,32 @@ class CommentTest extends TestCase
 
     private function createCourse()
     {
-        $data = $this->courseData() + ['confirmation_status' => Course::CONFIRMATION_STATUS_PENDING,];
+        $data = $this->courseData() + ['confirmation_status' => Course::CONFIRMATION_STATUS_PENDING];
         unset($data['image']);
+
         return Course::create($data);
     }
 
     private function createCategory()
     {
-        return Category::create(['title' => $this->faker->word, "slug" => $this->faker->word]);
+        return Category::create(['title' => $this->faker->word, 'slug' => $this->faker->word]);
     }
 
     private function courseData()
     {
         $category = $this->createCategory();
+
         return [
             'title' => $this->faker->sentence(2),
-            "slug" => $this->faker->sentence(2),
+            'slug' => $this->faker->sentence(2),
             'teacher_id' => auth()->id(),
             'category_id' => $category->id,
-            "priority" => 12,
-            "price" => 1200,
-            "percent" => 70,
-            "type" => Course::TYPE_FREE,
-            "image" => UploadedFile::fake()->image('banner.jpg'),
-            "status" => Course::STATUS_COMPLETED,
+            'priority' => 12,
+            'price' => 1200,
+            'percent' => 70,
+            'type' => Course::TYPE_FREE,
+            'image' => UploadedFile::fake()->image('banner.jpg'),
+            'status' => Course::STATUS_COMPLETED,
         ];
     }
 }

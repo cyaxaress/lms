@@ -10,8 +10,8 @@ class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
         PaymentWasSuccessful::class => [
-            UpdateUsedDiscountsForPayment::class
-        ]
+            UpdateUsedDiscountsForPayment::class,
+        ],
     ];
 
     public function boot()

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Cyaxaress\Course\Policies;
-
 
 use Cyaxaress\RolePermissions\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -35,7 +33,10 @@ class LessonPolicy
             $user->id === $lesson->course->teacher_id ||
             $lesson->course->hasStudent($user->id) ||
             $lesson->is_free
-        ) return true;
+        ) {
+            return true;
+        }
+
         return false;
     }
 }

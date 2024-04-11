@@ -1,14 +1,12 @@
 <?php
 
-
 namespace Cyaxaress\User\Http\Requests;
-
 
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Rules\ValidPassword;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProfileInformationRequest  extends FormRequest
+class UpdateProfileInformationRequest extends FormRequest
 {
     public function authorize()
     {
@@ -23,23 +21,24 @@ class UpdateProfileInformationRequest  extends FormRequest
     public function rules()
     {
         $rules = [
-            "name" => 'required|min:3|max:190',
-            "email" => 'required|email|min:3|max:190|unique:users,email,' . auth()->id(),
-            "username" => 'nullable|min:3|max:190|unique:users,username,' .  auth()->id(),
-            "mobile" => 'nullable|unique:users,mobile,' . request()->route('user'),
-            'password' => ['nullable', new ValidPassword()]
+            'name' => 'required|min:3|max:190',
+            'email' => 'required|email|min:3|max:190|unique:users,email,'.auth()->id(),
+            'username' => 'nullable|min:3|max:190|unique:users,username,'.auth()->id(),
+            'mobile' => 'nullable|unique:users,mobile,'.request()->route('user'),
+            'password' => ['nullable', new ValidPassword()],
 
         ];
 
         if (auth()->user()->hasPermissionTo(Permission::PERMISSION_TEACH)) {
             $rules += [
-                "card_number" => 'required|string|size:16',
-                "shaba" => 'required|size:24',
-                "headline" => 'required|min:3|max:60',
-                "bio" => 'required',
+                'card_number' => 'required|string|size:16',
+                'shaba' => 'required|size:24',
+                'headline' => 'required|min:3|max:60',
+                'bio' => 'required',
             ];
-            $rules['username'] = 'required|min:3|max:190|unique:users,username,' .  auth()->id();
+            $rules['username'] = 'required|min:3|max:190|unique:users,username,'.auth()->id();
         }
+
         return $rules;
     }
 
@@ -51,8 +50,8 @@ class UpdateProfileInformationRequest  extends FormRequest
             'username' => 'نام کاربری',
             'headline' => 'عنوان',
             'bio' => 'بیو',
-            "password" => 'رمز عبور جدید',
-            "mobile" => "موبایل",
+            'password' => 'رمز عبور جدید',
+            'mobile' => 'موبایل',
         ];
     }
 }

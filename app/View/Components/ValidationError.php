@@ -12,6 +12,7 @@ class ValidationError extends Component
      * @return void
      */
     public $field;
+
     public function __construct($field)
     {
         $this->field = $field;

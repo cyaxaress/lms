@@ -11,7 +11,7 @@ class AddSellersShareToHisAccount
 
     public function handle($event)
     {
-        if ($event->payment->seller){
+        if ($event->payment->seller) {
             $event->payment->seller->balance += $event->payment->seller_share;
             $event->payment->seller->save();
         }

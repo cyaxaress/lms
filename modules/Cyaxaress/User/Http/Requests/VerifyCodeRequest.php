@@ -25,7 +25,7 @@ class VerifyCodeRequest extends FormRequest
     public function rules()
     {
         return [
-            'verify_code' => VerifyCodeService::getRule()
+            'verify_code' => VerifyCodeService::getRule(),
         ];
     }
 }

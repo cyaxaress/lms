@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Cyaxaress\Course\Http\Controllers;
-
 
 use App\Http\Controllers\Controller;
 use Cyaxaress\Common\Responses\AjaxResponses;
@@ -32,6 +30,7 @@ class LessonController extends Controller
         $course = $courseRepo->findByid($course);
         $this->authorize('createLesson', $course);
         $seasons = $seasonRepo->getCourseSeasons($course->id);
+
         return view('Courses::lessons.create', compact('seasons', 'course'));
     }
 
@@ -39,9 +38,10 @@ class LessonController extends Controller
     {
         $course = $courseRepo->findByid($course);
         $this->authorize('createLesson', $course);
-        $request->request->add(["media_id" => MediaFileService::privateUpload($request->file('lesson_file'))->id ]);
+        $request->request->add(['media_id' => MediaFileService::privateUpload($request->file('lesson_file'))->id]);
         $this->lessonRepo->store($course->id, $request);
         newFeedback();
+
         return redirect(route('courses.details', $course->id));
     }
 
@@ -51,6 +51,7 @@ class LessonController extends Controller
         $this->authorize('edit', $lesson);
         $seasons = $seasonRepo->getCourseSeasons($courseId);
         $course = $courseRepo->findByid($courseId);
+
         return view('Courses::lessons.edit', compact('lesson', 'seasons', 'course'));
     }
 
@@ -60,21 +61,25 @@ class LessonController extends Controller
         $this->authorize('edit', $lesson);
         if ($request->hasFile('lesson_file')) {
 
-            if ($lesson->media)
+            if ($lesson->media) {
                 $lesson->media->delete();
+            }
 
-            $request->request->add(["media_id" => MediaFileService::privateUpload($request->file('lesson_file'))->id ]);
-        }else{
-            $request->request->add(['media_id'=> $lesson->media_id]);
+            $request->request->add(['media_id' => MediaFileService::privateUpload($request->file('lesson_file'))->id]);
+        } else {
+            $request->request->add(['media_id' => $lesson->media_id]);
         }
         $this->lessonRepo->update($lessonId, $courseId, $request);
         newFeedback();
+
         return redirect(route('courses.details', $courseId));
     }
+
     public function accept($id)
     {
         $this->authorize('manage', Course::class);
         $this->lessonRepo->updateConfirmationStatus($id, Lesson::CONFIRMATION_STATUS_ACCEPTED);
+
         return AjaxResponses::SuccessResponse();
     }
 
@@ -83,6 +88,7 @@ class LessonController extends Controller
         $this->authorize('manage', Course::class);
         $this->lessonRepo->acceptAll($courseId);
         newFeedback();
+
         return back();
     }
 
@@ -92,6 +98,7 @@ class LessonController extends Controller
         $ids = explode(',', $request->ids);
         $this->lessonRepo->updateConfirmationStatus($ids, Lesson::CONFIRMATION_STATUS_ACCEPTED);
         newFeedback();
+
         return back();
     }
 
@@ -99,8 +106,9 @@ class LessonController extends Controller
     {
         $this->authorize('manage', Course::class);
         $ids = explode(',', $request->ids);
-        $this->lessonRepo->updateConfirmationStatus($ids, Lesson::CONFIRMATION_STATUS_REJECTED );
+        $this->lessonRepo->updateConfirmationStatus($ids, Lesson::CONFIRMATION_STATUS_REJECTED);
         newFeedback();
+
         return back();
     }
 
@@ -108,22 +116,24 @@ class LessonController extends Controller
     {
         $this->authorize('manage', Course::class);
         $this->lessonRepo->updateConfirmationStatus($id, Lesson::CONFIRMATION_STATUS_REJECTED);
+
         return AjaxResponses::SuccessResponse();
     }
 
     public function lock($id)
     {
         $this->authorize('manage', Course::class);
-        if ($this->lessonRepo->updateStatus($id, Lesson::STATUS_LOCKED)){
+        if ($this->lessonRepo->updateStatus($id, Lesson::STATUS_LOCKED)) {
             return AjaxResponses::SuccessResponse();
         }
 
         return AjaxResponses::FailedResponse();
     }
+
     public function unlock($id)
     {
         $this->authorize('manage', Course::class);
-        if ($this->lessonRepo->updateStatus($id, Lesson::STATUS_OPENED)){
+        if ($this->lessonRepo->updateStatus($id, Lesson::STATUS_OPENED)) {
             return AjaxResponses::SuccessResponse();
         }
 
@@ -134,10 +144,11 @@ class LessonController extends Controller
     {
         $lesson = $this->lessonRepo->findByid($lessonId);
         $this->authorize('delete', $lesson);
-        if ($lesson->media){
+        if ($lesson->media) {
             $lesson->media->delete();
         }
         $lesson->delete();
+
         return AjaxResponses::SuccessResponse();
     }
 
@@ -147,12 +158,13 @@ class LessonController extends Controller
         foreach ($ids as $id) {
             $lesson = $this->lessonRepo->findByid($id);
             $this->authorize('delete', $lesson);
-            if ($lesson->media){
+            if ($lesson->media) {
                 $lesson->media->delete();
             }
             $lesson->delete();
         }
         newFeedback();
+
         return back();
     }
 }

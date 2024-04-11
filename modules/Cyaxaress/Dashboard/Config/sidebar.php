@@ -1,4 +1,5 @@
 <?php
+
 return [
     'items' => [
         'dashboard' => [],
@@ -10,5 +11,5 @@ return [
         'role-permissions' => [],
         'usersInformation' => [],
 
-    ]
+    ],
 ];

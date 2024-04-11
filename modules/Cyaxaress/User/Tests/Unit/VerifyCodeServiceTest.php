@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Cyaxaress\User\Tests\Unit;
-
 
 use Cyaxaress\User\Services\VerifyCodeService;
 use Tests\TestCase;

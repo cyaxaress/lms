@@ -19,19 +19,28 @@ class Course extends Model
     use HasComments;
 
     protected $guarded = [];
+
     const TYPE_FREE = 'free';
+
     const TYPE_CASH = 'cash';
-    static $types = [self::TYPE_FREE, self::TYPE_CASH];
+
+    public static $types = [self::TYPE_FREE, self::TYPE_CASH];
 
     const STATUS_COMPLETED = 'completed';
+
     const STATUS_NOT_COMPLETED = 'not-completed';
+
     const STATUS_LOCKED = 'locked';
-    static $statuses = [self::STATUS_COMPLETED, self::STATUS_NOT_COMPLETED, self::STATUS_LOCKED];
+
+    public static $statuses = [self::STATUS_COMPLETED, self::STATUS_NOT_COMPLETED, self::STATUS_LOCKED];
 
     const CONFIRMATION_STATUS_ACCEPTED = 'accepted';
+
     const CONFIRMATION_STATUS_REJECTED = 'rejected';
+
     const CONFIRMATION_STATUS_PENDING = 'pending';
-    static $confirmationStatuses = [self::CONFIRMATION_STATUS_ACCEPTED, self::CONFIRMATION_STATUS_PENDING, self::CONFIRMATION_STATUS_REJECTED];
+
+    public static $confirmationStatuses = [self::CONFIRMATION_STATUS_ACCEPTED, self::CONFIRMATION_STATUS_PENDING, self::CONFIRMATION_STATUS_REJECTED];
 
     public function banner()
     {
@@ -65,12 +74,12 @@ class Course extends Model
 
     public function tickets()
     {
-        return $this->morphMany(Ticket::class, "ticketable");
+        return $this->morphMany(Ticket::class, 'ticketable');
     }
 
     public function payments()
     {
-        return $this->morphMany(Payment::class, "paymentable");
+        return $this->morphMany(Payment::class, 'paymentable');
     }
 
     public function payment()
@@ -80,7 +89,7 @@ class Course extends Model
 
     public function discounts()
     {
-        return $this->morphToMany(Discount::class, "discountable");
+        return $this->morphToMany(Discount::class, 'discountable');
     }
 
     public function getDuration()
@@ -96,9 +105,10 @@ class Course extends Model
     public function formattedDuration()
     {
         $duration = $this->getDuration();
-        $h = round($duration / 60) < 10 ? '0' . round($duration / 60) : round($duration / 60);
-        $m = ($duration % 60) < 10 ? '0' . ($duration % 60) : ($duration % 60);
-        return $h . ':' . $m . ":00";
+        $h = round($duration / 60) < 10 ? '0'.round($duration / 60) : round($duration / 60);
+        $m = ($duration % 60) < 10 ? '0'.($duration % 60) : ($duration % 60);
+
+        return $h.':'.$m.':00';
     }
 
     public function getFormattedPrice()
@@ -111,10 +121,19 @@ class Course extends Model
         $discountRepo = new DiscountRepo();
         $discount = $discountRepo->getCourseBiggerDiscount($this->id);
         $globalDiscount = $discountRepo->getGlobalBiggerDiscount();
-        if ($discount == null && $globalDiscount == null) return null;
-        if ($discount == null && $globalDiscount != null) return $globalDiscount;
-        if ($discount != null && $globalDiscount == null) return $discount;
-        if ($globalDiscount->percent > $discount->percent) return $globalDiscount;
+        if ($discount == null && $globalDiscount == null) {
+            return null;
+        }
+        if ($discount == null && $globalDiscount != null) {
+            return $globalDiscount;
+        }
+        if ($discount != null && $globalDiscount == null) {
+            return $discount;
+        }
+        if ($globalDiscount->percent > $discount->percent) {
+            return $globalDiscount;
+        }
+
         return $discount;
     }
 
@@ -122,9 +141,12 @@ class Course extends Model
     {
         $discount = $this->getDiscount();
 
-        if ($discount) return $discount->percent;
+        if ($discount) {
+            return $discount->percent;
+        }
 
-        return 0;   }
+        return 0;
+    }
 
     public function getDiscountAmount($percent = null)
     {
@@ -132,6 +154,7 @@ class Course extends Model
             $discount = $this->getDiscount();
             $percent = $discount ? $discount->percent : 0;
         }
+
         return DiscountService::calculateDiscountAmount($this->price, $percent);
     }
 
@@ -142,7 +165,7 @@ class Course extends Model
 
         $discounts = [];
         if ($discount) {
-            $discounts [] = $discount;
+            $discounts[] = $discount;
             $amount = $this->price - $this->getDiscountAmount($discount->percent);
         }
 
@@ -150,13 +173,14 @@ class Course extends Model
             $repo = new DiscountRepo();
             $discountFromCode = $repo->getValidDiscountByCode($code, $this->id);
             if ($discountFromCode) {
-                $discounts [] = $discountFromCode;
+                $discounts[] = $discountFromCode;
                 $amount = $amount - DiscountService::calculateDiscountAmount($amount, $discountFromCode->percent);
             }
         }
 
-        if ($withDiscounts)
-        return [$amount, $discounts];
+        if ($withDiscounts) {
+            return [$amount, $discounts];
+        }
 
         return $amount;
     }
@@ -168,7 +192,7 @@ class Course extends Model
 
     public function path()
     {
-        return route('singleCourse', $this->id . '-' . $this->slug);
+        return route('singleCourse', $this->id.'-'.$this->slug);
     }
 
     public function lessonsCount()

@@ -11,6 +11,8 @@ class SlidePolicy
 
     public function manage($user)
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_SLIDES)) return true;
+        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_SLIDES)) {
+            return true;
+        }
     }
 }

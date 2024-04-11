@@ -7,7 +7,9 @@ use Illuminate\View\Component;
 class File extends Component
 {
     public $placeholder;
+
     public $name;
+
     /**
      * @var null
      */

@@ -8,9 +8,8 @@ class SlideRepo
 {
     public function all()
     {
-        return Slide::query()->orderBy("priority")->get();
+        return Slide::query()->orderBy('priority')->get();
     }
-
 
     public function findById($id)
     {
@@ -20,7 +19,7 @@ class SlideRepo
     public function store($values)
     {
         return Slide::create([
-            "user_id" => auth()->id(),
+            'user_id' => auth()->id(),
             'priority' => $values->priority,
             'media_id' => $values->media_id,
             'link' => $values->link,

@@ -23,11 +23,15 @@ class CommentSubmittedNotification extends Notification
     public function via($notifiable): array
     {
         $channels = [
-            "mail",
-            "database"
+            'mail',
+            'database',
         ];
-        if (!empty($notifiable->telegram)) $channels[] = TelegramChannel::class;
-        if (!empty($notifiable->mobile)) $channels[] = KavenegarChannel::class;
+        if (! empty($notifiable->telegram)) {
+            $channels[] = TelegramChannel::class;
+        }
+        if (! empty($notifiable->mobile)) {
+            $channels[] = KavenegarChannel::class;
+        }
 
         return $channels;
     }
@@ -39,24 +43,25 @@ class CommentSubmittedNotification extends Notification
 
     public function toTelegram($notifiable)
     {
-        if (!empty($notifiable->telegram))
-        return TelegramMessage::create()
-            ->to($notifiable->telegram)
-            ->content("یک دیدگاه جدید برای دوره ی شما در وب آموز ارسال شده است.")
-            ->button('مشاهده دوره', $this->comment->commentable->path())
-            ->button('مدیریت دیدگاه ها', route("comments.index"));
+        if (! empty($notifiable->telegram)) {
+            return TelegramMessage::create()
+                ->to($notifiable->telegram)
+                ->content('یک دیدگاه جدید برای دوره ی شما در وب آموز ارسال شده است.')
+                ->button('مشاهده دوره', $this->comment->commentable->path())
+                ->button('مدیریت دیدگاه ها', route('comments.index'));
+        }
     }
 
     public function toSMS($notifiable)
     {
-        return 'یک دیدگاه جدید برای دوره ی شما در وب آموز ارسال شده است. جهت مشاهده و ارسال پاسخ روی لینک زیر کلیک فرمایید.' . "\n" .  route("comments.index");
+        return 'یک دیدگاه جدید برای دوره ی شما در وب آموز ارسال شده است. جهت مشاهده و ارسال پاسخ روی لینک زیر کلیک فرمایید.'."\n".route('comments.index');
     }
 
     public function toArray($notifiable): array
     {
         return [
-            "message" => "دیدگاه جدید برای دوره ی شما ثبت شده است.",
-            "url" => route("comments.index"),
+            'message' => 'دیدگاه جدید برای دوره ی شما ثبت شده است.',
+            'url' => route('comments.index'),
         ];
     }
 }

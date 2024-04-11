@@ -1,12 +1,10 @@
 <?php
 
-
 namespace Cyaxaress\User\Http\Requests;
-
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserPhoto  extends FormRequest
+class UpdateUserPhoto extends FormRequest
 {
     public function authorize()
     {
@@ -21,7 +19,7 @@ class UpdateUserPhoto  extends FormRequest
     public function rules()
     {
         return [
-            'userPhoto' => ['required', 'mimes:jpg,jpeg,png']
+            'userPhoto' => ['required', 'mimes:jpg,jpeg,png'],
         ];
     }
 }

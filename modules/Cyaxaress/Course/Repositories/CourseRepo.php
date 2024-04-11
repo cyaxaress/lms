@@ -2,7 +2,6 @@
 
 namespace Cyaxaress\Course\Repositories;
 
-
 use Cyaxaress\Course\Models\Course;
 use Cyaxaress\Course\Models\Lesson;
 use Illuminate\Support\Str;
@@ -91,14 +90,14 @@ class CourseRepo
 
     public function addStudentToCourse(Course $course, $studentId)
     {
-        if (!$this->getCourseStudentById($course, $studentId)) {
+        if (! $this->getCourseStudentById($course, $studentId)) {
             $course->students()->attach($studentId);
         }
     }
 
     public function getCourseStudentById(Course $course, $studentId)
     {
-        return $course->students()->where("id", $studentId)->first();
+        return $course->students()->where('id', $studentId)->first();
     }
 
     public function hasStudent(Course $course, $student_id)
@@ -112,14 +111,15 @@ class CourseRepo
             ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_ACCEPTED);
     }
 
-    public function getAll(string $status = null)
+    public function getAll(?string $status = null)
     {
         $query = Course::query();
-        if ($status) $query->where("confirmation_status", $status);
+        if ($status) {
+            $query->where('confirmation_status', $status);
+        }
 
         return $query
             ->latest()
             ->get();
     }
-
 }

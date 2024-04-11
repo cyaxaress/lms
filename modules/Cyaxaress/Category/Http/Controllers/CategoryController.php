@@ -1,4 +1,5 @@
 <?php
+
 namespace Cyaxaress\Category\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -10,14 +11,17 @@ use Cyaxaress\Common\Responses\AjaxResponses;
 class CategoryController extends Controller
 {
     public $repo;
+
     public function __construct(CategoryRepo $categoryRepo)
     {
         $this->repo = $categoryRepo;
     }
+
     public function index()
     {
         $this->authorize('manage', Category::class);
         $categories = $this->repo->all();
+
         return view('Categories::index', compact('categories'));
     }
 
@@ -25,6 +29,7 @@ class CategoryController extends Controller
     {
         $this->authorize('manage', Category::class);
         $this->repo->store($request);
+
         return back();
     }
 
@@ -33,6 +38,7 @@ class CategoryController extends Controller
         $this->authorize('manage', Category::class);
         $category = $this->repo->findById($categoryId);
         $categories = $this->repo->allExceptById($categoryId);
+
         return view('Categories::edit', compact('category', 'categories'));
     }
 
@@ -40,6 +46,7 @@ class CategoryController extends Controller
     {
         $this->authorize('manage', Category::class);
         $this->repo->update($categoryId, $request);
+
         return back();
     }
 
@@ -47,6 +54,7 @@ class CategoryController extends Controller
     {
         $this->authorize('manage', Category::class);
         $this->repo->delete($categoryId);
+
         return AjaxResponses::SuccessResponse();
     }
 }

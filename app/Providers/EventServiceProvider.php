@@ -24,14 +24,14 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         CommentApprovedEvent::class => [
-            CommentApprovedListener::class
+            CommentApprovedListener::class,
         ],
         CommentRejectedEvent::class => [
-            CommentRejectedListener::class
+            CommentRejectedListener::class,
         ],
         CommentSubmittedEvent::class => [
-            CommentSubmittedListener::class
-        ]
+            CommentSubmittedListener::class,
+        ],
     ];
 
     public function boot(): void

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Cyaxaress\User\Services;
-
 
 class UserService
 {

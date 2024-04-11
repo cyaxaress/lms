@@ -24,16 +24,16 @@ class DiscountRequest extends FormRequest
      */
     public function rules()
     {
-        $rules =  [
-            "code" => "nullable|max:50|unique:discounts,code",
-            "percent" => "required|numeric|min:1|max:100",
-            "usage_limitation" => "nullable|numeric|min:0|max:1000000000",
-            "expire_at" => ["nullable",new ValidJalaliDate()],
-            "courses" => "nullable|array",
-            "type" => "required"
+        $rules = [
+            'code' => 'nullable|max:50|unique:discounts,code',
+            'percent' => 'required|numeric|min:1|max:100',
+            'usage_limitation' => 'nullable|numeric|min:0|max:1000000000',
+            'expire_at' => ['nullable', new ValidJalaliDate()],
+            'courses' => 'nullable|array',
+            'type' => 'required',
         ];
-        if (request()->getMethod() == "PATCH"){
-            $rules["code"] = "nullable|max:50|unique:discounts,code," . request()->route("discount")->id;
+        if (request()->getMethod() == 'PATCH') {
+            $rules['code'] = 'nullable|max:50|unique:discounts,code,'.request()->route('discount')->id;
         }
 
         return $rules;

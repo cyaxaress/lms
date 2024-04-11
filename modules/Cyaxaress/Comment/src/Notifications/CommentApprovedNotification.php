@@ -4,7 +4,6 @@ namespace Cyaxaress\Comment\Notifications;
 
 use Cyaxaress\Comment\Models\Comment;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramChannel;
@@ -16,7 +15,7 @@ class CommentApprovedNotification extends Notification
 
     public $comment;
 
-    public function __construct(Comment  $comment)
+    public function __construct(Comment $comment)
     {
         //
         $this->comment = $comment;
@@ -25,33 +24,37 @@ class CommentApprovedNotification extends Notification
     public function via($notifiable)
     {
         $channels[] = 'mail';
-        $channels[] = "database";
-        if (!empty($notifiable->telegram)) $channels[] = TelegramChannel::class;
+        $channels[] = 'database';
+        if (! empty($notifiable->telegram)) {
+            $channels[] = TelegramChannel::class;
+        }
+
         return $channels;
     }
 
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     public function toTelegram($notifiable)
     {
-        if (!empty($notifiable->telegram))
+        if (! empty($notifiable->telegram)) {
             return TelegramMessage::create()
                 ->to($notifiable->telegram)
-                ->content("دیدگاه شما تایید شد.")
+                ->content('دیدگاه شما تایید شد.')
                 ->button('مشاهده دوره', $this->comment->commentable->path());
+        }
     }
 
     public function toArray($notifiable)
     {
         return [
-            "message" => "دیدگاه شما تایید شد.",
-            "url" => $this->comment->commentable->path(),
+            'message' => 'دیدگاه شما تایید شد.',
+            'url' => $this->comment->commentable->path(),
         ];
     }
 }

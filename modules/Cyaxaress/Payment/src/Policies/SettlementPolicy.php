@@ -23,16 +23,22 @@ class SettlementPolicy
     {
         if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_SETTLEMENTS) ||
             $user->hasPermissionTo(Permission::PERMISSION_TEACH)
-        ) return true;
+        ) {
+            return true;
+        }
     }
 
     public function manage($user)
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_SETTLEMENTS)) return true;
+        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_SETTLEMENTS)) {
+            return true;
+        }
     }
 
     public function store($user)
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_TEACH)) return true;
+        if ($user->hasPermissionTo(Permission::PERMISSION_TEACH)) {
+            return true;
+        }
     }
 }

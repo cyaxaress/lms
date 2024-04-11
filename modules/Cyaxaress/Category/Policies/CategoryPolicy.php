@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Cyaxaress\Category\Policies;
-
 
 use Cyaxaress\RolePermissions\Models\Permission;
 use Cyaxaress\User\Models\User;

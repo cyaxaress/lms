@@ -12,66 +12,65 @@ class CategoriesTableSeeder extends Seeder
      *
      * @return void
      */
-
     public function run()
     {
         $categories = [
             [
-                "title" => __('uncategorized'),
-                "slug" => "uncategorized",
+                'title' => __('uncategorized'),
+                'slug' => 'uncategorized',
             ],
             [
-                "title" => __("programming"),
-                "slug" => "programming",
-                "categories" => [
+                'title' => __('programming'),
+                'slug' => 'programming',
+                'categories' => [
                     [
-                        "title" => __("web"),
-                        "slug" => "web-programming",
-                        "categories" => [
+                        'title' => __('web'),
+                        'slug' => 'web-programming',
+                        'categories' => [
                             [
-                                "title" => __("laravel"),
-                                "slug" => "laravel",
+                                'title' => __('laravel'),
+                                'slug' => 'laravel',
                             ],
                             [
-                                "title" => __("react"),
-                                "slug" => "react-js",
-                            ]
-                        ]
+                                'title' => __('react'),
+                                'slug' => 'react-js',
+                            ],
+                        ],
                     ],
                     [
-                        "title" => __("mobile"),
-                        "slug" => "mobile-programming",
-                    ]
-                ]
+                        'title' => __('mobile'),
+                        'slug' => 'mobile-programming',
+                    ],
+                ],
             ],
             [
-                "title" => __("graphic"),
-                "slug" => "graphic",
-                "categories" => [
+                'title' => __('graphic'),
+                'slug' => 'graphic',
+                'categories' => [
                     [
-                        "title" => __("user-interface"),
-                        "slug" => "desgin-user-interface",
-                    ]
-                ]
+                        'title' => __('user-interface'),
+                        'slug' => 'desgin-user-interface',
+                    ],
+                ],
             ],
             [
-                "title" => __("language"),
-                "slug" => "language",
+                'title' => __('language'),
+                'slug' => 'language',
             ],
             [
-                "title" => __("business-management"),
-                "slug" => "business-management",
-                "categories" => [
+                'title' => __('business-management'),
+                'slug' => 'business-management',
+                'categories' => [
                     [
-                        "title" => __("product-management"),
-                        "slug" => "product-management",
+                        'title' => __('product-management'),
+                        'slug' => 'product-management',
                     ],
                     [
-                        "title" => __("project-management"),
-                        "slug" => "project-management",
-                    ]
-                ]
-            ]
+                        'title' => __('project-management'),
+                        'slug' => 'project-management',
+                    ],
+                ],
+            ],
         ];
         foreach ($categories as $category) {
             $this->create($category);

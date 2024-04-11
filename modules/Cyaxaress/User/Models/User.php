@@ -22,17 +22,20 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
-    use HasRoles;
     use HasFactory;
+    use HasRoles;
+    use Notifiable;
 
-    const STATUS_ACTIVE = "active";
-    const STATUS_INACTIVE = "inactive";
-    const STATUS_BAN = "ban";
+    const STATUS_ACTIVE = 'active';
+
+    const STATUS_INACTIVE = 'inactive';
+
+    const STATUS_BAN = 'ban';
+
     public static $statuses = [
         self::STATUS_ACTIVE,
         self::STATUS_INACTIVE,
-        self::STATUS_BAN
+        self::STATUS_BAN,
     ];
 
     public static $defaultUsers = [
@@ -40,20 +43,20 @@ class User extends Authenticatable implements MustVerifyEmail
             'email' => 'admin@site.com',
             'password' => 'admin',
             'name' => 'Admin',
-            'role' => Role::ROLE_SUPER_ADMIN
+            'role' => Role::ROLE_SUPER_ADMIN,
         ],
         [
             'email' => 'teacher@site.com',
             'password' => 'teacher',
             'name' => 'Teacher',
-            'role' => Role::ROLE_TEACHER
+            'role' => Role::ROLE_TEACHER,
         ],
         [
             'email' => 'student@site.com',
             'password' => 'student',
             'name' => 'Student',
-            'role' => Role::ROLE_STUDENT
-        ]
+            'role' => Role::ROLE_STUDENT,
+        ],
     ];
 
     /**
@@ -62,7 +65,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'mobile'
+        'name', 'email', 'password', 'mobile',
     ];
 
     /**
@@ -110,7 +113,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function payments()
     {
-        return $this->hasMany(Payment::class, "buyer_id");
+        return $this->hasMany(Payment::class, 'buyer_id');
     }
 
     public function seasons()
@@ -146,23 +149,24 @@ class User extends Authenticatable implements MustVerifyEmail
     public function profilePath()
     {
         return null;
+
         return $this->username ? route('viewProfile', $this->username) : route('viewProfile', 'username');
     }
 
     public function getThumbAttribute()
     {
-        if ($this->image)
-            return '/storage/' . $this->image->files[300];
+        if ($this->image) {
+            return '/storage/'.$this->image->files[300];
+        }
 
         return '/panel/img/profile.jpg';
     }
 
-
     public function studentsCount()
     {
-        return \DB::table("courses")
-            ->select("course_id")->where("teacher_id", $this->id)
-            ->join("course_user", "courses.id", "=", "course_user.course_id")->count();
+        return \DB::table('courses')
+            ->select('course_id')->where('teacher_id', $this->id)
+            ->join('course_user', 'courses.id', '=', 'course_user.course_id')->count();
     }
 
     public function routeNotificationForSms()

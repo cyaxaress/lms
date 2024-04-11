@@ -25,6 +25,7 @@ class CourseController extends Controller
         } else {
             $courses = $courseRepo->getCoursesByTeacherId(auth()->id());
         }
+
         return view('Courses::index', compact('courses'));
     }
 
@@ -33,6 +34,7 @@ class CourseController extends Controller
         $this->authorize('create', Course::class);
         $teachers = $userRepo->getTeachers();
         $categories = $categoryRepo->all();
+
         return view('Courses::create', compact('teachers', 'categories'));
     }
 
@@ -45,8 +47,9 @@ class CourseController extends Controller
             $teacherId = auth()->id();
         }
         $courseRepo->store($request->merge([
-            'teacher_id' => $teacherId
+            'teacher_id' => $teacherId,
         ]));
+
         return redirect()->route('courses.index');
     }
 
@@ -56,6 +59,7 @@ class CourseController extends Controller
         $this->authorize('edit', $course);
         $teachers = $userRepo->getTeachers();
         $categories = $categoryRepo->all();
+
         return view('Courses::edit', compact('course', 'teachers', 'categories'));
     }
 
@@ -65,12 +69,14 @@ class CourseController extends Controller
         $this->authorize('edit', $course);
         if ($request->hasFile('image')) {
             $request->request->add(['banner_id' => MediaFileService::publicUpload($request->file('image'))->id]);
-            if ($course->banner)
+            if ($course->banner) {
                 $course->banner->delete();
+            }
         } else {
             $request->request->add(['banner_id' => $course->banner_id]);
         }
         $courseRepo->update($id, $request);
+
         return redirect(route('courses.index'));
     }
 
@@ -79,16 +85,18 @@ class CourseController extends Controller
         $course = $courseRepo->findByid($id);
         $lessons = $lessonRepo->paginate($id);
         $this->authorize('details', $course);
+
         return view('Courses::details', compact('course', 'lessons'));
     }
 
     public function downloadLinks($id, CourseRepo $courseRepo)
     {
         $course = $courseRepo->findByid($id);
-        $this->authorize("download", $course);
+        $this->authorize('download', $course);
 
-        return implode("<br>", $course->downloadLinks());
+        return implode('<br>', $course->downloadLinks());
     }
+
     public function destroy($id, CourseRepo $courseRepo)
     {
         $course = $courseRepo->findByid($id);
@@ -97,6 +105,7 @@ class CourseController extends Controller
             $course->banner->delete();
         }
         $course->delete();
+
         return AjaxResponses::SuccessResponse();
     }
 
@@ -134,18 +143,19 @@ class CourseController extends Controller
     {
         $course = $courseRepo->findByid($courseId);
 
-        if (!$this->courseCanBePurchased($course)) {
+        if (! $this->courseCanBePurchased($course)) {
             return back();
         }
 
-        if (!$this->authUserCanPurchaseCourse($course)) {
+        if (! $this->authUserCanPurchaseCourse($course)) {
             return back();
         }
 
         [$amount, $discounts] = $course->getFinalPrice(request()->code, true);
         if ($amount <= 0) {
             $courseRepo->addStudentToCourse($course, auth()->id());
-            newFeedback("عملیات موفقیت آمیز", "شما با موفقیت در دوره ثبت نام کردید.");
+            newFeedback('عملیات موفقیت آمیز', 'شما با موفقیت در دوره ثبت نام کردید.');
+
             return redirect($course->path());
         }
         $payment = PaymentService::generate($amount, $course, auth()->user(), $course->teacher_id, $discounts);
@@ -156,17 +166,20 @@ class CourseController extends Controller
     private function courseCanBePurchased(Course $course)
     {
         if ($course->type == Course::TYPE_FREE) {
-            newFeedback("عملیات ناموفق", "دوره های رایگان قابل خریداری نیستند!", "error");
+            newFeedback('عملیات ناموفق', 'دوره های رایگان قابل خریداری نیستند!', 'error');
+
             return false;
         }
 
         if ($course->status == Course::STATUS_LOCKED) {
-            newFeedback("عملیات ناموفق", "این دوره قفل شده است و قعلا قابل خریداری نیست!", "error");
+            newFeedback('عملیات ناموفق', 'این دوره قفل شده است و قعلا قابل خریداری نیست!', 'error');
+
             return false;
         }
 
         if ($course->confirmation_status != Course::CONFIRMATION_STATUS_ACCEPTED) {
-            newFeedback("عملیات ناموفق", "دوره ی انتخابی شما هنوز تایید نشده است!", "error");
+            newFeedback('عملیات ناموفق', 'دوره ی انتخابی شما هنوز تایید نشده است!', 'error');
+
             return false;
         }
 
@@ -176,15 +189,16 @@ class CourseController extends Controller
     private function authUserCanPurchaseCourse(Course $course)
     {
         if (auth()->id() == $course->teacher_id) {
-            newFeedback("عملیات ناموفق", "شما مدرس این دوره هستید.", "error");
+            newFeedback('عملیات ناموفق', 'شما مدرس این دوره هستید.', 'error');
+
             return false;
         }
 
-        if (auth()->user()->can("download", $course)) {
-            newFeedback("عملیات ناموفق", "شما به دوره دسترسی دارید.", "error");
+        if (auth()->user()->can('download', $course)) {
+            newFeedback('عملیات ناموفق', 'شما به دوره دسترسی دارید.', 'error');
+
             return false;
         }
-
 
         return true;
     }

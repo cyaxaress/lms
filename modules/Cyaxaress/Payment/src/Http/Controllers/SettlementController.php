@@ -14,32 +14,38 @@ class SettlementController extends Controller
     public function index(SettlementRepo $repo)
     {
         $this->authorize('index', Settlement::class);
-        if (auth()->user()->can(Permission::PERMISSION_MANAGE_SETTLEMENTS))
+        if (auth()->user()->can(Permission::PERMISSION_MANAGE_SETTLEMENTS)) {
             $settlements = $repo->latest()->paginate();
-        else
+        } else {
             $settlements = $repo->paginateUserSettlements(auth()->id());
-        return view("Payment::settlements.index", compact("settlements"));
+        }
+
+        return view('Payment::settlements.index', compact('settlements'));
     }
 
     public function create(SettlementRepo $repo)
     {
         $this->authorize('store', Settlement::class);
-        if ($repo->getLatestPendingSettlement(auth()->id())){
-            newFeedback("ناموفق", "شما یک درخواست تسویه در حال انتظار دارید و نمیتوانید درخواست جدیدی فعلا ثبت بکنید.", "error");
-            return  redirect()->route("settlements.index");
+        if ($repo->getLatestPendingSettlement(auth()->id())) {
+            newFeedback('ناموفق', 'شما یک درخواست تسویه در حال انتظار دارید و نمیتوانید درخواست جدیدی فعلا ثبت بکنید.', 'error');
+
+            return redirect()->route('settlements.index');
         }
-        return view("Payment::settlements.create");
+
+        return view('Payment::settlements.create');
     }
 
     public function store(SettlementRequest $request, SettlementRepo $repo)
     {
         $this->authorize('store', Settlement::class);
-        if ($repo->getLatestPendingSettlement(auth()->id())){
-            newFeedback("ناموفق", "شما یک درخواست تسویه در حال انتظار دارید و نمیتوانید درخواست جدیدی فعلا ثبت بکنید.", "error");
-            return  redirect()->route("settlements.index");
+        if ($repo->getLatestPendingSettlement(auth()->id())) {
+            newFeedback('ناموفق', 'شما یک درخواست تسویه در حال انتظار دارید و نمیتوانید درخواست جدیدی فعلا ثبت بکنید.', 'error');
+
+            return redirect()->route('settlements.index');
         }
         SettlementService::store($request->all());
-        return redirect(route("settlements.index"));
+
+        return redirect(route('settlements.index'));
     }
 
     public function edit($settlementId, SettlementRepo $repo)
@@ -47,12 +53,13 @@ class SettlementController extends Controller
         $requestedSettlement = $repo->find($settlementId);
         $settlement = $repo->getLatestSettlement($requestedSettlement->user_id);
         $this->authorize('manage', Settlement::class);
-        if ($settlement->id != $settlementId){
-            newFeedback("ناموفق", "این درخواست تسویه قابل ویرایش نیست و بایگانی شده است. فقط آخرین درخواست تسویه ی هر کاربر قابل ویرایش است.", "error");
-            return  redirect()->route("settlements.index");
+        if ($settlement->id != $settlementId) {
+            newFeedback('ناموفق', 'این درخواست تسویه قابل ویرایش نیست و بایگانی شده است. فقط آخرین درخواست تسویه ی هر کاربر قابل ویرایش است.', 'error');
+
+            return redirect()->route('settlements.index');
         }
 
-        return view("Payment::settlements.edit", compact("settlement"));
+        return view('Payment::settlements.edit', compact('settlement'));
     }
 
     public function update($settlementId, SettlementRequest $request, SettlementRepo $repo)
@@ -60,11 +67,13 @@ class SettlementController extends Controller
         $requestedSettlement = $repo->find($settlementId);
         $settlement = $repo->getLatestSettlement($requestedSettlement->user_id);
         $this->authorize('manage', Settlement::class);
-        if ($settlement->id != $settlementId){
-            newFeedback("ناموفق", "این درخواست تسویه قابل ویرایش نیست و بایگانی شده است. فقط آخرین درخواست تسویه ی هر کاربر قابل ویرایش است.", "error");
-            return  redirect()->route("settlements.index");
+        if ($settlement->id != $settlementId) {
+            newFeedback('ناموفق', 'این درخواست تسویه قابل ویرایش نیست و بایگانی شده است. فقط آخرین درخواست تسویه ی هر کاربر قابل ویرایش است.', 'error');
+
+            return redirect()->route('settlements.index');
         }
         SettlementService::update($settlementId, $request->all());
-        return redirect(route("settlements.index"));
+
+        return redirect(route('settlements.index'));
     }
 }

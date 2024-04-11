@@ -22,9 +22,9 @@ class UpdateUsedDiscountsForPayment
      */
     public function handle($event)
     {
-        foreach ($event->payment->discounts as $discount){
+        foreach ($event->payment->discounts as $discount) {
             $discount->uses++;
-            if (!is_null($discount->usage_limitation)){
+            if (! is_null($discount->usage_limitation)) {
                 $discount->usage_limitation--;
             }
             $discount->save();

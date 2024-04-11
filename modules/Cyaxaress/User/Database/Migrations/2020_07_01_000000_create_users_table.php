@@ -23,11 +23,11 @@ class CreateUsersTable extends Migration
             $table->text('bio')->nullable();
             $table->string('ip')->nullable();
             $table->string('telegram')->nullable();
-            $table->bigInteger("image_id")->unsigned()->nullable();
+            $table->bigInteger('image_id')->unsigned()->nullable();
 
             $table->string('card_number', 16)->nullable();
             $table->string('shaba', 24)->nullable();
-            $table->bigInteger("balance")->default(0);
+            $table->bigInteger('balance')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status', \Cyaxaress\User\Models\User::$statuses)->default('active');

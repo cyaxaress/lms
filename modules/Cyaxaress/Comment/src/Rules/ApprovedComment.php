@@ -7,7 +7,6 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ApprovedComment implements Rule
 {
-
     public function __construct()
     {
         //
@@ -16,6 +15,7 @@ class ApprovedComment implements Rule
     public function passes($attribute, $value)
     {
         $commentRepo = new CommentRepo();
+
         return ! is_null($commentRepo->findApproved($value));
     }
 

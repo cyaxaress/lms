@@ -7,7 +7,9 @@ use Illuminate\View\Component;
 class TextArea extends Component
 {
     public $placeholder;
+
     public $name;
+
     public $value;
 
     /**

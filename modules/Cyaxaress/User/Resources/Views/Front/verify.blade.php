@@ -5,7 +5,7 @@
         <form action="{{ route('verification.verify') }}" class="form" method="post">
             @csrf
             <a class="account-logo" href="/">
-                <img src="/img/weblogo.png" alt="">
+                <img src="/img/Hemn_ORG.png" alt="">
             </a>
             <div class="card-header">
                 <p class="activation-code-title">کد فرستاده شده به ایمیل  <span>{{ auth()->user()->email }}</span>

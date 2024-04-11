@@ -2,8 +2,8 @@
 
 @section('content')
 <form action="" class="form" method="post">
-    <a class="account-logo" href="index.html">
-        <img src="img/weblogo.png" alt="">
+    <a class="account-logo" href="/">
+        <img src="img/Hemn_ORG.png" class="w-100" alt="">
     </a>
     <div class="form-content form-account">
         <form method="POST" action="{{ route('register') }}">

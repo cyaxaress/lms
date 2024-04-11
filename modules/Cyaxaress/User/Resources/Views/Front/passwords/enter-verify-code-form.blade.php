@@ -6,7 +6,7 @@
             @csrf
             <input type="hidden" name="email" value="{{ request()->email }}">
             <a class="account-logo" href="/">
-                <img src="/img/weblogo.png" alt="">
+                <img src="/img/Hemn_ORG.png" alt="">
             </a>
             <div class="card-header">
                 <p class="activation-code-title">کد فرستاده شده به ایمیل  <span>{{ request()->email }}</span>

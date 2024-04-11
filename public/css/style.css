@@ -123,7 +123,7 @@ a, span {
 .t-header-logo a {
     height: 44px;
     display: block;
-    background: url("../img/weblogo.png") no-repeat;
+    background: url("../img/Hemn_ORG.png") no-repeat;
 }
 
 .t-header-search {
@@ -3753,4 +3753,8 @@ table {
 
 .text-error {
     color: #e73368 !important;
+}
+
+.w-100{
+    width: 100%;
 }

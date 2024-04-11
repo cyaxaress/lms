@@ -3,7 +3,7 @@
 @section('content')
     <form method="get" action="{{ route('password.sendVerifyCodeEmail') }}" class="form">
         <a class="account-logo" href="/">
-            <img src="/img/weblogo.png" alt="">
+            <img src="/img/Hemn_ORG.png" alt="">
         </a>
         <div class="form-content form-account">
             @if (session('status'))

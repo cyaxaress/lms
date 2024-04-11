@@ -3,7 +3,7 @@
 @section('content')
     <form action="" class="form" method="post">
         <a class="account-logo" href="index.html">
-            <img src="/img/weblogo.png" alt="">
+            <img src="/img/Hemn_ORG.png" alt="">
         </a>
         <div class="form-content form-account">
             <input type="text" class="txt-l txt" placeholder="ایمیل">

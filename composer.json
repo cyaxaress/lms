@@ -10,7 +10,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.2",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
         "kavenegar/laravel-notification": "^1.0",

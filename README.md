@@ -1,4 +1,5 @@
-#Laravel Learning Management System 
+#Laravel Learning Management System
+
 <p align="center ">
 </p>
 
@@ -6,31 +7,34 @@
 
 This project is a Learning Management System developed with Laravel framework in modular structure. Each feature in this application developed in an isolated module, such as:
 
-- Dashboard Module.
-- Users Module.
-- Courses Module.
-- Lessons Modules
-- Categories Module.
-- Role and Permissions Module.
-- Discounts Module.
-- Tickets Module,
-- Payments Module,
- etc...
- 
- ## Installation
+-   Dashboard Module.
+-   Users Module.
+-   Courses Module.
+-   Lessons Modules
+-   Categories Module.
+-   Role and Permissions Module.
+-   Discounts Module.
+-   Tickets Module,
+-   Payments Module,
+    etc...
+
+## Installation
+
 ```
 composer create-project cyaxaress/lms
 php artisan migrate --seed
+php artisan storage:link
 php artisan serve
 ```
 
 ### Demo users
+
 ```
 Admin:
 username: admin@site.com
 password: admin
 
-Teacher: 
+Teacher:
 username: teacher@site.com
 password: teacher
 
@@ -42,7 +46,6 @@ password: student
 ## How this app developed?
 
 If you want to learn Modular structure and how this app developed join my online course at [here](https://www.youtube.com/watch?v=uNY_6W1uKQ0&list=PLglcS3nCn86ZduzqLXD0SAHK4xaAFxYdq)
-
 
 ## Security Vulnerabilities
 

@@ -3,6 +3,7 @@
 namespace Cyaxaress\Slider\Providers;
 
 use Cyaxaress\RolePermissions\Models\Permission;
+use Cyaxaress\Slider\Database\Seeds\SliderSeeder;
 use Cyaxaress\Slider\Models\Slide;
 use Cyaxaress\Slider\Policies\SlidePolicy;
 use Illuminate\Support\Facades\Gate;
@@ -23,6 +24,8 @@ class SliderServiceProvider extends ServiceProvider
             ->group(__DIR__.'/../Routes/slider_routes.php');
 
         Gate::policy(Slide::class, SlidePolicy::class);
+
+        \DatabaseSeeder::$seeders[] = SliderSeeder::class;
     }
 
     public function boot()
@@ -35,5 +38,6 @@ class SliderServiceProvider extends ServiceProvider
                 Permission::PERMISSION_MANAGE_SLIDES,
             ],
         ]);
+
     }
 }

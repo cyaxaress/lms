@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Cyaxaress\Payment\Models\Settlement;
 
 class CreateSettlementsTable extends Migration
 {
@@ -21,8 +22,8 @@ class CreateSettlementsTable extends Migration
             $table->json("to")->nullable();
             $table->timestamp("settled_at")->nullable();
             $table
-                ->enum("status", \Cyaxaress\Payment\Models\Settlement::$statues)
-                ->default(\Cyaxaress\Payment\Models\Settlement::STATUS_PENDING);
+                ->enum("status", Settlement::$statues)
+                ->default(Settlement::STATUS_PENDING);
             $table->float("amount")->unsigned();
             $table->timestamps();
 

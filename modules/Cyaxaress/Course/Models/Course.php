@@ -4,6 +4,7 @@ namespace Cyaxaress\Course\Models;
 
 use Cyaxaress\Category\Models\Category;
 use Cyaxaress\Comment\Traits\HasComments;
+use Cyaxaress\Course\Database\Factories\CourseFactory;
 use Cyaxaress\Course\Repositories\CourseRepo;
 use Cyaxaress\Discount\Models\Discount;
 use Cyaxaress\Discount\Repositories\DiscountRepo;
@@ -12,11 +13,17 @@ use Cyaxaress\Media\Models\Media;
 use Cyaxaress\Payment\Models\Payment;
 use Cyaxaress\Ticket\Models\Ticket;
 use Cyaxaress\User\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    use HasComments;
+    use HasComments, HasFactory;
+
+    public static function newFactory()
+    {
+        return CourseFactory::new();
+    }
 
     protected $guarded = [];
 
